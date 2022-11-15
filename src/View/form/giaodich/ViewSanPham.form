@@ -304,6 +304,9 @@
               <Properties>
                 <Property name="labeText" type="java.lang.String" value="Lo&#x1ea1;i S&#xe1;ch"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cbo_loaiSachMouseClicked"/>
+              </Events>
             </Component>
             <Component class="View.form.TextField" name="textField2">
               <Properties>

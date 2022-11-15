@@ -5,26 +5,55 @@
  */
 package DomainModel;
 
+import Utilities.DBConnection;
+import ViewModel.SachViewModel;
 import java.io.Serializable;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author ADMIN
  */
-
 public class Sach {
-    
 
-    private int IdSach;  
-    private int IdNhaCungCap,idTheLoai;
+    private int IdSach;
+    private int IdNhaCungCap, idTheLoai;
     private String MaSach;
     private String TenSach;
-    private boolean TrangThai;  
+    private boolean TrangThai;
+
+    public List<Sach> getAll() {
+        String query = "select * from sach";
+        List<Sach> listSach = new ArrayList<>();
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Sach s = new Sach(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(3), rs.getString(4), rs.getBoolean(5));
+                listSach.add(s);
+            }
+            return listSach;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
 
     public Sach() {
     }
 
+    public Sach(int IdSach, int IdNhaCungCap, int idTheLoai, String MaSach, String TenSach, boolean TrangThai) {
+        this.IdSach = IdSach;
+        this.IdNhaCungCap = IdNhaCungCap;
+        this.idTheLoai = idTheLoai;
+        this.MaSach = MaSach;
+        this.TenSach = TenSach;
+        this.TrangThai = TrangThai;
+    }
+    
     public Sach(int IdSach, int IdNhaCungCap, int idTheLoai, String MaSach, String TenSach, boolean TrangThai, TheLoai theloai) {
         this.IdSach = IdSach;
         this.IdNhaCungCap = IdNhaCungCap;
@@ -41,8 +70,6 @@ public class Sach {
     public void setIdTheLoai(int idTheLoai) {
         this.idTheLoai = idTheLoai;
     }
-
-    
 
     public int getIdSach() {
         return IdSach;
@@ -86,9 +113,7 @@ public class Sach {
 
     @Override
     public String toString() {
-        return  TenSach ;
+        return TenSach;
     }
-    
-    
-    
+
 }

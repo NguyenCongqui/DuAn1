@@ -36,7 +36,7 @@ public class SachRepository {
         }
         return null;
     }
-    public boolean sua(Sach s){
+    public boolean sua(Sach s) throws SQLException{
         String query = "INSERT INTO [dbo].[Sach]\n" +
 "           (\n" +
 "           [TenSach]\n" +
@@ -45,8 +45,8 @@ public class SachRepository {
 "           (?,?)";
         int check = 0;
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setObject(1,s.setTenSach(1));
-            ps.setObject(check, s);
+            ps.setObject(1, s.getTenSach());
+            ps.setObject(2, s.isTrangThai());
             
             }
             return listSp;
