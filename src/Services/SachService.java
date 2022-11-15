@@ -14,5 +14,6 @@ import java.util.List;
  */
 public interface SachService {
     List<SachViewModel> getlist();
+    List<Sach> getAllSach();
     String inert(Sach s);
 }

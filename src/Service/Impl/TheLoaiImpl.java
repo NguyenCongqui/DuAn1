@@ -31,5 +31,14 @@ private TheLoaiRepository rp = new TheLoaiRepository();
         return "them that bai";
     }
 
+    @Override
+    public String update(TheLoai tl) {
+           boolean upd = rp.sua(tl);
+        if(upd){
+            return "sua thanh cong";
+        }
+        return "sua that bai";
+    }
+
     
 }

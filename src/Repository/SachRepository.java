@@ -71,7 +71,7 @@ public class SachRepository {
         return check > 0;
     }
 
-    public boolean sua(Sach s) {
+    public boolean them(Sach s) {
         String query = "INSERT INTO [dbo].[Sach]\n"
                 + "           (\n"
                 + "           [TenSach]\n"
@@ -82,6 +82,24 @@ public class SachRepository {
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, s.getTenSach());
             ps.setObject(2, s.isTrangThai());
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
+    public boolean sua(Sach s,String id) {
+        String query = "UPDATE [dbo].[Sach]\n"
+                + "   SET \n"
+                + "      [TenSach] = ?\n"
+                + "      ,[TrangThai] = ?\n"
+                + " WHERE IdSach = ?";
+        int check = 0;
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, s.getTenSach());
+            ps.setObject(2, s.isTrangThai());
+            ps.setObject(3, id);
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);

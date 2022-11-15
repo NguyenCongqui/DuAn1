@@ -49,6 +49,9 @@ public class ViewSanPham extends javax.swing.JPanel {
         tblModel.setColumnIdentifiers(cols);
         tbl_sanPham.setModel(tblModel);
     }
+    public void showData(){
+        
+    }
     public void showtheloai(){
         TheLoai tl = (TheLoai) cbo_loaiSach.getSelectedItem();
         if (tl == null) {
@@ -78,9 +81,7 @@ public class ViewSanPham extends javax.swing.JPanel {
         }
         return tl;
     }
-    public void fillCbb(){
-        txt_tenLoaiSach.setText((String) cbo_loaiSach.getSelectedItem());
-    }
+
     
 
     /**
@@ -397,7 +398,7 @@ public class ViewSanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void cbo_loaiSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbo_loaiSachMouseClicked
-      fillCbb();
+      
     }//GEN-LAST:event_cbo_loaiSachMouseClicked
 
 

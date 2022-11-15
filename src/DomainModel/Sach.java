@@ -26,21 +26,7 @@ public class Sach {
     private String TenSach;
     private boolean TrangThai;
 
-    public List<Sach> getAll() {
-        String query = "select * from sach";
-        List<Sach> listSach = new ArrayList<>();
-        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Sach s = new Sach(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(3), rs.getString(4), rs.getBoolean(5));
-                listSach.add(s);
-            }
-            return listSach;
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
-        return null;
-    }
+    
 
     public Sach() {
     }

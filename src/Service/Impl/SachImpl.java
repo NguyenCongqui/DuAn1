@@ -26,7 +26,13 @@ public class SachImpl implements SachService {
 
     @Override
     public String inert(Sach s) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        boolean them = rp.;
+        if
+    }
+
+    @Override
+    public List<Sach> getAllSach() {
+        return rp.getAllSach();
     }
 
 }

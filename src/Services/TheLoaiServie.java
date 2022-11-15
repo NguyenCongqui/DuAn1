@@ -14,4 +14,5 @@ import java.util.List;
 public interface TheLoaiServie {
     List<TheLoai> getlistTheLoai();
     String inerts(TheLoai tl);
+    String update(TheLoai tl);
 }

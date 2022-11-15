@@ -20,39 +20,57 @@ import java.sql.SQLException;
  * @author quanh
  */
 public class TheLoaiRepository {
-    public List<TheLoai> getAll(){
+
+    public List<TheLoai> getAll() {
         String query = "select * from TheLoai";
-        List<TheLoai> lisTl= new ArrayList<>();
-        try(Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)){
+        List<TheLoai> lisTl = new ArrayList<>();
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                 TheLoai tl = new TheLoai(rs.getInt(1), rs.getString(2), rs.getBoolean(3));
-                 lisTl.add(tl);
+            while (rs.next()) {
+                TheLoai tl = new TheLoai(rs.getInt(1), rs.getString(2), rs.getBoolean(3));
+                lisTl.add(tl);
             }
-            return lisTl; 
-        }catch(Exception e){
+            return lisTl;
+        } catch (Exception e) {
             e.printStackTrace(System.out);
         }
         return null;
     }
-    public boolean insert(TheLoai tl){
-        String query ="INSERT INTO [dbo].[TheLoai]\n" +
-"           ([TenTheLoai]\n" +
-"           ,[TrangThai])\n" +
-"     VALUES\n" +
-"           (?,?)";
+
+    public boolean insert(TheLoai tl) {
+        String query = "INSERT INTO [dbo].[TheLoai]\n"
+                + "           ([TenTheLoai]\n"
+                + "           ,[TrangThai])\n"
+                + "     VALUES\n"
+                + "           (?,?)";
         int check = 0;
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, tl.getTenTheLoai());
             ps.setObject(2, tl.isTrangThai());
-            
+
             check = ps.executeUpdate();
-            
 
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return check > 0;
     }
-    
+
+    public boolean sua(TheLoai tl) {
+        String query = "IUPDATE [dbo].[TheLoai]\n"
+                + "   SET [TenTheLoai] = ?\n"
+                + "      ,[TrangThai] = ?\n"
+                + " WHERE IdTheLoai = ?";
+        int check = 0;
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, tl.getTenTheLoai());
+            ps.setObject(2, tl.isTrangThai());
+            ps.setObject(3, tl.getIdTheLoai());
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
 }
