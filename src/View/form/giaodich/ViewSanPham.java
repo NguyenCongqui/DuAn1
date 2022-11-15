@@ -5,8 +5,11 @@
 package View.form.giaodich;
 
 import DomainModel.TheLoai;
+import Service.Impl.SachImpl;
 import Service.Impl.TheLoaiImpl;
+import Services.SachService;
 import Services.TheLoaiServie;
+import ViewModel.SachViewModel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -19,17 +22,19 @@ import net.miginfocom.layout.AC;
  * @author ADMIN
  */
 public class ViewSanPham extends javax.swing.JPanel {
-    
-   // DefaultTableModel tbl_model = new  DefaultTableModel();
-    
-    List<TheLoai> listtheloai = new ArrayList<>();
-   // TheLoaiServie theloaiservice = new TheLoaiImpl();
+    private DefaultComboBoxModel cbModel = new DefaultComboBoxModel();
+    private DefaultTableModel tblModel = new DefaultTableModel();
+    private List<SachViewModel> listSachView = new ArrayList<>();
+    private List<TheLoai> listtheloai = new ArrayList<>();
+    private TheLoaiServie svTheLoai = new TheLoaiImpl();
+    private SachService svSach = new SachImpl();
     
     public ViewSanPham() {
         initComponents();
         statusform();
-//        tbl_model = (DefaultTableModel) tbl_sanPham.getModel();
-//        listtheloai = theloaiservice.getlistTheLoai();
+        fillcomboxTheLoai();
+        
+
         
     }
     public void statusform (){
@@ -39,6 +44,11 @@ public class ViewSanPham extends javax.swing.JPanel {
         btn_them.setVisible(false);
         btn_xoa.setVisible(false);
     }
+    public void initTable(){
+        String[] cols = new String[]{"ID Sach","Ten Sach","Loai Sach","Trang thai"};
+        tblModel.setColumnIdentifiers(cols);
+        tbl_sanPham.setModel(tblModel);
+    }
     public void showtheloai(){
         TheLoai tl = (TheLoai) cbo_loaiSach.getSelectedItem();
         if (tl == null) {
@@ -47,25 +57,17 @@ public class ViewSanPham extends javax.swing.JPanel {
             txt_tenLoaiSach.setText(tl.getTenTheLoai());
         }
     }
-    public TheLoai getform(){
-        TheLoai tl = new TheLoai();
-        tl.setTenTheLoai(txt_tenLoaiSach.getText());
-        tl.setTrangThai(true);
-        return tl;
+
+    public void fillcomboxTheLoai(){
+        DefaultComboBoxModel comode = (DefaultComboBoxModel) cbo_loaiSach.getModel();
+        cbo_loaiSach.removeAllItems();
+        listtheloai = svTheLoai.getlistTheLoai();
+        for (TheLoai tl : listtheloai) {
+            comode.addElement(tl);
+        }
         
     }
-//    public void fillcomboxTheLoai(){
-//        DefaultComboBoxModel comode = (DefaultComboBoxModel) cbo_loaiSach.getModel();
-//        cbo_loaiSach.removeAllItems();
-//        for (TheLoai tl : listtheloai) {
-//            comode.addElement(tl);
-//        }
-//        
-//    }
-    public void insertTheLoai(){
-        TheLoai tl = getform();
-        
-    }
+
     public TheLoai guidata(){
         TheLoai tl = new TheLoai();
         tl.setTenTheLoai(txt_tenLoaiSach.getText());
@@ -75,6 +77,9 @@ public class ViewSanPham extends javax.swing.JPanel {
             tl.setTrangThai(false);
         }
         return tl;
+    }
+    public void fillCbb(){
+        txt_tenLoaiSach.setText((String) cbo_loaiSach.getSelectedItem());
     }
     
 
@@ -181,6 +186,11 @@ public class ViewSanPham extends javax.swing.JPanel {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chi Tiết Sách", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 10))); // NOI18N
 
         cbo_loaiSach.setLabeText("Loại Sách");
+        cbo_loaiSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbo_loaiSachMouseClicked(evt);
+            }
+        });
 
         textField2.setLabelText("Tên Sách");
         textField2.addActionListener(new java.awt.event.ActionListener() {
@@ -366,6 +376,7 @@ public class ViewSanPham extends javax.swing.JPanel {
             btn_xoa.setVisible(true);
             showtheloai();
         }
+        
     }//GEN-LAST:event_myButton7ActionPerformed
 
     private void txt_tenLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_tenLoaiSachActionPerformed
@@ -377,12 +388,17 @@ public class ViewSanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_textField2ActionPerformed
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
-        // TODO add your handling code here:
-       // JOptionPane.showMessageDialog(this,theloaiservice.inerts(guidata()));
+        
+       JOptionPane.showMessageDialog(this,svTheLoai.inerts(guidata()));
+       fillcomboxTheLoai();
         
         
         
     }//GEN-LAST:event_btn_themActionPerformed
+
+    private void cbo_loaiSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbo_loaiSachMouseClicked
+      fillCbb();
+    }//GEN-LAST:event_cbo_loaiSachMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

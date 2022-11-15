@@ -6,6 +6,7 @@
 package Service.Impl;
 
 import DomainModel.TheLoai;
+import Repository.TheLoaiRepository;
 //import Repository.TheLoaiRepository;
 import Services.TheLoaiServie;
 import java.util.List;
@@ -14,22 +15,21 @@ import java.util.List;
  *
  * @author ADMIN
  */
-public class TheLoaiImpl {
-//     TheLoaiRepository theloairep = new TheLoaiRepository();
-//             
-//    @Override
-//    public List<TheLoai> getlistTheLoai() {
-//        return theloairep.getList();
-//        
-//    }
-//
-//    @Override
-//    public String inerts(TheLoai tl) {
-//        if (theloairep.insert(tl)) {
-//            return "thêm thanh công";
-//        } else {
-//        return "thêm không thành công";
-//        }
-//    }
+public class TheLoaiImpl implements TheLoaiServie{
+private TheLoaiRepository rp = new TheLoaiRepository();
+    @Override
+    public List<TheLoai> getlistTheLoai() {
+        return rp.getAll();
+    }
+
+    @Override
+    public String inerts(TheLoai tl) {
+        boolean themTl = rp.insert(tl);
+        if(themTl){
+            return "them thanh cong";
+        }
+        return "them that bai";
+    }
+
     
 }

@@ -5,6 +5,7 @@
 package Services;
 
 import DomainModel.Sach;
+import ViewModel.SachViewModel;
 import java.util.List;
 
 /**
@@ -12,6 +13,6 @@ import java.util.List;
  * @author ADMIN
  */
 public interface SachService {
-    List<Sach> getlist();
+    List<SachViewModel> getlist();
     String inert(Sach s);
 }
