@@ -20,6 +20,22 @@ import java.sql.SQLException;
  */
 public class SachRepository {
 
+    public List<Sach> getAllSach() {
+        String query = "select * from sach";
+        List<Sach> listSach = new ArrayList<>();
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Sach s = new Sach(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(3), rs.getString(4), rs.getBoolean(5));
+                listSach.add(s);
+            }
+            return listSach;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
     public List<SachViewModel> getAll() {
         String query = "select sach.IdSach,sach.TenSach,TheLoai.TenTheLoai,sach.TrangThai \n"
                 + "from Sach join TheLoai on sach.Idtheloai = TheLoai.IdTheLoai";
@@ -36,25 +52,54 @@ public class SachRepository {
         }
         return null;
     }
-    public boolean sua(Sach s) throws SQLException{
-        String query = "INSERT INTO [dbo].[Sach]\n" +
-"           (\n" +
-"           [TenSach]\n" +
-"           ,[TrangThai])\n" +
-"     VALUES\n" +
-"           (?,?)";
+
+    public boolean update(Sach s) {
+        String query = "UPDATE [dbo].[Sach]\n"
+                + "   SET \n"
+                + "      ,[TenSach] = ?\n"
+                + "      ,[TrangThai] = ?\n"
+                + " WHERE IdSach = ?";
         int check = 0;
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, s.getTenSach());
             ps.setObject(2, s.isTrangThai());
-            
-            }
-            return listSp;
+            ps.setObject(3, s.getIdSach());
+            check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
-        return null;
+        return check > 0;
     }
 
-    
+    public boolean sua(Sach s) {
+        String query = "INSERT INTO [dbo].[Sach]\n"
+                + "           (\n"
+                + "           [TenSach]\n"
+                + "           ,[TrangThai])\n"
+                + "     VALUES\n"
+                + "           (?,?)";
+        int check = 0;
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, s.getTenSach());
+            ps.setObject(2, s.isTrangThai());
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
     }
+
+    public boolean xoa(String id) {
+        int check = 0;
+        String sql = "DELETE FROM [dbo].[Sach]\n"
+                + "      WHERE IdSach = ?";
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, id);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
+}
