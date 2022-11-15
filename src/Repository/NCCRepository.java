@@ -22,24 +22,24 @@ import java.util.logging.Logger;
 public class NCCRepository {
 
     DBConnection dbConnection;
-      Connection con = null;
+    Connection con = null;
     ResultSet rs = null;
     PreparedStatement ps = null;
-List<NCC> list = null;
+    List<NCC> list = null;
 
     public List<NCC> getAll() {
         String sql = "SELECT [IdNhaCungCap]\n"
-                    + "      ,[TenNhaCungCap]\n"
-                    + "      ,[DIACHI]\n"
-                    + "      ,[SODIENTHOAI]\n"
-                    + "  FROM [dbo].[NhaCungCap]";
+                + "      ,[TenNhaCungCap]\n"
+                + "      ,[DIACHI]\n"
+                + "      ,[SODIENTHOAI]\n"
+                + "  FROM [dbo].[NhaCungCap]";
         try {
             con = dbConnection.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             list = new ArrayList<>();
-            
-            while (rs.next()) {                
+
+            while (rs.next()) {
                 list.add(new NCC(rs.getInt(1), rs.getNString(2), rs.getNString(3), rs.getString(4)));
             }
             rs.close();
@@ -59,7 +59,7 @@ List<NCC> list = null;
                     + "    )VALUES(  ?,?,?)";
             con = dbConnection.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setObject(1, "NCC "+ ncc.getTenNCC());
+            ps.setObject(1, ncc.getTenNCC());
             ps.setObject(2, ncc.getDiaChi());
             ps.setObject(3, ncc.getSdt());
             check = ps.executeUpdate();
@@ -70,20 +70,18 @@ List<NCC> list = null;
         return check > 0;
     }
 
-    
     public boolean update(String id, NCC ncc) {
         int check = 0;
         try {
-            String sql = "UPDATE [dbo].[NhaCungCap]\n" +
-"   SET [TenNhaCungCap]= ?\n" +
-"      ,[DIACHI] =?\n" +
-"      ,[SODIENTHOAI] =?\n" +
-"      ,[TrangThai] =?\n" +
-" WHERE IdNhaCungCap = ?";
+            String sql = "UPDATE [dbo].[NhaCungCap]\n"
+                    + "   SET [TenNhaCungCap] = ?\n"
+                    + "      ,[DIACHI] = ?\n"
+                    + "      ,[SODIENTHOAI] =?\n"
+                    + " WHERE idnhacungcap =?";
 
             con = dbConnection.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setObject(1, "NCC"+ ncc.getTenNCC());
+            ps.setObject(1, ncc.getTenNCC());
             ps.setObject(2, ncc.getDiaChi());
             ps.setObject(3, ncc.getSdt());
             ps.setObject(4, id);
@@ -93,12 +91,12 @@ List<NCC> list = null;
         }
         return check > 0;
     }
-    
-     public boolean delete(String id,NCC ncc) {
+
+    public boolean delete(String id, NCC ncc) {
         int check = 0;
         try {
-            String sql = "DELETE FROM [dbo].[NhaCungCap]\n" +
-"      WHERE IdNhaCungCap = ?";
+            String sql = "DELETE FROM [dbo].[NhaCungCap]\n"
+                    + "      WHERE idnhacungcap = ?";
             con = dbConnection.getConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1, id);
@@ -117,14 +115,23 @@ List<NCC> list = null;
         }
         return -1;
     }
-    
-    public List<NCC> search(String temp){
+
+    public List<NCC> search(String temp) {
         List<NCC> listTemp = new ArrayList<>();
-        for (NCC ncc : list) {
-            if(ncc.getTenNCC().contains(temp)){
-                listTemp.add(ncc);
+        for (NCC x : list) {
+            if (x.getTenNCC().contains(temp)) {
+                listTemp.add(x);
             }
         }
         return listTemp;
     }
+//        public List<NCC> search(String temp) {
+//        List<NCC> listTemp = new ArrayList<>();
+//        for (NCC dongSP : list) {
+//            if (dongSP.getTenNCC().equalsIgnoreCase(temp.toLowerCase())) {
+//                listTemp.add(dongSP);
+//            }
+//        }
+//        return listTemp;
+//    }
 }

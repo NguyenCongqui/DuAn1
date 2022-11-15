@@ -9,22 +9,22 @@ import Repository.NCCRepository;
 import Services.NCCService;
 import java.util.List;
 
-
 /**
  *
  * @author ADMIN
  */
-public class NCCServiceImpl implements NCCService{
-     NCCRepository repository = new NCCRepository();
+public class NCCServiceImpl implements NCCService {
+
+    NCCRepository repository = new NCCRepository();
 
     @Override
     public List<NCC> getAll() {
-return repository.getAll();
+        return repository.getAll();
     }
 
     @Override
     public String insert(NCC ncc) {
- boolean add = repository.insert(ncc);
+        boolean add = repository.insert(ncc);
         if (add) {
             return "Thêm thành công";
         } else if (repository.getIndex(ncc.getTenNCC()) != -1) {
@@ -47,7 +47,7 @@ return repository.getAll();
 
     @Override
     public String delete(String id, NCC ncc) {
-boolean delete = repository.delete(id, ncc);
+        boolean delete = repository.delete(id, ncc);
         if (delete) {
             return "Xóa thành công id : " + id;
         } else if (repository.getIndex(ncc.getTenNCC()) == -1) {
@@ -58,7 +58,7 @@ boolean delete = repository.delete(id, ncc);
 
     @Override
     public List<NCC> search(String temp) {
-return repository.search(temp);
+        return repository.search(temp);
     }
 
 }
