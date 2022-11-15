@@ -13,7 +13,7 @@ import java.util.List;
  * @author ADMIN
  */
 public interface SachService {
-    List<SachViewModel> getlist();
+    List<SachViewModel> getAll();
     List<Sach> getAllSach();
     String inert(Sach s);
 }

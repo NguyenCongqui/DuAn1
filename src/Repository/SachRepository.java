@@ -73,13 +73,14 @@ public class SachRepository {
 
     public boolean them(Sach s) {
         String query = "INSERT INTO [dbo].[Sach]\n"
-                + "           (\n"
-                + "           [TenSach]\n"
+                + "          \n"
+                + "           ([TenSach]\n"
                 + "           ,[TrangThai])\n"
                 + "     VALUES\n"
-                + "           (?,?)";
+                + "           (?,? )";
         int check = 0;
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+
             ps.setObject(1, s.getTenSach());
             ps.setObject(2, s.isTrangThai());
             check = ps.executeUpdate();
@@ -89,7 +90,7 @@ public class SachRepository {
         return check > 0;
     }
 
-    public boolean sua(Sach s,String id) {
+    public boolean sua(Sach s, String id) {
         String query = "UPDATE [dbo].[Sach]\n"
                 + "   SET \n"
                 + "      [TenSach] = ?\n"

@@ -20,7 +20,7 @@ public class SachImpl implements SachService {
     private SachRepository rp = new SachRepository();
 
     @Override
-    public List<SachViewModel> getlist() {
+    public List<SachViewModel> getAll() {
         return rp.getAll();
     }
 

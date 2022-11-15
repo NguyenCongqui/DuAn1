@@ -31,6 +31,14 @@ public class Sach {
     public Sach() {
     }
 
+    public Sach(  String TenSach,int idTheLoai, boolean TrangThai) {
+    
+        this.TenSach = TenSach;
+        this.idTheLoai = idTheLoai;
+        this.TrangThai = TrangThai;
+    }
+    
+
     public Sach(int IdSach, int IdNhaCungCap, int idTheLoai, String MaSach, String TenSach, boolean TrangThai) {
         this.IdSach = IdSach;
         this.IdNhaCungCap = IdNhaCungCap;
@@ -47,6 +55,10 @@ public class Sach {
         this.MaSach = MaSach;
         this.TenSach = TenSach;
         this.TrangThai = TrangThai;
+    }
+
+    public Sach(String text, int idTheLoai) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public int getIdTheLoai() {

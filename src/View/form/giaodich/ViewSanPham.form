@@ -251,7 +251,7 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="textField2" min="-2" pref="272" max="-2" attributes="0"/>
+                                  <Component id="txtTenSach" min="-2" pref="272" max="-2" attributes="0"/>
                                   <Component id="lbl_tenLoaiSach" min="-2" pref="101" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -279,7 +279,7 @@
                           <Component id="btn_xoa" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="textField2" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtTenSach" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -308,12 +308,12 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cbo_loaiSachMouseClicked"/>
               </Events>
             </Component>
-            <Component class="View.form.TextField" name="textField2">
+            <Component class="View.form.TextField" name="txtTenSach">
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="T&#xea;n S&#xe1;ch"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textField2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTenSachActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
@@ -336,12 +336,18 @@
                 <Property name="text" type="java.lang.String" value="T&#x1ea1;o M&#x1edb;i"/>
                 <Property name="radius" type="int" value="20"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton3ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="View.form.MyButton" name="myButton4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
                 <Property name="radius" type="int" value="20"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton4ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="View.form.MyButton" name="myButton5">
               <Properties>

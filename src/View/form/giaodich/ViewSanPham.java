@@ -4,6 +4,7 @@
  */
 package View.form.giaodich;
 
+import DomainModel.Sach;
 import DomainModel.TheLoai;
 import Service.Impl.SachImpl;
 import Service.Impl.TheLoaiImpl;
@@ -22,37 +23,47 @@ import net.miginfocom.layout.AC;
  * @author ADMIN
  */
 public class ViewSanPham extends javax.swing.JPanel {
+
     private DefaultComboBoxModel cbModel = new DefaultComboBoxModel();
     private DefaultTableModel tblModel = new DefaultTableModel();
     private List<SachViewModel> listSachView = new ArrayList<>();
     private List<TheLoai> listtheloai = new ArrayList<>();
     private TheLoaiServie svTheLoai = new TheLoaiImpl();
     private SachService svSach = new SachImpl();
-    
+
     public ViewSanPham() {
         initComponents();
         statusform();
         fillcomboxTheLoai();
-        
+        initTable();
 
-        
     }
-    public void statusform (){
+
+    public void statusform() {
         txt_tenLoaiSach.setVisible(false);
         rdo_DangKinhDoanh.setSelected(true);
         btn_sua.setVisible(false);
         btn_them.setVisible(false);
         btn_xoa.setVisible(false);
     }
-    public void initTable(){
-        String[] cols = new String[]{"ID Sach","Ten Sach","Loai Sach","Trang thai"};
+
+    public void initTable() {
+        String[] cols = new String[]{"ID Sach", "Ten Sach", "Loai Sach", "Trang thai"};
         tblModel.setColumnIdentifiers(cols);
         tbl_sanPham.setModel(tblModel);
+        listSachView = svSach.getAll();
+        showData(listSachView);
     }
-    public void showData(){
-        
+
+    public void showData(List<SachViewModel> listSachView) {
+        tblModel.setRowCount(0);
+        for (SachViewModel s : listSachView) {
+            Object[] row = new Object[]{s.getId(), s.getTenSach(), s.getLoaiSach(), s.isTrangThai() == true ? "Đang kinh doanh" : "Ngừng kinh doanh"};
+            tblModel.addRow(row);
+        }
     }
-    public void showtheloai(){
+
+    public void showtheloai() {
         TheLoai tl = (TheLoai) cbo_loaiSach.getSelectedItem();
         if (tl == null) {
             return;
@@ -61,17 +72,17 @@ public class ViewSanPham extends javax.swing.JPanel {
         }
     }
 
-    public void fillcomboxTheLoai(){
+    public void fillcomboxTheLoai() {
         DefaultComboBoxModel comode = (DefaultComboBoxModel) cbo_loaiSach.getModel();
         cbo_loaiSach.removeAllItems();
         listtheloai = svTheLoai.getlistTheLoai();
         for (TheLoai tl : listtheloai) {
             comode.addElement(tl);
         }
-        
+
     }
 
-    public TheLoai guidata(){
+    public TheLoai guidata() {
         TheLoai tl = new TheLoai();
         tl.setTenTheLoai(txt_tenLoaiSach.getText());
         if (rdo_DangKinhDoanh.isSelected()) {
@@ -82,7 +93,7 @@ public class ViewSanPham extends javax.swing.JPanel {
         return tl;
     }
 
-    
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -104,7 +115,7 @@ public class ViewSanPham extends javax.swing.JPanel {
         tbl_sanPham = new View.form.TableColumn();
         jPanel4 = new javax.swing.JPanel();
         cbo_loaiSach = new View.form.Combobox();
-        textField2 = new View.form.TextField();
+        txtTenSach = new View.form.TextField();
         jLabel3 = new javax.swing.JLabel();
         rdo_DangKinhDoanh = new View.form.RadioButtonCustom();
         rdo_NgungKinhDoanh = new View.form.RadioButtonCustom();
@@ -193,10 +204,10 @@ public class ViewSanPham extends javax.swing.JPanel {
             }
         });
 
-        textField2.setLabelText("Tên Sách");
-        textField2.addActionListener(new java.awt.event.ActionListener() {
+        txtTenSach.setLabelText("Tên Sách");
+        txtTenSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField2ActionPerformed(evt);
+                txtTenSachActionPerformed(evt);
             }
         });
 
@@ -208,9 +219,19 @@ public class ViewSanPham extends javax.swing.JPanel {
 
         myButton3.setText("Tạo Mới");
         myButton3.setRadius(20);
+        myButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton3ActionPerformed(evt);
+            }
+        });
 
         myButton4.setText("Thêm");
         myButton4.setRadius(20);
+        myButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton4ActionPerformed(evt);
+            }
+        });
 
         myButton5.setText("Cập Nhập");
         myButton5.setRadius(20);
@@ -286,7 +307,7 @@ public class ViewSanPham extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTenSach, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_tenLoaiSach, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
@@ -307,7 +328,7 @@ public class ViewSanPham extends javax.swing.JPanel {
                     .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTenSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
@@ -359,7 +380,7 @@ public class ViewSanPham extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableShowProductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableShowProductsMouseClicked
-       // editProducts();
+        // editProducts();
         // TODO add your handling code here:
     }//GEN-LAST:event_tableShowProductsMouseClicked
 
@@ -377,29 +398,47 @@ public class ViewSanPham extends javax.swing.JPanel {
             btn_xoa.setVisible(true);
             showtheloai();
         }
-        
+
     }//GEN-LAST:event_myButton7ActionPerformed
 
     private void txt_tenLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_tenLoaiSachActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_tenLoaiSachActionPerformed
 
-    private void textField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField2ActionPerformed
+    private void txtTenSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenSachActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textField2ActionPerformed
+    }//GEN-LAST:event_txtTenSachActionPerformed
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
-        
-       JOptionPane.showMessageDialog(this,svTheLoai.inerts(guidata()));
-       fillcomboxTheLoai();
-        
-        
-        
+
+        JOptionPane.showMessageDialog(this, svTheLoai.inerts(guidata()));
+        fillcomboxTheLoai();
+
+
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void cbo_loaiSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbo_loaiSachMouseClicked
-      
+
     }//GEN-LAST:event_cbo_loaiSachMouseClicked
+
+    private void myButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton4ActionPerformed
+        listtheloai = svTheLoai.getlistTheLoai();
+        int indexTl = cbo_loaiSach.getSelectedIndex();
+        TheLoai tl = listtheloai.get(indexTl);
+        String tenSach = txtTenSach.getText();
+        boolean trangThai = rdo_DangKinhDoanh.isSelected();
+        Sach s = new Sach( tenSach, tl.getIdTheLoai(), trangThai);
+        JOptionPane.showMessageDialog(this, svSach.inert(s));
+        showData(listSachView);
+
+    }//GEN-LAST:event_myButton4ActionPerformed
+
+    private void myButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton3ActionPerformed
+        cbo_loaiSach.setSelectedIndex(0);
+        txtTenSach.setText("");
+        rdo_DangKinhDoanh.setSelected(false);
+        rdo_NgungKinhDoanh.setSelected(false);
+    }//GEN-LAST:event_myButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -426,7 +465,7 @@ public class ViewSanPham extends javax.swing.JPanel {
     private View.form.RadioButtonCustom rdo_NgungKinhDoanh;
     private View.form.TableColumn tbl_sanPham;
     private View.form.TextField textField1;
-    private View.form.TextField textField2;
+    private View.form.TextField txtTenSach;
     private View.form.TextField txt_tenLoaiSach;
     // End of variables declaration//GEN-END:variables
 }
