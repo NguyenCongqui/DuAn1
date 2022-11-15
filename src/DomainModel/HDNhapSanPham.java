@@ -12,7 +12,7 @@ import java.util.Date;
  * @author ADMIN
  */
 
-public class HDNhapSanPham implements Serializable {
+public class HDNhapSanPham  {
 
   
     private int IDHOADONNHAPSANPHAM;

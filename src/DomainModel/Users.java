@@ -5,23 +5,27 @@
  */
 package DomainModel;
 
+import java.util.Date;
+
 /**
  *
  * @author ADMIN
  */
 public class Users {
     private int idtaikhoan,idusers;
-    private String UserName,MatKhau;
+    private String Hoten;
+    private Date Ngaysinh;
+    private boolean gioitinh;
+    private String DiaChi,SoDienThoai,Email;
+    private float Luong;
+    private boolean role,TrangThai;
+    
 
     public Users() {
+        
     }
 
-    public Users(int idtaikhoan, int idusers, String UserName, String MatKhau) {
-        this.idtaikhoan = idtaikhoan;
-        this.idusers = idusers;
-        this.UserName = UserName;
-        this.MatKhau = MatKhau;
-    }
+   
 
     public int getIdtaikhoan() {
         return idtaikhoan;
@@ -39,21 +43,78 @@ public class Users {
         this.idusers = idusers;
     }
 
-    public String getUserName() {
-        return UserName;
+    public String getHoten() {
+        return Hoten;
     }
 
-    public void setUserName(String UserName) {
-        this.UserName = UserName;
+    public void setHoten(String Hoten) {
+        this.Hoten = Hoten;
     }
 
-    public String getMatKhau() {
-        return MatKhau;
+    public Date getNgaysinh() {
+        return Ngaysinh;
     }
 
-    public void setMatKhau(String MatKhau) {
-        this.MatKhau = MatKhau;
+    public void setNgaysinh(Date Ngaysinh) {
+        this.Ngaysinh = Ngaysinh;
     }
-    
+
+    public boolean isGioitinh() {
+        return gioitinh;
+    }
+
+    public void setGioitinh(boolean gioitinh) {
+        this.gioitinh = gioitinh;
+    }
+
+    public String getDiaChi() {
+        return DiaChi;
+    }
+
+    public void setDiaChi(String DiaChi) {
+        this.DiaChi = DiaChi;
+    }
+
+    public String getSoDienThoai() {
+        return SoDienThoai;
+    }
+
+    public void setSoDienThoai(String SoDienThoai) {
+        this.SoDienThoai = SoDienThoai;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
+
+    public float getLuong() {
+        return Luong;
+    }
+
+    public void setLuong(float Luong) {
+        this.Luong = Luong;
+    }
+
+    public boolean isRole() {
+        return role;
+    }
+
+    public void setRole(boolean role) {
+        this.role = role;
+    }
+
+    public boolean isTrangThai() {
+        return TrangThai;
+    }
+
+    public void setTrangThai(boolean TrangThai) {
+        this.TrangThai = TrangThai;
+    }
+
+ 
     
 }

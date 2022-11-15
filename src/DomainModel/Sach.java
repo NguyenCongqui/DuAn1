@@ -17,23 +17,32 @@ public class Sach {
     
 
     private int IdSach;  
-    private int IdNhaCungCap;
+    private int IdNhaCungCap,idTheLoai;
     private String MaSach;
     private String TenSach;
     private boolean TrangThai;  
-    private TheLoai theloai;
- 
+
     public Sach() {
     }
 
-    public Sach(int IdSach, int IdNhaCungCap, String MaSach, String TenSach, boolean TrangThai, TheLoai theloai) {
+    public Sach(int IdSach, int IdNhaCungCap, int idTheLoai, String MaSach, String TenSach, boolean TrangThai, TheLoai theloai) {
         this.IdSach = IdSach;
         this.IdNhaCungCap = IdNhaCungCap;
+        this.idTheLoai = idTheLoai;
         this.MaSach = MaSach;
         this.TenSach = TenSach;
         this.TrangThai = TrangThai;
-        this.theloai = theloai;
     }
+
+    public int getIdTheLoai() {
+        return idTheLoai;
+    }
+
+    public void setIdTheLoai(int idTheLoai) {
+        this.idTheLoai = idTheLoai;
+    }
+
+    
 
     public int getIdSach() {
         return IdSach;
