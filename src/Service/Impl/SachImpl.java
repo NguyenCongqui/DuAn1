@@ -26,8 +26,11 @@ public class SachImpl implements SachService {
 
     @Override
     public String inert(Sach s) {
-        boolean them = rp.;
-        if
+        boolean them = rp.them(s);
+        if(them){
+            return "them sach thanh cong";
+        }
+        return "them sach that bai";
     }
 
     @Override
