@@ -31,8 +31,7 @@ public class Sach {
     public Sach() {
     }
 
-    public Sach(  String TenSach,int idTheLoai, boolean TrangThai) {
-    
+    public Sach( String TenSach,int idTheLoai, boolean TrangThai) {
         this.TenSach = TenSach;
         this.idTheLoai = idTheLoai;
         this.TrangThai = TrangThai;
