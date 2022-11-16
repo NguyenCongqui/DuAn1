@@ -10,9 +10,7 @@ package View.form.giaodich;
  */
 public class ViewNhanVien extends javax.swing.JPanel {
 
-    /**
-     * Creates new form NhanVien
-     */
+    ViewThemNhanVienFrame nhanvien = new ViewThemNhanVienFrame();
     public ViewNhanVien() {
         initComponents();
     }
@@ -32,7 +30,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
         textField1 = new View.form.TextField();
         myButton1 = new View.form.MyButton();
         combobox1 = new View.form.Combobox();
-        btn_xoa = new View.form.MyButton();
+        btn_ThemNhanVien = new View.form.MyButton();
         btn_xoa1 = new View.form.MyButton();
         btn_xoa2 = new View.form.MyButton();
         jPanel3 = new javax.swing.JPanel();
@@ -53,8 +51,13 @@ public class ViewNhanVien extends javax.swing.JPanel {
 
         combobox1.setLabeText("Tình Trạng ");
 
-        btn_xoa.setText("Thêm Nhân Viên");
-        btn_xoa.setRadius(20);
+        btn_ThemNhanVien.setText("Thêm Nhân Viên");
+        btn_ThemNhanVien.setRadius(20);
+        btn_ThemNhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ThemNhanVienActionPerformed(evt);
+            }
+        });
 
         btn_xoa1.setText("Xóa Nhân Viên");
         btn_xoa1.setRadius(20);
@@ -76,7 +79,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
                 .addGap(54, 54, 54)
                 .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73)
-                .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_ThemNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(btn_xoa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
@@ -97,7 +100,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_ThemNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_xoa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_xoa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
@@ -158,9 +161,15 @@ public class ViewNhanVien extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_ThemNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemNhanVienActionPerformed
+        // TODO add your handling code here:
+        nhanvien.setVisible(true);
+        
+    }//GEN-LAST:event_btn_ThemNhanVienActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private View.form.MyButton btn_xoa;
+    private View.form.MyButton btn_ThemNhanVien;
     private View.form.MyButton btn_xoa1;
     private View.form.MyButton btn_xoa2;
     private View.form.Combobox combobox1;

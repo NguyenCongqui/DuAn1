@@ -76,7 +76,7 @@
                       <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                       <Component id="combobox1" min="-2" pref="188" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                      <Component id="btn_xoa" min="-2" pref="115" max="-2" attributes="0"/>
+                      <Component id="btn_ThemNhanVien" min="-2" pref="115" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="btn_xoa1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
@@ -102,7 +102,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btn_xoa" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_ThemNhanVien" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_xoa1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_xoa2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -136,11 +136,14 @@
                 <Property name="labeText" type="java.lang.String" value="T&#xec;nh Tr&#x1ea1;ng "/>
               </Properties>
             </Component>
-            <Component class="View.form.MyButton" name="btn_xoa">
+            <Component class="View.form.MyButton" name="btn_ThemNhanVien">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Th&#xea;m Nh&#xe2;n Vi&#xea;n"/>
                 <Property name="radius" type="int" value="20"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ThemNhanVienActionPerformed"/>
+              </Events>
             </Component>
             <Component class="View.form.MyButton" name="btn_xoa1">
               <Properties>
