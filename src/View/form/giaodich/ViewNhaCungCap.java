@@ -344,6 +344,8 @@ public class ViewNhaCungCap extends javax.swing.JPanel {
         txt_DiaChi.setText("");
         txt_SDT.setText("");
         txt_Search.setText("");
+        lbl_ID.setText("");
+        lbl_Search.setText("");
         fillData();
     }//GEN-LAST:event_btn_ResetActionPerformed
 

@@ -2,7 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DomainModel;
+package ViewModel;
+
 
 
 /**
@@ -10,26 +11,30 @@ package DomainModel;
  * @author ADMIN
  */
 
-public class HDNhapSanPham  {
+public class HDNhapSPViewModel  {
 
   
-private int IDHoaDonNhapSanPham;
+private int IDHoaDonNhapSanPham;//
 private int IDNhaCungCap ;
-private int IDUsers ;
-private String  NGAYTAODON ;
-private int  TINHTRANGTRATIEN ;
-private String  MoTa ;
+private int IDUsers ;//
+private String  NGAYTAODON ;//
+private int  TINHTRANGTRATIEN ;//
+private String  MoTa ;//
    
-    public HDNhapSanPham() {
+private String tenUser;
+private String tenNCC;
+    public HDNhapSPViewModel() {
     }
 
-    public HDNhapSanPham(int IDHoaDonNhapSanPham, int IDNhaCungCap, int IDUsers, String NGAYTAODON, int TINHTRANGTRATIEN, String MoTa) {
+    public HDNhapSPViewModel(int IDHoaDonNhapSanPham, int IDNhaCungCap, int IDUsers, String NGAYTAODON, int TINHTRANGTRATIEN, String MoTa, String tenUser, String tenNCC) {
         this.IDHoaDonNhapSanPham = IDHoaDonNhapSanPham;
         this.IDNhaCungCap = IDNhaCungCap;
         this.IDUsers = IDUsers;
         this.NGAYTAODON = NGAYTAODON;
         this.TINHTRANGTRATIEN = TINHTRANGTRATIEN;
         this.MoTa = MoTa;
+        this.tenUser = tenUser;
+        this.tenNCC = tenNCC;
     }
 
     public int getIDHoaDonNhapSanPham() {
@@ -80,6 +85,23 @@ private String  MoTa ;
         this.MoTa = MoTa;
     }
 
+    public String getTenUser() {
+        return tenUser;
+    }
+
+    public void setTenUser(String tenUser) {
+        this.tenUser = tenUser;
+    }
+
+    public String getTenNCC() {
+        return tenNCC;
+    }
+
+    public void setTenNCC(String tenNCC) {
+        this.tenNCC = tenNCC;
+    }
+
+ 
   
 
 }
