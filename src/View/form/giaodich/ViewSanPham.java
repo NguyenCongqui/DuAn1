@@ -36,6 +36,7 @@ public class ViewSanPham extends javax.swing.JPanel {
         statusform();
         fillcomboxTheLoai();
         initTable();
+//        listtheloai = svTheLoai.getlistTheLoai();
 
     }
 
@@ -85,15 +86,12 @@ public class ViewSanPham extends javax.swing.JPanel {
     public TheLoai guidata() {
         TheLoai tl = new TheLoai();
         tl.setTenTheLoai(txt_tenLoaiSach.getText());
-        if (rdo_DangKinhDoanh.isSelected()) {
-            tl.setTrangThai(true);
-        } else {
-            tl.setTrangThai(false);
-        }
+        
         return tl;
     }
-
-  
+    public Sach guiDataSach(){
+        return new Sach(txtTenSach.getText(), listtheloai.get(cbo_loaiSach.getSelectedIndex()).getIdTheLoai(), rdo_DangKinhDoanh.isSelected());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -104,6 +102,7 @@ public class ViewSanPham extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -213,8 +212,15 @@ public class ViewSanPham extends javax.swing.JPanel {
 
         jLabel3.setText("Trạng Thái");
 
+        buttonGroup1.add(rdo_DangKinhDoanh);
         rdo_DangKinhDoanh.setText("Đang Kinh Doanh ");
+        rdo_DangKinhDoanh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdo_DangKinhDoanhActionPerformed(evt);
+            }
+        });
 
+        buttonGroup1.add(rdo_NgungKinhDoanh);
         rdo_NgungKinhDoanh.setText("Ngừng Kinh Doanh");
 
         myButton3.setText("Tạo Mới");
@@ -422,14 +428,14 @@ public class ViewSanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_cbo_loaiSachMouseClicked
 
     private void myButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton4ActionPerformed
-        listtheloai = svTheLoai.getlistTheLoai();
-        int indexTl = cbo_loaiSach.getSelectedIndex();
-        TheLoai tl = listtheloai.get(indexTl);
-        String tenSach = txtTenSach.getText();
-        boolean trangThai = rdo_DangKinhDoanh.isSelected();
-        Sach s = new Sach( tenSach, tl.getIdTheLoai(), trangThai);
-        JOptionPane.showMessageDialog(this, svSach.inert(s));
-        showData(listSachView);
+//        listtheloai = svTheLoai.getlistTheLoai();
+//        int indexTl = cbo_loaiSach.getSelectedIndex();
+//        TheLoai tl = listtheloai.get(indexTl);
+//        String tenSach = txtTenSach.getText();
+//        boolean trangThai = rdo_DangKinhDoanh.isSelected();
+//        Sach s = new Sach( tenSach, tl.getIdTheLoai(), trangThai);
+        JOptionPane.showMessageDialog(this, svSach.inert(guiDataSach()));
+        showData(svSach.getAll());
 
     }//GEN-LAST:event_myButton4ActionPerformed
 
@@ -440,11 +446,16 @@ public class ViewSanPham extends javax.swing.JPanel {
         rdo_NgungKinhDoanh.setSelected(false);
     }//GEN-LAST:event_myButton3ActionPerformed
 
+    private void rdo_DangKinhDoanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_DangKinhDoanhActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdo_DangKinhDoanhActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.form.MyButton btn_sua;
     private View.form.MyButton btn_them;
     private View.form.MyButton btn_xoa;
+    private javax.swing.ButtonGroup buttonGroup1;
     private View.form.Combobox cbo_loaiSach;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

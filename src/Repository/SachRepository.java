@@ -26,7 +26,7 @@ public class SachRepository {
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Sach s = new Sach(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(3), rs.getString(4), rs.getBoolean(5));
+                Sach s = new Sach(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getBoolean(6));
                 listSach.add(s);
             }
             return listSach;
