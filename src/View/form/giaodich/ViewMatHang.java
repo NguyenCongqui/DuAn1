@@ -4,6 +4,14 @@
  */
 package View.form.giaodich;
 
+import Service.Impl.ChiTietSachImpl;
+import Services.ChiTietSachService;
+import ViewModel.MatHang01;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
+
 /**
  *
  * @author ADMIN
@@ -11,9 +19,26 @@ package View.form.giaodich;
 public class ViewMatHang extends javax.swing.JPanel {
 
     ViewThemMatHang themMatHang = new ViewThemMatHang();
+    ChiTietSachService chitietsachService = new ChiTietSachImpl();
+    List<MatHang01>  listmathang = new ArrayList<>();
+    DefaultTableModel tbl_model = new DefaultTableModel();
+    
+    
     
     public ViewMatHang() {
         initComponents();
+        tbl_model = (DefaultTableModel) tbl_matHang.getModel();
+        listmathang = chitietsachService.getlist();
+        filldata();
+        
+    }
+    public void filldata(){
+        tbl_model.setRowCount(0);
+        for (MatHang01 mh : listmathang) {
+            tbl_model.addRow(new Object[]{
+                mh.getMasach(),mh.getTensach(),mh.getGiaBan(),mh.getTenNgonNgu(),mh.getTenTacGia(),mh.getTenNxb(),mh.getSoLuong()
+            });
+        }
     }
 
     /**
@@ -40,7 +65,7 @@ public class ViewMatHang extends javax.swing.JPanel {
         radioButtonCustom4 = new View.form.RadioButtonCustom();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableColumn1 = new View.form.TableColumn();
+        tbl_matHang = new View.form.TableColumn();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -174,18 +199,18 @@ public class ViewMatHang extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tableColumn1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_matHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Ma", "Tên Sách", "Giá Bán", "Tên Ngôn Ngữ", "Tên Tác Giả", "Tên Nhà Xuất Bản", "Số Lượng Tồn"
             }
         ));
-        jScrollPane1.setViewportView(tableColumn1);
+        jScrollPane1.setViewportView(tbl_matHang);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -259,7 +284,7 @@ public class ViewMatHang extends javax.swing.JPanel {
     private View.form.RadioButtonCustom radioButtonCustom2;
     private View.form.RadioButtonCustom radioButtonCustom3;
     private View.form.RadioButtonCustom radioButtonCustom4;
-    private View.form.TableColumn tableColumn1;
+    private View.form.TableColumn tbl_matHang;
     private View.form.TextField textField1;
     // End of variables declaration//GEN-END:variables
 }

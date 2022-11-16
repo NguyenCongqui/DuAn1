@@ -6,13 +6,15 @@ package Service.Impl;
 
 import DomainModel.ChiTietSach;
 import Repository.ChiTietSachRepository;
-import Services.ChiTietSanPhamService;
+import Services.ChiTietSachService;
+import ViewModel.MatHang01;
+import java.util.List;
 
 /**
  *
  * @author ADMIN
  */
-public class ChiTietSachImpl implements ChiTietSanPhamService{
+public class ChiTietSachImpl implements ChiTietSachService{
     ChiTietSachRepository rep = new ChiTietSachRepository();
     
     public ChiTietSachImpl() {
@@ -22,5 +24,11 @@ public class ChiTietSachImpl implements ChiTietSanPhamService{
     public String insert(ChiTietSach cts) {
         return rep.insert(cts);
     }
-    
+
+    @Override
+    public List<MatHang01> getlist() {
+        return rep.getListchitietsp();
+    }
+
+   
 }

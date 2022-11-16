@@ -14,7 +14,6 @@ import Service.Impl.NgonNguImpl;
 import Service.Impl.NhaXuatBanImpl;
 import Service.Impl.SachImpl;
 import Service.Impl.TacGiaImpl;
-import Services.ChiTietSanPhamService;
 import Services.NgonNguService;
 import Services.NhaXuatBanService;
 import Services.SachService;
@@ -26,6 +25,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Services.ChiTietSachService;
 
 /**
  *
@@ -44,7 +44,7 @@ public class ViewThemMatHang extends javax.swing.JFrame {
     List<Sach> ListSach = new ArrayList<>();
     List<MatHangViewModel> listMatHangViewModel = new ArrayList<>();
     List<ChiTietSach> listchitietsach = new ArrayList<>();
-    ChiTietSanPhamService chitietsachService = new ChiTietSachImpl();
+    ChiTietSachService chitietsachService = new ChiTietSachImpl();
     
     
     
@@ -585,15 +585,15 @@ public class ViewThemMatHang extends javax.swing.JFrame {
         int index = tbl_chiTietSanPham.getRowCount();
         if (index >0) {
             for (int i = 0; i < listchitietsach.size(); i++) {
-                chitietsachService.insert(listchitietsach.get(i));
+                JOptionPane.showMessageDialog(this,chitietsachService.insert(listchitietsach.get(i)));
                 txt_giaBan.setText("");
             }
         }
-        JOptionPane.showMessageDialog(this,"them" + index + "Mat hang thanh cong");
-        listMatHangViewModel.clear();
-        tbl_model.setRowCount(0);
-        new mainform().showForm(new ViewMatHang());
-        this.dispose();
+//        JOptionPane.showMessageDialog(this,"them" + index + "Mat hang thanh cong");
+//        listMatHangViewModel.clear();
+//        tbl_model.setRowCount(0);
+//        new mainform().showForm(new ViewMatHang());
+//        this.dispose();
         
                 
         

@@ -5,11 +5,14 @@
 package Services;
 
 import DomainModel.ChiTietSach;
+import ViewModel.MatHang01;
+import java.util.List;
 
 /**
  *
  * @author ADMIN
  */
-public interface ChiTietSanPhamService {
+public interface ChiTietSachService {
+    List<MatHang01> getlist ();
     String insert(ChiTietSach cts);
 }
