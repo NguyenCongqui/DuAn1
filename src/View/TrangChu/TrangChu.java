@@ -11,6 +11,7 @@ import View.form.giaodich.ViewDoiHang;
 import View.form.giaodich.ViewDoiMatKhau;
 import View.form.giaodich.ViewHoaDonBanHang;
 import View.form.giaodich.ViewHoaDonDoiHang;
+import View.form.giaodich.ViewHoaDonNhapHang;
 import View.form.giaodich.ViewHoaDonTraHang;
 import View.form.giaodich.ViewKhuyenMai;
 import View.form.giaodich.ViewMatHang;
@@ -18,6 +19,8 @@ import View.form.giaodich.ViewNhaCungCap;
 import View.form.giaodich.ViewNhanVien;
 import View.form.giaodich.ViewNhapHang;
 import View.form.giaodich.ViewSanPham;
+import View.form.giaodich.ViewThongKeDoanhSo;
+import View.form.giaodich.ViewThongKeDoanhThu;
 import View.form.giaodich.ViewTraHang;
 import View.form.giaodich.ViewThongtincanhan;
 import View.login.Login;
@@ -89,7 +92,7 @@ menu1.addEvent(new EvenMenuSelected() {
                         }else if (subMenuIndex == 4) {
                             main.showForm(new ViewHoaDonBanHang());
                         }else if (subMenuIndex == 5) {
-                            //main.showForm(new jhoadonnhaphang);
+                            main.showForm(new ViewHoaDonNhapHang());
                         }else if (subMenuIndex == 6) {
                             main.showForm(new ViewHoaDonTraHang());
                         }else if (subMenuIndex == 7) {
@@ -105,9 +108,9 @@ menu1.addEvent(new EvenMenuSelected() {
                              main.showForm(new ViewNhanVien());
                         }}else if (menuIndex == 5) {
                         if (subMenuIndex ==0) {
-                            // main.showForm(new jdoanhthu());
+                             main.showForm(new ViewThongKeDoanhThu());
                         }else if (subMenuIndex == 1) {
-                            //main.showForm(new jdoanhso());
+                            main.showForm(new ViewThongKeDoanhSo());
                         }
                         }else if (menuIndex == 6) {
                         if (subMenuIndex ==0) {
