@@ -8,6 +8,7 @@ import DomainModel.ChiTietSach;
 import Repository.ChiTietSachRepository;
 import Services.ChiTietSachService;
 import ViewModel.MatHang01;
+import ViewModel.MatHangViewModel;
 import java.util.List;
 
 /**
@@ -20,15 +21,49 @@ public class ChiTietSachImpl implements ChiTietSachService{
     public ChiTietSachImpl() {
     }
 
-    @Override
-    public String insert(ChiTietSach cts) {
-        return rep.insert(cts);
-    }
+    
 
     @Override
     public List<MatHang01> getlist() {
         return rep.getListchitietsp();
     }
+
+    @Override
+    public String insert(MatHangViewModel cts) {
+       return rep.insert(cts);
+    }
+
+    @Override
+    public List<MatHang01> getlistConHang() {
+        return rep.getListConHang();
+    }
+
+    @Override
+    public List<MatHang01> getlistHetHang() {
+        return rep.getListHetHang();
+    }
+
+    @Override
+    public List<MatHang01> getlistThapToiCao() {
+        return rep.getListThapToiCao();
+    }
+
+    @Override
+    public List<MatHang01> getlistCaoToiThap() {
+        return rep.getListTuCaoToiThap();
+    }
+
+    @Override
+    public List<MatHang01> getlistDangKinhDoanh() {
+       return rep.getListDangKinhDoanh();
+    }
+
+    @Override
+    public List<MatHang01> getlistNgungKinhDoanh() {
+       return rep.getListNgungKinhDoanh();
+    }
+
+    
 
    
 }

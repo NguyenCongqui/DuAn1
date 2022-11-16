@@ -26,6 +26,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Services.ChiTietSachService;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -160,13 +161,29 @@ public class ViewThemMatHang extends javax.swing.JFrame {
         mh.setIdsach(s.getIdSach());
         mh.setTenSach(s.getTenSach());
         mh.setTrangThai(true);
+        mh.setSoluongton(0);
         mh.setMasach(s.getMaSach());
-        mh.setIdTacGia(mh.getIdsach());
+        mh.setIdTacGia(tg.getIdTacGia());
         mh.setTenTacGia(tg.getTenGiaGia());
         mh.setIsNXB(nxb.getId());
         mh.setTenNxb(nxb.getNhaXuatBan());
+         
         
         return mh;
+    }
+    public void inerts (){
+         int index = tbl_chiTietSanPham.getRowCount();
+        if (index >0) {
+            for (int i = 0; i < listMatHangViewModel.size(); i++) {
+                JOptionPane.showMessageDialog(this,chitietsachService.insert(listMatHangViewModel.get(i)));
+                txt_giaBan.setText("");
+            }
+                    JOptionPane.showMessageDialog(this,"them" + index + "Mat hang thanh cong");
+        listMatHangViewModel.clear();
+        tbl_model.setRowCount(0);
+        new mainform().showForm(new ViewMatHang());
+        this.dispose();
+        }
     }
    
     /**
@@ -200,12 +217,12 @@ public class ViewThemMatHang extends javax.swing.JFrame {
         txt_TenNhaXuatBan = new View.form.TextField();
         txt_TenNgonNgu = new View.form.TextField();
         jPanel7 = new javax.swing.JPanel();
-        myButton14 = new View.form.MyButton();
+        btn_reset = new View.form.MyButton();
         myButton15 = new View.form.MyButton();
         jPanel8 = new javax.swing.JPanel();
-        myButton16 = new View.form.MyButton();
+        btn_HoanThanh = new View.form.MyButton();
         myButton2 = new View.form.MyButton();
-        myButton17 = new View.form.MyButton();
+        btn_xoa = new View.form.MyButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_chiTietSanPham = new View.form.TableColumn();
 
@@ -222,7 +239,7 @@ public class ViewThemMatHang extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chi Tiet San Pham", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 13))); // NOI18N
 
-        cbo_tenSanPham.setLabeText("Ten san pham");
+        cbo_tenSanPham.setLabeText("Ten Sách");
 
         txt_giaBan.setLabelText("Gia ban");
 
@@ -403,11 +420,11 @@ public class ViewThemMatHang extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        myButton14.setText("Reset");
-        myButton14.setRadius(20);
-        myButton14.addActionListener(new java.awt.event.ActionListener() {
+        btn_reset.setText("Reset");
+        btn_reset.setRadius(20);
+        btn_reset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton14ActionPerformed(evt);
+                btn_resetActionPerformed(evt);
             }
         });
 
@@ -427,7 +444,7 @@ public class ViewThemMatHang extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(myButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(myButton14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_reset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(15, 15, 15))
         );
         jPanel7Layout.setVerticalGroup(
@@ -436,18 +453,18 @@ public class ViewThemMatHang extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(myButton15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(myButton14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        myButton16.setText("Hoan Thanh");
-        myButton16.setRadius(20);
-        myButton16.addActionListener(new java.awt.event.ActionListener() {
+        btn_HoanThanh.setText("Hoan Thanh");
+        btn_HoanThanh.setRadius(20);
+        btn_HoanThanh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton16ActionPerformed(evt);
+                btn_HoanThanhActionPerformed(evt);
             }
         });
 
@@ -459,11 +476,11 @@ public class ViewThemMatHang extends javax.swing.JFrame {
             }
         });
 
-        myButton17.setText("Xoa");
-        myButton17.setRadius(20);
-        myButton17.addActionListener(new java.awt.event.ActionListener() {
+        btn_xoa.setText("Xoa");
+        btn_xoa.setRadius(20);
+        btn_xoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton17ActionPerformed(evt);
+                btn_xoaActionPerformed(evt);
             }
         });
 
@@ -474,17 +491,17 @@ public class ViewThemMatHang extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(myButton16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(myButton17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_HoanThanh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_xoa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(myButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(myButton17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(myButton16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_HoanThanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -565,9 +582,9 @@ public class ViewThemMatHang extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void myButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton14ActionPerformed
+    private void btn_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_myButton14ActionPerformed
+    }//GEN-LAST:event_btn_resetActionPerformed
 
     private void myButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton15ActionPerformed
         // TODO add your handling code here:
@@ -578,33 +595,27 @@ public class ViewThemMatHang extends javax.swing.JFrame {
         });
         listMatHangViewModel.add(mh);
     }//GEN-LAST:event_myButton15ActionPerformed
-
-    private void myButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton16ActionPerformed
+public void addFilltable(ActionListener evt){
+    btn_HoanThanh.addActionListener(evt);
+}
+    private void btn_HoanThanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HoanThanhActionPerformed
         // TODO add your handling code here:
+        inerts();
         
-        int index = tbl_chiTietSanPham.getRowCount();
-        if (index >0) {
-            for (int i = 0; i < listchitietsach.size(); i++) {
-                JOptionPane.showMessageDialog(this,chitietsachService.insert(listchitietsach.get(i)));
-                txt_giaBan.setText("");
-            }
-        }
-//        JOptionPane.showMessageDialog(this,"them" + index + "Mat hang thanh cong");
-//        listMatHangViewModel.clear();
-//        tbl_model.setRowCount(0);
-//        new mainform().showForm(new ViewMatHang());
-//        this.dispose();
+       
+        
+
         
                 
         
-    }//GEN-LAST:event_myButton16ActionPerformed
+    }//GEN-LAST:event_btn_HoanThanhActionPerformed
     private void myButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_myButton2ActionPerformed
 
-    private void myButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton17ActionPerformed
+    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_myButton17ActionPerformed
+    }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void btn_themNhaXuatBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themNhaXuatBanActionPerformed
         // TODO add your handling code here:
@@ -733,12 +744,15 @@ public class ViewThemMatHang extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.form.MyButton Btn_Sua;
+    private View.form.MyButton btn_HoanThanh;
     private View.form.MyButton btn_SuaTacGia;
     private View.form.MyButton btn_ThemNXB;
+    private View.form.MyButton btn_reset;
     private View.form.MyButton btn_suaNhaXuatBan;
     private View.form.MyButton btn_themNgonNgu;
     private View.form.MyButton btn_themNhaXuatBan;
     private View.form.MyButton btn_themTacGia;
+    private View.form.MyButton btn_xoa;
     private View.form.Combobox cbo_ngonNgu;
     private View.form.Combobox cbo_nhaXuatBan;
     private View.form.Combobox cbo_tacGia;
@@ -750,10 +764,7 @@ public class ViewThemMatHang extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private View.form.MyButton myButton14;
     private View.form.MyButton myButton15;
-    private View.form.MyButton myButton16;
-    private View.form.MyButton myButton17;
     private View.form.MyButton myButton2;
     private View.form.MyButton myButton4;
     private View.form.MyButton myButton9;
