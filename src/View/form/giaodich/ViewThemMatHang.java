@@ -4,15 +4,23 @@
  */
 package View.form.giaodich;
 
+import DomainModel.ChiTietSach;
 import DomainModel.NgonNgu;
 import DomainModel.NhaXuatBan;
+import DomainModel.Sach;
 import DomainModel.TacGia;
+import Service.Impl.ChiTietSachImpl;
 import Service.Impl.NgonNguImpl;
 import Service.Impl.NhaXuatBanImpl;
+import Service.Impl.SachImpl;
 import Service.Impl.TacGiaImpl;
+import Services.ChiTietSanPhamService;
 import Services.NgonNguService;
 import Services.NhaXuatBanService;
+import Services.SachService;
 import Services.TacGiaService;
+import View.TrangChu.mainform;
+import ViewModel.MatHangViewModel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -29,9 +37,15 @@ public class ViewThemMatHang extends javax.swing.JFrame {
     NhaXuatBanService NhaXuatBanService = new NhaXuatBanImpl();
     NgonNguService NgonNguService = new NgonNguImpl();
     TacGiaService TacGiaService = new TacGiaImpl();
+    SachService SachService = new SachImpl();
     List<NhaXuatBan> LisNhaXuatBan = new ArrayList<>();
     List<NgonNgu> ListNgonNgu = new ArrayList<>();
     List<TacGia> ListTacGia = new ArrayList<>();
+    List<Sach> ListSach = new ArrayList<>();
+    List<MatHangViewModel> listMatHangViewModel = new ArrayList<>();
+    List<ChiTietSach> listchitietsach = new ArrayList<>();
+    ChiTietSanPhamService chitietsachService = new ChiTietSachImpl();
+    
     
     
     
@@ -44,6 +58,7 @@ public class ViewThemMatHang extends javax.swing.JFrame {
         fillComboboxNgonNgu();
         fillComboboxNhaXuatBan();
         fillComboboxTacGia();
+        fillComboboxTenSanPham();
         LisNhaXuatBan = NhaXuatBanService.getlist();
         
         
@@ -68,9 +83,17 @@ public class ViewThemMatHang extends javax.swing.JFrame {
     public void fillComboboxTacGia() {
         DefaultComboBoxModel cbModel = (DefaultComboBoxModel) cbo_tacGia.getModel();
         cbo_tacGia.removeAllItems();
-        List<TacGia> listTacGia = TacGiaService.getist();
-        for (TacGia c : listTacGia) {
+        ListTacGia = TacGiaService.getist();
+        for (TacGia c : ListTacGia) {
             cbModel.addElement(c);
+        }
+    }
+    public void fillComboboxTenSanPham() {
+        DefaultComboBoxModel cbModel = (DefaultComboBoxModel) cbo_tenSanPham.getModel();
+        cbo_tenSanPham.removeAllItems();
+        ListSach = SachService.getAllSach();
+        for (Sach s : ListSach) {
+            cbModel.addElement(s);
         }
     }
     public void statusForm(){
@@ -125,6 +148,26 @@ public class ViewThemMatHang extends javax.swing.JFrame {
         tg.setTenGiaGia(txt_TenTacGia.getText());
         return tg;
     }
+    public MatHangViewModel getfromMatHang(){
+        NhaXuatBan nxb = (NhaXuatBan) cbo_nhaXuatBan.getSelectedItem();
+        NgonNgu nn = (NgonNgu) cbo_ngonNgu.getSelectedItem();
+        TacGia tg = (TacGia) cbo_tacGia.getSelectedItem();
+        Sach s = (Sach) cbo_tenSanPham.getSelectedItem();
+        MatHangViewModel mh = new MatHangViewModel();
+        mh.setGiaban(Float.parseFloat(txt_giaBan.getText()));
+        mh.setIdNgonNgu(nn.getIdNgonNgu());
+        mh.setTenNgonNgu(nn.getTenNgonNgu());
+        mh.setIdsach(s.getIdSach());
+        mh.setTenSach(s.getTenSach());
+        mh.setTrangThai(true);
+        mh.setMasach(s.getMaSach());
+        mh.setIdTacGia(mh.getIdsach());
+        mh.setTenTacGia(tg.getTenGiaGia());
+        mh.setIsNXB(nxb.getId());
+        mh.setTenNxb(nxb.getNhaXuatBan());
+        
+        return mh;
+    }
    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -139,7 +182,7 @@ public class ViewThemMatHang extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        cbo_ten = new View.form.Combobox();
+        cbo_tenSanPham = new View.form.Combobox();
         txt_giaBan = new View.form.TextField();
         cbo_nhaXuatBan = new View.form.Combobox();
         cbo_ngonNgu = new View.form.Combobox();
@@ -164,7 +207,7 @@ public class ViewThemMatHang extends javax.swing.JFrame {
         myButton2 = new View.form.MyButton();
         myButton17 = new View.form.MyButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableColumn1 = new View.form.TableColumn();
+        tbl_chiTietSanPham = new View.form.TableColumn();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -179,7 +222,7 @@ public class ViewThemMatHang extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chi Tiet San Pham", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 13))); // NOI18N
 
-        cbo_ten.setLabeText("Ten san pham");
+        cbo_tenSanPham.setLabeText("Ten san pham");
 
         txt_giaBan.setLabelText("Gia ban");
 
@@ -277,7 +320,7 @@ public class ViewThemMatHang extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbo_ten, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                    .addComponent(cbo_tenSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
                     .addComponent(txt_giaBan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(52, 52, 52)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,7 +364,7 @@ public class ViewThemMatHang extends javax.swing.JFrame {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbo_ten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbo_tenSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbo_nhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -447,7 +490,7 @@ public class ViewThemMatHang extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tableColumn1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_chiTietSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -455,7 +498,7 @@ public class ViewThemMatHang extends javax.swing.JFrame {
                 "Ten San Pham", "Gia Ban", "Nha Xuat Ban", "Ngon Ngu", "Tac Gia"
             }
         ));
-        jScrollPane1.setViewportView(tableColumn1);
+        jScrollPane1.setViewportView(tbl_chiTietSanPham);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -528,10 +571,32 @@ public class ViewThemMatHang extends javax.swing.JFrame {
 
     private void myButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton15ActionPerformed
         // TODO add your handling code here:
+        tbl_model = (DefaultTableModel) tbl_chiTietSanPham.getModel();
+        MatHangViewModel mh = getfromMatHang();
+        tbl_model.addRow(new Object[]{
+            mh.getTenSach(),mh.getGiaban(),mh.getTenNxb(),mh.getTenNgonNgu(),mh.getTenTacGia()
+        });
+        listMatHangViewModel.add(mh);
     }//GEN-LAST:event_myButton15ActionPerformed
 
     private void myButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton16ActionPerformed
         // TODO add your handling code here:
+        
+        int index = tbl_chiTietSanPham.getRowCount();
+        if (index >0) {
+            for (int i = 0; i < listchitietsach.size(); i++) {
+                chitietsachService.insert(listchitietsach.get(i));
+                txt_giaBan.setText("");
+            }
+        }
+        JOptionPane.showMessageDialog(this,"them" + index + "Mat hang thanh cong");
+        listMatHangViewModel.clear();
+        tbl_model.setRowCount(0);
+        new mainform().showForm(new ViewMatHang());
+        this.dispose();
+        
+                
+        
     }//GEN-LAST:event_myButton16ActionPerformed
     private void myButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton2ActionPerformed
         this.dispose();
@@ -677,7 +742,7 @@ public class ViewThemMatHang extends javax.swing.JFrame {
     private View.form.Combobox cbo_ngonNgu;
     private View.form.Combobox cbo_nhaXuatBan;
     private View.form.Combobox cbo_tacGia;
-    private View.form.Combobox cbo_ten;
+    private View.form.Combobox cbo_tenSanPham;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
@@ -692,7 +757,7 @@ public class ViewThemMatHang extends javax.swing.JFrame {
     private View.form.MyButton myButton2;
     private View.form.MyButton myButton4;
     private View.form.MyButton myButton9;
-    private View.form.TableColumn tableColumn1;
+    private View.form.TableColumn tbl_chiTietSanPham;
     private View.form.TextField txt_TenNgonNgu;
     private View.form.TextField txt_TenNhaXuatBan;
     private View.form.TextField txt_TenTacGia;
