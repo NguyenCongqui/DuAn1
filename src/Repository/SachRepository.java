@@ -53,49 +53,12 @@ public class SachRepository {
         return null;
     }
 
-    public boolean update(Sach s) {
-        String query = "UPDATE [dbo].[Sach]\n"
-                + "   SET \n"
-                + "      ,[TenSach] = ?\n"
-                + "      ,[TrangThai] = ?\n"
-                + " WHERE IdSach = ?";
-        int check = 0;
-        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setObject(1, s.getTenSach());
-            ps.setObject(2, s.isTrangThai());
-            ps.setObject(3, s.getIdSach());
-            check = ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
-        return check > 0;
-    }
-
-    public boolean them(Sach s) {
-        String query = "INSERT INTO [dbo].[Sach]\n"
-                + "          \n"
-                + "           ([TenSach]\n"
-                + "           ,[TrangThai])\n"
-                + "     VALUES\n"
-                + "           (?,? )";
-        int check = 0;
-        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-
-            ps.setObject(1, s.getTenSach());
-            ps.setObject(2, s.isTrangThai());
-            check = ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
-        return check > 0;
-    }
-
-    public boolean sua(Sach s, String id) {
+    public boolean update(Sach s, String id) {
         String query = "UPDATE [dbo].[Sach]\n"
                 + "   SET \n"
                 + "      [TenSach] = ?\n"
                 + "      ,[TrangThai] = ?\n"
-                + " WHERE IdSach = ?";
+                + " WHERE idSach = ?";
         int check = 0;
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, s.getTenSach());
@@ -107,6 +70,29 @@ public class SachRepository {
         }
         return check > 0;
     }
+
+    public boolean them(Sach s) {
+        String query = "INSERT INTO [dbo].[Sach]\n"
+                + "           (\n"
+                + "            [TenSach]\n"
+                + "	      ,[Idtheloai]\n"
+                + "           ,[TrangThai])\n"
+                + "     VALUES\n"
+                + "           (?,?,?)";
+        int check = 0;
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setObject(1, s.getTenSach());
+            ps.setObject(2, s.getIdTheLoai());
+            ps.setObject(3, s.isTrangThai());
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
+ 
 
     public boolean xoa(String id) {
         int check = 0;

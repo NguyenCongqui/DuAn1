@@ -61,12 +61,25 @@ public class TheLoaiRepository {
         int check = 0;
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, tl.getTenTheLoai());
-            ps.setObject(3, tl.getIdTheLoai());
+            ps.setObject(2, tl.getIdTheLoai());
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
         return check > 0;
     }
-
+public boolean delete(TheLoai tl) {
+        String query = "UPDATE [dbo].[TheLoai]\n"
+                + "   SET [TenTheLoai] = ?\n"
+                + " WHERE IdTheLoai = ?";
+        int check = 0;
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, tl.getTenTheLoai());
+            ps.setObject(2, tl.getIdTheLoai());
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
 }

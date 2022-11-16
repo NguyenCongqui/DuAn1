@@ -38,4 +38,26 @@ public class SachImpl implements SachService {
         return rp.getAllSach();
     }
 
+    @Override
+    public String update(Sach s, String id) {
+        boolean up = rp.update(s, id);
+        if(up){
+            return "update thanh cong";
+        }
+        return "update that bai";
+    }
+
+    @Override
+    public String delete(String id) {
+        boolean de = rp.xoa(id);
+        if(de){
+            return "xoa thanh cong";
+        }
+        return "xoa that bai";
+    }
+
+    
+
+    
+
 }

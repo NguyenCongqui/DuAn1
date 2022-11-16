@@ -16,4 +16,7 @@ public interface SachService {
     List<SachViewModel> getAll();
     List<Sach> getAllSach();
     String inert(Sach s);
+    String update(Sach s , String id);
+    String delete(String id);
+
 }
