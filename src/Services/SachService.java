@@ -18,5 +18,6 @@ public interface SachService {
     String inert(Sach s);
     String update(Sach s , String id);
     String delete(String id);
+    Sach select(String name);
 
 }

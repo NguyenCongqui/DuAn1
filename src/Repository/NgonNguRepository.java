@@ -70,4 +70,17 @@ public class NgonNguRepository {
         }
         return "sua khong thanh cong";
     }
+    public NgonNgu selectName(String name){
+        ListNgonNgu = new ArrayList<>();
+        String select = "SELECT * FROM dbo.NgonNgu WHERE IdNgonNgu = ?";
+        try {
+            st = db.getConnection().createStatement();
+            rs = st.executeQuery(select);
+            while (rs.next()) {                
+                ListNgonNgu.add(new NgonNgu(rs.getInt(1), rs.getNString(2)));
+            }
+        } catch (Exception e) {
+        }
+        return (NgonNgu) ListNgonNgu;
+    }
 }

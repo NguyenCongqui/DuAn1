@@ -15,4 +15,5 @@ public interface TheLoaiServie {
     List<TheLoai> getlistTheLoai();
     String inerts(TheLoai tl);
     String update(TheLoai tl);
+    TheLoai Select (String name);
 }

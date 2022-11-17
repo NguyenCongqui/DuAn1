@@ -82,4 +82,20 @@ public boolean delete(TheLoai tl) {
         }
         return check > 0;
     }
+public TheLoai selectName(String name) {
+        String query = "SELECT * FROM dbo.TheLoai WHERE IdTheLoai = ?";
+        List<TheLoai> lisTl = new ArrayList<>();
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                TheLoai tl = new TheLoai(rs.getInt(1), rs.getString(2));
+                lisTl.add(tl);
+            }
+            return (TheLoai) lisTl;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
 }

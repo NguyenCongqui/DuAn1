@@ -6,6 +6,7 @@ package Services;
 
 import DomainModel.TacGia;
 import java.util.List;
+import javax.print.DocFlavor;
 
 /**
  *
@@ -15,4 +16,5 @@ public interface TacGiaService {
     List<TacGia> getist();
     String insert (TacGia tg);
     String update (TacGia tg);
+    TacGia selectName(String name);
 }

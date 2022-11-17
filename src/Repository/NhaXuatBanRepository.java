@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import sun.misc.Unsafe;
 
 /**
  *
@@ -77,5 +78,21 @@ public class NhaXuatBanRepository {
             System.out.println(nxb);
         }
         
+     }
+     public NhaXuatBan selectName (String name){
+         String sql = "SELECT * FROM dbo.NXB WHERE IdNXB = ?";
+         ListNhaXuatBan =new  ArrayList<>();
+         try {
+              st=db.getConnection().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {                
+                ListNhaXuatBan.add(new NhaXuatBan(rs.getInt(1), rs.getNString(2)));
+                
+            }
+            rs.close();
+         } catch (Exception e) {
+         }
+         return (NhaXuatBan) ListNhaXuatBan;
+                 
      }
 }

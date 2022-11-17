@@ -15,4 +15,5 @@ public interface NgonNguService {
     List<NgonNgu> getList();
     String insert(NgonNgu nn);
     String update(NgonNgu nn);
+    NgonNgu selectName(String name);
 }

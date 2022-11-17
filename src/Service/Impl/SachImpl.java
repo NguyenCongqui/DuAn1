@@ -56,6 +56,11 @@ public class SachImpl implements SachService {
         return "xoa that bai";
     }
 
+    @Override
+    public Sach select(String name) {
+        return rp.selectName(name);
+    }
+
     
 
     

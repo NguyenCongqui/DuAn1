@@ -44,10 +44,32 @@ public class FormSuaMatHang extends javax.swing.JFrame {
     ChiTietSachService chitietsachService = new ChiTietSachImpl();
     public FormSuaMatHang() {
         initComponents();
+        
+    }
+    public void updateFrom(String tennhaxuatban,String tenngonngu , String tenTacGIa, String Tensach,Float GiaBan,int idchitietsach){
         fillComboboxNgonNgu();
         fillComboboxNhaXuatBan();
         fillComboboxTacGia();
         fillComboboxTenSanPham();
+        txt_ID.setText(Integer.toString(idchitietsach));
+        txt_ID.setEditable(false);
+        txt_GiaBan.setText(Float.toString(GiaBan));
+       NhaXuatBan nxb = NhaXuatBanService.Select(tennhaxuatban);
+       TacGia tg = TacGiaService.selectName(tenTacGIa);
+       Sach s = SachService.select(Tensach);
+       NgonNgu nn = NgonNguService.selectName(tenngonngu);
+       cbo_NgonNgu.getModel().setSelectedItem(nn);
+       cbo_NhaXuatBan.getModel().setSelectedItem(nxb);
+       cbo_TacGia.getModel().setSelectedItem(tg);
+       cbo_TenSach.getModel().setSelectedItem(s);
+       cbo_TenSach.setEditable(false);
+       cbo_TenSach.setEnabled(false);
+       
+       
+       
+       
+        
+        
     }
     public void fillComboboxNhaXuatBan() {
         DefaultComboBoxModel cbModel = (DefaultComboBoxModel) cbo_NhaXuatBan.getModel();

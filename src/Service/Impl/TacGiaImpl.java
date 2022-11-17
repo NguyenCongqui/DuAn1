@@ -29,5 +29,10 @@ public class TacGiaImpl implements TacGiaService{
     public String update(TacGia tg) {
        return rep.update(tg);
     }
+
+    @Override
+    public TacGia selectName(String name) {
+       return rep.selectName(name);
+    }
     
 }

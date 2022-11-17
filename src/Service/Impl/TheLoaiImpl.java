@@ -40,5 +40,10 @@ private TheLoaiRepository rp = new TheLoaiRepository();
         return "sua that bai";
     }
 
+    @Override
+    public TheLoai Select(String name) {
+        return rp.selectName(name);
+    }
+
     
 }

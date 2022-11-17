@@ -67,6 +67,17 @@ public class TacGiaRepositiry {
         }
         return "sua khong thanh cong";
     }
-    
-    
+    public TacGia selectName(String name){
+        ListTacGia = new ArrayList<>();
+        String select = "SELECT * FROM dbo.TacGia WHERE IdTacGia = ?";
+        try {
+            st = db.getConnection().createStatement();
+            rs = st.executeQuery(select);
+            while (rs.next()) {                
+                ListTacGia.add(new TacGia(rs.getInt(1), rs.getNString(2)));
+            }
+        } catch (Exception e) {
+        }
+        return (TacGia) ListTacGia;
+    }
 }

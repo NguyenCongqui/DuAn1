@@ -106,5 +106,21 @@ public class SachRepository {
         }
         return check > 0;
     }
+    public Sach selectName (String name){
+         String sql = "SELECT * FROM dbo.Sach WHERE IdSach = ?";
+        List<Sach> listSach =new  ArrayList<>();
+         try (Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+              
+            while (rs.next()) {                
+                listSach.add(new Sach(rs.getInt(1), rs.getNString(2)));
+                
+            }
+            rs.close();
+         } catch (Exception e) {
+         }
+         return (Sach) listSach;
+                 
+     }
 
 }

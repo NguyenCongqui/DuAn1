@@ -30,5 +30,11 @@ public class NgonNguImpl implements NgonNguService{
     public String update(NgonNgu nn) {
         return rep.update(nn);
     }
+
+    @Override
+    public NgonNgu selectName(String name) {
+       return rep.selectName(name);
+       
+    }
     
 }

@@ -30,5 +30,10 @@ public class NhaXuatBanImpl implements NhaXuatBanService{
     public String update(NhaXuatBan nxb) {
         return rep.update(nxb);
     }
+
+    @Override
+    public NhaXuatBan Select(String name) {
+       return rep.selectName(name);
+    }
     
 }

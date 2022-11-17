@@ -27,6 +27,8 @@ public class ViewMatHang extends javax.swing.JPanel {
     ChiTietSachService chitietsachService = new ChiTietSachImpl();
     List<MatHang01>  listmathang = new ArrayList<>();
     DefaultTableModel tbl_model = new DefaultTableModel();
+    FormSuaMatHang suamatHang ;
+    
     
     
     
@@ -427,9 +429,20 @@ public class ViewMatHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
             int index = tbl_matHang.getSelectedRow();
-            
-            
-        }
+            int idchitietSach =  (int) tbl_matHang.getValueAt(index, 0);
+            listmathang = chitietsachService.getlist();
+            float giaban = 0;
+            for (int i = 0; i < listmathang.size(); i++) {
+                if (listmathang.get(i).getIdCTSach() == idchitietSach) {
+                    giaban = listmathang.get(1).getGiaBan();
+                }
+            }
+              String tenSach = (String) tbl_matHang.getValueAt(index, 2);
+               String tenNgonNgu = (String) tbl_matHang.getValueAt(index, 4);
+                String tenTacGia = (String) tbl_matHang.getValueAt(index, 5);
+                 String tenNhaXuatBan = (String) tbl_matHang.getValueAt(index, 6);
+                 suamatHang = new updateFrom
+                      }
     }//GEN-LAST:event_tbl_matHangMouseClicked
 
 
