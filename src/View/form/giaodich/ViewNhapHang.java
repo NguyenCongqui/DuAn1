@@ -119,7 +119,7 @@ public class ViewNhapHang extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txt_GhiChu = new javax.swing.JTextArea();
-        btn_HoanThanh = new View.form.MyButton();
+        btn_NhapHang = new View.form.MyButton();
         lblSlgNhap = new javax.swing.JLabel();
         lblGiaNhap = new javax.swing.JLabel();
 
@@ -262,8 +262,8 @@ public class ViewNhapHang extends javax.swing.JPanel {
         txt_GhiChu.setRows(5);
         jScrollPane3.setViewportView(txt_GhiChu);
 
-        btn_HoanThanh.setText("Hoàn Thành");
-        btn_HoanThanh.setRadius(20);
+        btn_NhapHang.setText("Nhap Hang");
+        btn_NhapHang.setRadius(20);
 
         lblSlgNhap.setForeground(new java.awt.Color(255, 0, 0));
         lblSlgNhap.setText(" ");
@@ -304,7 +304,7 @@ public class ViewNhapHang extends javax.swing.JPanel {
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(61, 61, 61)
-                        .addComponent(btn_HoanThanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_NhapHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -319,7 +319,7 @@ public class ViewNhapHang extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
-                        .addComponent(btn_HoanThanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_NhapHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -460,8 +460,8 @@ public class ViewNhapHang extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private View.form.MyButton btn_HoanThanh;
     private View.form.MyButton btn_LuuTam;
+    private View.form.MyButton btn_NhapHang;
     private View.form.MyButton btn_Tim;
     private View.form.MyButton btn_XoaTam;
     private View.form.Combobox cbo_NCC;

@@ -269,7 +269,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                              <Component id="btn_HoanThanh" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_NhapHang" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="36" max="32767" attributes="0"/>
@@ -288,7 +288,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                              <Component id="btn_HoanThanh" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_NhapHang" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
@@ -405,9 +405,9 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="View.form.MyButton" name="btn_HoanThanh">
+            <Component class="View.form.MyButton" name="btn_NhapHang">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ho&#xe0;n Th&#xe0;nh"/>
+                <Property name="text" type="java.lang.String" value="Nhap Hang"/>
                 <Property name="radius" type="int" value="20"/>
               </Properties>
             </Component>
