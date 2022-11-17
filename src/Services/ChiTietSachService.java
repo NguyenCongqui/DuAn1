@@ -7,6 +7,7 @@ package Services;
 import DomainModel.ChiTietSach;
 import ViewModel.MatHang01;
 import ViewModel.MatHangViewModel;
+import ViewModel.NhapHangViewModel;
 import java.util.List;
 
 /**
@@ -23,5 +24,5 @@ public interface ChiTietSachService {
     List<MatHang01> getlistDangKinhDoanh();
     List<MatHang01> getlistNgungKinhDoanh();
     String update(MatHangViewModel cts);
-    
+    List<NhapHangViewModel> getAll();
 }

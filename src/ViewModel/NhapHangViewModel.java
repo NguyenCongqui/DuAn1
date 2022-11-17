@@ -47,7 +47,25 @@ public class NhapHangViewModel {
         this.tenTheLoai = tenTheLoai;
     }
 
- 
+    public NhapHangViewModel(int idchitietsach,
+            String TenSach,
+            String tenTheLoai,
+            String TenNxb,
+            String TenNgonNgu,
+            String TenTacGia,
+            int soluong,
+            float gia
+            ) {
+        this.idchitietsach = idchitietsach;
+        this.TenSach = TenSach;
+        this.tenTheLoai = tenTheLoai;
+        this.TenNxb = TenNxb;
+        this.TenNgonNgu = TenNgonNgu;
+        this.TenTacGia = TenTacGia;
+        this.soluong = soluong;
+        this.gia = gia;
+
+    }
 
     public int getIdchitietsach() {
         return idchitietsach;
@@ -104,8 +122,6 @@ public class NhapHangViewModel {
     public void setSoluong(int soluong) {
         this.soluong = soluong;
     }
-
-
 
     public String getNgaytao() {
         return ngaytao;
@@ -195,6 +211,4 @@ public class NhapHangViewModel {
         this.gia = gia;
     }
 
-   
-    
-    }
+}

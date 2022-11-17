@@ -9,6 +9,7 @@ import Repository.ChiTietSachRepository;
 import Services.ChiTietSachService;
 import ViewModel.MatHang01;
 import ViewModel.MatHangViewModel;
+import ViewModel.NhapHangViewModel;
 import java.util.List;
 
 /**
@@ -66,6 +67,11 @@ public class ChiTietSachImpl implements ChiTietSachService{
     @Override
     public String update(MatHangViewModel cts) {
       return rep.update(cts);
+    }
+
+    @Override
+    public List<NhapHangViewModel> getAll() {
+        return rep.getAll();
     }
 
     

@@ -32,21 +32,22 @@ public class ChiTietSachRepository {
     List<ChiTietSach> ListChiTietSach = null;
     List<MatHang01> ListMatHang = null;
     List<NhapHangViewModel> listNHV = null;
+
     public ChiTietSachRepository() {
     }
 
     public List<MatHang01> getListchitietsp() {
-        String select = "  SELECT IdCTSach, MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon \n" +
-"  FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach \n" +
-"  INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu 	\n" +
-"  INNER JOIN dbo.TacGia ON TacGia.IdTacGia = ChiTietSach.IdTacGia \n" +
-"  INNER JOIN dbo.NXB ON NXB.IdNXB = ChiTietSach.IdNXB";
+        String select = "  SELECT IdCTSach, MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon \n"
+                + "  FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach \n"
+                + "  INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu 	\n"
+                + "  INNER JOIN dbo.TacGia ON TacGia.IdTacGia = ChiTietSach.IdTacGia \n"
+                + "  INNER JOIN dbo.NXB ON NXB.IdNXB = ChiTietSach.IdNXB";
         ListMatHang = new ArrayList<>();
         try {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(select);
             while (rs.next()) {
-                ListMatHang.add(new MatHang01(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
+                ListMatHang.add(new MatHang01(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
             }
             rs.close();
         } catch (SQLException ex) {
@@ -218,8 +219,8 @@ public class ChiTietSachRepository {
     }
 
     public List<NhapHangViewModel> getAll() {
-         
-        String sql = "  SELECT C.*,S.TenSach,X.TenNXB,N.TenNgonNGu,T.TenTacGia,L.TenTheLoai,C.SoLuongTon \n" +
+
+        String sql = "   SELECT c.IdCTSach,s.TenSach,l.TenTheLoai,x.TenNXB,n.TenNgonNGu,T.TenTacGia,C.SoLuongTon,C.GiaBan \n" +
 "  FROM dbo.ChiTietSach C\n" +
 "  INNER JOIN dbo.NgonNgu N ON N.IdNgonNgu = C.IdNgonNgu\n" +
 "  INNER JOIN dbo.NXB X ON X.IdNXB = C.IdNXB\n" +
@@ -234,23 +235,13 @@ public class ChiTietSachRepository {
             while (rs.next()) {
                 listNHV.add(new NhapHangViewModel(
                         rs.getInt(1),
-                        rs.getInt(2),
-                        rs.getInt(3),
-                        rs.getInt(4),
-                        rs.getInt(5),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
                         rs.getString(6),
                         rs.getInt(7),
-                        rs.getFloat(8),
-                        rs.getString(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getString(12),
-                        rs.getString(13),
-                        rs.getBoolean(14),
-                        rs.getInt(15),
-                        rs.getInt(16),
-                        rs.getString(17),
-                        rs.getString(18)));
+                        rs.getFloat(8)));
             }
             rs.close();
         } catch (SQLException ex) {
@@ -258,5 +249,4 @@ public class ChiTietSachRepository {
         }
         return listNHV;
     }
-
 }
