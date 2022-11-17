@@ -441,7 +441,15 @@ public class ViewMatHang extends javax.swing.JPanel {
                String tenNgonNgu = (String) tbl_matHang.getValueAt(index, 4);
                 String tenTacGia = (String) tbl_matHang.getValueAt(index, 5);
                  String tenNhaXuatBan = (String) tbl_matHang.getValueAt(index, 6);
-                 suamatHang = new updateFrom
+                 suamatHang = new FormSuaMatHang(tenNhaXuatBan, tenNgonNgu, tenTacGia, tenSach, giaban, idchitietSach);
+                 suamatHang.themSuKienUpdate(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                   suamatHang.update();
+                   filldata();
+                }
+                 });
+                 
                       }
     }//GEN-LAST:event_tbl_matHangMouseClicked
 

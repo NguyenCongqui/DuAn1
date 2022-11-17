@@ -21,6 +21,7 @@ import Services.SachService;
 import Services.TacGiaService;
 import View.TrangChu.mainform;
 import ViewModel.MatHangViewModel;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -46,7 +47,7 @@ public class FormSuaMatHang extends javax.swing.JFrame {
         initComponents();
         
     }
-    public void updateFrom(String tennhaxuatban,String tenngonngu , String tenTacGIa, String Tensach,Float GiaBan,int idchitietsach){
+    public FormSuaMatHang(String tennhaxuatban,String tenngonngu , String tenTacGIa, String Tensach,Float GiaBan,int idchitietsach){
         fillComboboxNgonNgu();
         fillComboboxNhaXuatBan();
         fillComboboxTacGia();
@@ -70,6 +71,9 @@ public class FormSuaMatHang extends javax.swing.JFrame {
        
         
         
+    }
+     public void themSuKienUpdate(ActionListener evt) {
+        btn_hoanThanh.addActionListener(evt);
     }
     public void fillComboboxNhaXuatBan() {
         DefaultComboBoxModel cbModel = (DefaultComboBoxModel) cbo_NhaXuatBan.getModel();
@@ -126,12 +130,12 @@ public class FormSuaMatHang extends javax.swing.JFrame {
         
         return mh;
     }
-//     public void update(){
-//         MatHangViewModel mh = getfromMatHang();
-//         chitietsachService.update(mh);
-//         new mainform().showForm(new ViewMatHang());
-//         this.dispose();
-//     }
+     public void update(){
+         MatHangViewModel mh = getfromMatHang();
+         chitietsachService.update(mh);
+         new mainform().showForm(new ViewMatHang());
+         this.dispose();
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
