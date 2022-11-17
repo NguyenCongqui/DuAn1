@@ -219,7 +219,14 @@ public class ChiTietSachRepository {
 
     public List<NhapHangViewModel> getAll() {
          
-        String sql = "";
+        String sql = "  SELECT C.*,S.TenSach,X.TenNXB,N.TenNgonNGu,T.TenTacGia,L.TenTheLoai,C.SoLuongTon \n" +
+"  FROM dbo.ChiTietSach C\n" +
+"  INNER JOIN dbo.NgonNgu N ON N.IdNgonNgu = C.IdNgonNgu\n" +
+"  INNER JOIN dbo.NXB X ON X.IdNXB = C.IdNXB\n" +
+"  INNER JOIN dbo.TacGia T ON T.IdTacGia = C.IdTacGia\n" +
+"  INNER JOIN dbo.Sach S ON S.IdSach = C.IdSach\n" +
+"  INNER JOIN dbo.TheLoai L ON L.IdTheLoai = S.Idtheloai\n" +
+"  ORDER BY C.IdCTSach DESC";
         try {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(sql);
@@ -251,28 +258,5 @@ public class ChiTietSachRepository {
         }
         return listNHV;
     }
-// List<ChiTietSP> list = new ArrayList<>();
-//        try {
-//            ResultSet rs = jdbcHelper.query(sql, args);
-//            while (rs.next()) {
-//                ChiTietSP p = new ChiTietSP();
-//                p.setId(rs.getInt("idPrDeltails"));
-//                p.setIdProduct(rs.getInt("idProduct"));
-//                p.setIdSize(rs.getInt("idSize"));
-//                p.setIdColor(rs.getInt("idColor"));
-//                p.setIdMaterial(rs.getInt("idMaterial"));
-//                p.setPrice(rs.getFloat("price"));
-//                p.setQuantity(rs.getInt("quatity"));
-//                p.setStatus(rs.getBoolean("status"));
-//                p.setSize(rs.getString("valueSize"));
-//                p.setColor(rs.getString("valueColor"));
-//                p.setMaterial(rs.getString("valueMaterial"));
-//                p.setProductName(rs.getString("nameProduct"));
-//                p.setCategoryName(rs.getString("nameList"));
-//                list.add(p);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return list;
+
 }
