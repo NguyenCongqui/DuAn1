@@ -235,13 +235,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="btn_them" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="btn_sua" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="btn_xoa" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="btn_them" min="-2" max="-2" attributes="0"/>
                                   <Component id="cboNhaCungCaP" min="-2" pref="235" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
@@ -293,11 +287,7 @@
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="txt_tenLoaiSach" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btn_them" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn_sua" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn_xoa" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btn_them" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtID" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -322,7 +312,7 @@
                           <Component id="myButton5" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="myButton6" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="61" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -410,21 +400,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_tenLoaiSachActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="View.form.MyButton" name="btn_xoa">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
-                <Property name="radius" type="int" value="20"/>
-              </Properties>
-            </Component>
-            <Component class="View.form.MyButton" name="btn_sua">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
-                <Property name="radius" type="int" value="20"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_suaActionPerformed"/>
               </Events>
             </Component>
             <Component class="View.form.MyButton" name="btn_them">

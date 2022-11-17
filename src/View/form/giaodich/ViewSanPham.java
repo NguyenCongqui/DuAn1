@@ -59,9 +59,7 @@ public class ViewSanPham extends javax.swing.JPanel {
     public void statusform() {
         txt_tenLoaiSach.setVisible(false);
         rdo_DangKinhDoanh.setSelected(true);
-        btn_sua.setVisible(false);
         btn_them.setVisible(false);
-        btn_xoa.setVisible(false);
     }
 
     public void initTable() {
@@ -150,8 +148,6 @@ public class ViewSanPham extends javax.swing.JPanel {
         myButton6 = new View.form.MyButton();
         myButton7 = new View.form.MyButton();
         txt_tenLoaiSach = new View.form.TextField();
-        btn_xoa = new View.form.MyButton();
-        btn_sua = new View.form.MyButton();
         btn_them = new View.form.MyButton();
         txtTenSach1 = new View.form.TextField();
         txtID = new View.form.TextField();
@@ -296,17 +292,6 @@ public class ViewSanPham extends javax.swing.JPanel {
             }
         });
 
-        btn_xoa.setText("Xóa");
-        btn_xoa.setRadius(20);
-
-        btn_sua.setText("Sửa");
-        btn_sua.setRadius(20);
-        btn_sua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_suaActionPerformed(evt);
-            }
-        });
-
         btn_them.setText("Thêm");
         btn_them.setRadius(20);
         btn_them.addActionListener(new java.awt.event.ActionListener() {
@@ -337,12 +322,7 @@ public class ViewSanPham extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cboNhaCungCaP, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -383,10 +363,7 @@ public class ViewSanPham extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(txt_tenLoaiSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
@@ -407,7 +384,7 @@ public class ViewSanPham extends javax.swing.JPanel {
                     .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(myButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(myButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -453,14 +430,14 @@ public class ViewSanPham extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (txt_tenLoaiSach.isVisible()) {
             txt_tenLoaiSach.setVisible(false);
-            btn_sua.setVisible(false);
+            
             btn_them.setVisible(false);
-            btn_xoa.setVisible(false);
+ 
         } else {
             txt_tenLoaiSach.setVisible(true);
-            btn_sua.setVisible(true);
+  
             btn_them.setVisible(true);
-            btn_xoa.setVisible(true);
+ 
             showtheloai();
         }
 
@@ -541,16 +518,9 @@ public class ViewSanPham extends javax.swing.JPanel {
          showData(listSachView);
     }//GEN-LAST:event_myButton6ActionPerformed
 
-    private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
-        String tenTl = txt_tenLoaiSach.getText();
-        
-    }//GEN-LAST:event_btn_suaActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private View.form.MyButton btn_sua;
     private View.form.MyButton btn_them;
-    private View.form.MyButton btn_xoa;
     private javax.swing.ButtonGroup buttonGroup1;
     private View.form.Combobox cboNhaCungCaP;
     private View.form.Combobox cbo_loaiSach;
