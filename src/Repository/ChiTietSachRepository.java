@@ -84,9 +84,10 @@ public class ChiTietSachRepository {
             
             pst.setInt(1, cts.getIdsach());
             pst.setInt(2, cts.getIdNgonNgu());
-            pst.setInt(3, cts.getIsNXB());
-            pst.setFloat(4, cts.getGiaban());  
-            pst.setInt(5, cts.getIdchitietsach());
+            pst.setInt(3, cts.getIdTacGia());
+            pst.setInt(4, cts.getIsNXB());
+            pst.setFloat(5, cts.getGiaban());  
+            pst.setInt(6, cts.getIdchitietsach());
             pst.executeUpdate();
             return "sua thanh cong";
         } catch (Exception e) {
@@ -204,5 +205,48 @@ public List<MatHang01> getListTuCaoToiThap(){
         return ListMatHang;
     }
     
-    
+//      public List<ChiTietSach> getAll() {
+//        String sql = "SELECT [IdNhaCungCap]\n"
+//                + "      ,[TenNhaCungCap]\n"
+//                + "      ,[DIACHI]\n"
+//                + "      ,[SODIENTHOAI]\n"
+//                + "  FROM [dbo].[NhaCungCap]";
+//        try {
+//          st=db.getConnection().createStatement();
+//            rs = st.executeQuery(sql);
+//            List<ChiTietSach> list = new ArrayList<>();
+//
+//            while (rs.next()) {
+//           
+//            }
+//            rs.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(NCCRepository.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return list;
+//    }
+// List<ChiTietSP> list = new ArrayList<>();
+//        try {
+//            ResultSet rs = jdbcHelper.query(sql, args);
+//            while (rs.next()) {
+//                ChiTietSP p = new ChiTietSP();
+//                p.setId(rs.getInt("idPrDeltails"));
+//                p.setIdProduct(rs.getInt("idProduct"));
+//                p.setIdSize(rs.getInt("idSize"));
+//                p.setIdColor(rs.getInt("idColor"));
+//                p.setIdMaterial(rs.getInt("idMaterial"));
+//                p.setPrice(rs.getFloat("price"));
+//                p.setQuantity(rs.getInt("quatity"));
+//                p.setStatus(rs.getBoolean("status"));
+//                p.setSize(rs.getString("valueSize"));
+//                p.setColor(rs.getString("valueColor"));
+//                p.setMaterial(rs.getString("valueMaterial"));
+//                p.setProductName(rs.getString("nameProduct"));
+//                p.setCategoryName(rs.getString("nameList"));
+//                list.add(p);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return list;
 }
