@@ -16,20 +16,42 @@ import java.util.List;
  * @author quanh
  */
 public class SachViewModel {
-     private int id;
+    private int id;
+    private String maSach;
     private String tenSach;
     private String loaiSach;
+    private String NXB;
     private boolean trangThai;
 
     public SachViewModel() {
     }
 
-    public SachViewModel(int id, String tenSach, String loaiSach, boolean trangThai) {
+    public SachViewModel(int id, String maSach, String tenSach, String loaiSach, String NXB, boolean trangThai) {
         this.id = id;
+        this.maSach = maSach;
         this.tenSach = tenSach;
         this.loaiSach = loaiSach;
+        this.NXB = NXB;
         this.trangThai = trangThai;
     }
+
+    public String getMaSach() {
+        return maSach;
+    }
+
+    public void setMaSach(String maSach) {
+        this.maSach = maSach;
+    }
+
+    public String getNXB() {
+        return NXB;
+    }
+
+    public void setNXB(String NXB) {
+        this.NXB = NXB;
+    }
+
+    
 
     public int getId() {
         return id;

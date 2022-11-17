@@ -4,10 +4,40 @@
  */
 package Service.Impl;
 
+import DomainModel.NCC;
+import Repository.NCCRepository;
+import Services.NCCService;
+import java.util.List;
+
 /**
  *
  * @author ADMIN
  */
-public class NCCImpl {
+public class NCCImpl implements NCCService{
+private NCCRepository rp = new NCCRepository();
+    @Override
+    public List<NCC> getAll() {
+        return rp.getAll();
+    }
+
+    @Override
+    public String insert(NCC ncc) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String update(String id, NCC ncc) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String delete(String id, NCC ncc) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<NCC> search(String temp) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

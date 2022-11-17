@@ -69,7 +69,7 @@ public class NCC {
 
     @Override
     public String toString() {
-        return "NCC{" + "idNCC=" + idNCC + ", tenNCC=" + tenNCC + ", DiaChi=" + DiaChi + ", Sdt=" + Sdt ;
+        return tenNCC ;
     }
     
     

@@ -26,7 +26,7 @@ public class SachRepository {
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Sach s = new Sach(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getBoolean(6));
+                Sach s = new Sach(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getBoolean(6));
                 listSach.add(s);
             }
             return listSach;
@@ -37,13 +37,15 @@ public class SachRepository {
     }
 
     public List<SachViewModel> getAll() {
-        String query = "select sach.IdSach,sach.TenSach,TheLoai.TenTheLoai,sach.TrangThai \n"
-                + "from Sach join TheLoai on sach.Idtheloai = TheLoai.IdTheLoai";
+        String query = "SELECT dbo.Sach.IdSach, dbo.Sach.MaSach, dbo.Sach.TenSach, dbo.TheLoai.TenTheLoai, dbo.NhaCungCap.TenNhaCungCap, dbo.Sach.TrangThai\n"
+                + "FROM     dbo.NhaCungCap INNER JOIN\n"
+                + "                  dbo.Sach ON dbo.NhaCungCap.IdNhaCungCap = dbo.Sach.IdNhaCungCap INNER JOIN\n"
+                + "                  dbo.TheLoai ON dbo.Sach.Idtheloai = dbo.TheLoai.IdTheLoai";
         List<SachViewModel> listSp = new ArrayList<>();
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                SachViewModel spViewModel = new SachViewModel(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4));
+                SachViewModel spViewModel = new SachViewModel(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6));
                 listSp.add(spViewModel);
             }
             return listSp;
@@ -56,14 +58,20 @@ public class SachRepository {
     public boolean update(Sach s, String id) {
         String query = "UPDATE [dbo].[Sach]\n"
                 + "   SET \n"
-                + "      [TenSach] = ?\n"
+                + "       [MaSach] = ?\n"
+                + "      ,[TenSach] = ?\n"
+                + "	 ,[Idtheloai] = ?\n"
+                + "      ,[IdNhaCungCap] =?\n"
                 + "      ,[TrangThai] = ?\n"
-                + " WHERE idSach = ?";
+                + " WHERE IdSach = ?";
         int check = 0;
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setObject(1, s.getTenSach());
-            ps.setObject(2, s.isTrangThai());
-            ps.setObject(3, id);
+            ps.setObject(1, s.getMaSach());
+            ps.setObject(2, s.getTenSach());
+            ps.setObject(3, s.getIdTheLoai());
+            ps.setObject(4, s.getIdNhaCungCap());
+            ps.setObject(5, s.isTrangThai());
+            ps.setObject(6, id);
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -74,25 +82,27 @@ public class SachRepository {
     public boolean them(Sach s) {
         String query = "INSERT INTO [dbo].[Sach]\n"
                 + "           (\n"
-                + "            [TenSach]\n"
-                + "	      ,[Idtheloai]\n"
+                + "		   [MaSach]\n"
+                + "		   ,[TenSach]\n"
+                + "           ,[Idtheloai]\n"
+                + "		   ,[IdNhaCungCap]\n"
                 + "           ,[TrangThai])\n"
                 + "     VALUES\n"
-                + "           (?,?,?)";
+                + "           (?,?,?,?,?)";
         int check = 0;
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
 
-            ps.setObject(1, s.getTenSach());
-            ps.setObject(2, s.getIdTheLoai());
-            ps.setObject(3, s.isTrangThai());
+            ps.setObject(1, s.getMaSach());
+            ps.setObject(2, s.getTenSach());
+            ps.setObject(3, s.getIdTheLoai());
+            ps.setObject(4, s.getIdNhaCungCap());
+            ps.setObject(5, s.isTrangThai());
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
         return check > 0;
     }
-
- 
 
     public boolean xoa(String id) {
         int check = 0;
@@ -106,21 +116,5 @@ public class SachRepository {
         }
         return check > 0;
     }
-    public Sach selectName (String name){
-         String sql = "SELECT * FROM dbo.Sach WHERE IdSach = ?";
-        List<Sach> listSach =new  ArrayList<>();
-         try (Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(sql)) {
-            ResultSet rs = ps.executeQuery();
-              
-            while (rs.next()) {                
-                listSach.add(new Sach(rs.getInt(1), rs.getNString(2)));
-                
-            }
-            rs.close();
-         } catch (Exception e) {
-         }
-         return (Sach) listSach;
-                 
-     }
 
 }

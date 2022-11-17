@@ -40,13 +40,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
-              <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel2" max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -159,15 +158,27 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="0">
+                      <Table columnCount="6" rowCount="0">
                         <Column editable="true" title="ID S&#xe1;ch" type="java.lang.Object"/>
+                        <Column editable="true" title="M&#xe3; S&#xe1;ch" type="java.lang.Object"/>
                         <Column editable="true" title="T&#xea;n S&#xe1;ch" type="java.lang.Object"/>
                         <Column editable="true" title="Lo&#x1ea1;i S&#xe1;ch" type="java.lang.Object"/>
+                        <Column editable="true" title="NXB" type="java.lang.Object"/>
                         <Column editable="true" title="Tr&#x1ea1;ng Th&#xe1;i" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
@@ -220,56 +231,52 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="myButton3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="myButton4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="myButton5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="myButton6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="btn_them" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="btn_sua" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btn_xoa" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="cboNhaCungCaP" min="-2" pref="235" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
+                                      <Component id="rdo_DangKinhDoanh" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                      <Component id="rdo_NgungKinhDoanh" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="txt_tenLoaiSach" alignment="0" min="-2" pref="272" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Component id="cbo_loaiSach" min="-2" pref="235" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                                       <Component id="myButton7" min="-2" pref="46" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="btn_them" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                      <Component id="btn_sua" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                                      <Component id="btn_xoa" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="txt_tenLoaiSach" alignment="0" min="-2" pref="272" max="-2" attributes="0"/>
+                                  <Component id="txtTenSach1" min="-2" pref="272" max="-2" attributes="0"/>
+                                  <Component id="txtID" alignment="0" min="-2" pref="272" max="-2" attributes="0"/>
+                                  <Component id="txtMaSach" alignment="0" min="-2" pref="272" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="238" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbl_tenLoaiSach" min="-2" pref="101" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="rdo_DangKinhDoanh" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="rdo_NgungKinhDoanh" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="txtTenSach1" min="-2" pref="272" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="txtID" max="32767" attributes="0"/>
-                              <EmptySpace min="-2" pref="297" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="myButton3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="myButton4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="myButton5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="myButton6" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -281,26 +288,32 @@
                           <Component id="cbo_loaiSach" min="-2" max="-2" attributes="0"/>
                           <Component id="myButton7" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="cboNhaCungCaP" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="txt_tenLoaiSach" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                      <Component id="lbl_tenLoaiSach" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btn_them" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_sua" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_xoa" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="txtTenSach1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtID" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Component id="txtMaSach" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="rdo_DangKinhDoanh" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="rdo_NgungKinhDoanh" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="rdo_DangKinhDoanh" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rdo_NgungKinhDoanh" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="txtTenSach1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -423,14 +436,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_themActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbl_tenLoaiSach">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="33" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="jLabel2"/>
-              </Properties>
-            </Component>
             <Component class="View.form.TextField" name="txtTenSach1">
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="T&#xea;n S&#xe1;ch"/>
@@ -442,6 +447,16 @@
             <Component class="View.form.TextField" name="txtID">
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="ID"/>
+              </Properties>
+            </Component>
+            <Component class="View.form.Combobox" name="cboNhaCungCaP">
+              <Properties>
+                <Property name="labeText" type="java.lang.String" value="Nh&#xe0; cung c&#x1ea5;p"/>
+              </Properties>
+            </Component>
+            <Component class="View.form.TextField" name="txtMaSach">
+              <Properties>
+                <Property name="labelText" type="java.lang.String" value="M&#xe3; S&#xe1;ch"/>
               </Properties>
             </Component>
           </SubComponents>

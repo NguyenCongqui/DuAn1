@@ -31,39 +31,31 @@ public class Sach {
     public Sach() {
     }
 
-    public Sach(int IdSach, String TenSach) {
-        this.IdSach = IdSach;
-        this.TenSach = TenSach;
-    }
-
     public Sach( String TenSach,int idTheLoai, boolean TrangThai) {
         this.TenSach = TenSach;
         this.idTheLoai = idTheLoai;
         this.TrangThai = TrangThai;
     }
-    
-    
-    public Sach(int IdSach, int IdNhaCungCap, int idTheLoai, String MaSach, String TenSach, boolean TrangThai) {
-        this.IdSach = IdSach;
-        this.IdNhaCungCap = IdNhaCungCap;
-        this.idTheLoai = idTheLoai;
-        this.MaSach = MaSach;
-        this.TenSach = TenSach;
-        this.TrangThai = TrangThai;
-    }
-    
-    public Sach(int IdSach, int IdNhaCungCap, int idTheLoai, String MaSach, String TenSach, boolean TrangThai, TheLoai theloai) {
-        this.IdSach = IdSach;
-        this.IdNhaCungCap = IdNhaCungCap;
-        this.idTheLoai = idTheLoai;
-        this.MaSach = MaSach;
-        this.TenSach = TenSach;
-        this.TrangThai = TrangThai;
-    }
 
-    public Sach(String text, int idTheLoai) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Sach(String MaSach,String TenSach,int idTheLoai,int IdNhaCungCap, boolean TrangThai) {
+        this.IdNhaCungCap = IdNhaCungCap;
+        this.idTheLoai = idTheLoai;
+        this.MaSach = MaSach;
+        this.TenSach = TenSach;
+        this.TrangThai = TrangThai;
     }
+    
+    
+    public Sach(int IdSach, String MaSach, String TenSach, int idTheLoai, int IdNhaCungCap, boolean TrangThai) {
+        this.IdSach = IdSach;
+        this.IdNhaCungCap = IdNhaCungCap;
+        this.idTheLoai = idTheLoai;
+        this.MaSach = MaSach;
+        this.TenSach = TenSach;
+        this.TrangThai = TrangThai;
+    }
+    
+    
 
     public int getIdTheLoai() {
         return idTheLoai;
