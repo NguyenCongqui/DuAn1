@@ -7,7 +7,12 @@ package View.form.giaodich;
 import DomainModel.NCC;
 import Service.Impl.NCCServiceImpl;
 import Services.NCCService;
+import ViewModel.CTHDNhapSpViewModel;
+import ViewModel.NhapHangViewModel;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,10 +22,15 @@ import javax.swing.table.DefaultTableModel;
  * @author ADMIN
  */
 public class ViewNhapHang extends javax.swing.JPanel {
+    Locale lc = new Locale("nv", "VN");
+    NumberFormat formatter = NumberFormat.getIntegerInstance(lc);
     DefaultTableModel tableModel;
     DefaultComboBoxModel dcbm;
     List<NCC> list1;
     NCCService service1;
+    List<CTHDNhapSpViewModel> list = new ArrayList<>();
+
+    //list lưu những hóa đơn chi tiết
     /**
      * Creates new form NhapHang
      */
@@ -35,6 +45,7 @@ public class ViewNhapHang extends javax.swing.JPanel {
         btn_LuuTam.setEnabled(false);
         btn_XoaTam.setEnabled(false);
     }
+
     private boolean validatFrom() {
         if (txt_SLgNhap.getText().isEmpty() || txt_Gia.getText().isEmpty() || txt_GhiChu.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "ko dc de trong");
@@ -145,6 +156,11 @@ public class ViewNhapHang extends javax.swing.JPanel {
                 "Id SP", "Ten SP", "The Loai", "NXB", "Ngon Ngu", "Tac Gia", "Slg trong kho", "Gia Ban"
             }
         ));
+        tbl1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -185,6 +201,11 @@ public class ViewNhapHang extends javax.swing.JPanel {
 
         btn_XoaTam.setText("Xoa Tam");
         btn_XoaTam.setRadius(20);
+        btn_XoaTam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_XoaTamActionPerformed(evt);
+            }
+        });
 
         tbl2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -194,6 +215,11 @@ public class ViewNhapHang extends javax.swing.JPanel {
                 "Id SP", "Ten SP", "The Loai", "NXB", "Ngon Ngu", "Tac Gia", "Slg Nhap"
             }
         ));
+        tbl2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbl2);
 
         cbo_NCC.setLabeText("Nhà Cung Cấp");
@@ -347,10 +373,48 @@ public class ViewNhapHang extends javax.swing.JPanel {
                 Float giaNhap = Float.parseFloat(txt_Gia.getText());
 
                 //do dlieu vao bang 2
-
+                DefaultTableModel tableModel1 = (DefaultTableModel) tbl2.getModel();
+                tableModel1.addRow(new Object[]{id, tenSP, theLoai, NXB, ngonNgu, tacGia, sLg});
+                CTHDNhapSpViewModel nhvm = new CTHDNhapSpViewModel();
+                nhvm.setPrice(giaNhap);
+                nhvm.setIDChiTietSach(id);
+                nhvm.setSoLuong(sLg);
+                //add vào list
+                list.add(nhvm);
+                //clear form
+                tbl1.clearSelection();//Bỏ chọn tất cả các cột và hàng trước đó đã được chọn.
+                txt_Gia.setText("");
+                txt_SLgNhap.setText("");
             }
         }
     }//GEN-LAST:event_btn_LuuTamActionPerformed
+
+    private void btn_XoaTamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTamActionPerformed
+        // TODO add your handling code here:
+
+        int row = tbl2.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tbl2.getModel();
+        int id = (int) tbl2.getValueAt(row, 0);
+        model.removeRow(row);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getIDChiTietSach() == id) {
+                list.remove(list.get(i));
+                JOptionPane.showMessageDialog(this, "Xóa thành công !");
+                btn_XoaTam.setEnabled(false);
+                return;
+            }
+        }
+    }//GEN-LAST:event_btn_XoaTamActionPerformed
+
+    private void tbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl1MouseClicked
+        // TODO add your handling code here:
+        btn_LuuTam.setEnabled(true);
+    }//GEN-LAST:event_tbl1MouseClicked
+
+    private void tbl2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl2MouseClicked
+        // TODO add your handling code here:
+        btn_XoaTam.setEnabled(true);
+    }//GEN-LAST:event_tbl2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
