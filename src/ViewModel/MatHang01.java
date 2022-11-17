@@ -9,16 +9,18 @@ package ViewModel;
  * @author ADMIN
  */
 public class MatHang01 {
+    private int idCTSach;
     private String Masach;
     private String tensach;
     private float GiaBan;
     private String TenNgonNgu,tenTacGia,TenNxb;
     private int soLuong;
-    private int idCTSach;
+    
     public MatHang01() {
     }
 
-    public MatHang01(String Masach, String tensach, float GiaBan, String TenNgonNgu, String tenTacGia, String TenNxb, int soLuong, int idCTSach) {
+    public MatHang01(int idCTSach, String Masach, String tensach, float GiaBan, String TenNgonNgu, String tenTacGia, String TenNxb, int soLuong) {
+        this.idCTSach = idCTSach;
         this.Masach = Masach;
         this.tensach = tensach;
         this.GiaBan = GiaBan;
@@ -26,8 +28,8 @@ public class MatHang01 {
         this.tenTacGia = tenTacGia;
         this.TenNxb = TenNxb;
         this.soLuong = soLuong;
-        this.idCTSach = idCTSach;
     }
+
     public MatHang01(String Masach, String tensach, float GiaBan, String TenNgonNgu, String tenTacGia, String TenNxb, int soLuong) {
         this.Masach = Masach;
         this.tensach = tensach;
@@ -37,6 +39,9 @@ public class MatHang01 {
         this.TenNxb = TenNxb;
         this.soLuong = soLuong;
     }
+
+   
+    
     public int getIdCTSach() {
         return idCTSach;
     }

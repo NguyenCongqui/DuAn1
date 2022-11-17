@@ -53,7 +53,7 @@ public class ViewMatHang extends javax.swing.JPanel {
         tbl_model.setRowCount(0);
         for (MatHang01 mh : listmathang) {
             tbl_model.addRow(new Object[]{
-                mh.getMasach(),mh.getTensach(),nf.format(mh.getGiaBan()) + " đ",mh.getTenNgonNgu(),mh.getTenTacGia(),mh.getTenNxb(),mh.getSoLuong()
+               mh.getIdCTSach(), mh.getMasach(),mh.getTensach(),nf.format(mh.getGiaBan()) + " đ",mh.getTenNgonNgu(),mh.getTenTacGia(),mh.getTenNxb(),mh.getSoLuong()
             });
         }
     }

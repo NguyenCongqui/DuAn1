@@ -88,6 +88,7 @@ public class FormSuaMatHang extends javax.swing.JFrame {
         Sach s = (Sach) cbo_TenSach.getSelectedItem();
         MatHangViewModel mh = new MatHangViewModel();
         mh.setGiaban(Float.parseFloat(txt_GiaBan.getText()));
+        mh.setIdchitietsach(Integer.parseInt(txt_ID.getText()));
         mh.setIdNgonNgu(nn.getIdNgonNgu());
         mh.setTenNgonNgu(nn.getTenNgonNgu());
         mh.setIdsach(s.getIdSach());
@@ -103,12 +104,12 @@ public class FormSuaMatHang extends javax.swing.JFrame {
         
         return mh;
     }
-     public void update(){
-         MatHangViewModel mh = getfromMatHang();
-         chitietsachService.update(mh);
-         new mainform().showForm(new ViewMatHang());
-         this.dispose();
-     }
+//     public void update(){
+//         MatHangViewModel mh = getfromMatHang();
+//         chitietsachService.update(mh);
+//         new mainform().showForm(new ViewMatHang());
+//         this.dispose();
+//     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -246,6 +247,11 @@ public class FormSuaMatHang extends javax.swing.JFrame {
 
     private void btn_hoanThanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hoanThanhActionPerformed
         // TODO add your handling code here:
+        MatHangViewModel mh = getfromMatHang();
+        chitietsachService.update(mh);
+        new mainform().showForm(new ViewMatHang());
+        this.dispose();
+        
     }//GEN-LAST:event_btn_hoanThanhActionPerformed
 
     private void btn_huyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_huyActionPerformed
