@@ -26,7 +26,7 @@ public class SachRepository {
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Sach s = new Sach(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getBoolean(6));
+                Sach s = new Sach(rs.getInt(1), rs.getString(4), rs.getString(5), rs.getInt(2), rs.getInt(3), rs.getBoolean(6));
                 listSach.add(s);
             }
             return listSach;
@@ -115,6 +115,21 @@ public class SachRepository {
             e.printStackTrace(System.out);
         }
         return check > 0;
+    }
+    public Sach selectName(String name) {
+        String query = "SELECT IdSach,TenSach FROM dbo.Sach WHERE IdSach = ?";
+        List<Sach> listSach = new ArrayList<>();
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Sach s = new Sach(rs.getInt(1), rs.getString(2));
+                listSach.add(s);
+            }
+            return (Sach) listSach;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
     }
 
 }

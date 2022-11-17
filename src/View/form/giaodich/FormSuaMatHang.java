@@ -47,7 +47,7 @@ public class FormSuaMatHang extends javax.swing.JFrame {
         initComponents();
         
     }
-    public FormSuaMatHang(String tennhaxuatban,String tenngonngu , String tenTacGIa, String Tensach,Float GiaBan,int idchitietsach){
+    public FormSuaMatHang(String Tensach, Float GiaBan,String tenngonngu ,String tenTacGIa,String tennhaxuatban,int idchitietsach){
         fillComboboxNgonNgu();
         fillComboboxNhaXuatBan();
         fillComboboxTacGia();

@@ -37,6 +37,13 @@ public class Sach {
         this.TrangThai = TrangThai;
     }
 
+    public Sach(int IdSach, String TenSach) {
+        this.IdSach = IdSach;
+        this.TenSach = TenSach;
+    }
+    
+    
+
     public Sach(String MaSach,String TenSach,int idTheLoai,int IdNhaCungCap, boolean TrangThai) {
         this.IdNhaCungCap = IdNhaCungCap;
         this.idTheLoai = idTheLoai;
