@@ -311,13 +311,13 @@ public class ViewMatHang extends javax.swing.JPanel {
 
         tbl_matHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Ma", "Tên Sách", "Giá Bán", "Tên Ngôn Ngữ", "Tên Tác Giả", "Tên Nhà Xuất Bản", "Số Lượng Tồn"
+                "ID", "Ma", "Tên Sách", "Giá Bán", "Tên Ngôn Ngữ", "Tên Tác Giả", "Tên Nhà Xuất Bản", "Số Lượng Tồn"
             }
         ));
         tbl_matHang.addMouseListener(new java.awt.event.MouseAdapter() {

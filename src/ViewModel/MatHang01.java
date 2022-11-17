@@ -14,10 +14,20 @@ public class MatHang01 {
     private float GiaBan;
     private String TenNgonNgu,tenTacGia,TenNxb;
     private int soLuong;
-
+    private int idCTSach;
     public MatHang01() {
     }
 
+    public MatHang01(String Masach, String tensach, float GiaBan, String TenNgonNgu, String tenTacGia, String TenNxb, int soLuong, int idCTSach) {
+        this.Masach = Masach;
+        this.tensach = tensach;
+        this.GiaBan = GiaBan;
+        this.TenNgonNgu = TenNgonNgu;
+        this.tenTacGia = tenTacGia;
+        this.TenNxb = TenNxb;
+        this.soLuong = soLuong;
+        this.idCTSach = idCTSach;
+    }
     public MatHang01(String Masach, String tensach, float GiaBan, String TenNgonNgu, String tenTacGia, String TenNxb, int soLuong) {
         this.Masach = Masach;
         this.tensach = tensach;
@@ -27,6 +37,15 @@ public class MatHang01 {
         this.TenNxb = TenNxb;
         this.soLuong = soLuong;
     }
+    public int getIdCTSach() {
+        return idCTSach;
+    }
+
+    public void setIdCTSach(int idCTSach) {
+        this.idCTSach = idCTSach;
+    }
+
+  
 
     public String getMasach() {
         return Masach;
