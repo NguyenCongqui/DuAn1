@@ -63,6 +63,11 @@ public class ChiTietSachImpl implements ChiTietSachService{
        return rep.getListNgungKinhDoanh();
     }
 
+    @Override
+    public String update(MatHangViewModel cts) {
+      return rep.update(cts);
+    }
+
     
 
    

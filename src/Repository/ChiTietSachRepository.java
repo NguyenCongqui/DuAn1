@@ -77,6 +77,24 @@ public class ChiTietSachRepository {
         }
         return "Them khong thanh cong";
     }
+     public String update (MatHangViewModel cts){
+        String update  = "UPDATE dbo.ChiTietSach SET IdSach = ?,IdNgonNgu = ?,IdTacGia = ?,IdNXB = ?,GiaBan = ? WHERE IdCTSach = ?";
+        try {
+            pst = db.getConnection().prepareStatement(update);
+            
+            pst.setInt(1, cts.getIdsach());
+            pst.setInt(2, cts.getIdNgonNgu());
+            pst.setInt(3, cts.getIsNXB());
+            pst.setFloat(4, cts.getGiaban());  
+            pst.setInt(5, cts.getIdchitietsach());
+            pst.executeUpdate();
+            return "sua thanh cong";
+        } catch (Exception e) {
+            
+        }
+        return "sua khong thanh cong";
+    }
+    
     public List<MatHang01> getListConHang (){
         String  select ="SELECT MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu \n" +
 "	INNER JOIN dbo.TacGia ON TacGia.IdTacGia = ChiTietSach.IdTacGia\n" +

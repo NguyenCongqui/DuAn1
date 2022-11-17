@@ -36,6 +36,7 @@ public class ViewMatHang extends javax.swing.JPanel {
         tbl_model = (DefaultTableModel) tbl_matHang.getModel();
         listmathang = chitietsachService.getlist();
         filldata();
+        rdo_tatca.setSelected(true);
         themMatHang.addFilltable(new ActionListener(){
 
             @Override
@@ -90,7 +91,7 @@ public class ViewMatHang extends javax.swing.JPanel {
         Rdo_TuThaypToiCao = new View.form.RadioButtonCustom();
         rdo_TuCaoToiThap = new View.form.RadioButtonCustom();
         jPanel7 = new javax.swing.JPanel();
-        radioButtonCustom1 = new View.form.RadioButtonCustom();
+        rdo_tatca = new View.form.RadioButtonCustom();
         radioButtonCustom2 = new View.form.RadioButtonCustom();
         rdo_hetHang = new View.form.RadioButtonCustom();
         jPanel4 = new javax.swing.JPanel();
@@ -236,11 +237,11 @@ public class ViewMatHang extends javax.swing.JPanel {
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Tồn Kho"));
 
-        buttonGroup1.add(radioButtonCustom1);
-        radioButtonCustom1.setText("Tất Cả");
-        radioButtonCustom1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(rdo_tatca);
+        rdo_tatca.setText("Tất Cả");
+        rdo_tatca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioButtonCustom1ActionPerformed(evt);
+                rdo_tatcaActionPerformed(evt);
             }
         });
 
@@ -269,14 +270,14 @@ public class ViewMatHang extends javax.swing.JPanel {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(radioButtonCustom2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rdo_hetHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(radioButtonCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rdo_tatca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(radioButtonCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rdo_tatca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(radioButtonCustom2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
@@ -319,6 +320,11 @@ public class ViewMatHang extends javax.swing.JPanel {
                 "Ma", "Tên Sách", "Giá Bán", "Tên Ngôn Ngữ", "Tên Tác Giả", "Tên Nhà Xuất Bản", "Số Lượng Tồn"
             }
         ));
+        tbl_matHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_matHangMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_matHang);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -377,10 +383,11 @@ public class ViewMatHang extends javax.swing.JPanel {
         
     }//GEN-LAST:event_myButton2ActionPerformed
 
-    private void radioButtonCustom1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonCustom1ActionPerformed
+    private void rdo_tatcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_tatcaActionPerformed
         // TODO add your handling code here:
+        listmathang = chitietsachService.getlist();
         filldata();
-    }//GEN-LAST:event_radioButtonCustom1ActionPerformed
+    }//GEN-LAST:event_rdo_tatcaActionPerformed
 
     private void radioButtonCustom2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonCustom2ActionPerformed
         filldataLoc();
@@ -416,6 +423,15 @@ public class ViewMatHang extends javax.swing.JPanel {
         filldata();
     }//GEN-LAST:event_rdo_TuCaoToiThapActionPerformed
 
+    private void tbl_matHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_matHangMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            int index = tbl_matHang.getSelectedRow();
+            
+            
+        }
+    }//GEN-LAST:event_tbl_matHangMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.form.RadioButtonCustom Rdo_TuThaypToiCao;
@@ -435,10 +451,10 @@ public class ViewMatHang extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private View.form.MyButton myButton1;
     private View.form.MyButton myButton2;
-    private View.form.RadioButtonCustom radioButtonCustom1;
     private View.form.RadioButtonCustom radioButtonCustom2;
     private View.form.RadioButtonCustom rdo_TuCaoToiThap;
     private View.form.RadioButtonCustom rdo_hetHang;
+    private View.form.RadioButtonCustom rdo_tatca;
     private View.form.TableColumn tbl_matHang;
     private View.form.TextField textField1;
     // End of variables declaration//GEN-END:variables

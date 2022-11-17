@@ -164,31 +164,29 @@
                                       <Component id="Btn_Sua" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="txt_TenNhaXuatBan" max="32767" attributes="0"/>
-                                          <Component id="cbo_nhaXuatBan" pref="175" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="btn_themNhaXuatBan" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="txt_TenNhaXuatBan" max="32767" attributes="0"/>
+                                      <Component id="cbo_nhaXuatBan" pref="175" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="cbo_ngonNgu" min="-2" pref="179" max="-2" attributes="0"/>
-                                          <Component id="cbo_tacGia" alignment="1" min="-2" pref="179" max="-2" attributes="0"/>
-                                          <Component id="txt_TenNgonNgu" alignment="1" min="-2" pref="179" max="-2" attributes="0"/>
-                                          <Component id="txt_TenTacGia" alignment="1" min="-2" pref="179" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="myButton9" min="-2" max="-2" attributes="0"/>
-                                          <Component id="myButton4" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btn_themNhaXuatBan" min="-2" pref="38" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="cbo_ngonNgu" min="-2" pref="179" max="-2" attributes="0"/>
+                                      <Component id="cbo_tacGia" alignment="1" min="-2" pref="179" max="-2" attributes="0"/>
+                                      <Component id="txt_TenNgonNgu" alignment="1" min="-2" pref="179" max="-2" attributes="0"/>
+                                      <Component id="txt_TenTacGia" alignment="1" min="-2" pref="179" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="myButton4" min="-2" pref="37" max="-2" attributes="0"/>
+                                      <Component id="myButton9" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="127" max="32767" attributes="0"/>
+                          <EmptySpace pref="191" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -209,8 +207,8 @@
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                  <Component id="btn_themNhaXuatBan" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  <Component id="btn_themNhaXuatBan" min="-2" pref="33" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -218,13 +216,18 @@
                               <Component id="btn_ThemNXB" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btn_suaNhaXuatBan" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="cbo_ngonNgu" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="myButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="cbo_ngonNgu" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txt_TenNgonNgu" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                                  <Component id="myButton4" min="-2" pref="35" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txt_TenNgonNgu" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btn_themNgonNgu" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -233,7 +236,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="cbo_tacGia" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="myButton9" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="myButton9" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txt_TenTacGia" min="-2" max="-2" attributes="0"/>
@@ -270,7 +273,12 @@
                 </Component>
                 <Component class="View.form.MyButton" name="btn_themNhaXuatBan">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="+"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icon/icon/icons8_Plus_32.png"/>
+                    </Property>
+                    <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
                     </Property>
@@ -300,7 +308,12 @@
                 </Component>
                 <Component class="View.form.MyButton" name="myButton4">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="+"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icon/icon/icons8_Plus_32.png"/>
+                    </Property>
+                    <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
                     </Property>
@@ -353,7 +366,12 @@
                 </Component>
                 <Component class="View.form.MyButton" name="myButton9">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="+"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icon/icon/icons8_Plus_32.png"/>
+                    </Property>
+                    <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
                     </Property>

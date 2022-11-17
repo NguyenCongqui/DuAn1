@@ -324,7 +324,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="radioButtonCustom2" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="rdo_hetHang" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="radioButtonCustom1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="rdo_tatca" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="73" max="32767" attributes="0"/>
                       </Group>
@@ -334,7 +334,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                          <Component id="radioButtonCustom1" min="-2" max="-2" attributes="0"/>
+                          <Component id="rdo_tatca" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="radioButtonCustom2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="10" max="32767" attributes="0"/>
@@ -345,7 +345,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="View.form.RadioButtonCustom" name="radioButtonCustom1">
+                <Component class="View.form.RadioButtonCustom" name="rdo_tatca">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="buttonGroup1"/>
@@ -353,7 +353,7 @@
                     <Property name="text" type="java.lang.String" value="T&#x1ea5;t C&#x1ea3;"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioButtonCustom1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdo_tatcaActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="View.form.RadioButtonCustom" name="radioButtonCustom2">
@@ -460,6 +460,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_matHangMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
