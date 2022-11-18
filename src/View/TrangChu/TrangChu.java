@@ -6,6 +6,7 @@ package View.TrangChu;
 
 
 
+import View.form.giaodich.ViewKhachHang;
 import View.form.giaodich.ViewBanHang;
 import View.form.giaodich.ViewDoiHang;
 import View.form.giaodich.ViewDoiMatKhau;
@@ -65,7 +66,7 @@ menu1.addEvent(new EvenMenuSelected() {
          System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 if (menuIndex == 3) {
                  if (subMenuIndex ==0) {
-                       // main.showForm(new  );
+                        main.showForm(new ViewKhachHang() );
                        System.out.println("");
                     } 
                 }else
