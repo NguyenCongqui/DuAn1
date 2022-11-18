@@ -32,28 +32,29 @@ public class ChiTietSachRepository {
     List<ChiTietSach> ListChiTietSach = null;
     List<MatHang01> ListMatHang = null;
     List<NhapHangViewModel> listNHV = null;
-
+    List<MatHangViewModel> listMatHangViewModel = null;
+ 
     public ChiTietSachRepository() {
     }
 
-    public List<MatHang01> getListchitietsp() {
+    public List<MatHangViewModel> getListchitietsp() {
         String select = "  SELECT IdCTSach, MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon \n"
                 + "  FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach \n"
                 + "  INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu 	\n"
                 + "  INNER JOIN dbo.TacGia ON TacGia.IdTacGia = ChiTietSach.IdTacGia \n"
                 + "  INNER JOIN dbo.NXB ON NXB.IdNXB = ChiTietSach.IdNXB";
-        ListMatHang = new ArrayList<>();
+        listMatHangViewModel = new ArrayList<>();
         try {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(select);
             while (rs.next()) {
-                ListMatHang.add(new MatHang01(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
+                listMatHangViewModel.add(new MatHangViewModel(rs.getInt(1), rs.getInt(8), rs.getFloat(4), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7)));
             }
             rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(ChiTietSachRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return ListMatHang;
+        return listMatHangViewModel;
     }
 
     public String insert(MatHangViewModel cts) {

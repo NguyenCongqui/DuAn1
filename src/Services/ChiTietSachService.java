@@ -15,7 +15,7 @@ import java.util.List;
  * @author ADMIN
  */
 public interface ChiTietSachService {
-    List<MatHang01> getlist ();
+    List<MatHangViewModel> getlist ();
     String insert(MatHangViewModel cts);
     List<MatHang01> getlistConHang();
     List<MatHang01> getlistHetHang();

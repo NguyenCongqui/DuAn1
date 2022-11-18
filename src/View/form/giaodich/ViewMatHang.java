@@ -7,6 +7,7 @@ package View.form.giaodich;
 import Service.Impl.ChiTietSachImpl;
 import Services.ChiTietSachService;
 import ViewModel.MatHang01;
+import ViewModel.MatHangViewModel;
 import java.awt.ActiveEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +29,7 @@ public class ViewMatHang extends javax.swing.JPanel {
     List<MatHang01>  listmathang = new ArrayList<>();
     DefaultTableModel tbl_model = new DefaultTableModel();
     FormSuaMatHang suamatHang ;
+    List<MatHangViewModel> ListMatHangViewModel = new ArrayList<>();
     
     
     
@@ -36,22 +38,30 @@ public class ViewMatHang extends javax.swing.JPanel {
     public ViewMatHang() {
         initComponents();
         tbl_model = (DefaultTableModel) tbl_matHang.getModel();
-        listmathang = chitietsachService.getlist();
-        filldata();
+        ListMatHangViewModel = chitietsachService.getlist();
+        filldata01();
         rdo_tatca.setSelected(true);
         themMatHang.addFilltable(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 themMatHang.inerts();
-                filldata();
+                filldata01();
             }
         });
         
     }
     Locale lc = new Locale("vn", "VN");
     NumberFormat nf = NumberFormat.getInstance(lc);
-    public void filldata(){
+    public void filldata01(){
+        tbl_model.setRowCount(0);
+        for (MatHangViewModel mh : ListMatHangViewModel) {
+            tbl_model.addRow(new Object[]{
+               mh.getIdchitietsach(), mh.getMasach(),mh.getTenSach(),nf.format(mh.getGiaban()) + " đ",mh.getTenNgonNgu(),mh.getTenTacGia(),mh.getTenNxb(),mh.getSoluongton()
+            });
+        }
+    }
+     public void filldata(){
         tbl_model.setRowCount(0);
         for (MatHang01 mh : listmathang) {
             tbl_model.addRow(new Object[]{
@@ -387,8 +397,8 @@ public class ViewMatHang extends javax.swing.JPanel {
 
     private void rdo_tatcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_tatcaActionPerformed
         // TODO add your handling code here:
-        listmathang = chitietsachService.getlist();
-        filldata();
+        ListMatHangViewModel = chitietsachService.getlist();
+        filldata01();
     }//GEN-LAST:event_rdo_tatcaActionPerformed
 
     private void radioButtonCustom2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonCustom2ActionPerformed
@@ -430,11 +440,11 @@ public class ViewMatHang extends javax.swing.JPanel {
         if (evt.getClickCount() == 2) {
             int index = tbl_matHang.getSelectedRow();
             int idchitietSach =  (int) tbl_matHang.getValueAt(index, 0);
-            listmathang = chitietsachService.getlist();
+            ListMatHangViewModel = chitietsachService.getlist();
             float giaban = 0;
-            for (int i = 0; i < listmathang.size(); i++) {
-                if (listmathang.get(i).getIdCTSach() == idchitietSach) {
-                    giaban = listmathang.get(1).getGiaBan();
+            for (int i = 0; i < ListMatHangViewModel.size(); i++) {
+                if (ListMatHangViewModel.get(i).getIdchitietsach() == idchitietSach) {
+                    giaban = ListMatHangViewModel.get(1).getGiaban();
                 }
             }
               String tenSach = (String) tbl_matHang.getValueAt(index, 2);
@@ -449,7 +459,7 @@ public class ViewMatHang extends javax.swing.JPanel {
                    filldata();
                 }
                  });
-                 
+                 suamatHang.setVisible(true);
                       }
     }//GEN-LAST:event_tbl_matHangMouseClicked
 

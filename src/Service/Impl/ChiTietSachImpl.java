@@ -25,7 +25,7 @@ public class ChiTietSachImpl implements ChiTietSachService{
     
 
     @Override
-    public List<MatHang01> getlist() {
+    public List<MatHangViewModel> getlist() {
         return rep.getListchitietsp();
     }
 

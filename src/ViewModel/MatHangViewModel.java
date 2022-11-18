@@ -51,6 +51,18 @@ public class MatHangViewModel {
         this.TenTacGia = TenTacGia;
         this.TenNxb = TenNxb;
     }
+
+    public MatHangViewModel(int idchitietsach, int soluongton, float giaban, String masach, String TenSach, String TenNgonNgu, String TenTacGia, String TenNxb) {
+        this.idchitietsach = idchitietsach;
+        this.soluongton = soluongton;
+        this.giaban = giaban;
+        this.masach = masach;
+        this.TenSach = TenSach;
+        this.TenNgonNgu = TenNgonNgu;
+        this.TenTacGia = TenTacGia;
+        this.TenNxb = TenNxb;
+    }
+    
     
 
     public String getMasach() {
