@@ -69,7 +69,7 @@ public class TacGiaRepositiry {
     }
     public TacGia selectName(String name){
         ListTacGia = new ArrayList<>();
-        String select = "SELECT * FROM dbo.TacGia WHERE IdTacGia = ?";
+        String select = "SELECT * FROM dbo.TacGia WHERE TenTacGia = ?";
         try {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(select);

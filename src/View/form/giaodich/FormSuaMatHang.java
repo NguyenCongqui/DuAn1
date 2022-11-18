@@ -45,9 +45,17 @@ public class FormSuaMatHang extends javax.swing.JFrame {
     ChiTietSachService chitietsachService = new ChiTietSachImpl();
     public FormSuaMatHang() {
         initComponents();
+//        fillComboboxNgonNgu();
+//        fillComboboxNhaXuatBan();
+//        fillComboboxTacGia();
+//        fillComboboxTenSanPham();
         
     }
     public FormSuaMatHang(String Tensach, Float GiaBan,String tenngonngu ,String tenTacGIa,String tennhaxuatban,int idchitietsach){
+        initComponents();
+        setLocationRelativeTo(null);
+         setResizable(false);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         fillComboboxNgonNgu();
         fillComboboxNhaXuatBan();
         fillComboboxTacGia();
@@ -55,16 +63,16 @@ public class FormSuaMatHang extends javax.swing.JFrame {
         txt_ID.setText(Integer.toString(idchitietsach));
         txt_ID.setEditable(false);
         txt_GiaBan.setText(Float.toString(GiaBan));
-       NhaXuatBan nxb = NhaXuatBanService.Select(tennhaxuatban);
-       TacGia tg = TacGiaService.selectName(tenTacGIa);
-       Sach s = SachService.select(Tensach);
-       NgonNgu nn = NgonNguService.selectName(tenngonngu);
-       cbo_NgonNgu.getModel().setSelectedItem(nn);
-       cbo_NhaXuatBan.getModel().setSelectedItem(nxb);
-       cbo_TacGia.getModel().setSelectedItem(tg);
-       cbo_TenSach.getModel().setSelectedItem(s);
-       cbo_TenSach.setEditable(false);
-       cbo_TenSach.setEnabled(false);
+//       NhaXuatBan nxb = (NhaXuatBan) NhaXuatBanService.Select(tennhaxuatban);
+//       TacGia tg = TacGiaService.selectName(tenTacGIa);
+//       Sach s = SachService.select(Tensach);
+//       NgonNgu nn = NgonNguService.selectName(tenngonngu);
+//       cbo_NgonNgu.getModel().setSelectedItem(nn);
+//       cbo_NhaXuatBan.getModel().setSelectedItem(nxb);
+//       cbo_TacGia.getModel().setSelectedItem(tg);
+//       cbo_TenSach.getModel().setSelectedItem(s);
+//       cbo_TenSach.setEditable(false);
+//       cbo_TenSach.setEnabled(false);
        
        
        
@@ -169,13 +177,13 @@ public class FormSuaMatHang extends javax.swing.JFrame {
 
         txt_GiaBan.setLabelText("Giá Bán");
 
-        cbo_TenSach.setLabeText("");
+        cbo_TenSach.setLabeText("Tên Sách");
 
-        cbo_NhaXuatBan.setLabeText("");
+        cbo_NhaXuatBan.setLabeText("Nhà Xuất Bản");
 
-        cbo_NgonNgu.setLabeText("");
+        cbo_NgonNgu.setLabeText("Ngôn Ngữ");
 
-        cbo_TacGia.setLabeText("");
+        cbo_TacGia.setLabeText("Tác Giả");
 
         btn_hoanThanh.setText("Hoàn Thành");
         btn_hoanThanh.setRadius(20);
@@ -273,10 +281,10 @@ public class FormSuaMatHang extends javax.swing.JFrame {
 
     private void btn_hoanThanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hoanThanhActionPerformed
         // TODO add your handling code here:
-        MatHangViewModel mh = getfromMatHang();
-        chitietsachService.update(mh);
-        new mainform().showForm(new ViewMatHang());
-        this.dispose();
+//        MatHangViewModel mh = getfromMatHang();
+//        chitietsachService.update(mh);
+//        new mainform().showForm(new ViewMatHang());
+//        this.dispose();
         
     }//GEN-LAST:event_btn_hoanThanhActionPerformed
 

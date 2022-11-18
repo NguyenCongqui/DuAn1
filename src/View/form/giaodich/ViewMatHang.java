@@ -28,7 +28,7 @@ public class ViewMatHang extends javax.swing.JPanel {
     ChiTietSachService chitietsachService = new ChiTietSachImpl();
     List<MatHang01>  listmathang = new ArrayList<>();
     DefaultTableModel tbl_model = new DefaultTableModel();
-    FormSuaMatHang suamatHang ;
+    FormSuaMatHang suamatHang = new FormSuaMatHang();
     List<MatHangViewModel> ListMatHangViewModel = new ArrayList<>();
     
     
@@ -47,6 +47,8 @@ public class ViewMatHang extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 themMatHang.inerts();
                 filldata01();
+                ListMatHangViewModel = chitietsachService.getlist();
+        filldata01();
             }
         });
         
@@ -437,17 +439,18 @@ public class ViewMatHang extends javax.swing.JPanel {
 
     private void tbl_matHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_matHangMouseClicked
         // TODO add your handling code here:
-        if (evt.getClickCount() == 2) {
+      // if (evt.getClickCount() == 2) {
             int index = tbl_matHang.getSelectedRow();
             int idchitietSach =  (int) tbl_matHang.getValueAt(index, 0);
             ListMatHangViewModel = chitietsachService.getlist();
             float giaban = 0;
             for (int i = 0; i < ListMatHangViewModel.size(); i++) {
                 if (ListMatHangViewModel.get(i).getIdchitietsach() == idchitietSach) {
-                    giaban = ListMatHangViewModel.get(1).getGiaban();
+                    giaban = ListMatHangViewModel.get(i).getGiaban();
                 }
             }
               String tenSach = (String) tbl_matHang.getValueAt(index, 2);
+         //     Float gia =  (Float) tbl_matHang.getValueAt(index, 3);
                String tenNgonNgu = (String) tbl_matHang.getValueAt(index, 4);
                 String tenTacGia = (String) tbl_matHang.getValueAt(index, 5);
                  String tenNhaXuatBan = (String) tbl_matHang.getValueAt(index, 6);
@@ -456,11 +459,14 @@ public class ViewMatHang extends javax.swing.JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                    suamatHang.update();
-                   filldata();
+                   filldata01();
                 }
                  });
                  suamatHang.setVisible(true);
-                      }
+                    
+                    
+    //   }
+        
     }//GEN-LAST:event_tbl_matHangMouseClicked
 
 

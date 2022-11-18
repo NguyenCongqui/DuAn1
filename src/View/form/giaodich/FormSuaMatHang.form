@@ -149,22 +149,22 @@
             </Component>
             <Component class="View.form.Combobox" name="cbo_TenSach">
               <Properties>
-                <Property name="labeText" type="java.lang.String" value=""/>
+                <Property name="labeText" type="java.lang.String" value="T&#xea;n S&#xe1;ch"/>
               </Properties>
             </Component>
             <Component class="View.form.Combobox" name="cbo_NhaXuatBan">
               <Properties>
-                <Property name="labeText" type="java.lang.String" value=""/>
+                <Property name="labeText" type="java.lang.String" value="Nh&#xe0; Xu&#x1ea5;t B&#x1ea3;n"/>
               </Properties>
             </Component>
             <Component class="View.form.Combobox" name="cbo_NgonNgu">
               <Properties>
-                <Property name="labeText" type="java.lang.String" value=""/>
+                <Property name="labeText" type="java.lang.String" value="Ng&#xf4;n Ng&#x1eef;"/>
               </Properties>
             </Component>
             <Component class="View.form.Combobox" name="cbo_TacGia">
               <Properties>
-                <Property name="labeText" type="java.lang.String" value=""/>
+                <Property name="labeText" type="java.lang.String" value="T&#xe1;c Gi&#x1ea3;"/>
               </Properties>
             </Component>
             <Component class="View.form.MyButton" name="btn_hoanThanh">

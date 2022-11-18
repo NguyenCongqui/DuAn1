@@ -32,8 +32,10 @@ public class NhaXuatBanImpl implements NhaXuatBanService{
     }
 
     @Override
-    public NhaXuatBan Select(String name) {
+    public List<NhaXuatBan> Select(String name) {
        return rep.selectName(name);
     }
+
+    
     
 }

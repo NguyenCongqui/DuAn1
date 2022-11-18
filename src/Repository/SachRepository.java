@@ -117,7 +117,7 @@ public class SachRepository {
         return check > 0;
     }
     public Sach selectName(String name) {
-        String query = "SELECT IdSach,TenSach FROM dbo.Sach WHERE IdSach = ?";
+        String query = "SELECT IdSach,TenSach FROM dbo.Sach WHERE TenSach = ?";
         List<Sach> listSach = new ArrayList<>();
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();

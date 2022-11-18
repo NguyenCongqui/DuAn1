@@ -72,7 +72,7 @@ public class NgonNguRepository {
     }
     public NgonNgu selectName(String name){
         ListNgonNgu = new ArrayList<>();
-        String select = "SELECT * FROM dbo.NgonNgu WHERE IdNgonNgu = ?";
+        String select = "SELECT * FROM dbo.NgonNgu WHERE TenNgonNGu = ? ";
         try {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(select);

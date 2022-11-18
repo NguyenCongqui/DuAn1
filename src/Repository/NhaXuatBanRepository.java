@@ -79,8 +79,8 @@ public class NhaXuatBanRepository {
         }
         
      }
-     public NhaXuatBan selectName (String name){
-         String sql = "SELECT * FROM dbo.NXB WHERE IdNXB = ?";
+     public List<NhaXuatBan> selectName (String name){
+         String sql = "SELECT * FROM dbo.NXB WHERE TenNXB = ?";
          ListNhaXuatBan =new  ArrayList<>();
          try {
               st=db.getConnection().createStatement();
@@ -92,7 +92,7 @@ public class NhaXuatBanRepository {
             rs.close();
          } catch (Exception e) {
          }
-         return (NhaXuatBan) ListNhaXuatBan;
+         return  ListNhaXuatBan;
                  
      }
 }
