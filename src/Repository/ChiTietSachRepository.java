@@ -66,9 +66,10 @@ public class ChiTietSachRepository {
                 + "				    IdNXB,\n"
                 + "				    SoLuongTon,\n"
                 + "				    GiaBan,\n"
-                + "				    CreatedAt,\n"             
+                + "				    CreatedAt,\n"
+                + "				    UpdateAt,\n"                
                 + "				)\n"
-                + "				VALUES(?,?,?,?,?,?,GETDATE())";
+                + "				VALUES(?,?,?,?,?,?,GETDATE(),GETDATE())";
         try {
             pst = db.getConnection().prepareStatement(insert);
             pst.setInt(1, cts.getIdsach());
