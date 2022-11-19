@@ -7,6 +7,7 @@ package Service.Impl;
 import DomainModel.ChiTietSach;
 import Repository.ChiTietSachRepository;
 import Services.ChiTietSachService;
+import ViewModel.BanHangViewModel;
 import ViewModel.MatHang01;
 import ViewModel.MatHangViewModel;
 import ViewModel.NhapHangViewModel;
@@ -72,6 +73,11 @@ public class ChiTietSachImpl implements ChiTietSachService{
     @Override
     public List<NhapHangViewModel> getAll() {
         return rep.getAll();
+    }
+
+    @Override
+    public List<BanHangViewModel> getlistBanHang() {
+      return rep.getListBanHang();
     }
 
     

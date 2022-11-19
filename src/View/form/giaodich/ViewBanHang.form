@@ -39,29 +39,32 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jScrollPane2" alignment="0" pref="864" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jScrollPane2" pref="955" max="32767" attributes="0"/>
+                                      <Component id="jScrollPane1" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="txt_SlgBan" min="-2" pref="216" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Component id="txt_SlgBan" min="-2" pref="263" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                                   <Component id="btn_LuuTam" min="-2" pref="91" max="-2" attributes="0"/>
-                                  <EmptySpace pref="266" max="32767" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Component id="btn_Xoa" min="-2" pref="91" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="187" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanel4" min="-2" pref="326" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="363" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="783" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="338" max="-2" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -79,18 +82,18 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jScrollPane1" min="-2" pref="232" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txt_SlgBan" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="btn_LuuTam" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btn_Xoa" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="232" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="34" max="32767" attributes="0"/>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -108,12 +111,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" pref="108" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="txt_Search" min="-2" pref="266" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" pref="142" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="txt_Search" min="-2" pref="306" max="-2" attributes="0"/>
+                      <EmptySpace pref="73" max="32767" attributes="0"/>
                       <Component id="btn_Search" min="-2" pref="91" max="-2" attributes="0"/>
-                      <EmptySpace pref="117" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -123,13 +126,9 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txt_Search" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_Search" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btn_Search" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -183,7 +182,8 @@
             <Component class="View.form.TableColumn" name="tbl1">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="8" rowCount="0">
+                  <Table columnCount="9" rowCount="0">
+                    <Column editable="true" title="ID" type="java.lang.Object"/>
                     <Column editable="true" title="Ma San Pham" type="java.lang.Object"/>
                     <Column editable="true" title="Ten San Pham" type="java.lang.Object"/>
                     <Column editable="true" title="The Loai" type="java.lang.Object"/>
@@ -191,8 +191,57 @@
                     <Column editable="true" title="Tac Gia" type="java.lang.Object"/>
                     <Column editable="true" title="NXB" type="java.lang.Object"/>
                     <Column editable="true" title="Don Gia" type="java.lang.Object"/>
-                    <Column editable="true" title="So Luong Ton" type="java.lang.Object"/>
+                    <Column editable="true" title="S&#x1ed1; L&#x1b0;&#x1ee3;ng T&#x1ed3;n" type="java.lang.Object"/>
                   </Table>
+                </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -211,7 +260,8 @@
             <Component class="View.form.TableColumn" name="tbl2">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="8" rowCount="0">
+                  <Table columnCount="9" rowCount="0">
+                    <Column editable="true" title="ID" type="java.lang.Object"/>
                     <Column editable="true" title="Ma San Pham" type="java.lang.Object"/>
                     <Column editable="true" title="Ten San Pham" type="java.lang.Object"/>
                     <Column editable="true" title="The Loai" type="java.lang.Object"/>
@@ -221,6 +271,55 @@
                     <Column editable="true" title="Don Gia" type="java.lang.Object"/>
                     <Column editable="true" title="So Luong Ban" type="java.lang.Object"/>
                   </Table>
+                </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -275,32 +374,28 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="btn_BanHang" min="-2" pref="91" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                           <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txt_Voucher" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
                                   <Component id="chk_Voucher" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Component id="myButton1" min="-2" pref="53" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="txt_TienThua" min="-2" pref="163" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                                      <Component id="btn_BanHang" min="-2" pref="91" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="txt_TongTien" min="-2" pref="163" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="txt_TienKhachDua" min="-2" pref="163" max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txt_TienKhachDua" min="-2" pref="163" max="-2" attributes="0"/>
+                                  <Component id="txt_TongTien" min="-2" pref="163" max="-2" attributes="0"/>
                                   <Component id="jLabel3" min="-2" pref="41" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="jScrollPane3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cbo_KhachHang" min="-2" pref="254" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="cbo_KhachHang" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txt_TienThua" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane3" alignment="0" pref="254" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -311,9 +406,9 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Component id="cbo_KhachHang" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
@@ -324,19 +419,17 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="txt_Voucher" min="-2" pref="33" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txt_TongTien" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="txt_TienKhachDua" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txt_TienThua" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="btn_BanHang" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="txt_TongTien" min="-2" pref="33" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="txt_TienKhachDua" min="-2" pref="33" max="-2" attributes="0"/>
                           </Group>
                           <Component id="myButton1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txt_TienThua" min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="btn_BanHang" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="73" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

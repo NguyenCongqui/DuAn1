@@ -7,6 +7,7 @@ package Repository;
 import DomainModel.ChiTietSach;
 import DomainModel.NhaXuatBan;
 import Utilities.DBConnection;
+import ViewModel.BanHangViewModel;
 import ViewModel.MatHang01;
 import ViewModel.MatHangViewModel;
 import ViewModel.NhapHangViewModel;
@@ -33,6 +34,7 @@ public class ChiTietSachRepository {
     List<MatHang01> ListMatHang = null;
     List<NhapHangViewModel> listNHV = null;
     List<MatHangViewModel> listMatHangViewModel = null;
+    List<BanHangViewModel> listBanHangViewModel = null;
  
     public ChiTietSachRepository() {
     }
@@ -55,6 +57,26 @@ public class ChiTietSachRepository {
             Logger.getLogger(ChiTietSachRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listMatHangViewModel;
+    }
+    public List<BanHangViewModel> getListBanHang() {
+        String select = "SELECT IdCTSach, MaSach,TenSach,TenTheLoai,TenNgonNGu,TenTacGia,TenNXB,GiaBan,SoLuongTon\n" +
+"                FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach \n" +
+"                  INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu 	\n" +
+"                  INNER JOIN dbo.TacGia ON TacGia.IdTacGia = ChiTietSach.IdTacGia \n" +
+"                 INNER JOIN dbo.NXB ON NXB.IdNXB = ChiTietSach.IdNXB INNER JOIN\n" +
+"				 dbo.TheLoai ON TheLoai.IdTheLoai = Sach.Idtheloai";
+        listBanHangViewModel = new ArrayList<>();
+        try {
+            st = db.getConnection().createStatement();
+            rs = st.executeQuery(select);
+            while (rs.next()) {
+                listBanHangViewModel.add(new BanHangViewModel(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getFloat(8), rs.getInt(9)));
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ChiTietSachRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listBanHangViewModel;
     }
 
     public String insert(MatHangViewModel cts) {
