@@ -25,6 +25,5 @@ public interface ChiTietSachService {
     List<MatHang01> getlistDangKinhDoanh();
     List<MatHang01> getlistNgungKinhDoanh();
     String update(MatHangViewModel cts);
-    List<NhapHangViewModel> getAll();
     List<BanHangViewModel> getlistBanHang ();
 }

@@ -241,35 +241,5 @@ public class ChiTietSachRepository {
         return ListMatHang;
     }
 
-    public List<NhapHangViewModel> getAll() {
-
-        String sql = "   SELECT c.IdCTSach,s.TenSach,l.TenTheLoai,x.TenNXB,n.TenNgonNGu,T.TenTacGia,C.SoLuongTon,C.GiaBan \n" +
-"  FROM dbo.ChiTietSach C\n" +
-"  INNER JOIN dbo.NgonNgu N ON N.IdNgonNgu = C.IdNgonNgu\n" +
-"  INNER JOIN dbo.NXB X ON X.IdNXB = C.IdNXB\n" +
-"  INNER JOIN dbo.TacGia T ON T.IdTacGia = C.IdTacGia\n" +
-"  INNER JOIN dbo.Sach S ON S.IdSach = C.IdSach\n" +
-"  INNER JOIN dbo.TheLoai L ON L.IdTheLoai = S.Idtheloai\n" +
-"  ORDER BY C.IdCTSach DESC";
-        try {
-            st = db.getConnection().createStatement();
-            rs = st.executeQuery(sql);
-            listNHV = new ArrayList<>();
-            while (rs.next()) {
-                listNHV.add(new NhapHangViewModel(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getInt(7),
-                        rs.getFloat(8)));
-            }
-            rs.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(NCCRepository.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return listNHV;
-    }
+   
 }

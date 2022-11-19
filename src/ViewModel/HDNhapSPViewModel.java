@@ -18,7 +18,7 @@ private int IDHoaDonNhapSanPham;//
 private int IDNhaCungCap ;
 private int IDUsers ;//
 private String  NGAYTAODON ;//
-private int  TINHTRANGTRATIEN ;//
+private boolean TINHTRANGTRATIEN ;//
 private String  MoTa ;//
    
 private String tenUser;
@@ -26,7 +26,7 @@ private String tenNCC;
     public HDNhapSPViewModel() {
     }
 
-    public HDNhapSPViewModel(int IDHoaDonNhapSanPham, int IDNhaCungCap, int IDUsers, String NGAYTAODON, int TINHTRANGTRATIEN, String MoTa, String tenUser, String tenNCC) {
+    public HDNhapSPViewModel(int IDHoaDonNhapSanPham, int IDNhaCungCap, int IDUsers, String NGAYTAODON, boolean TINHTRANGTRATIEN, String MoTa, String tenUser, String tenNCC) {
         this.IDHoaDonNhapSanPham = IDHoaDonNhapSanPham;
         this.IDNhaCungCap = IDNhaCungCap;
         this.IDUsers = IDUsers;
@@ -69,11 +69,11 @@ private String tenNCC;
         this.NGAYTAODON = NGAYTAODON;
     }
 
-    public int getTINHTRANGTRATIEN() {
+    public boolean getTINHTRANGTRATIEN() {
         return TINHTRANGTRATIEN;
     }
 
-    public void setTINHTRANGTRATIEN(int TINHTRANGTRATIEN) {
+    public void setTINHTRANGTRATIEN(boolean TINHTRANGTRATIEN) {
         this.TINHTRANGTRATIEN = TINHTRANGTRATIEN;
     }
 

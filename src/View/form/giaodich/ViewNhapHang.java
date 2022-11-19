@@ -5,11 +5,15 @@
 package View.form.giaodich;
 
 import DomainModel.NCC;
+import DomainModel.Users;
 import Service.Impl.ChiTietSachImpl;
 import Service.Impl.NCCServiceImpl;
+import Service.Impl.NhapHangImpl;
 import Services.ChiTietSachService;
 import Services.NCCService;
+import Services.NhapHangService;
 import ViewModel.CTHDNhapSpViewModel;
+import ViewModel.HDNhapSPViewModel;
 import ViewModel.NhapHangViewModel;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -24,36 +28,39 @@ import javax.swing.table.DefaultTableModel;
  * @author ADMIN
  */
 public class ViewNhapHang extends javax.swing.JPanel {
-  //  Locale lc = new Locale("nv", "VN");
-   // NumberFormat formatter = NumberFormat.getIntegerInstance(lc);
+    //  Locale lc = new Locale("nv", "VN");
+    // NumberFormat formatter = NumberFormat.getIntegerInstance(lc);
+
     DefaultTableModel tableModel;
     DefaultComboBoxModel dcbm;
     List<NCC> list1;
     NCCService service1;
     List<CTHDNhapSpViewModel> list = new ArrayList<>();
-    ChiTietSachService chiTietSachService ;
+    NhapHangService NHservice;
+    List<NhapHangViewModel> list2;
+    Users user = new Users();
     //list lưu những hóa đơn chi tiết
     /**
      * Creates new form NhapHang
      */
     public ViewNhapHang() {
-        initComponents();
+       initComponents();
         dcbm = (DefaultComboBoxModel) cbo_NCC.getModel();
         service1 = new NCCServiceImpl();
         list1 = service1.getAll();
         for (NCC ncc : list1) {
-            dcbm.addElement(ncc.getTenNCC());
+            dcbm.addElement(ncc);
         }
         btn_LuuTam.setEnabled(false);
         btn_XoaTam.setEnabled(false);
-        chiTietSachService = new ChiTietSachImpl();
+        NHservice = new NhapHangImpl();
         fillTable();
     }
- public void fillTable() {
+public void fillTable() {
         DefaultTableModel model = (DefaultTableModel) tbl1.getModel();
         model.setRowCount(0);
-        List<NhapHangViewModel> list = chiTietSachService.getAll();
-        for (NhapHangViewModel p : list) {
+        list2 = NHservice.getAll();
+        for (NhapHangViewModel p : list2) {
             model.addRow(new Object[]{
                 p.getIdchitietsach(),
                 p.getTenSach(),
@@ -67,7 +74,7 @@ public class ViewNhapHang extends javax.swing.JPanel {
         }
     }
 
-    private boolean validatFrom() {
+   private boolean validatFrom() {
         if (txt_SLgNhap.getText().isEmpty() || txt_Gia.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "ko dc de trong");
             return false;
@@ -133,9 +140,19 @@ public class ViewNhapHang extends javax.swing.JPanel {
         jLabel1.setText(" Nhập Hàng");
 
         txt_Search.setLabelText("Tìm theo tên hoặc mã");
+        txt_Search.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txt_SearchCaretUpdate(evt);
+            }
+        });
 
         btn_Tim.setText("Tìm");
         btn_Tim.setRadius(20);
+        btn_Tim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TimActionPerformed(evt);
+            }
+        });
 
         lbl_Search.setForeground(new java.awt.Color(255, 0, 0));
 
@@ -148,11 +165,12 @@ public class ViewNhapHang extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Tim, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lbl_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(btn_Tim, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,6 +282,11 @@ public class ViewNhapHang extends javax.swing.JPanel {
 
         btn_NhapHang.setText("Nhap Hang");
         btn_NhapHang.setRadius(20);
+        btn_NhapHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_NhapHangActionPerformed(evt);
+            }
+        });
 
         lblSlgNhap.setForeground(new java.awt.Color(255, 0, 0));
         lblSlgNhap.setText(" ");
@@ -395,7 +418,7 @@ public class ViewNhapHang extends javax.swing.JPanel {
             if (row == -1) {
                 JOptionPane.showMessageDialog(this, "Bạn chưa chọn mặt hàng nào");
             } else {//lay dlieu tu bang 1
-                int id = Integer.parseInt( tbl1.getValueAt(row, 0).toString());
+                int id = Integer.parseInt(tbl1.getValueAt(row, 0).toString());
                 String tenSP = (String) tbl1.getValueAt(row, 1);
                 String theLoai = (String) tbl1.getValueAt(row, 2);
                 String NXB = (String) tbl1.getValueAt(row, 3);
@@ -424,6 +447,7 @@ public class ViewNhapHang extends javax.swing.JPanel {
     private void btn_XoaTamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTamActionPerformed
         // TODO add your handling code here:
 
+        
         int row = tbl2.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) tbl2.getModel();
         int id = (int) tbl2.getValueAt(row, 0);
@@ -457,7 +481,70 @@ public class ViewNhapHang extends javax.swing.JPanel {
         // TODO add your handling code here:
          lblGiaNhap.setVisible(false);
     }//GEN-LAST:event_txt_GiaFocusGained
+public HDNhapSPViewModel themDl() {
+       // SimpleDateFormat sdf = new SimpleDateFormat();
+        HDNhapSPViewModel hdnspvm = new HDNhapSPViewModel();
+     // Calendar calendar = Calendar.getInstance();
+      //  hdnspvm.setNGAYTAODON(sdf.format( calendar.getTime()));
+        hdnspvm.setTINHTRANGTRATIEN(false);
+       // hdnspvm.setIDUsers(user.getIdusers());
+        hdnspvm.setMoTa(txt_GhiChu.getText());
+        NCC ncc = (NCC) cbo_NCC.getSelectedItem();
+        hdnspvm.setIDNhaCungCap(ncc.getIdNCC());
+        return hdnspvm;
 
+    }
+    private void btn_NhapHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NhapHangActionPerformed
+        // TODO add your handling code here:
+        int count = tbl2.getRowCount();
+        if (count <= 0) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhap sản phẩm nào");
+        } else {
+            HDNhapSPViewModel hdnspvm = themDl();
+            JOptionPane.showMessageDialog(this,  NHservice.insertHDN(hdnspvm));
+           // System.out.println(list.size());
+            // lặp list để insert từng hóa đơn chi tiết vào db
+            for (int i = 0; i < list.size(); i++) {
+                CTHDNhapSpViewModel de = list.get(i);
+                // them dlieu vao hdctiet
+            //    NHservice.insertHDCT(de);
+                // hàm cập nhập số lượng tồn kho trong bảng sản phẩm chi tiết
+                //NHservice.updateCTSP(de.getSoLuong(),de.getPrice(), de.getDetailsInvoice());
+            }
+           // JOptionPane.showMessageDialog(this, "Thêm " + list.size() + " mặt hàng vào hóa đơn thành công");
+            DefaultTableModel model = (DefaultTableModel) tbl2.getModel();
+            model.setRowCount(0);
+            list.clear();
+            fillTable();
+        }
+        btn_XoaTam.setEnabled(false);
+        
+    }//GEN-LAST:event_btn_NhapHangActionPerformed
+
+    private void btn_TimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimActionPerformed
+        // TODO add your handling code here:
+        String keyString = txt_Search.getText();
+        list2 = NHservice.search(keyString);
+        if (list2.isEmpty()) {
+            lbl_Search.setText("Không tìm thay san pham : " + keyString);
+            return;
+        }
+        fillTable();
+    }//GEN-LAST:event_btn_TimActionPerformed
+
+    private void txt_SearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_SearchCaretUpdate
+        // TODO add your handling code here:
+        String keyString = txt_Search.getText();
+        list2 = NHservice.search(keyString);
+        if (list2.isEmpty()) {
+            lbl_Search.setText("Không tìm thay san pham : " + keyString);
+            return;
+        }
+        fillTable();
+    }//GEN-LAST:event_txt_SearchCaretUpdate
+ 
+ 
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.form.MyButton btn_LuuTam;

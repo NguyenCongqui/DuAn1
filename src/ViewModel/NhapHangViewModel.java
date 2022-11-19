@@ -14,7 +14,8 @@ public class NhapHangViewModel {
     private int idchitietsach, idsach, idNgonNgu, IdTacGia, IsNXB;
     private String mota;
     private int soluong;
-    private float gia;
+    private float gia;//giaban
+    private float gianhap;
     private String ngaytao;
     private String TenSach, TenNgonNgu, TenTacGia, TenNxb;
     private boolean trangThai;
@@ -26,7 +27,7 @@ public class NhapHangViewModel {
     public NhapHangViewModel() {
     }
 
-    public NhapHangViewModel(int idchitietsach, int idsach, int idNgonNgu, int IdTacGia, int IsNXB, String mota, int soluong, float gia, String ngaytao, String TenSach, String TenNgonNgu, String TenTacGia, String TenNxb, boolean trangThai, int IdHoaDonBan, int IdKhachHang, String tenKhachHang, String tenTheLoai) {
+    public NhapHangViewModel(int idchitietsach, int idsach, int idNgonNgu, int IdTacGia, int IsNXB, String mota, int soluong, float gia, float gianhap, String ngaytao, String TenSach, String TenNgonNgu, String TenTacGia, String TenNxb, boolean trangThai, int IdHoaDonBan, int IdKhachHang, String tenKhachHang, String tenTheLoai) {
         this.idchitietsach = idchitietsach;
         this.idsach = idsach;
         this.idNgonNgu = idNgonNgu;
@@ -35,6 +36,7 @@ public class NhapHangViewModel {
         this.mota = mota;
         this.soluong = soluong;
         this.gia = gia;
+        this.gianhap = gianhap;
         this.ngaytao = ngaytao;
         this.TenSach = TenSach;
         this.TenNgonNgu = TenNgonNgu;
@@ -46,6 +48,8 @@ public class NhapHangViewModel {
         this.tenKhachHang = tenKhachHang;
         this.tenTheLoai = tenTheLoai;
     }
+
+  
 
     public NhapHangViewModel(int idchitietsach,
             String TenSach,
@@ -211,4 +215,13 @@ public class NhapHangViewModel {
         this.gia = gia;
     }
 
+    public float getGianhap() {
+        return gianhap;
+    }
+
+    public void setGianhap(float gianhap) {
+        this.gianhap = gianhap;
+    }
+
+    
 }

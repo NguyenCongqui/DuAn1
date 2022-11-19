@@ -70,10 +70,6 @@ public class ChiTietSachImpl implements ChiTietSachService{
       return rep.update(cts);
     }
 
-    @Override
-    public List<NhapHangViewModel> getAll() {
-        return rep.getAll();
-    }
 
     @Override
     public List<BanHangViewModel> getlistBanHang() {
