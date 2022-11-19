@@ -82,18 +82,23 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jScrollPane1" min="-2" pref="232" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txt_SlgBan" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="btn_LuuTam" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btn_Xoa" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btn_LuuTam" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_Xoa" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
+                                  <Component id="txt_SlgBan" min="-2" pref="49" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="232" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -171,6 +176,9 @@
             <Property name="text" type="java.lang.String" value="L&#x1b0;u T&#x1ea1;m"/>
             <Property name="radius" type="int" value="20"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_LuuTamActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -333,6 +341,9 @@
             <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
             <Property name="radius" type="int" value="20"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_XoaActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel3">
           <Properties>
@@ -371,33 +382,46 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="24" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="btn_BanHang" min="-2" pref="91" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txt_Voucher" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
-                                  <Component id="chk_Voucher" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="myButton1" min="-2" pref="53" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txt_TienKhachDua" min="-2" pref="163" max="-2" attributes="0"/>
-                                  <Component id="txt_TongTien" min="-2" pref="163" max="-2" attributes="0"/>
                                   <Component id="jLabel3" min="-2" pref="41" max="-2" attributes="0"/>
                                   <Component id="cbo_KhachHang" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txt_TienThua" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
                                   <Component id="jScrollPane3" alignment="0" pref="254" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="chk_Voucher" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="cbo_MaGiamGia" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="txt_Voucher" min="-2" pref="163" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="myButton1" min="-2" pref="53" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btn_BanHang" min="-2" pref="91" max="-2" attributes="0"/>
+                                  <Component id="txt_TongTien" min="-2" pref="163" max="-2" attributes="0"/>
+                                  <Component id="txt_TienKhachDua" min="-2" pref="163" max="-2" attributes="0"/>
+                                  <Component id="txt_TienThua" min="-2" pref="163" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -416,20 +440,22 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="chk_Voucher" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="txt_Voucher" min="-2" pref="33" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                              <Component id="txt_TongTien" min="-2" pref="33" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txt_TienKhachDua" min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="cbo_MaGiamGia" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="myButton1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txt_TienThua" min="-2" pref="33" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="txt_Voucher" min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace pref="10" max="32767" attributes="0"/>
+                      <Component id="txt_TongTien" min="-2" pref="45" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="txt_TienKhachDua" min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txt_TienThua" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btn_BanHang" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="73" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -469,16 +495,27 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#xc1;p m&#xe3; voucher ?"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chk_VoucherActionPerformed"/>
+              </Events>
             </Component>
             <Component class="View.form.TextField" name="txt_Voucher">
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="Ma giam gia"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_VoucherActionPerformed"/>
+              </Events>
             </Component>
             <Component class="View.form.TextField" name="txt_TienKhachDua">
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="Tien Khach Dua"/>
               </Properties>
+              <Events>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_TienKhachDuaFocusGained"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_TienKhachDuaKeyPressed"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_TienKhachDuaKeyReleased"/>
+              </Events>
             </Component>
             <Component class="View.form.TextField" name="txt_TienThua">
               <Properties>
@@ -490,6 +527,9 @@
                 <Property name="text" type="java.lang.String" value="Thanh To&#xe1;n"/>
                 <Property name="radius" type="int" value="20"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_BanHangActionPerformed"/>
+              </Events>
             </Component>
             <Component class="View.form.MyButton" name="myButton1">
               <Properties>
@@ -501,6 +541,14 @@
                 </Property>
                 <Property name="radius" type="int" value="20"/>
               </Properties>
+            </Component>
+            <Component class="View.form.Combobox" name="cbo_MaGiamGia">
+              <Properties>
+                <Property name="labeText" type="java.lang.String" value="M&#xe3; Gi&#x1ea3;m Gi&#xe1;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbo_MaGiamGiaActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
