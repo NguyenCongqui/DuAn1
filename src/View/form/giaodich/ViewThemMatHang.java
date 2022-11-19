@@ -178,7 +178,7 @@ public class ViewThemMatHang extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,chitietsachService.insert(listMatHangViewModel.get(i)));
                 txt_giaBan.setText("");
             }
-                    JOptionPane.showMessageDialog(this,"them" + index + "Mat hang thanh cong");
+               
         listMatHangViewModel.clear();
         tbl_model.setRowCount(0);
         new mainform().showForm(new ViewMatHang());

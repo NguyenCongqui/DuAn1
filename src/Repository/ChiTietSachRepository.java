@@ -58,18 +58,18 @@ public class ChiTietSachRepository {
     }
 
     public String insert(MatHangViewModel cts) {
-        String insert = "INSERT INTO dbo.ChiTietSach\n"
-                + "				(\n"
-                + "				    IdSach,\n"
-                + "				    IdNgonNgu,\n"
-                + "				    IdTacGia,\n"
-                + "				    IdNXB,\n"
-                + "				    SoLuongTon,\n"
-                + "				    GiaBan,\n"
-                + "				    CreatedAt,\n"
-                + "				    UpdateAt,\n"                
-                + "				)\n"
-                + "				VALUES(?,?,?,?,?,?,GETDATE(),GETDATE())";
+        String insert = "INSERT INTO dbo.ChiTietSach\n" +
+"(\n" +
+"    IdSach,\n" +
+"    IdNgonNgu,\n" +
+"    IdTacGia,\n" +
+"    IdNXB,\n" +
+"    SoLuongTon,\n" +
+"    GiaBan,\n" +
+"    CreatedAt\n" +
+"\n" +
+")\n" +
+"VALUES(?,?,?,?,?,?,GETDATE())";
         try {
             pst = db.getConnection().prepareStatement(insert);
             pst.setInt(1, cts.getIdsach());
@@ -87,7 +87,7 @@ public class ChiTietSachRepository {
     }
 
     public String update(MatHangViewModel cts) {
-        String update = "UPDATE dbo.ChiTietSach SET IdSach = ?,IdNgonNgu = ?,IdTacGia = ?,IdNXB = ?,GiaBan = ? WHERE IdCTSach = ?";
+        String update = "UPDATE dbo.ChiTietSach SET IdSach = ?,IdNgonNgu = ?,IdTacGia = ?,IdNXB = ?,GiaBan = ? ,UpdateAt = GETDATE() WHERE IdCTSach = ?";
         try {
             pst = db.getConnection().prepareStatement(update);
 
