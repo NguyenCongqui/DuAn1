@@ -318,6 +318,11 @@ public class ViewSanPham extends javax.swing.JPanel {
         myButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon/icons8_barcode_reader_32.png"))); // NOI18N
         myButton8.setBorderColor(new java.awt.Color(0, 0, 0));
         myButton8.setRadius(20);
+        myButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -534,6 +539,10 @@ public class ViewSanPham extends javax.swing.JPanel {
          listSachView = svSach.getAll();
          showData(listSachView);
     }//GEN-LAST:event_myButton6ActionPerformed
+
+    private void myButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myButton8ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
