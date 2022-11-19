@@ -262,7 +262,7 @@ public void fillTable() {
 
             },
             new String [] {
-                "Id SP", "Ten SP", "The Loai", "NXB", "Ngon Ngu", "Tac Gia", "Slg Nhap"
+                "Id SP", "Ten SP", "The Loai", "NXB", "Ngon Ngu", "Tac Gia", "Slg Nhap", "Gia Nhap"
             }
         ));
         tbl2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -429,7 +429,7 @@ public void fillTable() {
 
                 //do dlieu vao bang 2
                 DefaultTableModel tableModel1 = (DefaultTableModel) tbl2.getModel();
-                tableModel1.addRow(new Object[]{id, tenSP, theLoai, NXB, ngonNgu, tacGia, sLg});
+                tableModel1.addRow(new Object[]{id, tenSP, theLoai, NXB, ngonNgu, tacGia, sLg,giaNhap});
                 CTHDNhapSpViewModel nhvm = new CTHDNhapSpViewModel();
                 nhvm.setPrice(giaNhap);
                 nhvm.setIDChiTietSach(id);
@@ -487,7 +487,7 @@ public HDNhapSPViewModel themDl() {
      // Calendar calendar = Calendar.getInstance();
       //  hdnspvm.setNGAYTAODON(sdf.format( calendar.getTime()));
         hdnspvm.setTINHTRANGTRATIEN(false);
-       // hdnspvm.setIDUsers(user.getIdusers());
+        hdnspvm.setIDUsers(user.getIdusers());
         hdnspvm.setMoTa(txt_GhiChu.getText());
         NCC ncc = (NCC) cbo_NCC.getSelectedItem();
         hdnspvm.setIDNhaCungCap(ncc.getIdNCC());
@@ -502,16 +502,18 @@ public HDNhapSPViewModel themDl() {
         } else {
             HDNhapSPViewModel hdnspvm = themDl();
             JOptionPane.showMessageDialog(this,  NHservice.insertHDN(hdnspvm));
-           // System.out.println(list.size());
             // lặp list để insert từng hóa đơn chi tiết vào db
             for (int i = 0; i < list.size(); i++) {
                 CTHDNhapSpViewModel de = list.get(i);
                 // them dlieu vao hdctiet
-            //    NHservice.insertHDCT(de);
+                System.out.println(de.getSoLuong());
+                 JOptionPane.showMessageDialog(this,  NHservice.insertHDCT(de) );
+               
                 // hàm cập nhập số lượng tồn kho trong bảng sản phẩm chi tiết
+                JOptionPane.showMessageDialog(this,  NHservice.updateCTSP(de.getSoLuong(),de.getPrice(), de.getIDChiTietSach()) );
                 //NHservice.updateCTSP(de.getSoLuong(),de.getPrice(), de.getDetailsInvoice());
             }
-           // JOptionPane.showMessageDialog(this, "Thêm " + list.size() + " mặt hàng vào hóa đơn thành công");
+            JOptionPane.showMessageDialog(this, "Thêm " + list.size() + " mặt hàng vào hóa đơn thành công");
             DefaultTableModel model = (DefaultTableModel) tbl2.getModel();
             model.setRowCount(0);
             list.clear();

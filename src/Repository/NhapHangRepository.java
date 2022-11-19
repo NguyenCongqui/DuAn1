@@ -90,69 +90,69 @@ public class NhapHangRepository {
         }
         return listNHV;
     }
-    
-      public boolean insertHDN(HDNhapSPViewModel hdnspvm) {
-           int check = 0;
-         try {
-            String sql = "INSERT INTO dbo.HoaDonNhapSanPham\n" +
-" (\n" +
-"     IDNhaCungCap,\n" +
-"     TINHTRANGTRATIEN,\n" +
-"     MoTa,\n" +
-"	NGAYTAODON\n" +
-" )\n" +
-" VALUES\n" +
-" (?,?,?,GETDATE())";
+
+    public String insertHDN(HDNhapSPViewModel hdnspvm) {
+
+        try {
+            String sql = "  INSERT INTO [dbo].[HoaDonNhapSanPham]\n"
+                    + "           ([IDNhaCungCap]\n"
+                    + //"           ,[IDUsers]\n" +
+                    "           ,[TINHTRANGTRATIEN]\n"
+                    + "           ,[MoTa]"
+                    + ",[NGAYTAODON])\n"
+                    + "     VALUES\n"
+                    + "           (?,?,?,GETDATE())";
             pst = db.getConnection().prepareStatement(sql);
             pst.setInt(1, hdnspvm.getIDNhaCungCap());
-           // pst.setInt(2, hdnspvm.getIDUsers());
+            //pst.setInt(2, hdnspvm.getIDUsers());
             //pst.setString(3, hdnspvm.getNGAYTAODON());
             pst.setBoolean(2, hdnspvm.getTINHTRANGTRATIEN());
             pst.setString(3, hdnspvm.getMoTa());
-           
-            pst.executeUpdate();
 
+            pst.executeUpdate();
+            return "Them thanh cong";
         } catch (SQLException ex) {
             Logger.getLogger(NCCRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return check > 0;
-}
-      
-         public boolean insertHDCT(CTHDNhapSpViewModel cthdnsvm) {
-           int check = 0;
-         try {
-            String sql = "INSERT INTO [dbo].[ChiTietHoaDonNhapSanPham]([IDHoaDonNhapSanPham],[IDChiTietSach],[SoLuong],[priceImport])VALUES\n" +
-"((SELECT TOP 1 IDHoaDonNhapSanPham FROM dbo.HoaDonNhapSanPham ORDER BY IDHoaDonNhapSanPham DESC),?,?,\n" +
-"( SELECT TOP 1 GiaNhap FROM dbo.ChiTietSach ORDER BY GiaNhap DESC))";
+        return "Them khong thanh cong";
+    }
+
+    public String insertHDCT(CTHDNhapSpViewModel cthdnsvm) {
+
+        try {
+            String sql = "INSERT INTO [dbo].[ChiTietHoaDonNhapSanPham]([IDHoaDonNhapSanPham],[IDChiTietSach],[SoLuong],[priceImport])VALUES \n" +
+"((SELECT TOP 1 IDHoaDonNhapSanPham FROM dbo.HoaDonNhapSanPham ORDER BY IDHoaDonNhapSanPham DESC),?,?,?)";
             pst = db.getConnection().prepareStatement(sql);
-           // pst.setInt(1, cthdnsvm.getIDHoaDonNhapSanPham());
+            // pst.setInt(1, cthdnsvm.getIDHoaDonNhapSanPham());
             pst.setInt(1, cthdnsvm.getIDChiTietSach());
             pst.setInt(2, cthdnsvm.getSoLuong());
-            pst.setFloat(3, cthdnsvm.getPrice());
-            
-            pst.executeUpdate();
+                pst.setFloat(3, cthdnsvm.getPrice());
 
+            pst.executeUpdate();
+            return "Them thanh cong";
         } catch (SQLException ex) {
             Logger.getLogger(NCCRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return check > 0;
-}
-       public String updateCTSP(Integer slg,Float giaNhap ,Integer id){
-            NhapHangViewModel nhvm= new NhapHangViewModel();
-             String update = "UPDATE dbo.ChiTietSach SET SoLuongTon = SoLuongTon + 3,GiaNhap = ? WHERE IdCTSach = ?";
-             
-            try {
+        return "Them khong thanh cong";
+    }
+
+    public String updateCTSP(Integer slg, Float giaNhap, Integer id) {
+        NhapHangViewModel nhvm = new NhapHangViewModel();
+        
+        String update = "UPDATE dbo.ChiTietSach SET SoLuongTon = SoLuongTon + ? , GiaNhap = (SELECT TOP 1 priceImport FROM dbo.ChiTietHoaDonNhapSanPham ORDER BY priceImport DESC) WHERE IdCTSach = ?";
+
+        try {
             pst = db.getConnection().prepareStatement(update);
             pst.setInt(1, nhvm.getSoluong());
-            pst.setFloat(2, nhvm.getGianhap());
-            pst.setInt(3, nhvm.getIdchitietsach());
-            
+         //   pst.setFloat(2, nhvm.getGianhap());
+            pst.setInt(2, nhvm.getIdchitietsach());
+
             pst.executeUpdate();
             return "sua thanh cong";
         } catch (SQLException e) {
 
         }
-        return "sua khong thanh cong";  
-       }
-         
+        return "sua khong thanh cong";
+    }
+
 }
