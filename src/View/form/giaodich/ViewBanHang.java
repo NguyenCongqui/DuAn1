@@ -102,6 +102,7 @@ public class ViewBanHang extends javax.swing.JPanel {
         return pattern = pattern.replaceAll(",", "");
     }
     public void fillTable(){
+        
         if (txt_SlgBan.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(this,"số lượng không đc để trống");
             return;
