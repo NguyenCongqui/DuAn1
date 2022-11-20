@@ -4,6 +4,12 @@
  */
 package View.form.giaodich;
 
+import Service.Impl.ChiTietHoaDonImpl;
+import Services.ChiTietHoaDonService;
+import ViewModel.CTHDBanViewModel;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ADMIN
@@ -13,8 +19,40 @@ public class ViewHoaDonChiTietBanHang extends javax.swing.JFrame {
     /**
      * Creates new form ViewHoaDonChiTietBanHang
      */
-    public ViewHoaDonChiTietBanHang() {
+    DefaultTableModel model;
+    int row;
+    List<CTHDBanViewModel> list;
+    ChiTietHoaDonService chiTietHoaDonService;
+    int id;
+
+    public ViewHoaDonChiTietBanHang(int id, DefaultTableModel model, int row) {
         initComponents();
+        this.model = model;
+        this.row = row;
+        this.id = id;
+        setLocationRelativeTo(null);
+          setResizable(false);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        chiTietHoaDonService = new ChiTietHoaDonImpl();
+        fillTable(id);
+    }
+
+    public void fillTable(int id) {
+        DefaultTableModel model = (DefaultTableModel) tableColumn1.getModel();
+        model.setRowCount(0);
+        list = chiTietHoaDonService.selectByIdBan(id);
+        for (CTHDBanViewModel d : list) {
+            model.addRow(new Object[]{
+                d.getIdCTHoaDonBan(),
+                d.getTenSach(),
+                d.getTenKhachHang(),
+                d.getTenNgonNGu(),
+                d.getTenNXB(),
+                d.getTenTacGia(),
+                d.getSoLuong(),
+                d.getDonGia() + " đ"
+            });
+        }
     }
 
     /**
@@ -38,17 +76,16 @@ public class ViewHoaDonChiTietBanHang extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Hóa Đơn Chi Tiết");
 
+        tableColumn1.setBackground(new java.awt.Color(255, 255, 255));
         tableColumn1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "ID", "Tên Sách", "Thể Loại", "Tên Khách Hàng", "Ngôn Ngữ", "Tác GIả", "NXB", "Số Lượng", "GIá Tiền"
+                "ID", "Tên Sách", "Tên Khách Hàng", "Ngôn Ngữ", "Tác GIả", "NXB", "Số Lượng", "GIá Tiền"
             }
         ));
+        tableColumn1.setSelectionBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(tableColumn1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -56,13 +93,14 @@ public class ViewHoaDonChiTietBanHang extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(991, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1072, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -70,7 +108,7 @@ public class ViewHoaDonChiTietBanHang extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -91,37 +129,8 @@ public class ViewHoaDonChiTietBanHang extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewHoaDonChiTietBanHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewHoaDonChiTietBanHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewHoaDonChiTietBanHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewHoaDonChiTietBanHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewHoaDonChiTietBanHang().setVisible(true);
-            }
-        });
-    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

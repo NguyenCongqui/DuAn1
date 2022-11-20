@@ -5,6 +5,9 @@
 package Services;
 
 import DomainModel.ChiTietHoaDonBan;
+import ViewModel.CTHDBanViewModel;
+import ViewModel.HDBanViewModel;
+import java.util.List;
 
 
 
@@ -16,4 +19,8 @@ import DomainModel.ChiTietHoaDonBan;
  */
 public interface ChiTietHoaDonService {
     String insert (ChiTietHoaDonBan cthd);
+    
+    List<HDBanViewModel> getAll();
+    
+    List<CTHDBanViewModel> selectByIdBan(int id);
 }

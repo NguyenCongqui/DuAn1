@@ -4,19 +4,58 @@
  */
 package View.form.giaodich;
 
+import DomainModel.KhachHang;
+import Service.Impl.ChiTietHoaDonImpl;
+import Service.Impl.KhachHangIMpl;
+import Services.ChiTietHoaDonService;
+import Services.KhachHangService;
+import ViewModel.HDBanViewModel;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ACER
  */
 public class ViewHoaDonBanHang extends javax.swing.JPanel {
-
+    DefaultTableModel tableModel = new DefaultTableModel();
+    List<HDBanViewModel> listCTB;
+    ChiTietHoaDonService chitiethoadonservice = new ChiTietHoaDonImpl();
+    List<KhachHang> listKHg;
+    
     /**
      * Creates new form HoaDonBanHang
      */
     public ViewHoaDonBanHang() {
         initComponents();
+        setOpaque(false);
+        chitiethoadonservice = new ChiTietHoaDonImpl();
+        fillData();
     }
 
+    public void fillData(){
+         tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
+        listCTB = chitiethoadonservice.getAll();
+        KhachHangService khachHangService = new KhachHangIMpl();
+        listKHg = khachHangService.getlistKhachHang();
+         String phone = "";
+        for (HDBanViewModel i : listCTB) {
+            for (int j = 0; j < listKHg.size(); j++) {
+                if(i.getIdKhachHang() == listKHg.get(j).getIdKhachHang()){
+                    phone = listKHg.get(j).getSoDienThoai();
+                }
+            }
+            tableModel.addRow(new Object[]{
+                i.getIdHoaDonBan(),
+                i.getTenKhachHang(),
+                phone,
+                i.getTenUser(),
+                i.getTongTien() +" đ",
+                i.getNGAYTHANHTOAN(),
+                i.getGhiChu()
+            });
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -134,10 +173,32 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Ma HD Ban", "Ten KH", "SDT", "Ten NV", "Tong Tien", "Ngay Tao", "Ghi Chu"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl_hoadonbanhang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_hoadonbanhangMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_hoadonbanhang);
+        if (tbl_hoadonbanhang.getColumnModel().getColumnCount() > 0) {
+            tbl_hoadonbanhang.getColumnModel().getColumn(0).setResizable(false);
+            tbl_hoadonbanhang.getColumnModel().getColumn(1).setResizable(false);
+            tbl_hoadonbanhang.getColumnModel().getColumn(2).setResizable(false);
+            tbl_hoadonbanhang.getColumnModel().getColumn(3).setResizable(false);
+            tbl_hoadonbanhang.getColumnModel().getColumn(4).setResizable(false);
+            tbl_hoadonbanhang.getColumnModel().getColumn(5).setResizable(false);
+            tbl_hoadonbanhang.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -184,6 +245,15 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
     private void btn_timActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_timActionPerformed
+
+    private void tbl_hoadonbanhangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_hoadonbanhangMouseClicked
+        // TODO add your handling code here:
+                if (evt.getClickCount() == 2) {
+            int row = tbl_hoadonbanhang.getSelectedRow();
+            int id = (int) tbl_hoadonbanhang.getValueAt(row, 0);
+            new ViewHoaDonChiTietBanHang(id, (DefaultTableModel) tbl_hoadonbanhang.getModel(), tbl_hoadonbanhang.getSelectedRow()).setVisible(true);
+        }
+    }//GEN-LAST:event_tbl_hoadonbanhangMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

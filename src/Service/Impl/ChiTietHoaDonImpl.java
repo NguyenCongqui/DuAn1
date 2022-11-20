@@ -7,6 +7,9 @@ package Service.Impl;
 import DomainModel.ChiTietHoaDonBan;
 import Repository.ChiTietHoaDonRepository;
 import Services.ChiTietHoaDonService;
+import ViewModel.CTHDBanViewModel;
+import ViewModel.HDBanViewModel;
+import java.util.List;
 
 /**
  *
@@ -18,6 +21,16 @@ public class ChiTietHoaDonImpl implements ChiTietHoaDonService{
     @Override
     public String insert(ChiTietHoaDonBan cthd) {
         return rep.insert(cthd);
+    }
+
+    @Override
+    public List<HDBanViewModel> getAll() {
+        return rep.getAll();
+    }
+
+    @Override
+    public List<CTHDBanViewModel> selectByIdBan(int id) {
+        return rep.selectByIdBan(id);
     }
     
 }
