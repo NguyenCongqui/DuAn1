@@ -5,7 +5,6 @@
 package Repository;
 
 import DomainModel.ChiTietHoaDonBan;
-import DomainModel.HoaDonBanHang;
 import Utilities.DBConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,20 +26,20 @@ public class ChiTietHoaDonRepository {
     }
     
     public String insert (ChiTietHoaDonBan cthd){
-        String insert = " INSERT INTO dbo.CTHoaDonBan\n" +
-" (\n" +
-"     IdHoaDonBan,\n" +
-"     IdCTSach,\n" +
-"     SoLuong,\n" +
-"     DonGia\n" +
-" )\n" +
-" VALUES(?,?,?,?)";
+        String insert =" INSERT INTO dbo.CTHoaDonBan\n" +
+"							 (\n" +
+"							     IdHoaDonBan,\n" +
+"							     IdCTSach,\n" +
+"							     SoLuong,\n" +
+"							     DonGia\n" +
+"							 )\n" +
+"							 VALUES\n" +
+"							 (  (SELECT TOP 1 IdHoaDonBan FROM dbo.HoaDonBan ORDER BY IdHoaDonBan DESC),?,?,?)"; 
         try {
             pst = db.getConnection().prepareStatement(insert);
-           pst.setInt(1, cthd.getIDHoaDonBan());
-           pst.setInt(2, cthd.getIdChiTietSach());
-           pst.setInt(3, cthd.getSoLuong());
-           pst.setFloat(4, cthd.getDonGia());
+           pst.setInt(1, cthd.getIdChiTietSach());
+           pst.setInt(2, cthd.getSoLuong());
+           pst.setFloat(3, cthd.getDonGia());
             pst.executeUpdate();
             return "them thanh cong";
         } catch (Exception e) {

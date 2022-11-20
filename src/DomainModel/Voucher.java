@@ -98,6 +98,12 @@ public class Voucher {
         this.TrangThai = TrangThai;
     }
 
+    @Override
+    public String toString() {
+        return  MaGiamGia ;
+    }
+
+    
     
     
 }

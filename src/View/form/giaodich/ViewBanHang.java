@@ -12,16 +12,22 @@ import DomainModel.Voucher;
 import Service.Impl.ChiTietHoaDonImpl;
 import Service.Impl.HoaDonBanHangImpl;
 import Service.Impl.ChiTietSachImpl;
+import Service.Impl.KhachHangIMpl;
+import Service.Impl.VoucherImpl;
 import Services.ChiTietHoaDonService;
 import Services.ChiTietSachService;
 import Services.HoaDonBanHangService;
+import Services.KhachHangService;
+import Services.VoucherService;
 import ViewModel.BanHangViewModel;
 import ViewModel.MatHangViewModel;
+import java.lang.reflect.Array;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -36,14 +42,25 @@ public class ViewBanHang extends javax.swing.JPanel {
     ChiTietSachService chitietsachService = new ChiTietSachImpl();
     List<BanHangViewModel> ListBanHangViewModel = new ArrayList<>();
     List<ChiTietHoaDonBan> ListChiTietHoaDonBan = new ArrayList<>();
+    List<Voucher> ListVoucher = new ArrayList<>();
+    List<KhachHang> listKhachHang = new ArrayList<>();
+    KhachHangService KhachHangService = new KhachHangIMpl();
+    VoucherService voucherService = new VoucherImpl();
     HoaDonBanHangService hoadonbanhangservice = new HoaDonBanHangImpl();
     ChiTietHoaDonService chitiethoadonservice = new ChiTietHoaDonImpl();
+    
     
     public ViewBanHang() {
         initComponents();
         tbl_model = (DefaultTableModel) tbl1.getModel();
         ListBanHangViewModel = chitietsachService.getlistBanHang();
+        fillComboxVoucher();
+        fillComboxKhachHang();
         filldata01();
+        chk_Voucher.setSelected(false);
+        cbo_MaGiamGia.setVisible(false);
+        txt_TongTien.setEnabled(false);
+        
     }
     Locale lc = new Locale("vn", "VN");
     NumberFormat nf = NumberFormat.getInstance(lc);
@@ -54,6 +71,22 @@ public class ViewBanHang extends javax.swing.JPanel {
                 bh.getId(),bh.getMaSach(),bh.getTenSach(),bh.getTheLoai(),bh.getNgonNgu(),bh.getTacGia(),bh.getNXB(),nf.format(bh.getDonGia()) + " đ",bh.getSoLuongTon()
               
             });
+        }
+    }
+    public void fillComboxVoucher() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cbo_MaGiamGia.getModel();
+        cbo_MaGiamGia.removeAllItems();
+       ListVoucher = voucherService.getListVouchers();
+        for (Voucher v : ListVoucher) {
+            model.addElement(v);
+        }
+    }
+    public void fillComboxKhachHang() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cbo_KhachHang.getModel();
+        cbo_KhachHang.removeAllItems();
+       listKhachHang = KhachHangService.getlistKhachHang();
+        for (KhachHang kh : listKhachHang) {
+            model.addElement(kh);
         }
     }
      public String deleteLastKey(String str) {
@@ -128,49 +161,54 @@ public class ViewBanHang extends javax.swing.JPanel {
         return (int) TotalBuy() - (TotalBuy() * (float) (voucher / 100));
     }
       public void delete() {
-        tbl_model1 = (DefaultTableModel) tbl2.getModel();
+          DefaultTableModel model = (DefaultTableModel) tbl2.getModel();
         int index = tbl1.getSelectedRow();
         int index2 = tbl2.getSelectedRow();
 
-//         List<DetailInvoiceSell> list = new ArrayList<>();
+
         if (tbl2.getSelectedRowCount() == 1) {
             for (int i = 0; i < tbl1.getRowCount(); i++) {
                 if (tbl1.getValueAt(i, 0).equals(tbl2.getValueAt(index2, 0))) {
-                    int ii = (int) tbl1.getValueAt(i, 7) + (int) tbl2.getValueAt(index2, 8);
+                    int ii = (int) tbl1.getValueAt(i, 8) + (int) tbl2.getValueAt(index2, 8);
                     tbl1.setValueAt(ii, i, 8);
                     System.out.println("okooooo" + ii);
                 }
             }
             for (int j = 0; j < ListChiTietHoaDonBan.size(); j++) {
                 if (ListChiTietHoaDonBan.get(j).getIDHoaDonBan() == (int) tbl2.getValueAt(index2, 0)) {
-                    tbl_model1.removeRow(tbl2.getSelectedRow());
+                   model.removeRow(tbl2.getSelectedRow());
                     ListChiTietHoaDonBan.remove(ListChiTietHoaDonBan.get(j));
                     return;
                 }
             }
+//            model.setRowCount(0);
+//            ListChiTietHoaDonBan.clear();
+//                filldata01();
         }
 
     }
-      HoaDonBanHang getHoaDon() {
+     public HoaDonBanHang getHoaDon() {
         HoaDonBanHang hd = new HoaDonBanHang();
-        Calendar calendar = Calendar.getInstance();
+       // Calendar calendar = Calendar.getInstance();
         hd.setTrangThai(true);
         hd.setTrangThaiHoaDon(true);
         hd.setTrangThaiTraTien(true);
-       // hd.setGhichu(txtMoTa.getText());
-        hd.setTongTien(TotalBuy());   
+        hd.setGhichu(txtMoTa.getText());
+        hd.setTongTien(TotalBuy());      
         hd.setTienKhachDua(Float.parseFloat(txt_TienKhachDua.getText()));
-      // hd.setTienTraLai(Float.valueOf(txt_TienKhachDua.getText()) - Float.valueOf(MaVoucher()));
-        hd.setTienTraLai(Float.valueOf(txt_TienThua.getText()));
-         hd.setIdKhachHang(1);
+    //  hd.setTienTraLai(Float.valueOf(txt_TienKhachDua.getText()) - Float.valueOf(MaVoucher()));
+       hd.setTienTraLai(Float.parseFloat(fomartFloat(txt_TienThua.getText())));     
           KhachHang kh = (KhachHang) cbo_KhachHang.getSelectedItem();
-       // hd.setIdKhachHang(kh.getIdKhachHang());
+        hd.setIdKhachHang(kh.getIdKhachHang());
+        hd.setTenKhachHang(kh.getHoTen());
         if (!chk_Voucher.isSelected()) {
-            hd.setIDVoucher(null);
+           hd.setIDVoucher(null);
         } else {
             Voucher v = (Voucher) cbo_MaGiamGia.getSelectedItem();
             hd.setIDVoucher(v.getIDVoucher());
         }
+         
+        hd.setIdUsers(1);
         return hd;
     }
       public void insertBanHang(){
@@ -178,7 +216,7 @@ public class ViewBanHang extends javax.swing.JPanel {
         if (index <= 0) {
             JOptionPane.showMessageDialog(this," bạn chưa thanh toán sản phẩm nào ");
                     
-            // return;
+             return;
         } else {
             if (txt_TienKhachDua.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Bạn chưa nhập tiền khách đưa kìa");
@@ -194,21 +232,23 @@ public class ViewBanHang extends javax.swing.JPanel {
                 for (int i = 0; i < ListChiTietHoaDonBan.size(); i++) {
                     ChiTietHoaDonBan cthd = ListChiTietHoaDonBan.get(i);
                     System.out.println(cthd.getSoLuong());
-                    JOptionPane.showMessageDialog(this,chitiethoadonservice.insert(cthd));
-                   // prDAO.sellProductItem(de.getQuantity(), de.getIdPrDetails());
+                   JOptionPane.showMessageDialog(this,chitiethoadonservice.insert(cthd));
+                    JOptionPane.showMessageDialog(this, chitietsachService.updateSoLuongTon(cthd.getSoLuong(),cthd.getIdChiTietSach()));
+                  
                 }
                 hdbh.setTongTien(TotalBuy());
                 
                
-                // Voucher v = (Voucher) cbbVoucher.getSelectedItem();
-                // vDao.updateVoucher(v.getIdVoucher());
-//                if (chk_Voucher.isSelected()) {
-//                    Voucher v = (Voucher) cbo_MaGiamGia.getSelectedItem();
-//                    vDao.updateVoucher(v.getIdVoucher());
-//                }
+            
+                if (chk_Voucher.isSelected()) {
+                    Voucher v1 =  (Voucher) cbo_MaGiamGia.getSelectedItem();
+                   // ListVoucher = voucherService.updateSoLuongTon( v1.getIDVoucher());
+                    
+                }
                 DefaultTableModel model = (DefaultTableModel) tbl2.getModel();
                 model.setRowCount(0);
                 ListChiTietHoaDonBan.clear();
+                ListBanHangViewModel = chitietsachService.getlistBanHang();
                 filldata01();
             }
         }
@@ -588,12 +628,12 @@ public class ViewBanHang extends javax.swing.JPanel {
                 if (txt_TienKhachDua.getText().isEmpty()) {
                     return;
                 } else {
-                    txt_TienThua.setText(nf.format(Float.valueOf(txt_TienKhachDua.getText()) - Float.valueOf(MaVoucher())) + " đ");
+                    txt_TienThua.setText(nf.format(Float.valueOf(txt_TienKhachDua.getText()) - Float.valueOf(MaVoucher())));
                 }
             }
         } else {
             cbo_MaGiamGia.setVisible(false);
-            txt_TienThua.setText(nf.format(Float.valueOf(txt_TienKhachDua.getText()) - Float.valueOf(TotalBuy())) + " đ");
+            txt_TienThua.setText(nf.format(Float.valueOf(txt_TienKhachDua.getText()) - Float.valueOf(TotalBuy())));
             txt_TongTien.setText(nf.format(TotalBuy()) + " đ");
         }
     }//GEN-LAST:event_chk_VoucherActionPerformed
@@ -632,7 +672,7 @@ public class ViewBanHang extends javax.swing.JPanel {
                     return;
                 } else {
 
-                    txt_TienThua.setText(nf.format(Float.valueOf(txt_TienKhachDua.getText()) - Float.valueOf(MaVoucher())) + " đ");
+                    txt_TienThua.setText(nf.format(Float.valueOf(txt_TienKhachDua.getText()) - Float.valueOf(MaVoucher())) );
                 }
             }
         } else {
@@ -640,7 +680,7 @@ public class ViewBanHang extends javax.swing.JPanel {
                 return;
             } else {
 
-                txt_TienThua.setText(nf.format(Float.valueOf(txt_TienKhachDua.getText()) - Float.valueOf(TotalBuy())) + " đ");
+                txt_TienThua.setText(nf.format(Float.valueOf(txt_TienKhachDua.getText()) - Float.valueOf(TotalBuy())) );
             }
             txt_TongTien.setText(nf.format(TotalBuy()) + " đ");
         }
@@ -649,6 +689,7 @@ public class ViewBanHang extends javax.swing.JPanel {
     private void btn_BanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BanHangActionPerformed
         // TODO add your handling code here:
         insertBanHang();
+         
         
     }//GEN-LAST:event_btn_BanHangActionPerformed
 

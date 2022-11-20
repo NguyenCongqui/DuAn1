@@ -76,6 +76,12 @@ public class ChiTietSachImpl implements ChiTietSachService{
       return rep.getListBanHang();
     }
 
+    @Override
+    public String updateSoLuongTon(Integer SoLuong, Integer ID) {
+       return rep.updateSoLuongTon(SoLuong, ID);
+    }
+
+    
     
 
    

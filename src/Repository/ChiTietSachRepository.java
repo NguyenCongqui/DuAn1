@@ -126,6 +126,20 @@ public class ChiTietSachRepository {
         }
         return "sua khong thanh cong";
     }
+    public String updateSoLuongTon(Integer soluong, Integer id) {
+        String update = "UPDATE dbo.ChiTietSach SET SoLuongTon = SoLuongTon - ? WHERE IdCTSach = ?";
+        try {
+            pst = db.getConnection().prepareStatement(update);
+
+            pst.setInt(1, soluong);           
+            pst.setInt(2, id);
+            pst.executeUpdate();
+            return "sua thanh cong";
+        } catch (Exception e) {
+
+        }
+        return "sua khong thanh cong";
+    }
 
     public List<MatHang01> getListConHang() {
         String select = "SELECT MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu \n"
