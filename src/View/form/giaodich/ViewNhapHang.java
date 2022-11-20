@@ -501,16 +501,20 @@ public HDNhapSPViewModel themDl() {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhap sản phẩm nào");
         } else {
             HDNhapSPViewModel hdnspvm = themDl();
-            JOptionPane.showMessageDialog(this,  NHservice.insertHDN(hdnspvm));
+            NHservice.insertHDN(hdnspvm);
+          //  JOptionPane.showMessageDialog(this,  NHservice.insertHDN(hdnspvm));
             // lặp list để insert từng hóa đơn chi tiết vào db
             for (int i = 0; i < list.size(); i++) {
                 CTHDNhapSpViewModel de = list.get(i);
                 // them dlieu vao hdctiet
                 System.out.println(de.getSoLuong());
-                 JOptionPane.showMessageDialog(this,  NHservice.insertHDCT(de) );
+                System.out.println(de.getPrice());
+ NHservice.insertHDCT(de);
+              //   JOptionPane.showMessageDialog(this,  NHservice.insertHDCT(de) );
                
                 // hàm cập nhập số lượng tồn kho trong bảng sản phẩm chi tiết
-                JOptionPane.showMessageDialog(this,  NHservice.updateCTSP(de.getSoLuong(),de.getPrice(), de.getIDChiTietSach()) );
+                 NHservice.updateCTSP(de.getSoLuong(),de.getPrice(), de.getIDChiTietSach());
+             //   JOptionPane.showMessageDialog(this,  NHservice.updateCTSP(de.getSoLuong(),de.getPrice(), de.getIDChiTietSach()) );
                 //NHservice.updateCTSP(de.getSoLuong(),de.getPrice(), de.getDetailsInvoice());
             }
             JOptionPane.showMessageDialog(this, "Thêm " + list.size() + " mặt hàng vào hóa đơn thành công");

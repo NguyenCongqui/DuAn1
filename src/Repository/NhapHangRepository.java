@@ -137,15 +137,15 @@ public class NhapHangRepository {
     }
 
     public String updateCTSP(Integer slg, Float giaNhap, Integer id) {
-        NhapHangViewModel nhvm = new NhapHangViewModel();
+      //  NhapHangViewModel nhvm = new NhapHangViewModel();
         
         String update = "UPDATE dbo.ChiTietSach SET SoLuongTon = SoLuongTon + ? , GiaNhap = (SELECT TOP 1 priceImport FROM dbo.ChiTietHoaDonNhapSanPham ORDER BY priceImport DESC) WHERE IdCTSach = ?";
 
         try {
             pst = db.getConnection().prepareStatement(update);
-            pst.setInt(1, nhvm.getSoluong());
+            pst.setInt(1,slg);
          //   pst.setFloat(2, nhvm.getGianhap());
-            pst.setInt(2, nhvm.getIdchitietsach());
+            pst.setInt(2, id);
 
             pst.executeUpdate();
             return "sua thanh cong";
