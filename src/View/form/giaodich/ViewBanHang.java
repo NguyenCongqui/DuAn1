@@ -227,14 +227,14 @@ public class ViewBanHang extends javax.swing.JPanel {
                 return;
             } else {
                 HoaDonBanHang hdbh = getHoaDon();
-                JOptionPane.showMessageDialog(this,hoadonbanhangservice.insert(hdbh));
+                hoadonbanhangservice.insert(hdbh);
                 
                 int index1 = tbl2.getRowCount();
                 for (int i = 0; i < ListChiTietHoaDonBan.size(); i++) {
                     ChiTietHoaDonBan cthd = ListChiTietHoaDonBan.get(i);
                     System.out.println(cthd.getSoLuong());
-                   JOptionPane.showMessageDialog(this,chitiethoadonservice.insert(cthd));
-                    JOptionPane.showMessageDialog(this, chitietsachService.updateSoLuongTon(cthd.getSoLuong(),cthd.getIdChiTietSach()));
+                   chitiethoadonservice.insert(cthd);
+                   chitietsachService.updateSoLuongTon(cthd.getSoLuong(),cthd.getIdChiTietSach());
                   
                 }
                 hdbh.setTongTien(TotalBuy());
