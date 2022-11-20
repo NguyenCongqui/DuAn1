@@ -17,11 +17,13 @@ public interface NhapHangService {
 
     List<NhapHangViewModel> getAll();
 
-    List<NhapHangViewModel> search(String temp);
+    List<NhapHangViewModel> searchTenSach(String temp);
     
     String insertHDN(HDNhapSPViewModel hdnspvm) ;
     
     String insertHDCT(CTHDNhapSpViewModel cthdnsvm) ;
     
     String updateCTSP(Integer slg,Float giaNhap ,Integer id);
+    
+    NhapHangViewModel searchID(int id);
 }

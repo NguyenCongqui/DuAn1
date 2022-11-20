@@ -25,8 +25,8 @@ public class NhapHangImpl implements NhapHangService {
     }
 
     @Override
-    public List<NhapHangViewModel> search(String temp) {
-        return rep.search(temp);
+    public List<NhapHangViewModel> searchTenSach(String temp) {
+        return rep.searchTenSach(temp);
     }
 
     @Override
@@ -42,6 +42,11 @@ public class NhapHangImpl implements NhapHangService {
     @Override
     public String updateCTSP(Integer slg, Float giaNhap, Integer id) {
         return rep.updateCTSP(slg, giaNhap, id);
+    }
+
+    @Override
+    public NhapHangViewModel searchID(int id) {
+        return rep.searchID(id);
     }
 
 }

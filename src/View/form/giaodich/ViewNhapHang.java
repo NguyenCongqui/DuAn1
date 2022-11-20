@@ -39,12 +39,13 @@ public class ViewNhapHang extends javax.swing.JPanel {
     NhapHangService NHservice;
     List<NhapHangViewModel> list2;
     Users user = new Users();
+
     //list lưu những hóa đơn chi tiết
     /**
      * Creates new form NhapHang
      */
     public ViewNhapHang() {
-       initComponents();
+        initComponents();
         dcbm = (DefaultComboBoxModel) cbo_NCC.getModel();
         service1 = new NCCServiceImpl();
         list1 = service1.getAll();
@@ -56,7 +57,8 @@ public class ViewNhapHang extends javax.swing.JPanel {
         NHservice = new NhapHangImpl();
         fillTable();
     }
-public void fillTable() {
+
+    public void fillTable() {
         DefaultTableModel model = (DefaultTableModel) tbl1.getModel();
         model.setRowCount(0);
         list2 = NHservice.getAll();
@@ -74,7 +76,7 @@ public void fillTable() {
         }
     }
 
-   private boolean validatFrom() {
+    private boolean validatFrom() {
         if (txt_SLgNhap.getText().isEmpty() || txt_Gia.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "ko dc de trong");
             return false;
@@ -110,7 +112,6 @@ public void fillTable() {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txt_Search = new View.form.TextField();
-        btn_Tim = new View.form.MyButton();
         lbl_Search = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -139,18 +140,10 @@ public void fillTable() {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText(" Nhập Hàng");
 
-        txt_Search.setLabelText("Tìm theo tên hoặc mã");
+        txt_Search.setLabelText("Tìm theo tên san pham");
         txt_Search.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 txt_SearchCaretUpdate(evt);
-            }
-        });
-
-        btn_Tim.setText("Tìm");
-        btn_Tim.setRadius(20);
-        btn_Tim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_TimActionPerformed(evt);
             }
         });
 
@@ -165,12 +158,9 @@ public void fillTable() {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_Tim, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,8 +168,7 @@ public void fillTable() {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Tim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_Search, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
                 .addContainerGap())
@@ -238,6 +227,11 @@ public void fillTable() {
         txt_Gia.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txt_GiaFocusGained(evt);
+            }
+        });
+        txt_Gia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_GiaKeyReleased(evt);
             }
         });
 
@@ -429,7 +423,7 @@ public void fillTable() {
 
                 //do dlieu vao bang 2
                 DefaultTableModel tableModel1 = (DefaultTableModel) tbl2.getModel();
-                tableModel1.addRow(new Object[]{id, tenSP, theLoai, NXB, ngonNgu, tacGia, sLg,giaNhap});
+                tableModel1.addRow(new Object[]{id, tenSP, theLoai, NXB, ngonNgu, tacGia, sLg, giaNhap});
                 CTHDNhapSpViewModel nhvm = new CTHDNhapSpViewModel();
                 nhvm.setPrice(giaNhap);
                 nhvm.setIDChiTietSach(id);
@@ -447,7 +441,6 @@ public void fillTable() {
     private void btn_XoaTamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTamActionPerformed
         // TODO add your handling code here:
 
-        
         int row = tbl2.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) tbl2.getModel();
         int id = (int) tbl2.getValueAt(row, 0);
@@ -474,18 +467,18 @@ public void fillTable() {
 
     private void txt_SLgNhapFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_SLgNhapFocusGained
         // TODO add your handling code here:
-         lblSlgNhap.setVisible(false);
+        lblSlgNhap.setVisible(false);
     }//GEN-LAST:event_txt_SLgNhapFocusGained
 
     private void txt_GiaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_GiaFocusGained
         // TODO add your handling code here:
-         lblGiaNhap.setVisible(false);
+        lblGiaNhap.setVisible(false);
     }//GEN-LAST:event_txt_GiaFocusGained
-public HDNhapSPViewModel themDl() {
-       // SimpleDateFormat sdf = new SimpleDateFormat();
+    public HDNhapSPViewModel themDl() {
+        // SimpleDateFormat sdf = new SimpleDateFormat();
         HDNhapSPViewModel hdnspvm = new HDNhapSPViewModel();
-     // Calendar calendar = Calendar.getInstance();
-      //  hdnspvm.setNGAYTAODON(sdf.format( calendar.getTime()));
+        // Calendar calendar = Calendar.getInstance();
+        //  hdnspvm.setNGAYTAODON(sdf.format( calendar.getTime()));
         hdnspvm.setTINHTRANGTRATIEN(false);
         hdnspvm.setIDUsers(user.getIdusers());
         hdnspvm.setMoTa(txt_GhiChu.getText());
@@ -494,68 +487,134 @@ public HDNhapSPViewModel themDl() {
         return hdnspvm;
 
     }
+       private boolean validatFrom1() {
+        if (txt_GhiChu.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "ko dc de trong");
+            return false;
+        } 
+        return true;
+       }
     private void btn_NhapHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NhapHangActionPerformed
         // TODO add your handling code here:
         int count = tbl2.getRowCount();
         if (count <= 0) {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhap sản phẩm nào");
         } else {
+            if(validatFrom1()){
             HDNhapSPViewModel hdnspvm = themDl();
             NHservice.insertHDN(hdnspvm);
-          //  JOptionPane.showMessageDialog(this,  NHservice.insertHDN(hdnspvm));
+            //  JOptionPane.showMessageDialog(this,  NHservice.insertHDN(hdnspvm));
             // lặp list để insert từng hóa đơn chi tiết vào db
             for (int i = 0; i < list.size(); i++) {
                 CTHDNhapSpViewModel de = list.get(i);
                 // them dlieu vao hdctiet
                 System.out.println(de.getSoLuong());
                 System.out.println(de.getPrice());
- NHservice.insertHDCT(de);
-              //   JOptionPane.showMessageDialog(this,  NHservice.insertHDCT(de) );
-               
+                NHservice.insertHDCT(de);
+                //   JOptionPane.showMessageDialog(this,  NHservice.insertHDCT(de) );
+
                 // hàm cập nhập số lượng tồn kho trong bảng sản phẩm chi tiết
-                 NHservice.updateCTSP(de.getSoLuong(),de.getPrice(), de.getIDChiTietSach());
-             //   JOptionPane.showMessageDialog(this,  NHservice.updateCTSP(de.getSoLuong(),de.getPrice(), de.getIDChiTietSach()) );
+                NHservice.updateCTSP(de.getSoLuong(), de.getPrice(), de.getIDChiTietSach());
+                //   JOptionPane.showMessageDialog(this,  NHservice.updateCTSP(de.getSoLuong(),de.getPrice(), de.getIDChiTietSach()) );
                 //NHservice.updateCTSP(de.getSoLuong(),de.getPrice(), de.getDetailsInvoice());
             }
+            
             JOptionPane.showMessageDialog(this, "Thêm " + list.size() + " mặt hàng vào hóa đơn thành công");
+            
             DefaultTableModel model = (DefaultTableModel) tbl2.getModel();
             model.setRowCount(0);
             list.clear();
             fillTable();
+            }
         }
         btn_XoaTam.setEnabled(false);
-        
+
     }//GEN-LAST:event_btn_NhapHangActionPerformed
-
-    private void btn_TimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimActionPerformed
-        // TODO add your handling code here:
-        String keyString = txt_Search.getText();
-        list2 = NHservice.search(keyString);
+    public void TimTheoTen() {
+        String temp = txt_Search.getText();
+        list2 = NHservice.searchTenSach(temp);
+        tableModel = (DefaultTableModel) tbl1.getModel();
+        tableModel.setRowCount(0);
         if (list2.isEmpty()) {
-            lbl_Search.setText("Không tìm thay san pham : " + keyString);
-            return;
+            lbl_Search.setText("Không tìm thay san pham : " + temp);
+          return;
         }
-        fillTable();
-    }//GEN-LAST:event_btn_TimActionPerformed
-
+        for (NhapHangViewModel p : list2) {
+            tableModel.addRow(new Object[]{
+                p.getIdchitietsach(),
+                p.getTenSach(),
+                p.getTenTheLoai(),
+                p.getTenNxb(),
+                p.getTenNgonNgu(),
+                p.getTenTacGia(),
+                p.getSoluong(),
+                p.getGia() + " đ"
+            });
+        }
+    }
+// public void TimTheoID() {
+//        int id = Integer.parseInt(txt_Search.getText());
+//        NhapHangViewModel p = NHservice.searchID(id);
+//        tableModel = (DefaultTableModel) tbl1.getModel();
+//        tableModel.setRowCount(0);
+//        if (p == null) {
+//            lbl_Search.setText("Không tìm thay id : " + id);
+//           return;
+//        }
+//            tableModel.addRow(new Object[]{
+//                p.getIdchitietsach(),
+//                p.getTenSach(),
+//                p.getTenTheLoai(),
+//                p.getTenNxb(),
+//                p.getTenNgonNgu(),
+//                p.getTenTacGia(),
+//                p.getSoluong(),
+//                p.getGia() + " đ"
+//            });
+//       
+//    }
     private void txt_SearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_SearchCaretUpdate
         // TODO add your handling code here:
-        String keyString = txt_Search.getText();
-        list2 = NHservice.search(keyString);
-        if (list2.isEmpty()) {
-            lbl_Search.setText("Không tìm thay san pham : " + keyString);
+//         try {
+//           TimTheoTen();   
+//        } catch (Exception e) {
+            TimTheoTen();
+        //}
+
+    }//GEN-LAST:event_txt_SearchCaretUpdate
+public String deleteLastKey(String str) {
+        if (str.charAt(str.length() - 1) == 'đ') {
+            str = str.replace(str.substring(str.length() - 1), "");
+            return str;
+        } else {
+            return str;
+        }
+    }
+    
+    public String fomartFloat(String txt) {
+        String pattern = deleteLastKey(txt);
+        return pattern = pattern.replaceAll(",", "");
+    }
+    private void txt_GiaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_GiaKeyReleased
+        // TODO add your handling code here:
+           if (txt_Gia.getText().trim().isEmpty()) {
+            lblGiaNhap.setText("");
             return;
         }
-        fillTable();
-    }//GEN-LAST:event_txt_SearchCaretUpdate
- 
- 
- 
+        if (Float.parseFloat(txt_Gia.getText()) > Float.parseFloat(fomartFloat(tbl1.getValueAt(tbl1.getSelectedRow(), 7).toString()))) {
+            lblGiaNhap.setVisible(true);
+            lblGiaNhap.setText("Giá nhập nhỏ hơn giá bán");
+            System.out.println(Float.parseFloat(fomartFloat(tbl1.getValueAt(tbl1.getSelectedRow(), 7).toString())));
+        } else {
+            
+            lblGiaNhap.setText("");
+        }
+    }//GEN-LAST:event_txt_GiaKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.form.MyButton btn_LuuTam;
     private View.form.MyButton btn_NhapHang;
-    private View.form.MyButton btn_Tim;
     private View.form.MyButton btn_XoaTam;
     private View.form.Combobox cbo_NCC;
     private javax.swing.JLabel jLabel1;
