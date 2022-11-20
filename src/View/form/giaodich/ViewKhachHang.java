@@ -47,6 +47,8 @@ private KhachHangService svKH = new KhachHangIMpl();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         textField1 = new View.form.TextField();
@@ -103,14 +105,18 @@ private KhachHangService svKH = new KhachHangIMpl();
 
         jLabel2.setText("Giới tính");
 
+        buttonGroup1.add(rdoNam);
         rdoNam.setText("Nam");
 
+        buttonGroup1.add(rdoNu);
         rdoNu.setText("Nu");
 
         jLabel3.setText("Trạng thái");
 
+        buttonGroup2.add(rdoHailong);
         rdoHailong.setText("Hài lòng");
 
+        buttonGroup2.add(rdoKhaiLong);
         rdoKhaiLong.setText("Không hài lòng");
 
         myButton2.setText("insert");
@@ -262,6 +268,8 @@ private KhachHangService svKH = new KhachHangIMpl();
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
