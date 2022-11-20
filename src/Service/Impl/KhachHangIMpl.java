@@ -13,16 +13,24 @@ import java.util.List;
  *
  * @author ADMIN
  */
-public class KhachHangIMpl implements KhachHangService{
+public class KhachHangIMpl implements KhachHangService {
+
     KhachHangRepository rep = new KhachHangRepository();
 
     public KhachHangIMpl() {
     }
-    
-    
+
     @Override
     public List<KhachHang> getlistKhachHang() {
         return rep.getListKhachHang();
     }
-    
+
+    @Override
+    public String them(KhachHang kh) {
+        boolean t = rep.them(kh);
+        if (t) {
+            return "them thanh cong";
+        }
+        return "them that bai";
+    }
 }

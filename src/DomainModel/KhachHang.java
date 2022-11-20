@@ -20,6 +20,15 @@ public class KhachHang {
     public KhachHang() {
     }
 
+    public KhachHang(String HoTen, String NgaySinh, boolean GioiTinh, String SoDienThoai, String DiaChi, boolean TrangThai) {
+        this.HoTen = HoTen;
+        this.NgaySinh = NgaySinh;
+        this.GioiTinh = GioiTinh;
+        this.SoDienThoai = SoDienThoai;
+        this.DiaChi = DiaChi;
+        this.TrangThai = TrangThai;
+    }
+    
     public KhachHang(int IdKhachHang, String HoTen, String NgaySinh, boolean GioiTinh, String SoDienThoai, String DiaChi, boolean TrangThai) {
         this.IdKhachHang = IdKhachHang;
         this.HoTen = HoTen;

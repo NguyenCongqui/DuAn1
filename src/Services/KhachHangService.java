@@ -13,5 +13,5 @@ import java.util.List;
  */
 public interface KhachHangService {
     List<KhachHang> getlistKhachHang();
-    
+    String them(KhachHang kh);
 }
