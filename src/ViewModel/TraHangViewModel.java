@@ -9,8 +9,8 @@ package ViewModel;
  * @author quanh
  */
 public class TraHangViewModel {
-    private int idTraHang;
-    private int idBanHang;
+    private int maBanHang;
+    private String maSach;
     private String tenKh;
     private String tenSach;
     private int soLuong;
@@ -20,9 +20,9 @@ public class TraHangViewModel {
     public TraHangViewModel() {
     }
 
-    public TraHangViewModel(int idTraHang, int idBanHang, String tenKh, String tenSach, int soLuong, String SDT, float donGia) {
-        this.idTraHang = idTraHang;
-        this.idBanHang = idBanHang;
+    public TraHangViewModel(int maBanHang, String maSach, String tenKh, String tenSach, int soLuong, String SDT, float donGia) {
+        this.maBanHang = maBanHang;
+        this.maSach = maSach;
         this.tenKh = tenKh;
         this.tenSach = tenSach;
         this.soLuong = soLuong;
@@ -30,21 +30,25 @@ public class TraHangViewModel {
         this.donGia = donGia;
     }
 
-    public int getIdTraHang() {
-        return idTraHang;
+    public int getMaBanHang() {
+        return maBanHang;
     }
 
-    public void setIdTraHang(int idTraHang) {
-        this.idTraHang = idTraHang;
+    public void setMaBanHang(int maBanHang) {
+        this.maBanHang = maBanHang;
     }
 
-    public int getIdBanHang() {
-        return idBanHang;
+    
+
+    public String getMaSach() {
+        return maSach;
     }
 
-    public void setIdBanHang(int idBanHang) {
-        this.idBanHang = idBanHang;
+    public void setMaSach(String maSach) {
+        this.maSach = maSach;
     }
+
+    
 
     public String getTenKh() {
         return tenKh;

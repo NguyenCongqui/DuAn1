@@ -4,17 +4,54 @@
  */
 package View.form.giaodich;
 
+import Service.Impl.HoaDonBanHangImpl;
+import Service.Impl.HoaDonTraHangImpl;
+import Services.HoaDonTraHangService;
+import ViewModel.NhapHangViewModel;
+import ViewModel.TraHangViewModel;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ACER
  */
 public class ViewTraHang extends javax.swing.JPanel {
-
+private DefaultTableModel tblModel;
+private List<TraHangViewModel> listTraHang;
+private HoaDonTraHangService svTraHang;
     /**
      * Creates new form TraHang
      */
     public ViewTraHang() {
         initComponents();
+//        tblModel = (DefaultTableModel) tbl_thongtinhoadon.getModel();
+        svTraHang = (HoaDonTraHangService) new HoaDonTraHangImpl();
+        listTraHang = svTraHang.getAll();
+//        fillTable();
+    }
+    public void TimTheoTen() {
+        String temp = txt_timkiemhoadon.getText();
+        listTraHang = svTraHang.searchTen(temp);
+        tblModel = (DefaultTableModel) tbl_danhsachsanpham.getModel();
+        tblModel.setRowCount(0);
+        if (listTraHang.isEmpty()) {
+            lbl_thongBao.setText("Không tìm thay san pham : " + temp);
+          return;
+        }
+        for (TraHangViewModel p : listTraHang) {
+            tblModel.addRow(new Object[]{
+                p.getMaBanHang(),
+                p.getMaSach(),
+                p.getTenKh(),
+                p.getTenSach(),
+                p.getSoLuong(),
+                p.getSDT(),
+                p.getDonGia()+ " đ",
+                 
+            });
+        }
     }
 
     /**
@@ -30,6 +67,7 @@ public class ViewTraHang extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txt_timkiemhoadon = new View.form.TextField();
+        lbl_thongBao = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_thongtinhoadon = new View.form.TableColumn();
@@ -54,6 +92,18 @@ public class ViewTraHang extends javax.swing.JPanel {
         jLabel2.setText("Tìm Kiếm :");
 
         txt_timkiemhoadon.setLabelText("Tìm kiếm hóa đơn");
+        txt_timkiemhoadon.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txt_timkiemhoadonCaretUpdate(evt);
+            }
+        });
+        txt_timkiemhoadon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_timkiemhoadonActionPerformed(evt);
+            }
+        });
+
+        lbl_thongBao.setText("jLabel3");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -65,8 +115,10 @@ public class ViewTraHang extends javax.swing.JPanel {
                 .addGap(64, 64, 64)
                 .addComponent(jLabel2)
                 .addGap(29, 29, 29)
-                .addComponent(txt_timkiemhoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(280, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_timkiemhoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_thongBao, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -76,7 +128,9 @@ public class ViewTraHang extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(txt_timkiemhoadon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lbl_thongBao)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -87,7 +141,7 @@ public class ViewTraHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã trả hàng", "Mã bán hàng", "Tên khách hàng", "Tên sách", "Số lượng", "SÐT", "Đơn giá"
+                "Mã trả hàng", "Mã Sách", "Tên khách hàng", "Tên sách", "Số lượng", "SÐT", "Đơn giá"
             }
         ));
         jScrollPane1.setViewportView(tbl_thongtinhoadon);
@@ -160,7 +214,7 @@ public class ViewTraHang extends javax.swing.JPanel {
                     .addComponent(txt_mahoadon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txt_ghichu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txt_tienhoantra, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,6 +277,14 @@ public class ViewTraHang extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txt_timkiemhoadonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_timkiemhoadonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_timkiemhoadonActionPerformed
+
+    private void txt_timkiemhoadonCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_timkiemhoadonCaretUpdate
+       
+    }//GEN-LAST:event_txt_timkiemhoadonCaretUpdate
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.form.MyButton btn_trahang;
@@ -235,6 +297,7 @@ public class ViewTraHang extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lbl_thongBao;
     private View.form.TableColumn tbl_danhsachsanpham;
     private View.form.TableColumn tbl_thongtinhoadon;
     private View.form.TextField txt_ghichu;
