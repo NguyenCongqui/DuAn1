@@ -542,6 +542,8 @@ public class ViewSanPham extends javax.swing.JPanel {
 
     private void myButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton8ActionPerformed
         // TODO add your handling code here:
+        QR qr = new QR();
+        qr.setVisible(true);
     }//GEN-LAST:event_myButton8ActionPerformed
 
 

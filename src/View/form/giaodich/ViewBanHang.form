@@ -386,42 +386,30 @@
                       <EmptySpace min="24" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jLabel3" min="-2" pref="41" max="-2" attributes="0"/>
-                                  <Component id="cbo_KhachHang" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jScrollPane3" alignment="0" pref="254" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="txt_TongTien" min="-2" pref="262" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jLabel3" min="-2" pref="41" max="-2" attributes="0"/>
+                                      <Component id="cbo_KhachHang" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jScrollPane3" alignment="0" pref="254" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="txt_TienKhachDua" alignment="1" min="-2" pref="262" max="-2" attributes="0"/>
+                                  <Component id="txt_TienThua" alignment="1" min="-2" pref="262" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="chk_Voucher" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="cbo_MaGiamGia" max="32767" attributes="0"/>
-                                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="txt_Voucher" min="-2" pref="163" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Component id="myButton1" min="-2" pref="53" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btn_BanHang" min="-2" pref="91" max="-2" attributes="0"/>
-                                  <Component id="txt_TongTien" min="-2" pref="163" max="-2" attributes="0"/>
-                                  <Component id="txt_TienKhachDua" min="-2" pref="163" max="-2" attributes="0"/>
-                                  <Component id="txt_TienThua" min="-2" pref="163" max="-2" attributes="0"/>
-                              </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btn_BanHang" min="-2" pref="96" max="-2" attributes="0"/>
+                                  <Component id="cbo_MaGiamGia" alignment="0" min="-2" pref="117" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="chk_Voucher" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                                      <Component id="myButton1" min="-2" pref="53" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -445,17 +433,15 @@
                           </Group>
                           <Component id="myButton1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txt_Voucher" min="-2" pref="33" max="-2" attributes="0"/>
-                      <EmptySpace pref="10" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="txt_TongTien" min="-2" pref="45" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="txt_TienKhachDua" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txt_TienKhachDua" min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="txt_TienThua" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btn_BanHang" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="btn_BanHang" min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace pref="43" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -499,14 +485,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chk_VoucherActionPerformed"/>
               </Events>
             </Component>
-            <Component class="View.form.TextField" name="txt_Voucher">
-              <Properties>
-                <Property name="labelText" type="java.lang.String" value="Ma giam gia"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_VoucherActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="View.form.TextField" name="txt_TienKhachDua">
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="Tien Khach Dua"/>
@@ -541,6 +519,9 @@
                 </Property>
                 <Property name="radius" type="int" value="20"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton1ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="View.form.Combobox" name="cbo_MaGiamGia">
               <Properties>

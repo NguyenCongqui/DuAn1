@@ -175,10 +175,11 @@ public class ViewBanHang extends javax.swing.JPanel {
                     System.out.println("okooooo" + ii);
                 }
             }
-            for (int j = 0; j < ListChiTietHoaDonBan.size(); j++) {
-                if (ListChiTietHoaDonBan.get(j).getIDHoaDonBan() == (int) tbl2.getValueAt(index2, 0)) {
+            for (int j = 0; j < ListBanHangViewModel.size(); j++) {
+                if (ListBanHangViewModel.get(j).getId() == (int) tbl2.getValueAt(index2, 0)) {
                    model.removeRow(tbl2.getSelectedRow());
-                    ListChiTietHoaDonBan.remove(ListChiTietHoaDonBan.get(j));
+                    ListBanHangViewModel.remove(ListBanHangViewModel.get(j));
+                    JOptionPane.showMessageDialog(this,"xoa thanh cong");
                     return;
                 }
             }
@@ -238,6 +239,7 @@ public class ViewBanHang extends javax.swing.JPanel {
                   
                 }
                 hdbh.setTongTien(TotalBuy());
+                JOptionPane.showMessageDialog(this, "Bán " + ListChiTietHoaDonBan.size() + " Hóa Đơn Thành công");
                 
                
             
@@ -284,7 +286,6 @@ public class ViewBanHang extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txt_TongTien = new View.form.TextField();
         chk_Voucher = new javax.swing.JCheckBox();
-        txt_Voucher = new View.form.TextField();
         txt_TienKhachDua = new View.form.TextField();
         txt_TienThua = new View.form.TextField();
         btn_BanHang = new View.form.MyButton();
@@ -403,13 +404,6 @@ public class ViewBanHang extends javax.swing.JPanel {
             }
         });
 
-        txt_Voucher.setLabelText("Ma giam gia");
-        txt_Voucher.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_VoucherActionPerformed(evt);
-            }
-        });
-
         txt_TienKhachDua.setLabelText("Tien Khach Dua");
         txt_TienKhachDua.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -438,6 +432,11 @@ public class ViewBanHang extends javax.swing.JPanel {
         myButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon/icons8_barcode_reader_32.png"))); // NOI18N
         myButton1.setBorderColor(new java.awt.Color(0, 0, 0));
         myButton1.setRadius(20);
+        myButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton1ActionPerformed(evt);
+            }
+        });
 
         cbo_MaGiamGia.setLabeText("Mã Giảm Giá");
         cbo_MaGiamGia.addActionListener(new java.awt.event.ActionListener() {
@@ -454,33 +453,25 @@ public class ViewBanHang extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbo_KhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbo_KhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
+                            .addComponent(txt_TienKhachDua, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_TienThua, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addComponent(chk_Voucher)
-                                    .addGap(86, 86, 86))
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addComponent(cbo_MaGiamGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGap(34, 34, 34)))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(txt_Voucher, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)))
-                        .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(159, 159, 159))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_TienKhachDua, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_TienThua, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(btn_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbo_MaGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(chk_Voucher)
+                                .addGap(119, 119, 119)
+                                .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(126, 126, 126))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,17 +489,15 @@ public class ViewBanHang extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(cbo_MaGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_Voucher, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(txt_TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_TienKhachDua, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_TienKhachDua, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(txt_TienThua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addComponent(btn_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -609,10 +598,6 @@ public class ViewBanHang extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btn_LuuTamActionPerformed
 
-    private void txt_VoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_VoucherActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_VoucherActionPerformed
-
     private void cbo_MaGiamGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_MaGiamGiaActionPerformed
         // TODO add your handling code here:
         txt_TongTien.setText(nf.format(MaVoucher())+ " đ");
@@ -694,6 +679,12 @@ public class ViewBanHang extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btn_BanHangActionPerformed
 
+    private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
+        // TODO add your handling code here:
+        QR qr = new QR();
+        qr.setVisible(true);
+    }//GEN-LAST:event_myButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.form.MyButton btn_BanHang;
@@ -721,6 +712,5 @@ public class ViewBanHang extends javax.swing.JPanel {
     private View.form.TextField txt_TienKhachDua;
     private View.form.TextField txt_TienThua;
     private View.form.TextField txt_TongTien;
-    private View.form.TextField txt_Voucher;
     // End of variables declaration//GEN-END:variables
 }
