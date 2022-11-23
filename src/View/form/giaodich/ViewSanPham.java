@@ -134,7 +134,7 @@ public class ViewSanPham extends javax.swing.JPanel {
                 p.getTenSach(),
                 p.getLoaiSach(),
                 p.getNXB(),
-                p.isTrangThai(),
+                p.isTrangThai()==true?"Đang Kinh Doanh":"Ngừng Kinh Doanh",
                
             });
         }
@@ -429,6 +429,8 @@ public class ViewSanPham extends javax.swing.JPanel {
                 .addContainerGap(121, Short.MAX_VALUE))
         );
 
+        lblTb2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTb2.setForeground(new java.awt.Color(255, 51, 51));
         lblTb2.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
