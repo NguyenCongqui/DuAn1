@@ -54,6 +54,24 @@ public class SachRepository {
         }
         return null;
     }
+        public List<SachViewModel> searchTen(String temp) {
+        String query = "SELECT dbo.Sach.IdSach, dbo.Sach.MaSach, dbo.Sach.TenSach, dbo.TheLoai.TenTheLoai, dbo.NhaCungCap.TenNhaCungCap, dbo.Sach.TrangThai\n"
+                + "FROM     dbo.NhaCungCap INNER JOIN\n"
+                + "                  dbo.Sach ON dbo.NhaCungCap.IdNhaCungCap = dbo.Sach.IdNhaCungCap INNER JOIN\n"
+                + "                  dbo.TheLoai ON dbo.Sach.Idtheloai = dbo.TheLoai.IdTheLoai where Sach.TenSach like '%" + temp +"%' order by Sach.TenSach asc";
+        List<SachViewModel> listSearch = new ArrayList<>();
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                SachViewModel spViewModel = new SachViewModel(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6));
+                listSearch.add(spViewModel);
+            }
+            return listSearch;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
 
     public boolean update(Sach s, String id) {
         String query = "UPDATE [dbo].[Sach]\n"

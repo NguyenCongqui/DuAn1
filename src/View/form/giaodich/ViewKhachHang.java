@@ -17,9 +17,11 @@ import javax.swing.table.DefaultTableModel;
  * @author ADMIN
  */
 public class ViewKhachHang extends javax.swing.JPanel {
-private DefaultTableModel tblModel;
-private List<KhachHang> listKH = new ArrayList<>();
-private KhachHangService svKH = new KhachHangIMpl();
+
+    private DefaultTableModel tblModel;
+    private List<KhachHang> listKH = new ArrayList<>();
+    private KhachHangService svKH = new KhachHangIMpl();
+
     /**
      * Creates new form KhachHang
      */
@@ -30,10 +32,11 @@ private KhachHangService svKH = new KhachHangIMpl();
         showData(listKH);
         txtID.disable();
     }
+
     public void showData(List<KhachHang> listKH) {
         tblModel.setRowCount(0);
         for (KhachHang s : listKH) {
-            Object[] row = new Object[]{s.getIdKhachHang(),s.getHoTen(), s.getNgaySinh(), s.isGioiTinh()==true?"Nam":"Nu",s.getSoDienThoai(),s.getDiaChi(), s.isTrangThai()== true ? "Hài lòng":"Không hài lòng"};
+            Object[] row = new Object[]{s.getIdKhachHang(), s.getHoTen(), s.getNgaySinh(), s.isGioiTinh() == true ? "Nam" : "Nu", s.getSoDienThoai(), s.getDiaChi(), s.isTrangThai() == true ? "Hài lòng" : "Không hài lòng"};
             tblModel.addRow(row);
         }
     }
@@ -248,21 +251,28 @@ private KhachHangService svKH = new KhachHangIMpl();
         String ten = txtTen.getText();
         String diaChi = txtDiaCHi.getText();
         String sdt = txtSdt.getText();
-        String ngaySinh = txtNgaySinh.getText();
+        String ngaySinh = null;
         boolean gt = rdoNam.isSelected();
-        if(gt){
+        if (gt) {
             rdoNam.setSelected(true);
-        }else{
+        } else {
             rdoNu.setSelected(true);
         }
-        
+
         boolean tt = rdoHailong.isSelected();
-        if(tt){
+        if (tt) {
             rdoHailong.setSelected(true);
         }
-            rdoKhaiLong.setSelected(true);
+        rdoKhaiLong.setSelected(true);
+        if (txtNgaySinh.getText().equals("")) {
+            ngaySinh = null;
+
+        } else {
+            ngaySinh = txtNgaySinh.getText();
+
+        }
         KhachHang kh = new KhachHang(ten, ngaySinh, gt, sdt, diaChi, tt);
-        JOptionPane.showMessageDialog(this,svKH.them(kh));
+        JOptionPane.showMessageDialog(this, svKH.them(kh));
         showData(svKH.getlistKhachHang());
     }//GEN-LAST:event_myButton2ActionPerformed
 
