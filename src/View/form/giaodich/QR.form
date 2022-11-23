@@ -63,7 +63,7 @@
         <Component class="javax.swing.JTextField" name="result_field">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="57" y="88" width="238" height="39"/>
+              <AbsoluteConstraints x="70" y="430" width="238" height="39"/>
             </Constraint>
           </Constraints>
         </Component>

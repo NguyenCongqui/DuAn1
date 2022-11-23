@@ -70,7 +70,7 @@ public class QR extends javax.swing.JFrame implements Runnable,ThreadFactory{
 
         jLabel1.setText("jLabel1");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 65, -1, -1));
-        jPanel1.add(result_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 88, 238, 39));
+        jPanel1.add(result_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 430, 238, 39));
 
         btn_ma.setText("su dung ma");
         btn_ma.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +117,7 @@ public class QR extends javax.swing.JFrame implements Runnable,ThreadFactory{
     public static void main(String[] args) {
         QR qr = new QR();
         qr.setVisible(true);
+      
     }
     
 private void initwebcam(){
