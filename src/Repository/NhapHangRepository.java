@@ -62,7 +62,7 @@ public class NhapHangRepository {
     }
 
     public List<NhapHangViewModel> searchTenSach(String temp) {
-        String sql = " SELECT c.IdCTSach,s.TenSach,l.TenTheLoai,x.TenNXB,n.TenNgonNGu,T.TenTacGia,C.SoLuongTon,C.GiaBan \n"
+        String sql = "SELECT c.IdCTSach,s.TenSach,l.TenTheLoai,x.TenNXB,n.TenNgonNGu,T.TenTacGia,C.SoLuongTon,C.GiaBan \n"
                 + "FROM dbo.ChiTietSach C\n"
                 + "INNER JOIN dbo.NgonNgu N ON N.IdNgonNgu = C.IdNgonNgu\n"
                 + "INNER JOIN dbo.NXB X ON X.IdNXB = C.IdNXB\n"
@@ -164,10 +164,11 @@ public class NhapHangRepository {
                 + "INNER JOIN dbo.Sach S ON S.IdSach = C.IdSach\n"
                 + "INNER JOIN dbo.TheLoai L ON L.IdTheLoai = S.Idtheloai where c.IdCTSach = ?";
         try {
-            st = db.getConnection().createStatement();
-            rs = st.executeQuery(sql);
+            pst = db.getConnection().prepareStatement(sql);
+            pst.setObject(1, id);
+            rs = pst.executeQuery();
             listNHV = new ArrayList<>();
-            pst.setInt(1, id);
+
             while (rs.next()) {
 //                listNHV.add(new NhapHangViewModel(
 //                        rs.getInt(1),
@@ -179,7 +180,7 @@ public class NhapHangRepository {
 //                        rs.getInt(7),
 //                        rs.getFloat(8)));
                 NhapHangViewModel p = new NhapHangViewModel();
-                p.setIdchitietsach(rs.getInt(rs.getInt(1)));
+                p.setIdchitietsach(rs.getInt(1));
                 p.setTenSach(rs.getString(2));
                 p.setTenTheLoai(rs.getString(3));
                 p.setTenNxb(rs.getString(4));
@@ -188,13 +189,13 @@ public class NhapHangRepository {
                 p.setGia(rs.getFloat(8));
                 p.setSoluong(rs.getInt(7));
 
-               return p;
+                return p;
             }
             rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(NCCRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-        
+
     }
 }

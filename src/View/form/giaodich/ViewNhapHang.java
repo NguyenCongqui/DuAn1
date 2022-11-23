@@ -559,7 +559,7 @@ public class ViewNhapHang extends javax.swing.JPanel {
         }
     }
 // public void TimTheoID() {
-//        int id = Integer.parseInt(txt_Search.getText());
+//        int id = String.valueOf(txt_Search.getText());
 //        NhapHangViewModel p = NHservice.searchID(id);
 //        tableModel = (DefaultTableModel) tbl1.getModel();
 //        tableModel.setRowCount(0);

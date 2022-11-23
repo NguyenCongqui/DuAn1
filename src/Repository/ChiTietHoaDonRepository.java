@@ -59,7 +59,7 @@ public class ChiTietHoaDonRepository {
 
         String sql = "   SELECT * FROM dbo.HoaDonBan JOIN dbo.Users \n" +
 " ON  Users.IdUsers = HoaDonBan.IdUsers JOIN dbo.KhachHang \n" +
-" ON KhachHang.IdKhachHang = HoaDonBan.IdKhachHang";
+" ON KhachHang.IdKhachHang = HoaDonBan.IdKhachHang ORDER BY dbo.HoaDonBan.ngayTao DESC";
         try {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(sql);
