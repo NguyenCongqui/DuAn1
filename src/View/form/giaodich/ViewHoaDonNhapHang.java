@@ -36,26 +36,19 @@ public class ViewHoaDonNhapHang extends javax.swing.JPanel {
           tableModel = (DefaultTableModel) tbl1.getModel();
            tableModel.setRowCount(0);
           listCTHDNhap = nhapHangService.getAllHDNhap();
-//          NCCService nCCService = new NCCServiceImpl();
-//          listNcc = nCCService.getAll();
-//          String phone ="";
           for (HDNhapSPViewModel i : listCTHDNhap) {
-           Float tongTien = nhapHangService.TongTien(i.getIDHoaDonNhapSanPham());
-            //   for (int j = 0; j < listNcc.size(); j++) {
-//                if(i.getIDNhaCungCap() == listNcc.get(j).getIdNCC()){
-//                    phone = listNcc.get(j).getSdt();
-//                }
+         //  Float tongTien = nhapHangService.TongTien(i.getIDHoaDonNhapSanPham());
+ 
                 tableModel.addRow(new Object[]{
                     i.getIDHoaDonNhapSanPham(),
                     i.getTenUser(),
                     i.getTenNCC(),
                     i.getSdtNCC(),
                     i.getNGAYTAODON(),
-                   tongTien + " đ",
+                  // tongTien + " đ",
                     i.getMoTa() 
                 });
             }
-       // }
     }
     /**
      * This method is called from within the constructor to initialize the form.
