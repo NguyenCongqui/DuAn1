@@ -28,6 +28,7 @@ public class NhapHangRepository {
     Statement st = null;
     PreparedStatement pst = null;
     List<NhapHangViewModel> listNHV = null;
+    List<HDNhapSPViewModel> listHDNhap = null;
 
     public List<NhapHangViewModel> getAll() {
 
@@ -96,18 +97,18 @@ public class NhapHangRepository {
         try {
             String sql = "  INSERT INTO [dbo].[HoaDonNhapSanPham]\n"
                     + "           ([IDNhaCungCap]\n"
-                    + //"           ,[IDUsers]\n" +
-                    "           ,[TINHTRANGTRATIEN]\n"
+                    + "           ,[IDUsers]\n"
+                    + "           ,[TINHTRANGTRATIEN]\n"
                     + "           ,[MoTa]"
                     + ",[NGAYTAODON])\n"
                     + "     VALUES\n"
-                    + "           (?,?,?,GETDATE())";
+                    + "           (?,?,?,?,GETDATE())";
             pst = db.getConnection().prepareStatement(sql);
             pst.setInt(1, hdnspvm.getIDNhaCungCap());
-            //pst.setInt(2, hdnspvm.getIDUsers());
-            //pst.setString(3, hdnspvm.getNGAYTAODON());
-            pst.setBoolean(2, hdnspvm.getTINHTRANGTRATIEN());
-            pst.setString(3, hdnspvm.getMoTa());
+            pst.setInt(2, hdnspvm.getIDUsers());
+            pst.setBoolean(3, hdnspvm.getTINHTRANGTRATIEN());
+            pst.setString(4, hdnspvm.getMoTa());
+            //  pst.setString(5, hdnspvm.getNGAYTAODON());
 
             pst.executeUpdate();
             return "Them thanh cong";
@@ -197,5 +198,74 @@ public class NhapHangRepository {
         }
         return null;
 
+    }
+
+    public List<HDNhapSPViewModel> getAllHDNhap() {
+//        String sql ="SELECT N.IDHoaDonNhapSanPham , N.NGAYTAODON , U.HoTen, C.TenNhaCungCap , N.MoTa\n" +
+//"FROM dbo.HoaDonNhapSanPham N \n" +
+//"JOIN dbo.Users U ON U.IdUsers = N.IDUsers\n" +
+//"JOIN dbo.NhaCungCap C ON C.IdNhaCungCap = N.IDNhaCungCap ORDER BY N.IDHoaDonNhapSanPham DESC";
+//         try {
+//            st = db.getConnection().createStatement();
+//            rs = st.executeQuery(sql);
+//            listHDNhap = new ArrayList<>();
+//            while (rs.next()) {
+//               HDNhapSPViewModel i = new HDNhapSPViewModel();
+//                i.setIDHoaDonNhapSanPham(rs.getInt(1));
+//                i.setNGAYTAODON(rs.getString(2));
+//                i.setTenUser(rs.getString(3));
+//                i.setTenNCC(rs.getString(4));
+//                i.setMoTa(rs.getString("MoTa"));
+//                
+//                listHDNhap.add(i);
+//            }
+//            rs.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(NCCRepository.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return listHDNhap;
+
+        String sql = "SELECT N.IDHoaDonNhapSanPham , N.NGAYTAODON , U.HoTen, C.TenNhaCungCap ,C.SODIENTHOAI, N.MoTa\n"
+                + "FROM dbo.HoaDonNhapSanPham N \n"
+                + "JOIN dbo.Users U ON U.IdUsers = N.IDUsers\n"
+                + "JOIN dbo.NhaCungCap C ON C.IdNhaCungCap = N.IDNhaCungCap \n"
+                + "ORDER BY N.IDHoaDonNhapSanPham DESC";
+        try {
+            st = db.getConnection().createStatement();
+            rs = st.executeQuery(sql);
+            listHDNhap = new ArrayList<>();
+            while (rs.next()) {
+                HDNhapSPViewModel i = new HDNhapSPViewModel();
+                i.setIDHoaDonNhapSanPham(rs.getInt("IDHoaDonNhapSanPham"));
+                i.setNGAYTAODON(rs.getString("NGAYTAODON"));
+                i.setTenUser(rs.getString("HoTen"));
+                i.setSdtNCC(rs.getString("SODIENTHOAI"));
+                i.setTenNCC(rs.getString("TenNhaCungCap"));
+                i.setMoTa(rs.getString("MoTa"));
+
+                listHDNhap.add(i);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(NCCRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listHDNhap;
+    }
+
+    public Float TongTien(Integer idHDN) {
+        String sql = "SELECT  IDHoaDonNhapSanPham, SUM(SoLuong * priceImport) as \"totalCash\" FROM dbo.ChiTietHoaDonNhapSanPham \n"
+                + "GROUP BY IDHoaDonNhapSanPham \n"
+                + "HAVING IDHoaDonNhapSanPham = ?";
+        try {
+            pst = db.getConnection().prepareStatement(sql, idHDN);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                return rs.getFloat("totalCash");
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

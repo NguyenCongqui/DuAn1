@@ -49,4 +49,14 @@ public class NhapHangImpl implements NhapHangService {
         return rep.searchID(id);
     }
 
+    @Override
+    public List<HDNhapSPViewModel> getAllHDNhap() {
+        return rep.getAllHDNhap();
+    }
+
+    @Override
+    public Float TongTien(Integer idHDN) {
+        return rep.TongTien(idHDN);
+    }
+
 }

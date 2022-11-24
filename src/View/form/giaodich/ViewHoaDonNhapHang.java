@@ -4,19 +4,59 @@
  */
 package View.form.giaodich;
 
+import DomainModel.NCC;
+import Service.Impl.NCCServiceImpl;
+import Service.Impl.NhapHangImpl;
+import Services.NCCService;
+import Services.NhapHangService;
+import ViewModel.HDNhapSPViewModel;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ADMIN
  */
 public class ViewHoaDonNhapHang extends javax.swing.JPanel {
-
+ DefaultTableModel tableModel = new DefaultTableModel();
+    List<HDNhapSPViewModel> listCTHDNhap;
+    NhapHangService nhapHangService = new NhapHangImpl();
+    List<NCC> listNcc;
     /**
      * Creates new form HoaDonNhapHang
      */
     public ViewHoaDonNhapHang() {
         initComponents();
+         setOpaque(false);
+         nhapHangService = new NhapHangImpl();
+         fillData();
     }
 
+    public void fillData(){
+          tableModel = (DefaultTableModel) tbl1.getModel();
+           tableModel.setRowCount(0);
+          listCTHDNhap = nhapHangService.getAllHDNhap();
+//          NCCService nCCService = new NCCServiceImpl();
+//          listNcc = nCCService.getAll();
+//          String phone ="";
+          for (HDNhapSPViewModel i : listCTHDNhap) {
+           Float tongTien = nhapHangService.TongTien(i.getIDHoaDonNhapSanPham());
+            //   for (int j = 0; j < listNcc.size(); j++) {
+//                if(i.getIDNhaCungCap() == listNcc.get(j).getIdNCC()){
+//                    phone = listNcc.get(j).getSdt();
+//                }
+                tableModel.addRow(new Object[]{
+                    i.getIDHoaDonNhapSanPham(),
+                    i.getTenUser(),
+                    i.getTenNCC(),
+                    i.getSdtNCC(),
+                    i.getNGAYTAODON(),
+                   tongTien + " đ",
+                    i.getMoTa() 
+                });
+            }
+       // }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,7 +93,7 @@ public class ViewHoaDonNhapHang extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Hoá Đơn Nhập Hàng");
 
-        txt_Search.setLabelText("Tim theo ma phieu nhap");
+        txt_Search.setLabelText("Tim theo ma hoa don");
 
         btn_TimKiem.setText("Tim Kiem");
         btn_TimKiem.setRadius(20);

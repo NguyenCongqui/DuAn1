@@ -486,7 +486,7 @@ public class ViewNhapHang extends javax.swing.JPanel {
         // Calendar calendar = Calendar.getInstance();
         //  hdnspvm.setNGAYTAODON(sdf.format( calendar.getTime()));
         hdnspvm.setTINHTRANGTRATIEN(false);
-        hdnspvm.setIDUsers(user.getIdusers());
+        hdnspvm.setIDUsers(1);
         hdnspvm.setMoTa(txt_GhiChu.getText());
         NCC ncc = (NCC) cbo_NCC.getSelectedItem();
         hdnspvm.setIDNhaCungCap(ncc.getIdNCC());

@@ -28,11 +28,7 @@ public class NCCRepository {
     List<NCC> list = null;
 
     public List<NCC> getAll() {
-        String sql = "SELECT [IdNhaCungCap]\n"
-                + "      ,[TenNhaCungCap]\n"
-                + "      ,[DIACHI]\n"
-                + "      ,[SODIENTHOAI]\n"
-                + "  FROM [dbo].[NhaCungCap]";
+        String sql = "	SELECT * FROM dbo.NhaCungCap ORDER BY IdNhaCungCap DESC";
         try {
             con = dbConnection.getConnection();
             ps = con.prepareStatement(sql);

@@ -26,4 +26,8 @@ public interface NhapHangService {
     String updateCTSP(Integer slg,Float giaNhap ,Integer id);
     
     NhapHangViewModel searchID(int id);
+    
+    List<HDNhapSPViewModel> getAllHDNhap();
+    
+    Float TongTien(Integer idHDN);
 }
