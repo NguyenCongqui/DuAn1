@@ -4,8 +4,10 @@
  */
 package Repository;
 
+
 import DomainModel.Voucher;
 import Utilities.DBConnection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -32,7 +34,7 @@ public class VoucherRepository {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(select);
             while (rs.next()) {
-                ListVoucher.add(new Voucher(rs.getInt(1),rs.getString(2),rs.getFloat(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getBoolean(8)));
+                ListVoucher.add(new Voucher(rs.getInt(1),rs.getString(2),rs.getFloat(3),rs.getString(4),rs.getDate(5),rs.getDate(6),rs.getInt(7),rs.getBoolean(8)));
             }
             rs.close();
         } catch (Exception e) {
@@ -53,5 +55,32 @@ public class VoucherRepository {
         }
         return "sua khong thanh cong";
     }
-    
+     public String insert (Voucher v){
+        String insert = "INSERT INTO dbo.Voucher\n" +
+"(\n" +
+"    MaGiamGia,\n" +
+"    GiamGia,\n" +
+"    StartsAt,\n" +
+"    EndsAt,\n" +
+"    SoLuong,\n" +
+"    NgayTao,\n" +
+")\n" +
+"VALUES(?,?,?,?,?,GETDATE())";
+      
+        try {
+            pst = db.getConnection().prepareStatement(insert);
+            pst.setString(1, v.getMaGiamGia());
+            pst.setFloat(2, v.getGiamgia());
+            pst.setDate(3, (Date) v.getNgayBatDau());
+            pst.setDate(4, (Date) v.getNgayKetThuc());
+            pst.setInt(5, v.getSoLuong());
+           
+            
+            pst.executeUpdate();
+            return "them thanh cong";
+        } catch (Exception e) {
+            
+        }
+        return "Them khong thanh cong";
+    }
 }

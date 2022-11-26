@@ -24,5 +24,10 @@ public class VoucherImpl implements VoucherService{
     public String updateSoLuongTon(Integer idVoucher) {
         return rep.updateSoLuongTon(idVoucher);
     }
+
+    @Override
+    public String insert(Voucher v) {
+        return rep.insert(v);
+    }
     
 }

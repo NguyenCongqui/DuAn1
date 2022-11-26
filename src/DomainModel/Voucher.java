@@ -4,6 +4,8 @@
  */
 package DomainModel;
 
+import java.util.Date;
+
 /**
  *
  * @author ADMIN
@@ -12,14 +14,15 @@ public class Voucher {
     private int IDVoucher;
     private String MaGiamGia;
     private float giamgia;
-    private String Ngaytao,NgayBatDau,NgayKetThuc;
+    private String Ngaytao;
+    private Date NgayBatDau,NgayKetThuc;
     private int SoLuong;
     private boolean TrangThai;
 
     public Voucher() {
     }
 
-    public Voucher(int IDVoucher, String MaGiamGia, float giamgia, String Ngaytao, String NgayBatDau, String NgayKetThuc, int SoLuong, boolean TrangThai) {
+    public Voucher(int IDVoucher, String MaGiamGia, float giamgia, String Ngaytao, Date NgayBatDau, Date NgayKetThuc, int SoLuong, boolean TrangThai) {
         this.IDVoucher = IDVoucher;
         this.MaGiamGia = MaGiamGia;
         this.giamgia = giamgia;
@@ -30,6 +33,7 @@ public class Voucher {
         this.TrangThai = TrangThai;
     }
 
+    
     
 
     public int getIDVoucher() {
@@ -66,21 +70,24 @@ public class Voucher {
         this.Ngaytao = Ngaytao;
     }
 
-    public String getNgayBatDau() {
+    public Date getNgayBatDau() {
         return NgayBatDau;
     }
 
-    public void setNgayBatDau(String NgayBatDau) {
+    public void setNgayBatDau(Date NgayBatDau) {
         this.NgayBatDau = NgayBatDau;
     }
 
-    public String getNgayKetThuc() {
+    public Date getNgayKetThuc() {
         return NgayKetThuc;
     }
 
-    public void setNgayKetThuc(String NgayKetThuc) {
+    public void setNgayKetThuc(Date NgayKetThuc) {
         this.NgayKetThuc = NgayKetThuc;
     }
+
+   
+    
 
     public int getSoLuong() {
         return SoLuong;

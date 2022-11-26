@@ -2,17 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package Services;
+package DateNgayThangNam;
 
-import DomainModel.Voucher;
-import java.util.List;
+import java.awt.event.MouseEvent;
 
 /**
  *
  * @author ADMIN
  */
-public interface VoucherService {
-    List<Voucher> getListVouchers();
-    String updateSoLuongTon(Integer idVoucher);
-    String insert(Voucher v);
+public interface Event {
+    public void execute(MouseEvent evt, int num);
+    
 }
