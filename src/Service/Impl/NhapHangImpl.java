@@ -59,4 +59,9 @@ public class NhapHangImpl implements NhapHangService {
         return rep.TongTien(idHDN);
     }
 
+    @Override
+    public List<CTHDNhapSpViewModel> selectByIdNhap(int id) {
+        return rep.selectByIdNhap(id);
+    }
+
 }

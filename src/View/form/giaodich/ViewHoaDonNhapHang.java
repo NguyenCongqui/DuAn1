@@ -18,38 +18,41 @@ import javax.swing.table.DefaultTableModel;
  * @author ADMIN
  */
 public class ViewHoaDonNhapHang extends javax.swing.JPanel {
- DefaultTableModel tableModel = new DefaultTableModel();
+
+    DefaultTableModel tableModel = new DefaultTableModel();
     List<HDNhapSPViewModel> listCTHDNhap;
     NhapHangService nhapHangService = new NhapHangImpl();
     List<NCC> listNcc;
+
     /**
      * Creates new form HoaDonNhapHang
      */
     public ViewHoaDonNhapHang() {
         initComponents();
-         setOpaque(false);
-         nhapHangService = new NhapHangImpl();
-         fillData();
+        setOpaque(false);
+        nhapHangService = new NhapHangImpl();
+        fillData();
     }
 
-    public void fillData(){
-          tableModel = (DefaultTableModel) tbl1.getModel();
-           tableModel.setRowCount(0);
-          listCTHDNhap = nhapHangService.getAllHDNhap();
-          for (HDNhapSPViewModel i : listCTHDNhap) {
-         //  Float tongTien = nhapHangService.TongTien(i.getIDHoaDonNhapSanPham());
- 
-                tableModel.addRow(new Object[]{
-                    i.getIDHoaDonNhapSanPham(),
-                    i.getTenUser(),
-                    i.getTenNCC(),
-                    i.getSdtNCC(),
-                    i.getNGAYTAODON(),
-                  // tongTien + " đ",
-                    i.getMoTa() 
-                });
-            }
+    public void fillData() {
+        tableModel = (DefaultTableModel) tbl1.getModel();
+        tableModel.setRowCount(0);
+        listCTHDNhap = nhapHangService.getAllHDNhap();
+        for (HDNhapSPViewModel i : listCTHDNhap) {
+            Float tongTien = nhapHangService.TongTien(i.getIDHoaDonNhapSanPham());
+
+            tableModel.addRow(new Object[]{
+                i.getIDHoaDonNhapSanPham(),
+                i.getTenUser(),
+                i.getTenNCC(),
+                i.getSdtNCC(),
+                i.getNGAYTAODON(),
+                 tongTien + " đ",
+                i.getMoTa()
+            });
+        }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -196,8 +199,30 @@ public class ViewHoaDonNhapHang extends javax.swing.JPanel {
             new String [] {
                 "Ma Hoa Don", "Nguoi Nhap", "NCC", "Sdt NCC", "NgayNhap", "Tong Tien=(slg*priceImport)", "Mo ta"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl1);
+        if (tbl1.getColumnModel().getColumnCount() > 0) {
+            tbl1.getColumnModel().getColumn(0).setResizable(false);
+            tbl1.getColumnModel().getColumn(1).setResizable(false);
+            tbl1.getColumnModel().getColumn(2).setResizable(false);
+            tbl1.getColumnModel().getColumn(3).setResizable(false);
+            tbl1.getColumnModel().getColumn(4).setResizable(false);
+            tbl1.getColumnModel().getColumn(5).setResizable(false);
+            tbl1.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -313,6 +338,16 @@ public class ViewHoaDonNhapHang extends javax.swing.JPanel {
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
 
     }//GEN-LAST:event_btnLastActionPerformed
+
+    private void tbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl1MouseClicked
+        // TODO add your handling code here:
+         if (evt.getClickCount() == 2) {
+            int row = tbl1.getSelectedRow();
+            int id = (int) tbl1.getValueAt(row, 0);
+            String totalMoney = (String) tbl1.getValueAt(row, 5);
+            new ViewHoaDonChiTietNhapHang(id, totalMoney, (DefaultTableModel) tbl1.getModel(), tbl1.getSelectedRow()).setVisible(true);
+        }
+    }//GEN-LAST:event_tbl1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

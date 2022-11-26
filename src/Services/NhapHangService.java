@@ -30,4 +30,6 @@ public interface NhapHangService {
     List<HDNhapSPViewModel> getAllHDNhap();
     
     Float TongTien(Integer idHDN);
+    
+    List<CTHDNhapSpViewModel> selectByIdNhap(int id);
 }
