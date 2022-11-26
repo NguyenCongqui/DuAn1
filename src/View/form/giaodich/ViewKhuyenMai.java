@@ -82,8 +82,6 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        NgayBatDau = new DateNgayThangNam.DateChooser();
-        NgayKetThuc = new DateNgayThangNam.DateChooser();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -100,10 +98,6 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
         btn_sua = new View.form.MyButton();
         btn_xoa = new View.form.MyButton();
         btn_taomoi = new View.form.MyButton();
-
-        NgayBatDau.setTextRefernce(txt_NgayBatDau);
-
-        NgayKetThuc.setTextRefernce(txt_NgayKetThuc);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -280,8 +274,6 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private DateNgayThangNam.DateChooser NgayBatDau;
-    private DateNgayThangNam.DateChooser NgayKetThuc;
     private View.form.MyButton btn_sua;
     private View.form.MyButton btn_taomoi;
     private View.form.MyButton btn_them;
