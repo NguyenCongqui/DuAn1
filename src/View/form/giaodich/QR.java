@@ -33,7 +33,7 @@ import org.w3c.dom.css.Counter;
 public class QR extends javax.swing.JFrame implements Runnable,ThreadFactory{
 
     private WebcamPanel panel = null;
-    private Webcam webcam = null;
+    private static Webcam webcam = null;
     private Executor executor = Executors.newSingleThreadExecutor(this);
     
     
@@ -43,6 +43,12 @@ public class QR extends javax.swing.JFrame implements Runnable,ThreadFactory{
         initComponents();
         initwebcam();
         
+    }
+    public static void closeCam(){
+        if (webcam == null) {
+            return;
+        }
+        webcam.close();
     }
 
     /**
@@ -66,7 +72,7 @@ public class QR extends javax.swing.JFrame implements Runnable,ThreadFactory{
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 30, -1, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 30, -1, 10));
 
         jLabel1.setText("jLabel1");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 65, -1, -1));
@@ -111,6 +117,10 @@ public class QR extends javax.swing.JFrame implements Runnable,ThreadFactory{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if (webcam == null) {
+            return;
+        }
+        webcam.close();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -145,6 +155,9 @@ public void run(){
             if ((image = webcam.getImage() )== null) {
                 continue;
             }
+        }
+        if (image == null) {
+            continue;
         }
         LuminanceSource soure = new BufferedImageLuminanceSource(image);
         BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(soure));
