@@ -676,8 +676,8 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
 //            return;
 //        }
 //        webcam.close();
-       // this.dispose();
-      // initwebcam();
+//        this.dispose();
+       //initwebcam();
         
     }//GEN-LAST:event_myButton8ActionPerformed
 
