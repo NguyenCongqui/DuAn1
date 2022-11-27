@@ -122,7 +122,7 @@ menu1.addEvent(new EvenMenuSelected() {
                         }
                         }else if (menuIndex == 7) {
                         if (subMenuIndex ==-1) {
-                           //  main.showForm(new ViewKhuyenMai());
+                            main.showForm(new ViewKhuyenMai());
                         }}else {
 
                         int i = JOptionPane.showConfirmDialog(rootPane, "bạn có muốn đăng xuất không ");

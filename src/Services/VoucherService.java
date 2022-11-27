@@ -15,4 +15,6 @@ public interface VoucherService {
     List<Voucher> getListVouchers();
     String updateSoLuongTon(Integer idVoucher);
     String insert(Voucher v);
+    String updateVoucher(Voucher v);
+    String DeleteVoucher(Voucher v);
 }

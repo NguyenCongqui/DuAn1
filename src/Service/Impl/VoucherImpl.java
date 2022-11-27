@@ -29,5 +29,15 @@ public class VoucherImpl implements VoucherService{
     public String insert(Voucher v) {
         return rep.insert(v);
     }
+
+    @Override
+    public String updateVoucher(Voucher v) {
+        return rep.updateVoucher(v);
+    }
+
+    @Override
+    public String DeleteVoucher(Voucher v) {
+       return rep.DeleteVoucher(v);
+    }
     
 }

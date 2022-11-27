@@ -59,11 +59,11 @@ public class VoucherRepository {
         String insert = "INSERT INTO dbo.Voucher\n" +
 "(\n" +
 "    MaGiamGia,\n" +
-"    GiamGia,\n" +
+"    GiamGia,    \n" +
 "    StartsAt,\n" +
 "    EndsAt,\n" +
 "    SoLuong,\n" +
-"    NgayTao,\n" +
+"	NgayTao\n" +
 ")\n" +
 "VALUES(?,?,?,?,?,GETDATE())";
       
@@ -71,8 +71,8 @@ public class VoucherRepository {
             pst = db.getConnection().prepareStatement(insert);
             pst.setString(1, v.getMaGiamGia());
             pst.setFloat(2, v.getGiamgia());
-            pst.setDate(3, (Date) v.getNgayBatDau());
-            pst.setDate(4, (Date) v.getNgayKetThuc());
+            pst.setObject(3, v.getNgayBatDau());
+            pst.setObject(4,  v.getNgayKetThuc());
             pst.setInt(5, v.getSoLuong());
            
             
@@ -82,5 +82,45 @@ public class VoucherRepository {
             
         }
         return "Them khong thanh cong";
+    }
+         public String updateVoucher (Voucher v){
+        String update = "UPDATE dbo.Voucher SET GiamGia = ? , StartsAt = ?,EndsAt =?, SoLuong = ? WHERE IdVoucher = ?";
+      
+        try {
+            pst = db.getConnection().prepareStatement(update);
+            pst.setFloat(1, v.getGiamgia());
+            pst.setObject(2, v.getNgayBatDau());
+            pst.setObject(3,  v.getNgayKetThuc());
+            pst.setInt(4, v.getSoLuong());
+            pst.setInt(5, v.getIDVoucher());
+
+            pst.executeUpdate();
+            return "Sua thanh cong";
+        } catch (Exception e) {
+            
+        }
+        return "Sua khong thanh cong";
+    }
+         public String DeleteVoucher (Voucher v){
+        String Delete = "DELETE FROM dbo.Voucher WHERE IdVoucher = ?";
+      
+        try {
+            pst = db.getConnection().prepareStatement(Delete);
+            pst.setInt(1, v.getIDVoucher());
+            pst.executeUpdate();
+            
+            return "Xoa thanh cong";
+        } catch (Exception e) {
+            
+        }
+        return "Xoa khong thanh cong";
+    }
+         public int getindex (int id){
+        for (int i = 0; i < ListVoucher.size(); i++) {
+            if (ListVoucher.get(i).getIDVoucher() == id) {
+                return i;
+            }
+        }
+        return -3;
     }
 }

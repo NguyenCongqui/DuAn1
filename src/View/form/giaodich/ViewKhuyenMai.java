@@ -11,6 +11,7 @@ import View.login.XDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,15 +27,18 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
     DefaultTableModel tbl_model = new DefaultTableModel();
     VoucherService voucherService = new VoucherImpl();
     List<Voucher> ListVoucher = new ArrayList<>();
+    int index =0;
     
     public ViewKhuyenMai() {
         initComponents();
         setOpaque(false);
-        btn_xoa.setEnabled(false);
-        btn_sua.setEnabled(false);
+       // btn_xoa.setEnabled(false);
+       // btn_sua.setEnabled(false);
         tbl_model = (DefaultTableModel) tbl_khuyenMai.getModel();
         ListVoucher = voucherService.getListVouchers();
         filldata();
+        txt_ID.setEnabled(false);
+        
     }
      public void filldata(){
         tbl_model.setRowCount(0);
@@ -68,6 +72,33 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
         v.setSoLuong(Integer.parseInt(txt_soluong.getText()));
         return v;
     }
+    public void reset(){
+        txt_NgayBatDau.setText("");
+        txt_NgayKetThuc.setText("");
+        txt_giamgia.setText("");
+        txt_soluong.setText("");
+        txt_ID.setText("");
+    }
+    public void showdeil(){
+        Voucher v = ListVoucher.get(index);
+        txt_ID.setText(String.valueOf(v.getIDVoucher()));
+        txt_giamgia.setText(String.valueOf(v.getGiamgia()));
+        txt_soluong.setText(String.valueOf(v.getSoLuong()));
+        txt_NgayBatDau.setText(String.valueOf(v.getNgayBatDau()));
+        txt_NgayKetThuc.setText(String.valueOf(v.getNgayKetThuc()));
+    }
+    public int getVoucher(){
+        int rowindex = tbl_khuyenMai.getSelectedRow();
+        if (rowindex >= 0 ) {
+            int ID = Integer.valueOf(tbl_khuyenMai.getModel().getValueAt(rowindex, 0).toString());
+            return ID;
+            
+        } else {
+            return 1;
+        }
+        
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -78,6 +109,8 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        NgayBatDau = new com.raven.datechooser.DateChooser();
+        NgayKetThuc = new com.raven.datechooser.DateChooser();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -95,6 +128,12 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
         btn_sua = new View.form.MyButton();
         btn_xoa = new View.form.MyButton();
         btn_taomoi = new View.form.MyButton();
+        txt_ID = new View.form.TextField();
+
+        NgayBatDau.setTextRefernce(txt_NgayBatDau);
+
+        NgayKetThuc.setTextRefernce(txt_NgayKetThuc);
+        NgayKetThuc.setVerifyInputWhenFocusTarget(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -140,6 +179,11 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
                 "ID", "Mã Voucher", "Phần % Giảm Giá", "Ngày Tạo", "Ngày Bắt Đầu", "Ngày Kết Thúc"
             }
         ));
+        tbl_khuyenMai.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_khuyenMaiMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_khuyenMai);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -174,9 +218,16 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
 
         btn_xoa.setText("Xóa");
         btn_xoa.setRadius(20);
+        btn_xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoaActionPerformed(evt);
+            }
+        });
 
         btn_taomoi.setText("Tạo Mới");
         btn_taomoi.setRadius(20);
+
+        txt_ID.setLabelText("ID");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -184,7 +235,9 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txt_NgayBatDau, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                    .addComponent(txt_NgayKetThuc, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,25 +246,25 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_taomoi, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txt_giamgia, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txt_soluong, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txt_NgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txt_NgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txt_giamgia, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                    .addComponent(txt_soluong, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                    .addComponent(txt_ID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(50, 50, 50)
+                .addComponent(txt_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_giamgia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(txt_soluong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
+                .addGap(18, 18, 18)
                 .addComponent(txt_NgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_NgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -232,9 +285,9 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(jScrollPane1))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(42, 42, 42)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(545, 545, 545))
+                .addGap(845, 845, 845))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,7 +315,7 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1651, Short.MAX_VALUE)
+            .addGap(0, 1927, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -286,12 +339,37 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
-//        Voucher v= guidata();
-//        JOptionPane.showMessageDialog(this,voucherService.insert(v));
+        Voucher v= guidata();
+        JOptionPane.showMessageDialog(this,voucherService.insert(v));
+        ListVoucher = voucherService.getListVouchers();
+        filldata();
+        reset();
     }//GEN-LAST:event_btn_themActionPerformed
+
+    private void tbl_khuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_khuyenMaiMouseClicked
+        // TODO add your handling code here:
+        try {
+            index = tbl_khuyenMai.getSelectedRow();
+            showdeil();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this ," loi click");
+        }
+    }//GEN-LAST:event_tbl_khuyenMaiMouseClicked
+
+    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
+        // TODO add your handling code here:
+        Voucher newv= guidata();
+        newv.setIDVoucher(getVoucher());
+        JOptionPane.showMessageDialog(this, voucherService.DeleteVoucher(guidata()));
+        ListVoucher = voucherService.getListVouchers();
+        filldata();
+        reset();
+    }//GEN-LAST:event_btn_xoaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.raven.datechooser.DateChooser NgayBatDau;
+    private com.raven.datechooser.DateChooser NgayKetThuc;
     private View.form.MyButton btn_sua;
     private View.form.MyButton btn_taomoi;
     private View.form.MyButton btn_them;
@@ -304,6 +382,7 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private View.form.TableColumn tbl_khuyenMai;
+    private View.form.TextField txt_ID;
     private View.form.TextField txt_NgayBatDau;
     private View.form.TextField txt_NgayKetThuc;
     private View.form.TextField txt_giamgia;
