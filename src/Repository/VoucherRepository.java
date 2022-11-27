@@ -28,7 +28,7 @@ public class VoucherRepository {
     public VoucherRepository() {
     }
     public List<Voucher> getLisVoucher() {
-        String select = "SELECT * FROM dbo.Voucher";
+        String select = "SELECT * FROM dbo.TaiKhoan INNER JOIN dbo.Users ON Users.IdUsers = TaiKhoan.IdUsers WHERE UserName = ? AND TrangThai = 1";
         ListVoucher = new ArrayList<>();
         try {
             st = db.getConnection().createStatement();
