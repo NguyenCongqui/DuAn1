@@ -396,19 +396,16 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="txt_TienThua" min="-2" pref="174" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="cbo_MaGiamGia" alignment="0" min="-2" pref="117" max="-2" attributes="0"/>
-                                                  <Component id="chk_Voucher" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                                              <Component id="myButton1" min="-2" pref="53" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="cbo_MaGiamGia" alignment="0" min="-2" pref="117" max="-2" attributes="0"/>
+                                              <Component id="chk_Voucher" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="txt_TongTien" min="-2" pref="262" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                                          <Component id="myButton1" min="-2" pref="53" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                      <Component id="txt_TongTien" min="-2" pref="262" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
