@@ -130,4 +130,14 @@ public class NCCRepository {
 //        }
 //        return listTemp;
 //    }
+    
+    //private static List<Employee> sortList = new LinkedList<Employee>();
+//      public <T> void searchInList(T search) {
+//        sortList.clear();
+//        for (Employee e : empList) {
+//            if (e.toString().toLowerCase().contains(((String) search).toLowerCase())) {
+//                sortList.add(e);
+//            }
+//        }
+//    }
 }
