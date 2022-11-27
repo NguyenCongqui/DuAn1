@@ -30,7 +30,7 @@ public class NhapHangRepository {
     List<NhapHangViewModel> listNHV = null;
     List<HDNhapSPViewModel> listHDNhap = null;
     List<CTHDNhapSpViewModel> listCTHDNhap = null;
-    
+
     public List<NhapHangViewModel> getAll() {
 
         String sql = "   SELECT c.IdCTSach,s.TenSach,l.TenTheLoai,x.TenNXB,n.TenNgonNGu,T.TenTacGia,C.SoLuongTon,C.GiaBan \n"
@@ -247,31 +247,31 @@ public class NhapHangRepository {
         }
         return null;
     }
-    
-     public List<CTHDNhapSpViewModel> selectByIdNhap(int id){
-         String sql =" SELECT P.TenSach, N.TenNgonNGu, X.TenNXB,T.TenTacGia ,D.SoLuong,D.priceImport\n" +
-"FROM dbo.ChiTietHoaDonNhapSanPham D\n" +
-"JOIN dbo.ChiTietSach De ON De.IdCTSach = D.IDChiTietSach\n" +
-"JOIN dbo.Sach P ON P.IdSach = De.IdSach\n" +
-"JOIN dbo.NgonNgu N ON N.IdNgonNgu = De.IdNgonNgu\n" +
-"JOIN dbo.NXB X ON X.IdNXB = De.IdNXB\n" +
-"JOIN dbo.TacGia T ON T.IdTacGia = De.IdTacGia\n" +
-"WHERE D.IDHoaDonNhapSanPham = ?";
-           try {
+
+    public List<CTHDNhapSpViewModel> selectByIdNhap(int id) {
+        String sql = " SELECT P.TenSach, N.TenNgonNGu, X.TenNXB,T.TenTacGia ,D.SoLuong,D.priceImport\n"
+                + "FROM dbo.ChiTietHoaDonNhapSanPham D\n"
+                + "JOIN dbo.ChiTietSach De ON De.IdCTSach = D.IDChiTietSach\n"
+                + "JOIN dbo.Sach P ON P.IdSach = De.IdSach\n"
+                + "JOIN dbo.NgonNgu N ON N.IdNgonNgu = De.IdNgonNgu\n"
+                + "JOIN dbo.NXB X ON X.IdNXB = De.IdNXB\n"
+                + "JOIN dbo.TacGia T ON T.IdTacGia = De.IdTacGia\n"
+                + "WHERE D.IDHoaDonNhapSanPham = ?";
+        try {
             //st = db.getConnection().createStatement();
             pst = db.getConnection().prepareStatement(sql);
-           pst.setInt(1, id);
-           rs = pst.executeQuery();
-            listCTHDNhap= new ArrayList<>();
+            pst.setInt(1, id);
+            rs = pst.executeQuery();
+            listCTHDNhap = new ArrayList<>();
             while (rs.next()) {
-               CTHDNhapSpViewModel de = new CTHDNhapSpViewModel();
-               de.setTenSp(rs.getString("TenSach"));
+                CTHDNhapSpViewModel de = new CTHDNhapSpViewModel();
+                de.setTenSp(rs.getString("TenSach"));
                 de.setNgonNgu(rs.getString("TenNgonNGu"));
                 de.setNXB(rs.getString("TenNXB"));
                 de.setTacGia(rs.getString("TenTacGia"));
                 de.setSoLuong(rs.getInt("SoLuong"));
                 de.setPrice(rs.getFloat("priceImport"));
-                
+
                 listCTHDNhap.add(de);
             }
             rs.close();
@@ -279,5 +279,76 @@ public class NhapHangRepository {
             Logger.getLogger(NCCRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listCTHDNhap;
-     }
+    }
+
+    public HDNhapSPViewModel FindHDN(int k) {
+        String sql = "SELECT N.IDHoaDonNhapSanPham , N.NGAYTAODON , U.HoTen, C.TenNhaCungCap ,C.SODIENTHOAI, N.MoTa\n"
+                + "FROM dbo.HoaDonNhapSanPham N \n"
+                + "JOIN dbo.Users U ON U.IdUsers = N.IDUsers\n"
+                + "JOIN dbo.NhaCungCap C ON C.IdNhaCungCap = N.IDNhaCungCap \n"
+                + "WHERE N.IDHoaDonNhapSanPham = ?";
+        listHDNhap = new ArrayList<>();
+        try {
+            pst = db.getConnection().prepareStatement(sql,k);
+            rs = pst.executeQuery();
+            
+            while (rs.next()) {
+                HDNhapSPViewModel i = new HDNhapSPViewModel();
+                i.setIDHoaDonNhapSanPham(rs.getInt("IDHoaDonNhapSanPham"));
+                i.setNGAYTAODON(rs.getString("NGAYTAODON"));
+                i.setTenUser(rs.getString("HoTen"));
+                i.setSdtNCC(rs.getString("SODIENTHOAI"));
+                i.setTenNCC(rs.getString("TenNhaCungCap"));
+                i.setMoTa(rs.getString("MoTa"));
+
+                listHDNhap.add(i);
+            }
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(NCCRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return listHDNhap.get(0);
+
+    }
+//    public List<HDNhapSPViewModel> FindHDN(int k) {
+//        String sql = "SELECT N.IDHoaDonNhapSanPham , N.NGAYTAODON , U.HoTen, C.TenNhaCungCap ,C.SODIENTHOAI, N.MoTa\n"
+//                + "FROM dbo.HoaDonNhapSanPham N \n"
+//                + "JOIN dbo.Users U ON U.IdUsers = N.IDUsers\n"
+//                + "JOIN dbo.NhaCungCap C ON C.IdNhaCungCap = N.IDNhaCungCap \n"
+//                + "WHERE N.IDHoaDonNhapSanPham =" + k ;
+//        try {
+//            pst = db.getConnection().prepareStatement(sql);
+//            //pst.setInt(1, k);
+//            rs = pst.executeQuery();
+//            listHDNhap = new ArrayList<>();
+//            
+////            st = db.getConnection().createStatement();
+////            rs = st.executeQuery(sql);
+////            listHDNhap = new ArrayList<>();
+//            while (rs.next()) {
+//                HDNhapSPViewModel i = new HDNhapSPViewModel();
+//               i.setIDHoaDonNhapSanPham(rs.getInt("IDHoaDonNhapSanPham"));
+//                i.setNGAYTAODON(rs.getString("NGAYTAODON"));
+//                i.setTenUser(rs.getString("HoTen"));
+//                i.setSdtNCC(rs.getString("SODIENTHOAI"));
+//                i.setTenNCC(rs.getString("TenNhaCungCap"));
+//                i.setMoTa(rs.getString("MoTa"));
+//
+//                listHDNhap.add(i);
+//            }
+//            return listHDNhap;
+//        //    rs.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(NCCRepository.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return null;
+//    }
+    
+//    public static void main(String[] args) {
+//        NhapHangRepository i = new NhapHangRepository();
+//        List<HDNhapSPViewModel> list = i.FindHDN(1);
+//        for (HDNhapSPViewModel nhanVienViewModel : list) {
+//            System.out.println(nhanVienViewModel.toString());
+//        }
+//    }
 }

@@ -24,7 +24,6 @@ private String  MoTa ;//
 private String tenUser;
 private String tenNCC;
 private String sdtNCC;
-private Float tongTien;
 
     public HDNhapSPViewModel() {
     }
@@ -111,16 +110,6 @@ private Float tongTien;
     public void setSdtNCC(String sdtNCC) {
         this.sdtNCC = sdtNCC;
     }
-
-    public Float getTongTien() {
-        return tongTien;
-    }
-
-    public void setTongTien(Float tongTien) {
-        this.tongTien = tongTien;
-    }
-
- 
   
 
 }

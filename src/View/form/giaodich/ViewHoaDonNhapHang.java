@@ -40,7 +40,6 @@ public class ViewHoaDonNhapHang extends javax.swing.JPanel {
         listCTHDNhap = nhapHangService.getAllHDNhap();
         for (HDNhapSPViewModel i : listCTHDNhap) {
             Float tongTien = nhapHangService.TongTien(i.getIDHoaDonNhapSanPham());
-
             tableModel.addRow(new Object[]{
                 i.getIDHoaDonNhapSanPham(),
                 i.getTenUser(),
@@ -90,6 +89,11 @@ public class ViewHoaDonNhapHang extends javax.swing.JPanel {
         jLabel1.setText("Hoá Đơn Nhập Hàng");
 
         txt_Search.setLabelText("Tim theo ma hoa don");
+        txt_Search.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txt_SearchCaretUpdate(evt);
+            }
+        });
 
         btn_TimKiem.setText("Tim Kiem");
         btn_TimKiem.setRadius(20);
@@ -348,6 +352,31 @@ public class ViewHoaDonNhapHang extends javax.swing.JPanel {
             new ViewHoaDonChiTietNhapHang(id, totalMoney, (DefaultTableModel) tbl1.getModel(), tbl1.getSelectedRow()).setVisible(true);
         }
     }//GEN-LAST:event_tbl1MouseClicked
+
+    private void txt_SearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_SearchCaretUpdate
+  if (txt_Search.getText().isEmpty()) {
+            return;
+        }
+     tableModel = (DefaultTableModel) tbl1.getModel();
+        tableModel.setRowCount(0);
+      int id = Integer.valueOf(txt_Search.getText());
+       HDNhapSPViewModel i  = nhapHangService.FindHDN(id);
+        if (listCTHDNhap.isEmpty()) {
+            lbl_Search.setText("Không có mặt hàng : " + id);
+            return;
+        }
+        Float tongTien = nhapHangService.TongTien(i.getIDHoaDonNhapSanPham());
+            tableModel.addRow(new Object[]{
+                i.getIDHoaDonNhapSanPham(),
+                i.getTenUser(),
+                i.getTenNCC(),
+                i.getSdtNCC(),
+                i.getNGAYTAODON(),
+                 tongTien + " đ",
+                i.getMoTa()
+            });
+        lbl_Search.setText("");
+    }//GEN-LAST:event_txt_SearchCaretUpdate
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

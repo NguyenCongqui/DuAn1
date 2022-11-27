@@ -139,6 +139,9 @@
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="Tim theo ma hoa don"/>
               </Properties>
+              <Events>
+                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txt_SearchCaretUpdate"/>
+              </Events>
             </Component>
             <Component class="View.form.MyButton" name="btn_TimKiem">
               <Properties>

@@ -64,4 +64,9 @@ public class NhapHangImpl implements NhapHangService {
         return rep.selectByIdNhap(id);
     }
 
+    @Override
+    public HDNhapSPViewModel FindHDN(int k){
+        return rep.FindHDN(k);
+    }
+
 }
