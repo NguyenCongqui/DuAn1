@@ -27,6 +27,7 @@ public class KhachHangRepository {
     DBConnection db;
     ResultSet rs = null;
     Statement st = null;
+    Connection con = null;
     PreparedStatement pst = null;
     List<KhachHang> ListKhachHang = null;
 
@@ -60,7 +61,7 @@ public class KhachHangRepository {
                 + "     VALUES\n"
                 + "           (?,?,?,?,?,?)";
         int check = 0;
-        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setObject(1, kh.getHoTen());
             ps.setObject(2, kh.getNgaySinh());
@@ -68,12 +69,65 @@ public class KhachHangRepository {
             ps.setObject(4, kh.getSoDienThoai());
             ps.setObject(5, kh.getDiaChi());
             ps.setObject(6, kh.isTrangThai());
-    
+
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
         return check > 0;
+    }
+
+    public boolean capnhat(int ID, KhachHang khachHang) {
+        int check = 0;
+        try {
+            String sql = "UPDATE [dbo].[KhachHang]\n"
+                    + "   SET [Hoten] = ?\n"
+                    + "      ,[NgaySinh] = ?\n"
+                    + "      ,[GioiTinh] = ?\n"
+                    + "      ,[Sdt] = ?\n"
+                    + "      ,[DiaChi] = ?\n"
+                    + "      ,[TrangThai] = ?\n"
+                    + " WHERE IdKhachHang = ?";
+
+            con = DBConnection.getConnection();
+            pst = con.prepareStatement(sql);
+            pst.setObject(1, khachHang.getHoTen());
+            pst.setObject(2, khachHang.getNgaySinh());
+            pst.setObject(3, khachHang.isGioiTinh());
+            pst.setObject(4, khachHang.getSoDienThoai());
+            pst.setObject(5, khachHang.getDiaChi());
+            pst.setObject(6, khachHang.isTrangThai());
+            pst.setObject(7, ID);
+            check = pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(NCCRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return check > 0;
+    }
+
+    public boolean delete(int id) {
+        int check = 0;
+        try {
+            String sql = "DELETE FROM [dbo].[KhachHang]\n"
+                    + "      WHERE IdKhachHang = ?";
+            con = DBConnection.getConnection();
+            pst = con.prepareStatement(sql);
+            pst.setObject(1, id);
+            check = pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(NCCRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return check > 0;
+    }
+
+    public List<KhachHang> search(String temp) {
+        List<KhachHang> listTemp = new ArrayList<>();
+        for (KhachHang x : ListKhachHang) {
+            if (x.getHoTen().contains(temp)) {
+                listTemp.add(x);
+            }
+        }
+        return listTemp;
     }
 
 }

@@ -19,8 +19,7 @@ public class KhachHangIMpl implements KhachHangService {
 
     public KhachHangIMpl() {
     }
-
-    @Override
+ @Override
     public List<KhachHang> getlistKhachHang() {
         return rep.getListKhachHang();
     }
@@ -33,4 +32,28 @@ public class KhachHangIMpl implements KhachHangService {
         }
         return "them that bai";
     }
+
+    @Override
+    public String capnhat(int ID, KhachHang khachHang) {
+        boolean cn = rep.capnhat(ID, khachHang);
+        if(cn){
+            return "sua thanh cong";
+        }
+        return "sua that bai";
+    }
+
+    @Override
+    public String delete(int id) {
+        boolean de = rep.delete(id);
+        if(de){
+            return "xoa thanh cong";
+        }
+        return "xoa that bai";
+    }
+
+    @Override
+    public List<KhachHang> search(String temp) {
+         return rep.search(temp);
+    }
+   
 }
