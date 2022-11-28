@@ -13,12 +13,9 @@ package DomainModel;
 
 public class TaiKhoan {
     
-    private int id;
-    
-    
+    private int idTaiKhoan;
+    private int idUser;   
     private String name;
-    
-    
     private String matKhau;
     
    
@@ -26,20 +23,37 @@ public class TaiKhoan {
     public TaiKhoan() {
     }
 
-    public TaiKhoan(int id, String name, String matKhau, TaiKhoan taiKhoan) {
-        this.id = id;
+    public TaiKhoan(String name, String matKhau) {
         this.name = name;
         this.matKhau = matKhau;
-       // this.taiKhoan = taiKhoan;
     }
 
-    public int getId() {
-        return id;
+    public TaiKhoan(int idTaiKhoan, int idUser, String name, String matKhau) {
+        this.idTaiKhoan = idTaiKhoan;
+        this.idUser = idUser;
+        this.name = name;
+        this.matKhau = matKhau;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getIdTaiKhoan() {
+        return idTaiKhoan;
     }
+
+    public void setIdTaiKhoan(int idTaiKhoan) {
+        this.idTaiKhoan = idTaiKhoan;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+   
+
+    
 
     public String getName() {
         return name;

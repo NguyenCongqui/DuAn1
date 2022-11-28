@@ -6,40 +6,32 @@ package Repository;
 
 import DomainModel.Users;
 import Utilities.DBConnection;
-import Utilities.jdbcHelper;
-import java.sql.Connection;
+
+import Utilities.DBConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- *
- * @author ADMIN
- */
-public class UserRepositoty {
-    DBConnection db;
+public class ThongTinCaNhanRepository {
+ DBConnection db;
     ResultSet rs = null;
     Statement st = null;
     PreparedStatement pst = null;
-    List<Users> ListUsers = null;
+    List<Users> ListNgonNgu = null;
     Users users = null;
     
-    
-
-    public UserRepositoty() {
-        
+    public ThongTinCaNhanRepository() {
     }
-    public Users getLisUsers(int iduser) {
-        String select = "SELECT * FROM dbo.Users WHERE IdUsers = '"+iduser+"'";
-       
+    public Users getListusers(Integer id) {
+        String select01 = "SELECT * FROM dbo.Users WHERE IdUsers = ?";
+        
         try {
- 
-st = db.getConnection().createStatement();        
-            rs = st.executeQuery(select);
-           // ListUsers= new ArrayList<>();
-           while (rs.next()) {                
+           pst = db.getConnection().prepareStatement(select01);
+           pst.setInt(1, id);
+           rs = pst.executeQuery();
+          //LisTaiKhoan = new ArrayList<>();
+            while (rs.next()) {                
                 users =new Users(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getBoolean(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getFloat(8), rs.getBoolean(9), rs.getBoolean(10));
             }
            rs.close();
@@ -48,7 +40,5 @@ st = db.getConnection().createStatement();
         
         return users;
     }
-
-
-    
+  
 }

@@ -12,7 +12,7 @@ import java.util.Date;
  * @author ADMIN
  */
 public class Users {
-    private int idtaikhoan,idusers;
+    private int idusers;
     private String Hoten;
     private Date Ngaysinh;
     private boolean gioitinh;
@@ -25,15 +25,20 @@ public class Users {
         
     }
 
-   
-
-    public int getIdtaikhoan() {
-        return idtaikhoan;
+    public Users(int idusers, String Hoten, Date Ngaysinh, boolean gioitinh, String DiaChi, String SoDienThoai, String Email, float Luong, boolean role, boolean TrangThai) {
+        this.idusers = idusers;
+        this.Hoten = Hoten;
+        this.Ngaysinh = Ngaysinh;
+        this.gioitinh = gioitinh;
+        this.DiaChi = DiaChi;
+        this.SoDienThoai = SoDienThoai;
+        this.Email = Email;
+        this.Luong = Luong;
+        this.role = role;
+        this.TrangThai = TrangThai;
     }
 
-    public void setIdtaikhoan(int idtaikhoan) {
-        this.idtaikhoan = idtaikhoan;
-    }
+    
 
     public int getIdusers() {
         return idusers;

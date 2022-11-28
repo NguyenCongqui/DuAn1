@@ -24,7 +24,7 @@ public class Login extends javax.swing.JFrame {
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
         formdangnhap login = new formdangnhap();
     formQuenMatKhau quenmk = new  formQuenMatKhau();
-    Slide1.setAnimate(5);
+    Slide1.setAnimate(15);
     Slide1.init(login, quenmk);
         login.addEventRegister(new ActionListener() {
             @Override
@@ -41,7 +41,18 @@ public class Login extends javax.swing.JFrame {
                 login.login();
             }
         });
+          login.addEventLogin(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (login.login() == true) {
+                    dispose01();
+                }
+            }
+        });
         
+    }
+    public void dispose01() {
+        this.setVisible(false);
     }
 
    

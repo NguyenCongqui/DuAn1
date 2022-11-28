@@ -4,8 +4,19 @@
  */
 package View.login;
 
+import DomainModel.TaiKhoan;
+import DomainModel.Users;
+import Repository.TaiKhoanRepository;
+import Repository.UserRepositoty;
+import Service.Impl.TaiKhoanImpl;
+import Service.Impl.UsersImpl;
+import Services.TaiKhoanService;
+import Services.UsersService;
 import View.TrangChu.TrangChu;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,17 +24,54 @@ import java.awt.event.ActionListener;
  */
 public class formdangnhap extends javax.swing.JPanel {
 
-    /**
-     * Creates new form formdangnhap
-     */
+    TaiKhoanService taikhoanservice = new TaiKhoanImpl();
+    UsersService userservice = new UsersImpl();
+    List<TaiKhoan> ListTaiKhoan = new ArrayList<>();
+    List<Users> ListUsers = new ArrayList<>();
+ 
+    
     public formdangnhap() {
         initComponents();
-    }
-    public void login() {
         txt_users.grabFocus();
+    }
+    public void login01() {
+       // txt_users.grabFocus();
+    }
+    public boolean login() {
+        String userName = txt_users.getText();
+        String passWord = new String(txt_word.getPassword());
+        try {          
+            TaiKhoan taikhoan = taikhoanservice.gettaikhoan(userName);
+            if (taikhoan == null) {    //nếu user sai
+                JOptionPane.showMessageDialog(this,"Sai Ten Dang Nhap");
+                return false;
+            } else {
+                String  passwordSystem = taikhoan.getMatKhau();
+                if (passWord.equalsIgnoreCase(passwordSystem)) {
+                    JOptionPane.showMessageDialog(this,"Dang Nhap Thanh Cong");
+                    Users users=  userservice.getUsers(taikhoan.getIdUser());
+                    System.out.println(taikhoan.getIdUser());
+                    Auth.user = users;
+                    new TrangChu().setVisible(true);
+                    this.setVisible(false);
+                    return true;
+                } else {
+                    JOptionPane.showMessageDialog(this,"sai mat khau");
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this,"loi truy van du lieu");
+        }
+        return true;
+
     }
 public void addEventRegister(ActionListener event) {
         btn_quen.addActionListener(event);
+    }
+public void addEventLogin(ActionListener event) {
+        btn_dangNhap.addActionListener(event);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,28 +83,30 @@ public void addEventRegister(ActionListener event) {
     private void initComponents() {
 
         txt_users = new View.login.txtField();
-        password1 = new View.login.password();
-        button1 = new View.login.button();
+        txt_word = new View.login.password();
+        btn_dangNhap = new View.login.button();
         btn_quen = new View.login.button();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
+        txt_users.setText("quinc");
         txt_users.setHint("USERSNAME");
 
-        password1.setHint("PASSWORD");
-        password1.addActionListener(new java.awt.event.ActionListener() {
+        txt_word.setText("123456");
+        txt_word.setHint("PASSWORD");
+        txt_word.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                password1ActionPerformed(evt);
+                txt_wordActionPerformed(evt);
             }
         });
 
-        button1.setBackground(new java.awt.Color(104, 159, 158));
-        button1.setText("Đăng Nhập");
-        button1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        btn_dangNhap.setBackground(new java.awt.Color(104, 159, 158));
+        btn_dangNhap.setText("Đăng Nhập");
+        btn_dangNhap.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_dangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                btn_dangNhapActionPerformed(evt);
             }
         });
 
@@ -77,9 +127,9 @@ public void addEventRegister(ActionListener event) {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(66, 66, 66)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(password1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_word, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_users, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_dangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_quen, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(99, 99, 99)
@@ -94,33 +144,33 @@ public void addEventRegister(ActionListener event) {
                 .addGap(43, 43, 43)
                 .addComponent(txt_users, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(password1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_word, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_dangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(btn_quen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(88, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void password1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password1ActionPerformed
+    private void txt_wordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_wordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_password1ActionPerformed
+    }//GEN-LAST:event_txt_wordActionPerformed
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+    private void btn_dangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dangNhapActionPerformed
         // TODO add your handling code here:
         
-        new TrangChu().setVisible(true);
+       
         
-    }//GEN-LAST:event_button1ActionPerformed
+    }//GEN-LAST:event_btn_dangNhapActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private View.login.button btn_dangNhap;
     private View.login.button btn_quen;
-    private View.login.button button1;
     private javax.swing.JLabel jLabel1;
-    private View.login.password password1;
     private View.login.txtField txt_users;
+    private View.login.password txt_word;
     // End of variables declaration//GEN-END:variables
 
     

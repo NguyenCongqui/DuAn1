@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class NCCRepository {
 
     DBConnection dbConnection;
-    Connection con = null;
+   Connection con = null;
     ResultSet rs = null;
     PreparedStatement ps = null;
     List<NCC> list = null;
@@ -30,6 +30,7 @@ public class NCCRepository {
     public List<NCC> getAll() {
         String sql = "	SELECT * FROM dbo.NhaCungCap ORDER BY IdNhaCungCap DESC";
         try {
+           // pst = db.getConnection().prepareStatement(sql);
             con = dbConnection.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();

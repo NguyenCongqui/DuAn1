@@ -27,6 +27,7 @@ import View.form.giaodich.ViewThongtincanhan;
 import View.login.Login;
 import View.icon.GoogleMaterialDesignIcons;
 import View.icon.IconFontSwing;
+import View.login.Auth;
 import java.awt.Component;
 import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
@@ -64,7 +65,8 @@ menu1.addEvent(new EvenMenuSelected() {
         @Override
         public void menuSelected(int menuIndex, int subMenuIndex) {
          System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
-                if (menuIndex == 3) {
+            if (Auth.isManager()) {
+                 if (menuIndex == 3) {
                  if (subMenuIndex ==0) {
                         main.showForm(new ViewKhachHang() );
                        System.out.println("");
@@ -135,6 +137,51 @@ menu1.addEvent(new EvenMenuSelected() {
                             return;
                         }
                     }
+            } else {
+                if (menuIndex == 3) {
+                 if (subMenuIndex ==0) {
+                        main.showForm(new ViewKhachHang() );
+                       System.out.println("");
+                    } 
+                }else
+                    if (menuIndex == 1) {
+                        if (subMenuIndex ==0) {
+                             main.showForm(new ViewMatHang());
+                        }else if (subMenuIndex == 1) {
+                        main.showForm(new ViewSanPham() );
+                    }else if (subMenuIndex == 2) {
+                        main.showForm(new ViewNhaCungCap() );
+                    }
+                       
+                    }else if (menuIndex == 0) {
+                        if (subMenuIndex ==-1) {
+                             main.showForm(new home());
+                        }
+                       
+                    }
+                    else
+                        if (menuIndex == 2) {
+                        if (subMenuIndex ==2) {
+                             main.showForm(new ViewTraHang());
+                        }else if (subMenuIndex == 3) {
+                            main.showForm(new ViewDoiHang());
+                        }else if (subMenuIndex == 4) {
+                            main.showForm(new ViewHoaDonBanHang());
+                        }else if (subMenuIndex == 5) {
+                            main.showForm(new ViewHoaDonNhapHang());
+                        }else if (subMenuIndex == 6) {
+                            main.showForm(new ViewHoaDonTraHang());
+                        }else if (subMenuIndex == 7) {
+                            main.showForm(new ViewHoaDonDoiHang());
+                        }else if (subMenuIndex == 1) {
+                            main.showForm(new ViewNhapHang());
+                        }else if (subMenuIndex == 0) {
+                            main.showForm(new ViewBanHang());
+                        }
+                    }
+                
+            }
+               
         }
     });
 //    menu1.addEventShowPopup(new EventShowPopupMenu() {

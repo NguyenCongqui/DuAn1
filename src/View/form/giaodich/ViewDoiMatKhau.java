@@ -4,17 +4,65 @@
  */
 package View.form.giaodich;
 
+import DomainModel.TaiKhoan;
+import Repository.TaiKhoanRepository;
+import Service.Impl.TaiKhoanImpl;
+import Services.TaiKhoanService;
+import View.login.Auth;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ADMIN
  */
 public class ViewDoiMatKhau extends javax.swing.JPanel {
 
-    /**
-     * Creates new form DoiMatKhau
-     */
+    TaiKhoanService taikhoanService = new  TaiKhoanImpl();
+    
     public ViewDoiMatKhau() {
         initComponents();
+        edit();
+    }
+  
+   
+    public void setForm(TaiKhoan b) {
+       txt_username.setText(b.getName());
+       txt_password.setText(b.getMatKhau());
+    }
+    public void edit() {
+        TaiKhoan a = taikhoanService.getdoimatkhau(Auth.user.getIdusers());;
+        setForm(a);
+    }
+
+    TaiKhoan getForm() {
+        TaiKhoan tk = new TaiKhoan();
+        tk.setMatKhau(new String(txt_NhapLaiPasss.getPassword()));
+        return tk;
+    }
+    public void reset(){
+        txt_newpassWord.setText("");
+        txt_NhapLaiPasss.setText("");
+    }
+    public void updatePassword() {
+        try {
+            if (!new String(txt_newpassWord.getPassword()).equals(new String(txt_NhapLaiPasss.getPassword()))) {
+                JOptionPane.showMessageDialog(this,"Mật khẩu không trùng khớp");
+                return;
+            } else if (new String(txt_NhapLaiPasss.getPassword()).equals(new String(txt_password.getPassword()))) {
+                JOptionPane.showMessageDialog(this,"Mật mới không được trùng mật khẩu trước đó");
+                return;
+            } else {
+           
+                TaiKhoan a = getForm();
+                int idUser = Auth.user.getIdusers();
+                a.setIdUser(idUser);
+                JOptionPane.showMessageDialog(this,taikhoanService.update(a));
+               reset();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+           // System.out.println("doi khong thanh cong");
+        }
     }
 
     /**
@@ -29,10 +77,10 @@ public class ViewDoiMatKhau extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txt_username = new View.form.TextField();
-        txt_password = new View.form.TextField();
-        txt_newpassWord = new View.form.TextField();
-        txt_NhapLaiPasss = new View.form.TextField();
         btn_doimatkhau = new View.form.MyButton();
+        txt_newpassWord = new View.form.PasswordField();
+        txt_password = new View.form.PasswordField();
+        txt_NhapLaiPasss = new View.form.PasswordField();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -41,14 +89,19 @@ public class ViewDoiMatKhau extends javax.swing.JPanel {
 
         txt_username.setLabelText("Username");
 
-        txt_password.setLabelText("Passwoerd");
+        btn_doimatkhau.setText("Đổi mật khẩu");
+        btn_doimatkhau.setRadius(20);
+        btn_doimatkhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_doimatkhauActionPerformed(evt);
+            }
+        });
 
         txt_newpassWord.setLabelText("New Password");
 
-        txt_NhapLaiPasss.setLabelText("VerifyPassword");
+        txt_password.setLabelText("Passwoerd");
 
-        btn_doimatkhau.setText("Đổi mật khẩu");
-        btn_doimatkhau.setRadius(20);
+        txt_NhapLaiPasss.setLabelText("VerifyPassword");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -56,18 +109,17 @@ public class ViewDoiMatKhau extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btn_doimatkhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txt_newpassWord, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                                .addComponent(txt_username, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(84, 84, 84)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txt_password, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txt_NhapLaiPasss, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_doimatkhau, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txt_username, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                            .addComponent(txt_newpassWord, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(84, 84, 84)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_password, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                            .addComponent(txt_NhapLaiPasss, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -100,14 +152,19 @@ public class ViewDoiMatKhau extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_doimatkhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doimatkhauActionPerformed
+        // TODO add your handling code here:
+        updatePassword();
+    }//GEN-LAST:event_btn_doimatkhauActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.form.MyButton btn_doimatkhau;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private View.form.TextField txt_NhapLaiPasss;
-    private View.form.TextField txt_newpassWord;
-    private View.form.TextField txt_password;
+    private View.form.PasswordField txt_NhapLaiPasss;
+    private View.form.PasswordField txt_newpassWord;
+    private View.form.PasswordField txt_password;
     private View.form.TextField txt_username;
     // End of variables declaration//GEN-END:variables
 }

@@ -38,20 +38,18 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel1" min="-2" pref="135" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                          <Component id="btn_doimatkhau" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txt_newpassWord" alignment="0" pref="238" max="32767" attributes="0"/>
-                                  <Component id="txt_username" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txt_password" max="32767" attributes="0"/>
-                                  <Component id="txt_NhapLaiPasss" pref="217" max="32767" attributes="0"/>
-                              </Group>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="btn_doimatkhau" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="txt_username" alignment="0" pref="238" max="32767" attributes="0"/>
+                              <Component id="txt_newpassWord" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txt_password" pref="217" max="32767" attributes="0"/>
+                              <Component id="txt_NhapLaiPasss" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -95,25 +93,28 @@
             <Property name="labelText" type="java.lang.String" value="Username"/>
           </Properties>
         </Component>
-        <Component class="View.form.TextField" name="txt_password">
-          <Properties>
-            <Property name="labelText" type="java.lang.String" value="Passwoerd"/>
-          </Properties>
-        </Component>
-        <Component class="View.form.TextField" name="txt_newpassWord">
-          <Properties>
-            <Property name="labelText" type="java.lang.String" value="New Password"/>
-          </Properties>
-        </Component>
-        <Component class="View.form.TextField" name="txt_NhapLaiPasss">
-          <Properties>
-            <Property name="labelText" type="java.lang.String" value="VerifyPassword"/>
-          </Properties>
-        </Component>
         <Component class="View.form.MyButton" name="btn_doimatkhau">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x110;&#x1ed5;i m&#x1ead;t kh&#x1ea9;u"/>
             <Property name="radius" type="int" value="20"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_doimatkhauActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="View.form.PasswordField" name="txt_newpassWord">
+          <Properties>
+            <Property name="labelText" type="java.lang.String" value="New Password"/>
+          </Properties>
+        </Component>
+        <Component class="View.form.PasswordField" name="txt_password">
+          <Properties>
+            <Property name="labelText" type="java.lang.String" value="Passwoerd"/>
+          </Properties>
+        </Component>
+        <Component class="View.form.PasswordField" name="txt_NhapLaiPasss">
+          <Properties>
+            <Property name="labelText" type="java.lang.String" value="VerifyPassword"/>
           </Properties>
         </Component>
       </SubComponents>

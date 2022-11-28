@@ -4,17 +4,45 @@
  */
 package View.form.giaodich;
 
+import DomainModel.Users;
+import Repository.ThongTinCaNhanRepository;
+import Service.Impl.ThongTinCaNhanImpl;
+import Services.ThongTinCaNhanService;
+import View.login.Auth;
+import View.login.XDate;
+
 /**
  *
  * @author ACER
  */
 public class ViewThongtincanhan extends javax.swing.JPanel {
 
-    /**
-     * Creates new form jthongtincanhan
-     */
+    ThongTinCaNhanService thongtincanhanservice = new ThongTinCaNhanImpl();
+    
     public ViewThongtincanhan() {
         initComponents();
+        txt_ma.setEnabled(false);
+        txt_Luong.setEnabled(false);
+        txt_ChucVu.setEnabled(false);
+        //txt_ma.setEnabled(false);
+        edit();
+    }
+    public void setForm(Users user) {
+        txt_ChucVu.setText(user.isRole()? "Quan Ly":"Nhan Vien");
+        txt_ma.setText(user.getIdusers() + "");
+        txt_ngaysinh.setText(XDate.toString(user.getNgaysinh(), "dd-MM-yyyy"));
+        txt_Hoten.setText(user.getHoten());
+        txt_SoDienThoai.setText(user.getSoDienThoai());
+        txt_Luong.setText(user.getLuong() + "");
+        rdo_nam.setSelected(user.isGioitinh());
+        rdo_nu.setSelected(!user.isGioitinh());
+        txt_Email.setText(user.getEmail());
+        txt_DiaChi.setText(user.getDiaChi());
+    }
+    public void edit() {
+        int idUser = Auth.user.getIdusers();
+        Users user = thongtincanhanservice.getlistUsers(idUser);
+      setForm(user);
     }
 
     /**
@@ -26,12 +54,13 @@ public class ViewThongtincanhan extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txt_ma = new View.form.TextField();
         jLabel2 = new javax.swing.JLabel();
         rdo_nam = new View.form.RadioButtonCustom();
-        txt_nu = new View.form.RadioButtonCustom();
+        rdo_nu = new View.form.RadioButtonCustom();
         txt_Hoten = new View.form.TextField();
         txt_ngaysinh = new View.form.TextField();
         txt_Luong = new View.form.TextField();
@@ -52,11 +81,13 @@ public class ViewThongtincanhan extends javax.swing.JPanel {
 
         jLabel2.setText("Giới Tính ");
 
-        rdo_nam.setBackground(new java.awt.Color(255, 255, 255));
+        rdo_nam.setBackground(new java.awt.Color(0, 0, 0));
+        buttonGroup1.add(rdo_nam);
         rdo_nam.setText("Nam");
 
-        txt_nu.setBackground(new java.awt.Color(255, 255, 255));
-        txt_nu.setText("Nữ");
+        rdo_nu.setBackground(new java.awt.Color(0, 0, 0));
+        buttonGroup1.add(rdo_nu);
+        rdo_nu.setText("Nữ");
 
         txt_Hoten.setLabelText("Họ Tên");
 
@@ -103,13 +134,13 @@ public class ViewThongtincanhan extends javax.swing.JPanel {
                                     .addGap(18, 18, 18)
                                     .addComponent(rdo_nam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(txt_nu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(rdo_nu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txt_Email, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
                                     .addComponent(txt_SoDienThoai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txt_ngaysinh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addComponent(jScrollPane1)))
-                .addContainerGap(434, Short.MAX_VALUE))
+                .addContainerGap(835, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,7 +150,7 @@ public class ViewThongtincanhan extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(rdo_nam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txt_nu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(rdo_nu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
@@ -140,25 +171,30 @@ public class ViewThongtincanhan extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGap(40, 40, 40)
                 .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -166,6 +202,7 @@ public class ViewThongtincanhan extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private View.form.MyButton myButton1;
     private View.form.RadioButtonCustom rdo_nam;
+    private View.form.RadioButtonCustom rdo_nu;
     private View.form.TextField txt_ChucVu;
     private javax.swing.JTextArea txt_DiaChi;
     private View.form.TextField txt_Email;
@@ -174,6 +211,5 @@ public class ViewThongtincanhan extends javax.swing.JPanel {
     private View.form.TextField txt_SoDienThoai;
     private View.form.TextField txt_ma;
     private View.form.TextField txt_ngaysinh;
-    private View.form.RadioButtonCustom txt_nu;
     // End of variables declaration//GEN-END:variables
 }

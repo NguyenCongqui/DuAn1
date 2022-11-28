@@ -4,6 +4,7 @@
  */
 package View.TrangChu;
 
+import View.login.Auth;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GradientPaint;
@@ -71,8 +72,8 @@ public void addEventShowPopup(EventShowPopupMenu eventShowPopup) {
         Panel1.add(new MenuItem(menu, getEventMenu(), event, Panel1.getComponentCount()), "h 40!");
     }
      public void initMenuItem() {
-        
-          addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\1.png"), "Trang Chủ"));
+         if (Auth.isManager()) {
+             addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\1.png"), "Trang Chủ"));
           addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\12.png"), "Quản Lý Sách", "Mặt Hàng", "Sản Phẩm", "Nhà Cung Cấp"));
           addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\4.png"), "Giao Dịch", "Bán Hàng", "Nhập Hàng", "Trả Hàng","Đổi Hàng","Hóa Đơn Bán Hàng","Hóa Đơn Nhập Hàng","Hóa Đơn Trả Hàng","Hóa Đơn Đổi Hàng"));
           addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\10.png"), "Khách Hàng", "Danh Sách Khách Hàng"));
@@ -81,6 +82,14 @@ public void addEventShowPopup(EventShowPopupMenu eventShowPopup) {
           addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\canhan.png"), "Cá Nhân", "Thông Tin Cá Nhân ", "Đổi Mật Khẩu"));
           addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\9.png"), "Khuyến Mại"));
           addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\18.png"), "Đăng Xuất"));
+         } else {
+              addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\1.png"), "Trang Chủ"));
+          addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\12.png"), "Quản Lý Sách", "Mặt Hàng", "Sản Phẩm", "Nhà Cung Cấp"));
+          addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\4.png"), "Giao Dịch", "Bán Hàng", "Nhập Hàng", "Trả Hàng","Đổi Hàng","Hóa Đơn Bán Hàng","Hóa Đơn Nhập Hàng","Hóa Đơn Trả Hàng","Hóa Đơn Đổi Hàng"));
+          addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\10.png"), "Khách Hàng", "Danh Sách Khách Hàng"));
+             
+         }
+          
           
         
     }

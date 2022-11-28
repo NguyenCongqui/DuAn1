@@ -4,6 +4,7 @@ import javax.swing.Icon;
 
 public class ModelCard {
 
+   
     public String getTitle() {
         return title;
     }

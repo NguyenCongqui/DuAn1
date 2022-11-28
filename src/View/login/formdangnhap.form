@@ -26,9 +26,9 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="password1" min="-2" pref="252" max="-2" attributes="0"/>
+                          <Component id="txt_word" min="-2" pref="252" max="-2" attributes="0"/>
                           <Component id="txt_users" min="-2" pref="252" max="-2" attributes="0"/>
-                          <Component id="button1" alignment="1" min="-2" pref="252" max="-2" attributes="0"/>
+                          <Component id="btn_dangNhap" alignment="1" min="-2" pref="252" max="-2" attributes="0"/>
                           <Component id="btn_quen" alignment="1" min="-2" pref="252" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -49,9 +49,9 @@
               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               <Component id="txt_users" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Component id="password1" min="-2" max="-2" attributes="0"/>
+              <Component id="txt_word" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-              <Component id="button1" min="-2" max="-2" attributes="0"/>
+              <Component id="btn_dangNhap" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Component id="btn_quen" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="88" max="32767" attributes="0"/>
@@ -62,18 +62,20 @@
   <SubComponents>
     <Component class="View.login.txtField" name="txt_users">
       <Properties>
+        <Property name="text" type="java.lang.String" value="quinc"/>
         <Property name="hint" type="java.lang.String" value="USERSNAME"/>
       </Properties>
     </Component>
-    <Component class="View.login.password" name="password1">
+    <Component class="View.login.password" name="txt_word">
       <Properties>
+        <Property name="text" type="java.lang.String" value="123456"/>
         <Property name="hint" type="java.lang.String" value="PASSWORD"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="password1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_wordActionPerformed"/>
       </Events>
     </Component>
-    <Component class="View.login.button" name="button1">
+    <Component class="View.login.button" name="btn_dangNhap">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="9e" green="9f" red="68" type="rgb"/>
@@ -84,7 +86,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_dangNhapActionPerformed"/>
       </Events>
     </Component>
     <Component class="View.login.button" name="btn_quen">
