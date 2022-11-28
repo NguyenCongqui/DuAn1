@@ -27,4 +27,6 @@ public interface ChiTietSachService {
     String update(MatHangViewModel cts);
     List<BanHangViewModel> getlistBanHang ();
     String updateSoLuongTon(Integer SoLuong, Integer ID);
+    BanHangViewModel TimKiemmSach(String tim);
+    List<BanHangViewModel> timkiemtheoma (String tim);
 }

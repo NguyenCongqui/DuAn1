@@ -81,6 +81,19 @@ public class ChiTietSachImpl implements ChiTietSachService{
        return rep.updateSoLuongTon(SoLuong, ID);
     }
 
+    @Override
+    public BanHangViewModel TimKiemmSach(String tim) {
+        return rep.TimKiemSach(tim);
+    }
+
+    @Override
+    public List<BanHangViewModel> timkiemtheoma(String tim) {
+         return rep.search(tim);
+    }
+
+    
+    
+
     
     
 

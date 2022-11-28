@@ -80,6 +80,7 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
         chk_Voucher.setSelected(false);
         cbo_MaGiamGia.setVisible(false);
         txt_TongTien.setEnabled(false);
+        lbl_tim.setVisible(false);
         initwebcam();
         
     }
@@ -183,6 +184,12 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
         return pattern = pattern.replaceAll(",", "");
     }
     public void fillTable(){
+        try {
+            Integer.parseInt(txt_SlgBan.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"Bạn Ơi số lượng phải là số nha");
+                   return;
+        }
         
         if (txt_SlgBan.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(this,"số lượng không đc để trống");
@@ -296,6 +303,12 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
     }
       public void insertBanHang(){
            int index = tbl2.getRowCount();
+           try {
+               Float.parseFloat(txt_TienKhachDua.getText());
+          } catch (Exception e) {
+               JOptionPane.showMessageDialog(this,"bạn ơi tiền khách đưa phải là só nha");
+               return;
+          }
         if (index <= 0) {
             JOptionPane.showMessageDialog(this," bạn chưa thanh toán sản phẩm nào ");
                     
@@ -337,6 +350,22 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
             }
         }
       }
+      public void fillTableWhenFind() {
+        DefaultTableModel model = (DefaultTableModel) tbl1.getModel();
+        model.setRowCount(0);
+        String keyString = txt_Search.getText();
+        List<BanHangViewModel> list = chitietsachService.timkiemtheoma(keyString);
+        if (list.isEmpty()) {
+            lbl_tim.setText("Không có khách hàng " + keyString);
+            return;
+        }
+        for (BanHangViewModel c : list) {
+            model.addRow(new Object[]{
+                c.getId(), c.getMaSach(), c.getTenSach(), c.getTheLoai(), c.getNgonNgu(), c.getTacGia(), c.getNXB(), c.getDonGia(), c.getSoLuongTon()
+            });
+        }
+        lbl_tim.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -374,6 +403,7 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
         cbo_MaGiamGia = new View.form.Combobox();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
+        lbl_tim = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -384,6 +414,24 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
         jLabel2.setText("Ban Hang");
 
         txt_Search.setLabelText("Tim theo ten hoac ma");
+        txt_Search.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txt_SearchCaretUpdate(evt);
+            }
+        });
+        txt_Search.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_SearchFocusGained(evt);
+            }
+        });
+        txt_Search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_SearchKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_SearchKeyReleased(evt);
+            }
+        });
 
         btn_Search.setText("Tìm Kiếm");
         btn_Search.setRadius(20);
@@ -593,6 +641,8 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 360, 150));
 
+        lbl_tim.setText("jLabel1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -602,9 +652,14 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 912, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2))
+                            .addComponent(jScrollPane2)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(219, 219, 219)
+                                .addComponent(lbl_tim, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txt_SlgBan, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -632,7 +687,9 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(87, 88, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addGap(5, 5, 5)
+                                .addComponent(lbl_tim)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -780,6 +837,72 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
         }
     }//GEN-LAST:event_chk_VoucherActionPerformed
 
+    private void txt_SearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_SearchCaretUpdate
+        // TODO add your handling code here:
+//        if (txt_Search.getText().isEmpty()) {
+//            return;
+//        }
+//     tbl_model = (DefaultTableModel) tbl1.getModel();
+//        tbl_model.setRowCount(0);
+//      String ma = txt_Search.getText();
+//       BanHangViewModel i  = chitietsachService.TimKiemmSach(ma);
+//        if (ListBanHangViewModel.isEmpty()) {
+//            lbl_tim.setText("Không có mặt hàng : " + ma);
+//            return;
+//        }
+//        
+//            tbl_model.addRow(new Object[]{
+//               
+//                i.getMaSach(),
+//                i.getTenSach(),
+//                i.getTheLoai(),
+//                i.getNgonNgu(),
+//                i.getTacGia(),
+//                i.getNXB(),
+//                    i.getDonGia(),
+//                    i.getSoLuongTon()
+//            });
+            
+//String keyString = txt_Search.getText();
+//        ListBanHangViewModel = chitietsachService.timkiemtheoma(keyString);
+//        if (ListBanHangViewModel.isEmpty()) {
+//        lbl_tim.setText("Không có khách hàng : " + keyString);
+//           lbl_tim.setVisible(true);
+//           return;
+//       }
+//        filldata01();
+fillTableWhenFind();
+    }//GEN-LAST:event_txt_SearchCaretUpdate
+
+    private void txt_SearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_SearchKeyReleased
+        // TODO add your handling code here:
+//        String keyString = txt_Search.getText();
+//        ListBanHangViewModel = chitietsachService.timkiemtheoma(keyString);
+//        if (ListBanHangViewModel.isEmpty()) {
+//           lbl_tim.setText("Không có khách hàng : " + keyString);
+//         //  lbl_tim.setVisible(true);
+//            return;
+//        }
+//        filldata01();
+    }//GEN-LAST:event_txt_SearchKeyReleased
+
+    private void txt_SearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_SearchKeyPressed
+        // TODO add your handling code here:
+//        String keyString = txt_Search.getText();
+//        ListBanHangViewModel = chitietsachService.timkiemtheoma(keyString);
+//        if (ListBanHangViewModel.isEmpty()) {
+//           lbl_tim.setText("Không có khách hàng : " + keyString);
+//         //  lbl_tim.setVisible(true);
+//            return;
+//        }
+//        filldata01();
+    }//GEN-LAST:event_txt_SearchKeyPressed
+
+    private void txt_SearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_SearchFocusGained
+        // TODO add your handling code here:
+        fillTableWhenFind();
+    }//GEN-LAST:event_txt_SearchFocusGained
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.form.MyButton btn_BanHang;
@@ -800,6 +923,7 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lbl_tim;
     private View.form.MyButton myButton1;
     private View.form.TableColumn tbl1;
     private View.form.TableColumn tbl2;
