@@ -49,6 +49,29 @@ public class ViewNhaCungCap extends javax.swing.JPanel {
         return new NCC(txt_TenNCC.getText(), txt_DiaChi.getText(), txt_SDT.getText());
     }
 
+    public boolean validateForm() {
+        if (txt_TenNCC.getText().isEmpty() || txt_DiaChi.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mời nhập đủ !");
+            return false;
+        }
+        if (txt_SDT.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập SDT !");
+            return false;
+        } else if (!txt_SDT.getText().matches("0[1-9]{1}[0-9 ]{8}")) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại đúng form 0(1-9)xxxxxxxx");
+            return false;
+        } else {
+            try {
+                Integer.parseInt(txt_SDT.getText());
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Số điện thoại không phải số");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,7 +85,6 @@ public class ViewNhaCungCap extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txt_Search = new View.form.TextField();
-        btn_tim = new View.form.MyButton();
         btn_xuat = new View.form.MyButton();
         lbl_Search = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -94,14 +116,6 @@ public class ViewNhaCungCap extends javax.swing.JPanel {
             }
         });
 
-        btn_tim.setText("Tìm");
-        btn_tim.setRadius(20);
-        btn_tim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_timActionPerformed(evt);
-            }
-        });
-
         btn_xuat.setText("Xuất");
         btn_xuat.setRadius(20);
 
@@ -118,9 +132,7 @@ public class ViewNhaCungCap extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txt_Search, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                     .addComponent(lbl_Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(124, 124, 124)
-                .addComponent(btn_tim, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86)
+                .addGap(276, 276, 276)
                 .addComponent(btn_xuat, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(194, Short.MAX_VALUE))
         );
@@ -129,9 +141,7 @@ public class ViewNhaCungCap extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btn_tim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_xuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btn_xuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_Search, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -322,9 +332,11 @@ public class ViewNhaCungCap extends javax.swing.JPanel {
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, service.insert(getGui()));
-        list = service.getAll();
-        fillData();
+        if (validateForm()) {
+            JOptionPane.showMessageDialog(this, service.insert(getGui()));
+            list = service.getAll();
+            fillData();
+        }
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void txt_SDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SDTActionPerformed
@@ -333,12 +345,19 @@ public class ViewNhaCungCap extends javax.swing.JPanel {
 
     private void btn_CapNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhapActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, service.update(lbl_ID.getText(), getGui()));
-        list = service.getAll();
-        fillData();
+        if (validateForm()) {
+            JOptionPane.showMessageDialog(this, service.update(lbl_ID.getText(), getGui()));
+            list = service.getAll();
+            fillData();
+        }
+Reset();
     }//GEN-LAST:event_btn_CapNhapActionPerformed
 
     private void btn_ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ResetActionPerformed
+        Reset();
+    }//GEN-LAST:event_btn_ResetActionPerformed
+
+    public void Reset() {
         // TODO add your handling code here:
         txt_TenNCC.setText("");
         txt_DiaChi.setText("");
@@ -347,18 +366,21 @@ public class ViewNhaCungCap extends javax.swing.JPanel {
         lbl_ID.setText("");
         lbl_Search.setText("");
         fillData();
-    }//GEN-LAST:event_btn_ResetActionPerformed
+    }
 
     private void btn_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, service.delete(lbl_ID.getText(), getGui()));
-        list = service.getAll();
-        fillData();
+        if (validateForm()) {
+            JOptionPane.showMessageDialog(this, service.delete(lbl_ID.getText(), getGui()));
+            list = service.getAll();
+            fillData();
+        }
+        Reset();
     }//GEN-LAST:event_btn_XoaActionPerformed
 
     private void tbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl1MouseClicked
         // TODO add your handling code here:
-                int row = tbl1.getSelectedRow();
+        int row = tbl1.getSelectedRow();
         NCC k = list.get(row);
         lbl_ID.setText(String.valueOf(k.getIdNCC()));
         txt_TenNCC.setText(k.getTenNCC());
@@ -366,26 +388,16 @@ public class ViewNhaCungCap extends javax.swing.JPanel {
         txt_SDT.setText(k.getSdt());
     }//GEN-LAST:event_tbl1MouseClicked
 
-    private void btn_timActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timActionPerformed
-        // TODO add your handling code here:
-                String keyString = txt_Search.getText();
-        list = service.search(keyString);
-        if (list.isEmpty()) {
-            lbl_Search.setText("Không có nhà cung câp : " + keyString);
-            return;
-        }
-        fillData();
-    }//GEN-LAST:event_btn_timActionPerformed
-
     private void txt_SearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_SearchCaretUpdate
         // TODO add your handling code here:
-                String keyString = txt_Search.getText();
+        String keyString = txt_Search.getText();
         list = service.search(keyString);
         if (list.isEmpty()) {
             lbl_Search.setText("Không có nhà cung câp : " + keyString);
             return;
         }
         fillData();
+        lbl_Search.setText("");
     }//GEN-LAST:event_txt_SearchCaretUpdate
 
 
@@ -394,7 +406,6 @@ public class ViewNhaCungCap extends javax.swing.JPanel {
     private View.form.MyButton btn_Reset;
     private View.form.MyButton btn_Xoa;
     private View.form.MyButton btn_them;
-    private View.form.MyButton btn_tim;
     private View.form.MyButton btn_xuat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
