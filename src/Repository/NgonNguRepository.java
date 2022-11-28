@@ -74,13 +74,18 @@ public class NgonNguRepository {
         ListNgonNgu = new ArrayList<>();
         String select = "SELECT * FROM dbo.NgonNgu WHERE TenNgonNGu = ? ";
         try {
-            st = db.getConnection().createStatement();
-            rs = st.executeQuery(select);
+//            st = db.getConnection().createStatement();
+//            rs = st.executeQuery(select);
+            
+            pst = db.getConnection().prepareStatement(select);
+           pst.setString(1, name);
+           rs = pst.executeQuery();
             while (rs.next()) {                
                 ListNgonNgu.add(new NgonNgu(rs.getInt(1), rs.getNString(2)));
             }
+            rs.close();
         } catch (Exception e) {
         }
-        return (NgonNgu) ListNgonNgu;
+        return null;
     }
 }

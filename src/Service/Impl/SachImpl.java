@@ -63,6 +63,11 @@ public class SachImpl implements SachService {
         return rp.searchTen(temp);
     }
 
+    @Override
+    public Sach selectName01(String name) {
+       return rp.selectName01(name);
+    }
+
     
 
     

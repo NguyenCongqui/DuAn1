@@ -4,6 +4,9 @@
  */
 package Services;
 
+import ViewModel.KhachHangTrangHangViewModel;
+import java.util.List;
+
 /**
  *
  * @author ADMIN
@@ -13,6 +16,7 @@ public interface TrangChuService {
     int getTongDoanhTHu();
     int getTongSanPham();
     int getTongTonKho();
+    List<KhachHangTrangHangViewModel> getlistKhachHang();
     
     
 }

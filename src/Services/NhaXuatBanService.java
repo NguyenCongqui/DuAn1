@@ -15,5 +15,5 @@ public interface NhaXuatBanService {
     List<NhaXuatBan> getlist();
     String insert(NhaXuatBan nxb);
     String update(NhaXuatBan nxb);
-    List<NhaXuatBan> Select(String name);
+    NhaXuatBan Select(String name);
 }

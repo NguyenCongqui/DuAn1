@@ -71,13 +71,14 @@ public class TacGiaRepositiry {
         ListTacGia = new ArrayList<>();
         String select = "SELECT * FROM dbo.TacGia WHERE TenTacGia = ?";
         try {
-            st = db.getConnection().createStatement();
-            rs = st.executeQuery(select);
+            pst = db.getConnection().prepareStatement(select);
+           pst.setString(1, name);
+           rs = pst.executeQuery();
             while (rs.next()) {                
                 ListTacGia.add(new TacGia(rs.getInt(1), rs.getNString(2)));
             }
         } catch (Exception e) {
         }
-        return (TacGia) ListTacGia;
+        return null;
     }
 }

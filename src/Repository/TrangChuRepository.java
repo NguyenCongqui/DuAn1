@@ -5,11 +5,17 @@
 package Repository;
 
 
+import DomainModel.NCC;
 import Utilities.DBConnection;
+import ViewModel.KhachHangTrangHangViewModel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,7 +26,7 @@ public class TrangChuRepository {
     ResultSet rs = null;
     Statement st = null;
     PreparedStatement pst = null;
-    //List<Ng> ListNgonNgu = null;
+    List<KhachHangTrangHangViewModel> ListkhachHang = null;
 
     public TrangChuRepository() {
     }
@@ -37,7 +43,7 @@ public class TrangChuRepository {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(select);
             while (rs.next()) {
-                return rs.getInt("TongDoanhThu");
+                return rs.getInt("revenue");
             }
         } catch (Exception e) {
         }
@@ -79,5 +85,20 @@ public class TrangChuRepository {
         } catch (Exception e) {
         }
         return 0;
+    }
+      public List<KhachHangTrangHangViewModel> getlistkhachHang(){
+        ListkhachHang = new ArrayList<>();
+        String select = "SELECT TENKhachHang,GioiTinh,Sdt,SoLuong FROM dbo.KhachHang INNER JOIN\n" +
+"				 dbo.HoaDonBan ON HoaDonBan.IdKhachHang = KhachHang.IdKhachHang\n" +
+"				 INNER JOIN dbo.CTHoaDonBan ON CTHoaDonBan.IdHoaDonBan = HoaDonBan.IdHoaDonBan ORDER BY KhachHang.IdKhachHang DESC";
+        try {
+            st = db.getConnection().createStatement();
+            rs = st.executeQuery(select);
+            while (rs.next()) {                
+                ListkhachHang.add(new KhachHangTrangHangViewModel(rs.getString(1), rs.getBoolean(2),rs.getString(3),rs.getInt(4)));
+            }
+        } catch (Exception e) {
+        }
+        return ListkhachHang;
     }
 }

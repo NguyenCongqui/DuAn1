@@ -12,9 +12,13 @@ import Services.TrangChuService;
 import View.form.ModelNoticeBoard;
 import View.icon.GoogleMaterialDesignIcons;
 import View.icon.IconFontSwing;
+import ViewModel.KhachHangTrangHangViewModel;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.Icon;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,10 +27,25 @@ import javax.swing.Icon;
 public class home extends javax.swing.JPanel {
 
     TrangChuService trangchuService = new TrangChuImpl();
+    DefaultTableModel tbl_model = new DefaultTableModel();
+    List<KhachHangTrangHangViewModel> listKhachHang = new ArrayList<>();
+    
     public home() {
         initComponents();
         initNoticeBoard();
         initCardData();
+        tbl_model = (DefaultTableModel) tbl_khachHang.getModel();
+        listKhachHang = trangchuService.getlistKhachHang();
+        filldata();
+        
+    }
+    public  void filldata(){
+        tbl_model.setRowCount(0);
+        for (KhachHangTrangHangViewModel kh : listKhachHang) {
+            tbl_model.addRow(new Object[]{
+                kh.getTen(),kh.isGioiTinh() == true?"Nam":"Nữ",kh.getSoDienThoai(),kh.getSoluong()
+            });
+        }
     }
     private void initCardData() {
         Icon icon1 = IconFontSwing.buildIcon(GoogleMaterialDesignIcons.PEOPLE, 60, new Color(255, 255, 255, 100), new Color(255, 255, 255, 15));
@@ -40,9 +59,9 @@ public class home extends javax.swing.JPanel {
     }
     private void initNoticeBoard() {
         noticeBoard.addDate("Quy định mua hàng của shop");
-        noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(94, 49, 238), "Lưu ý", "Now", "Bạn đặt hàng vui lòng kiểm tra kỹ lại thông tin sản phẩm: Size, chất liệu, màu của sản phẩm"));
+        noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(94, 49, 238), "Lưu ý", "Now", "Bạn đặt hàng vui lòng kiểm tra kỹ lại thông tin sản phẩm: Tên Sách, Nhà Xuất Bản, Ngôn Ngữ, Tác Giả"));
         noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(218, 49, 238), "Thời gian làm việc", "2h ago", "Thời gian mở cửa shop từ 6h00 tới 23h00. Làm việc cả thứ bảy và chủ nhật"));
-        noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(255, 51, 0), "Chính sách đổi trả", "2h ago", "Khi khách hàng gặp sự cố về sản phẩm lỗi bên shop như sản phẩm không vừa, hỏng, lỗi... Thời gian đổi trả trong vòng 2 ngày. Chi tiết liên hệ 0332429178"));
+        noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(255, 51, 0), "Chính sách đổi trả", "2h ago", "Khi khách hàng gặp sự cố về sản phẩm lỗi bên shop như sản phẩm không vừa, hỏng, lỗi... Thời gian đổi trả trong vòng 2 ngày. Chi tiết liên hệ 0123456789"));
 
         noticeBoard.addDate("Hướng dẫn sử dụng phần mềm ITSHOP");
         noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(32, 171, 43), "Further Reading", "12:30 PM", "There are more information to digest regarding MigLayout. The resources are all available at www.migcomponents.com"));

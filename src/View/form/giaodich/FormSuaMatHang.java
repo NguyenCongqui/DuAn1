@@ -65,7 +65,7 @@ public class FormSuaMatHang extends javax.swing.JFrame {
         txt_GiaBan.setText(Float.toString(GiaBan));
 //       NhaXuatBan nxb = (NhaXuatBan) NhaXuatBanService.Select(tennhaxuatban);
 //       TacGia tg = TacGiaService.selectName(tenTacGIa);
-//       Sach s = SachService.select(Tensach);
+//      Sach s = SachService.selectName01(Tensach);
 //       NgonNgu nn = NgonNguService.selectName(tenngonngu);
 //       cbo_NgonNgu.getModel().setSelectedItem(nn);
 //       cbo_NhaXuatBan.getModel().setSelectedItem(nxb);

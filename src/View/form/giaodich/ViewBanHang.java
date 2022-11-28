@@ -21,6 +21,7 @@ import Services.KhachHangService;
 import Services.NCCService;
 import Services.TheLoaiServie;
 import Services.VoucherService;
+import View.login.Auth;
 import ViewModel.BanHangViewModel;
 import ViewModel.MatHangViewModel;
 import com.github.sarxos.webcam.Webcam;
@@ -298,7 +299,7 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
             hd.setIDVoucher(v.getIDVoucher());
         }
          
-        hd.setIdUsers(1);
+        hd.setIdUsers(Auth.user.getIdusers());
         return hd;
     }
       public void insertBanHang(){
@@ -361,7 +362,7 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
         }
         for (BanHangViewModel c : list) {
             model.addRow(new Object[]{
-                c.getId(), c.getMaSach(), c.getTenSach(), c.getTheLoai(), c.getNgonNgu(), c.getTacGia(), c.getNXB(), c.getDonGia(), c.getSoLuongTon()
+                c.getId(), c.getMaSach(), c.getTenSach(), c.getTheLoai(), c.getNgonNgu(), c.getTacGia(), c.getNXB(),nf.format(c.getDonGia()) + " đ", c.getSoLuongTon()
             });
         }
         lbl_tim.setText("");

@@ -185,6 +185,27 @@ public class ViewThemMatHang extends javax.swing.JFrame {
         this.dispose();
         }
     }
+    public void deleteRowInTableTemp() {
+        int row = tbl_chiTietSanPham.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tbl_chiTietSanPham.getModel();
+
+        for (int i = 0; i < tbl_chiTietSanPham.getRowCount(); i++) {
+            if (row == i) {
+                model.removeRow(row);
+                listMatHangViewModel.remove(listMatHangViewModel.get(i));
+                JOptionPane.showMessageDialog(this,"Xóa Mặt Hàng Thành Công");
+                //btn_xoa.setEnabled(false);
+                return;
+            }
+        }
+    }
+    public void reset(){
+        cbo_ngonNgu.setSelectedIndex(0);
+        cbo_nhaXuatBan.setSelectedIndex(0);
+        cbo_tacGia.setSelectedIndex(0);
+        cbo_tenSanPham.setSelectedIndex(0);
+        txt_giaBan.setText("");
+    }
    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -591,6 +612,7 @@ public class ViewThemMatHang extends javax.swing.JFrame {
 
     private void btn_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetActionPerformed
         // TODO add your handling code here:
+        reset();
     }//GEN-LAST:event_btn_resetActionPerformed
 
     private void myButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton15ActionPerformed
@@ -601,6 +623,7 @@ public class ViewThemMatHang extends javax.swing.JFrame {
             mh.getTenSach(),mh.getGiaban(),mh.getTenNxb(),mh.getTenNgonNgu(),mh.getTenTacGia()
         });
         listMatHangViewModel.add(mh);
+        reset();
     }//GEN-LAST:event_myButton15ActionPerformed
 public void addFilltable(ActionListener evt){
     btn_HoanThanh.addActionListener(evt);
@@ -622,6 +645,7 @@ public void addFilltable(ActionListener evt){
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
+        deleteRowInTableTemp();
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void btn_themNhaXuatBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themNhaXuatBanActionPerformed

@@ -19,5 +19,6 @@ public interface SachService {
     String update(Sach s , String id);
     String delete(String id);
     List<SachViewModel> searchTen(String temp);
+    Sach selectName01(String name);
 
 }

@@ -23,7 +23,7 @@ public class NhaXuatBanRepository {
     Statement st = null;
     PreparedStatement pst = null;
     List<NhaXuatBan> ListNhaXuatBan = null;
-
+NhaXuatBan nxb;
     public NhaXuatBanRepository() {
     }
     public List<NhaXuatBan> getlist (){
@@ -79,12 +79,15 @@ public class NhaXuatBanRepository {
         }
         
      }
-     public List<NhaXuatBan> selectName (String name){
+     public NhaXuatBan selectName (String name){
          String sql = "SELECT * FROM dbo.NXB WHERE TenNXB = ?";
          ListNhaXuatBan =new  ArrayList<>();
          try {
-              st=db.getConnection().createStatement();
-            rs = st.executeQuery(sql);
+//              st=db.getConnection().createStatement();
+//            rs = st.executeQuery(sql);
+            pst = db.getConnection().prepareStatement(sql);
+           pst.setString(1, name);
+           rs = pst.executeQuery();
             while (rs.next()) {                
                 ListNhaXuatBan.add(new NhaXuatBan(rs.getInt(1), rs.getNString(2)));
                 
@@ -92,7 +95,7 @@ public class NhaXuatBanRepository {
             rs.close();
          } catch (Exception e) {
          }
-         return  ListNhaXuatBan;
+         return nxb;
                  
      }
 }

@@ -13,13 +13,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
  * @author quanh
  */
 public class SachRepository {
-
+ DBConnection db;
+    ResultSet rs = null;
+    Statement st = null;
+    PreparedStatement pst = null;
+    List<Sach> listSach = null;
+    
     public List<Sach> getAllSach() {
         String query = "select * from sach";
         List<Sach> listSach = new ArrayList<>();
@@ -149,5 +155,24 @@ public class SachRepository {
         }
         return null;
     }
+    public Sach selectName01 (String name){
+         String sql = "SELECT * FROM dbo.Sach INNER JOIN dbo.TheLoai ON TheLoai.IdTheLoai = Sach.Idtheloai WHERE TenSach = ?";
+         listSach =new  ArrayList<>();
+         try {
+//              st=db.getConnection().createStatement();
+//            rs = st.executeQuery(sql);
+            pst = db.getConnection().prepareStatement(sql);
+           pst.setString(1, name);
+           rs = pst.executeQuery();
+            while (rs.next()) {                
+                listSach.add(new Sach(rs.getInt(1), rs.getString(4), rs.getString(5), rs.getInt(2), rs.getInt(3), rs.getBoolean(6)));
+                
+            }
+            rs.close();
+         } catch (Exception e) {
+         }
+         return null;
+                 
+     }
 
 }
