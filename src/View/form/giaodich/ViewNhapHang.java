@@ -558,33 +558,33 @@ public class ViewNhapHang extends javax.swing.JPanel {
             });
         }
     }
-// public void TimTheoID() {
-//        int id = String.valueOf(txt_Search.getText());
-//        NhapHangViewModel p = NHservice.searchID(id);
-//        tableModel = (DefaultTableModel) tbl1.getModel();
-//        tableModel.setRowCount(0);
-//        if (p == null) {
-//            lbl_Search.setText("Không tìm thay id : " + id);
-//           return;
-//        }
-//            tableModel.addRow(new Object[]{
-//                p.getIdchitietsach(),
-//                p.getTenSach(),
-//                p.getTenTheLoai(),
-//                p.getTenNxb(),
-//                p.getTenNgonNgu(),
-//                p.getTenTacGia(),
-//                p.getSoluong(),
-//                p.getGia() + " đ"
-//            });
-//       
-//    }
+ public void TimTheoID() {
+        int id = Integer.valueOf(txt_Search.getText());
+        NhapHangViewModel p = NHservice.searchID(id);
+        tableModel = (DefaultTableModel) tbl1.getModel();
+        tableModel.setRowCount(0);
+        if (p == null) {
+            lbl_Search.setText("Không tìm thay id : " + id);
+           return;
+        }
+            tableModel.addRow(new Object[]{
+                p.getIdchitietsach(),
+                p.getTenSach(),
+                p.getTenTheLoai(),
+                p.getTenNxb(),
+                p.getTenNgonNgu(),
+                p.getTenTacGia(),
+                p.getSoluong(),
+                p.getGia() + " đ"
+            });
+       
+    }
     private void txt_SearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_SearchCaretUpdate
         // TODO add your handling code here:
 //         try {
 //           TimTheoTen();   
 //        } catch (Exception e) {
-            TimTheoTen();
+            TimTheoID();
         //}
 
     }//GEN-LAST:event_txt_SearchCaretUpdate

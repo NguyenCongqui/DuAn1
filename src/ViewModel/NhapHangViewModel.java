@@ -12,7 +12,7 @@ public class NhapHangViewModel {
 //CTSPViewModel
 
     private int idchitietsach, idsach, idNgonNgu, IdTacGia, IsNXB;
-    private String mota;
+   // private String mota;
     private int soluong;
     private float gia;//giaban
     private float gianhap;
@@ -27,27 +27,27 @@ public class NhapHangViewModel {
     public NhapHangViewModel() {
     }
 
-    public NhapHangViewModel(int idchitietsach, int idsach, int idNgonNgu, int IdTacGia, int IsNXB, String mota, int soluong, float gia, float gianhap, String ngaytao, String TenSach, String TenNgonNgu, String TenTacGia, String TenNxb, boolean trangThai, int IdHoaDonBan, int IdKhachHang, String tenKhachHang, String tenTheLoai) {
-        this.idchitietsach = idchitietsach;
-        this.idsach = idsach;
-        this.idNgonNgu = idNgonNgu;
-        this.IdTacGia = IdTacGia;
-        this.IsNXB = IsNXB;
-        this.mota = mota;
-        this.soluong = soluong;
-        this.gia = gia;
-        this.gianhap = gianhap;
-        this.ngaytao = ngaytao;
-        this.TenSach = TenSach;
-        this.TenNgonNgu = TenNgonNgu;
-        this.TenTacGia = TenTacGia;
-        this.TenNxb = TenNxb;
-        this.trangThai = trangThai;
-        this.IdHoaDonBan = IdHoaDonBan;
-        this.IdKhachHang = IdKhachHang;
-        this.tenKhachHang = tenKhachHang;
-        this.tenTheLoai = tenTheLoai;
-    }
+//    public NhapHangViewModel(int idchitietsach, int idsach, int idNgonNgu, int IdTacGia, int IsNXB, String mota, int soluong, float gia, float gianhap, String ngaytao, String TenSach, String TenNgonNgu, String TenTacGia, String TenNxb, boolean trangThai, int IdHoaDonBan, int IdKhachHang, String tenKhachHang, String tenTheLoai) {
+//        this.idchitietsach = idchitietsach;
+//        this.idsach = idsach;
+//        this.idNgonNgu = idNgonNgu;
+//        this.IdTacGia = IdTacGia;
+//        this.IsNXB = IsNXB;
+//        this.mota = mota;
+//        this.soluong = soluong;
+//        this.gia = gia;
+//        this.gianhap = gianhap;
+//        this.ngaytao = ngaytao;
+//        this.TenSach = TenSach;
+//        this.TenNgonNgu = TenNgonNgu;
+//        this.TenTacGia = TenTacGia;
+//        this.TenNxb = TenNxb;
+//        this.trangThai = trangThai;
+//        this.IdHoaDonBan = IdHoaDonBan;
+//        this.IdKhachHang = IdKhachHang;
+//        this.tenKhachHang = tenKhachHang;
+//        this.tenTheLoai = tenTheLoai;
+//    }
 
   
 
@@ -111,13 +111,13 @@ public class NhapHangViewModel {
         this.IsNXB = IsNXB;
     }
 
-    public String getMota() {
-        return mota;
-    }
-
-    public void setMota(String mota) {
-        this.mota = mota;
-    }
+//    public String getMota() {
+//        return mota;
+//    }
+//
+//    public void setMota(String mota) {
+//        this.mota = mota;
+//    }
 
     public int getSoluong() {
         return soluong;

@@ -183,7 +183,7 @@ public class ChiTietSachRepository {
         String select = "SELECT MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu \n"
                 + "	INNER JOIN dbo.TacGia ON TacGia.IdTacGia = ChiTietSach.IdTacGia\n"
                 + "	INNER JOIN dbo.NXB ON NXB.IdNXB = ChiTietSach.IdNXB\n"
-                + "	WHERE TrangThai = 1";
+                + "	WHERE Sach.TrangThai = 1";
         ListMatHang = new ArrayList<>();
         try {
             st = db.getConnection().createStatement();
@@ -202,7 +202,7 @@ public class ChiTietSachRepository {
         String select = "SELECT MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu \n"
                 + "	INNER JOIN dbo.TacGia ON TacGia.IdTacGia = ChiTietSach.IdTacGia\n"
                 + "	INNER JOIN dbo.NXB ON NXB.IdNXB = ChiTietSach.IdNXB\n"
-                + "	WHERE TrangThai = 0";
+                + "	WHERE Sach.TrangThai = 0";
         ListMatHang = new ArrayList<>();
         try {
             st = db.getConnection().createStatement();
