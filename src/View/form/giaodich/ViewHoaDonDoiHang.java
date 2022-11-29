@@ -93,13 +93,13 @@ public class ViewHoaDonDoiHang extends javax.swing.JPanel {
 
         tbl_HoaDonDoiTra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Ma Tra Hang", "Ma Hoa Don", "Thoi Gian", "Khach Hang", "Tong Tien Hoan Tra", "Ghi Chu"
             }
         ));
         jScrollPane1.setViewportView(tbl_HoaDonDoiTra);
