@@ -5,10 +5,17 @@
 package View.form.giaodich;
 
 import DomainModel.Users;
+import Service.Impl.NhanVienImpl;
 import Service.Impl.UsersImpl;
+import Services.NhanVienService;
 import Services.UsersService;
+import View.login.Auth;
+import View.login.XDate;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,18 +28,21 @@ public class ViewNhanVien extends javax.swing.JPanel {
     private List<Users> us = new ArrayList<>();
     private UsersService usersService = new UsersImpl();
     ViewThemNhanVienFrame nhanvien = new ViewThemNhanVienFrame();
+    NhanVienService nhanvienservice = new NhanVienImpl();
+    ViewThemNhanVienFrame thenhanvien01 = new ViewThemNhanVienFrame();
+    ViewThemNhanVienFrame thenhanvienUpdate;
 
     public ViewNhanVien() {
         initComponents();
         tblModel = (DefaultTableModel) tbl_nhanvien.getModel();
-        us = usersService.getListnhanvien();
-        showData(us);
+        us = nhanvienservice.ListgetNhanVien();
+        showData();
         
     }
 
-    public void showData(List<Users> listnv) {
+    public void showData() {
         tblModel.setRowCount(0);
-        for (Users us : listnv) {
+        for (Users us : us) {
             Object[] row = new Object[]{us.getIdusers(),
                 us.getHoten(),
                 us.isRole() == true ? "quan li" : "nhan vien",
@@ -44,6 +54,36 @@ public class ViewNhanVien extends javax.swing.JPanel {
                 us.getLuong()};
             tblModel.addRow(row);
         }
+    }
+    public void showDataKhongLam() {
+        tblModel.setRowCount(0);
+        List<Users>  list = nhanvienservice.ListgetNhanVienKhongLam();
+       for (Users us : list) {
+            Object[] row = new Object[]{us.getIdusers(),
+                us.getHoten(),
+                us.isRole() == true ? "quan li" : "nhan vien",
+                us.isGioitinh() == true ? "Nam" : "Nu",
+                us.getNgaysinh(), 
+                us.getDiaChi(),
+                us.getSoDienThoai(),
+                us.getEmail(),
+                us.getLuong()};
+            tblModel.addRow(row);
+        }
+    }
+  
+    public void delete() {
+        int index = tbl_nhanvien.getSelectedRow();
+        int idUser = (int) tbl_nhanvien.getValueAt(index, 0);
+        if (idUser == Auth.user.getIdusers()) {
+            JOptionPane.showMessageDialog(this,"Bạn không thể xoá được bạn ???");
+            return;
+        } 
+           JOptionPane.showMessageDialog(this, nhanvienservice.XoaNhanVien(idUser));
+           us = nhanvienservice.ListgetNhanVien();
+            showData();
+           
+        
     }
 
     /**
@@ -60,7 +100,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txt_tim = new View.form.TextField();
         btn_tim = new View.form.MyButton();
-        cbb_tinhtrang = new View.form.Combobox();
+        cbo_tinhtrang = new View.form.Combobox();
         btn_themnhanvien = new View.form.MyButton();
         btn_xoanhanvien = new View.form.MyButton();
         btn_xuat = new View.form.MyButton();
@@ -85,7 +125,13 @@ public class ViewNhanVien extends javax.swing.JPanel {
         btn_tim.setText("Tìm");
         btn_tim.setRadius(20);
 
-        cbb_tinhtrang.setLabeText("Tình Trạng ");
+        cbo_tinhtrang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Đang Làm Việc", "Nghỉ Làm" }));
+        cbo_tinhtrang.setLabeText("Tình Trạng ");
+        cbo_tinhtrang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbo_tinhtrangActionPerformed(evt);
+            }
+        });
 
         btn_themnhanvien.setText("Thêm Nhân Viên");
         btn_themnhanvien.setRadius(20);
@@ -97,6 +143,11 @@ public class ViewNhanVien extends javax.swing.JPanel {
 
         btn_xoanhanvien.setText("Xóa Nhân Viên");
         btn_xoanhanvien.setRadius(20);
+        btn_xoanhanvien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoanhanvienActionPerformed(evt);
+            }
+        });
 
         btn_xuat.setText("Xuất");
         btn_xuat.setRadius(20);
@@ -113,7 +164,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
                 .addGap(35, 35, 35)
                 .addComponent(btn_tim, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
-                .addComponent(cbb_tinhtrang, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbo_tinhtrang, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73)
                 .addComponent(btn_themnhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
@@ -130,7 +181,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txt_tim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_tim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbb_tinhtrang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbo_tinhtrang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -153,6 +204,11 @@ public class ViewNhanVien extends javax.swing.JPanel {
                 "ID", "Họ Tên", "Chức Vụ", "giới Tính", "Ngày Sinh", "Địa Chỉ", "Số Điện Thoại", "email", "lương"
             }
         ));
+        tbl_nhanvien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_nhanvienMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_nhanvien);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -207,13 +263,63 @@ public class ViewNhanVien extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_timActionPerformed
 
+    private void btn_xoanhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoanhanvienActionPerformed
+        // TODO add your handling code here:\
+        delete();
+    }//GEN-LAST:event_btn_xoanhanvienActionPerformed
+
+    private void tbl_nhanvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_nhanvienMouseClicked
+        // TODO add your handling code here:
+        // if (evt.getClickCount() == 2) {
+            int index = tbl_nhanvien.getSelectedRow();
+            int idUser = (int) tbl_nhanvien.getValueAt(index, 0);
+            String Hoten = tbl_nhanvien.getValueAt(index, 1).toString();
+            String ChucVu = tbl_nhanvien.getValueAt(index, 2).toString();
+            String GioiTinh = tbl_nhanvien.getValueAt(index, 3).toString();
+            String NgaySinh = tbl_nhanvien.getValueAt(index, 4).toString();
+            String DiaChi = tbl_nhanvien.getValueAt(index, 5).toString();
+            String SoDienThoai = tbl_nhanvien.getValueAt(index, 6).toString();
+            String email = tbl_nhanvien.getValueAt(index, 7).toString();
+            String Luong = tbl_nhanvien.getValueAt(index, 8).toString();
+            thenhanvienUpdate = new ViewThemNhanVienFrame(Hoten,ChucVu,GioiTinh,NgaySinh,DiaChi,SoDienThoai,email,Luong,idUser,cbo_tinhtrang.getSelectedIndex());
+            thenhanvienUpdate.setVisible(true);
+        //}
+
+        if (thenhanvienUpdate == null) {
+            return;
+        } else {
+            thenhanvienUpdate.addEvenUpdate(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    thenhanvienUpdate.update();
+//                    MsgBox.alert(this, "Update thành công");
+                    cbo_tinhtrang.setSelectedIndex(0);
+                    showData();
+                }
+            }
+                    
+                
+            );
+
+        }
+    }//GEN-LAST:event_tbl_nhanvienMouseClicked
+
+    private void cbo_tinhtrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_tinhtrangActionPerformed
+        // TODO add your handling code here:
+        if (cbo_tinhtrang.getSelectedIndex() == 0) {
+            showData();
+        } else {
+            showDataKhongLam();
+        }
+    }//GEN-LAST:event_cbo_tinhtrangActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.form.MyButton btn_themnhanvien;
     private View.form.MyButton btn_tim;
     private View.form.MyButton btn_xoanhanvien;
     private View.form.MyButton btn_xuat;
-    private View.form.Combobox cbb_tinhtrang;
+    private View.form.Combobox cbo_tinhtrang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

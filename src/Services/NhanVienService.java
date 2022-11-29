@@ -4,6 +4,7 @@
  */
 package Services;
 
+import DomainModel.TaiKhoan;
 import DomainModel.Users;
 import java.util.List;
 
@@ -11,11 +12,11 @@ import java.util.List;
  *
  * @author ADMIN
  */
-public interface UsersService {
-List<Users> getListnhanvien();
-    Users getUsers(int k);
-
-   
-
-    
+public interface NhanVienService {
+    List<Users> ListgetNhanVien(); 
+    List<Users> ListgetNhanVienKhongLam();
+    String themNhanVien(Users us);
+    String ThemTaiKhoan(TaiKhoan tk);
+    String XoaNhanVien(int k);
+    String SuaNhanVien(Users us);
 }

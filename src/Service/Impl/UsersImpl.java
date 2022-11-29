@@ -24,19 +24,24 @@ public class UsersImpl implements UsersService{
         return rep.getLisUsers(k);
     }
 
-    @Override
-    public String them(Users us) {
-        boolean t = rep.them(us);
-        if (t) {
-            return "them thanh cong";
-        }
-        return "them that bai";
+//    @Override
+//    public String them(Users us) {
+//        boolean t = rep.them(us);
+//        if (t) {
+//            return "them thanh cong";
+//        }
+//        return "them that bai";
+//
+//    }
 
-    }
+//    @Override
+//    public List<Users> getListnhanvien() {
+//     return rep.getListnhanvien();
+//    }
 
     @Override
     public List<Users> getListnhanvien() {
-     return rep.getListnhanvien();
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
    

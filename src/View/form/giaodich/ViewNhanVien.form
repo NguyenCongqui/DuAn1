@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -74,7 +74,7 @@
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="btn_tim" min="-2" pref="66" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                      <Component id="cbb_tinhtrang" min="-2" pref="188" max="-2" attributes="0"/>
+                      <Component id="cbo_tinhtrang" min="-2" pref="188" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                       <Component id="btn_themnhanvien" min="-2" pref="115" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
@@ -93,7 +93,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txt_tim" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btn_tim" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbb_tinhtrang" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbo_tinhtrang" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -134,10 +134,19 @@
                 <Property name="radius" type="int" value="20"/>
               </Properties>
             </Component>
-            <Component class="View.form.Combobox" name="cbb_tinhtrang">
+            <Component class="View.form.Combobox" name="cbo_tinhtrang">
               <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="2">
+                    <StringItem index="0" value="&#x110;ang L&#xe0;m Vi&#x1ec7;c"/>
+                    <StringItem index="1" value="Ngh&#x1ec9; L&#xe0;m"/>
+                  </StringArray>
+                </Property>
                 <Property name="labeText" type="java.lang.String" value="T&#xec;nh Tr&#x1ea1;ng "/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbo_tinhtrangActionPerformed"/>
+              </Events>
             </Component>
             <Component class="View.form.MyButton" name="btn_themnhanvien">
               <Properties>
@@ -153,6 +162,9 @@
                 <Property name="text" type="java.lang.String" value="X&#xf3;a Nh&#xe2;n Vi&#xea;n"/>
                 <Property name="radius" type="int" value="20"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_xoanhanvienActionPerformed"/>
+              </Events>
             </Component>
             <Component class="View.form.MyButton" name="btn_xuat">
               <Properties>
@@ -252,6 +264,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_nhanvienMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
