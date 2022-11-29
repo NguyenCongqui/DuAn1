@@ -4,6 +4,7 @@
  */
 package View.TrangChu;
 
+import View.login.Auth;
 import java.awt.event.ActionListener;
 
 /**
@@ -17,6 +18,10 @@ public class Header extends javax.swing.JPanel {
      */
     public Header() {
         initComponents();
+        if (Auth.isLogin()) {
+            lbl_ten.setText(Auth.user.getHoten());
+            lbl_role.setText(Auth.user.isRole() ? "Quản lý" : "Nhân viên");
+        }
     }
     public void addMenuEvent(ActionListener event) {
         cmdMenu.addActionListener(event);
@@ -33,8 +38,8 @@ public class Header extends javax.swing.JPanel {
 
         cmdMenu = new View.TrangChu.Button();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lbl_ten = new javax.swing.JLabel();
+        lbl_role = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -43,9 +48,9 @@ public class Header extends javax.swing.JPanel {
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\ADMIN\\OneDrive\\Documents\\icons8_Account_16.png")); // NOI18N
 
-        jLabel2.setText("USERSNAME");
+        lbl_ten.setText("USERSNAME");
 
-        jLabel3.setText("ADMIN");
+        lbl_role.setText("ADMIN");
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -59,10 +64,10 @@ public class Header extends javax.swing.JPanel {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
+                    .addComponent(lbl_ten)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel3)))
+                        .addComponent(lbl_role)))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -71,9 +76,9 @@ public class Header extends javax.swing.JPanel {
             .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(lbl_ten)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addComponent(lbl_role)
                 .addGap(4, 4, 4))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -86,8 +91,8 @@ public class Header extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.TrangChu.Button cmdMenu;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbl_role;
+    private javax.swing.JLabel lbl_ten;
     // End of variables declaration//GEN-END:variables
 }
