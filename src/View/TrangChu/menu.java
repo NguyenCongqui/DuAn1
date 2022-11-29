@@ -130,7 +130,7 @@ public void hideallMenu() {
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        GradientPaint gra = new GradientPaint(0,0,new  Color(140,105,245), getWidth(),0,new Color(153,255,180));
+        GradientPaint gra = new GradientPaint(0,0,new  Color(153,204,255), getWidth(),0,new Color(51,102,255));
        g2.setPaint(gra);
        g2.fillRect(0,0,getWidth(),getHeight());
         
