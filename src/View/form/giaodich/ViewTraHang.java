@@ -174,12 +174,12 @@ public class ViewTraHang extends javax.swing.JPanel {
         public void insertInvoiceReturn() {
         HDTraHangViewModel ir = getInvoiceReturn();
         svTraHang.insert(ir);
-        JOptionPane.showMessageDialog(this,"them thanh cong");
+        JOptionPane.showMessageDialog(this,"Tra hang thanh cong");
         int row = tbl_danhsachsanpham.getRowCount();
         for (int i = 0; i < listTraHang.size(); i++) {
             HDTraHangViewModel de = listTraHang.get(i);
             svTraHang.insert(de);
-           
+           break;
         }
     }
 
