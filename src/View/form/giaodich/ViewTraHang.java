@@ -9,7 +9,12 @@ import Service.Impl.HoaDonTraHangImpl;
 import Services.HoaDonTraHangService;
 import ViewModel.NhapHangViewModel;
 import ViewModel.TraHangViewModel;
+import com.fpt.entity.CTHDTra;
+import com.fpt.utils.MsgBox;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,9 +23,14 @@ import javax.swing.table.DefaultTableModel;
  * @author ACER
  */
 public class ViewTraHang extends javax.swing.JPanel {
-private DefaultTableModel tblModel;
-private List<TraHangViewModel> listTraHang;
-private HoaDonTraHangService svTraHang;
+
+    private DefaultTableModel tblModel = new DefaultTableModel();
+    private DefaultTableModel tblModelList = new DefaultTableModel();
+    private List<TraHangViewModel> listTraHang = new ArrayList<>();
+    private List<TraHangViewModel> list = new ArrayList<>();
+    
+    private HoaDonTraHangService svTraHang = new HoaDonTraHangImpl();
+
     /**
      * Creates new form TraHang
      */
@@ -30,30 +40,108 @@ private HoaDonTraHangService svTraHang;
         svTraHang = (HoaDonTraHangService) new HoaDonTraHangImpl();
         listTraHang = svTraHang.getAll();
 //        fillTable();
+        showData();
     }
-    public void TimTheoTen() {
-        String temp = txt_timkiemhoadon.getText();
-        listTraHang = svTraHang.searchTen(temp);
-        tblModel = (DefaultTableModel) tbl_danhsachsanpham.getModel();
-        tblModel.setRowCount(0);
-        if (listTraHang.isEmpty()) {
-            lbl_thongBao.setText("Không tìm thay san pham : " + temp);
-          return;
-        }
-        for (TraHangViewModel p : listTraHang) {
-            tblModel.addRow(new Object[]{
-                p.getMaBanHang(),
-                p.getMaSach(),
-                p.getTenKh(),
+
+    public void showData() {
+        DefaultTableModel model = (DefaultTableModel) tbl_thongtinhoadon.getModel();
+        model.setRowCount(0);
+        List<TraHangViewModel> list = svTraHang.getAll();
+        for (TraHangViewModel p : list) {
+            model.addRow(new Object[]{
+                p.getIDMaHoaDon(),
+                p.getIDSach(),
                 p.getTenSach(),
                 p.getSoLuong(),
-                p.getSDT(),
-                p.getDonGia()+ " đ",
-                 
-            });
+                p.getTenNXB(),
+                p.getTenNN(),
+                p.getTenTG(),
+                p.getDonGia() + " đ",
+                p.getTenKh(),});
         }
     }
 
+    public void TimTheoID() {
+        if (txt_timkiemhoadon.getText().isEmpty()) {
+            return ;
+        }
+    lbl_thongBao.setVisible(true);
+       DefaultTableModel tableModel = (DefaultTableModel) tbl_thongtinhoadon.getModel();
+        tableModel.setRowCount(0);
+        int id = Integer.valueOf(txt_timkiemhoadon.getText());
+        List<TraHangViewModel> p = svTraHang.searchID(id);
+        if (p == null) {
+            //lbl_Search.setVisible(true);
+            lbl_thongBao.setText("Không có hoa don : " + id);
+            return;
+        }
+        for (TraHangViewModel i : p) {
+            tableModel.addRow(new Object[]{
+            i.getIDMaHoaDon(),
+            i.getIDSach(),
+            i.getTenSach(),
+            i.getSoLuong(),
+            i.getTenNXB(),
+            i.getTenNN(),
+            i.getTenTG(),
+            i.getDonGia(),
+            i.getTenKh(),
+        });
+        }
+        
+        lbl_thongBao.setText("");
+    }
+    
+    Locale lc = new Locale("nv", "VN");
+    NumberFormat nf = NumberFormat.getInstance(lc);
+    
+    float priceTotal;
+    public float TotalBuy() {
+        float price = 0;
+        int index = tbl_danhsachsanpham.getRowCount();
+        for (int i = 0; i < index; i++) {
+            price += (int) tbl_danhsachsanpham.getValueAt(i, 2) * (float) tbl_danhsachsanpham.getValueAt(i, 6);
+        }
+        return price;
+    }
+    public void insertTraHang() {
+        try {
+            boolean flag = false;
+            int quatity = Integer.valueOf(MsgBox.prompt(this, "Nhập số lượng cần hoàn trả"));
+            int row = tbl_thongtinhoadon.getSelectedRow();
+            int idMaHD = (int) tbl_thongtinhoadon.getValueAt(row, 0);
+            int idSach = (int) tbl_thongtinhoadon.getValueAt(row, 1);
+            String tenSach = (String) tbl_thongtinhoadon.getValueAt(row, 2);
+            int soLuong = (int) tbl_thongtinhoadon.getValueAt(row, 3);
+            String tenNXB = (String) tbl_thongtinhoadon.getValueAt(row, 4);
+            String tenNN = (String) tbl_thongtinhoadon.getValueAt(row, 5);
+            String tenTG = (String) tbl_thongtinhoadon.getValueAt(row, 6);
+            float donGia = (float) tbl_thongtinhoadon.getValueAt(row, 7);
+            String tenKh = (String) tbl_thongtinhoadon.getValueAt(row, 8);
+
+            if (quatity > (int) tbl_thongtinhoadon.getValueAt(row, 3) || quatity < 0) {
+                MsgBox.warring(this, "Số lượng trả hàng không hợp lệ!!!");
+            } else {
+                tblModel = (DefaultTableModel) tbl_danhsachsanpham.getModel();
+                tblModel.addRow(new Object[]{
+                    idSach, tenSach, quatity, tenNXB, tenNN, tenTG, donGia
+                });
+                int i = ((int) tbl_thongtinhoadon.getValueAt(row, 3)) - quatity;
+                tbl_thongtinhoadon.setValueAt(i, row, 3);
+                txt_tienhoantra.setText(nf.format(TotalBuy()) + " đ");
+                priceTotal = TotalBuy();
+                TraHangViewModel dir = new TraHangViewModel();
+                dir.setDonGia(donGia);
+                dir.setIDSach(idSach);
+                dir.setSoLuong(soLuong);
+                list.add(dir);
+                 tbl_thongtinhoadon.clearSelection();
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Chưa chọn số lượng hoàn trả ???");
+        }
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,9 +185,19 @@ private HoaDonTraHangService svTraHang;
                 txt_timkiemhoadonCaretUpdate(evt);
             }
         });
+        txt_timkiemhoadon.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_timkiemhoadonFocusGained(evt);
+            }
+        });
         txt_timkiemhoadon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_timkiemhoadonActionPerformed(evt);
+            }
+        });
+        txt_timkiemhoadon.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_timkiemhoadonKeyReleased(evt);
             }
         });
 
@@ -141,10 +239,19 @@ private HoaDonTraHangService svTraHang;
 
             },
             new String [] {
-                "Mã trả hàng", "Mã Sách", "Tên khách hàng", "Tên sách", "Số lượng", "SÐT", "Đơn giá"
+                "ID Ban Hang", "ID Sach", "Tên sách", "Số lượng", "TenNXB", "TenNN", "TenTG", "Đơn giá", "HoTen"
             }
         ));
+        tbl_thongtinhoadon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_thongtinhoadonMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_thongtinhoadon);
+        if (tbl_thongtinhoadon.getColumnModel().getColumnCount() > 0) {
+            tbl_thongtinhoadon.getColumnModel().getColumn(2).setResizable(false);
+            tbl_thongtinhoadon.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -171,7 +278,7 @@ private HoaDonTraHangService svTraHang;
 
             },
             new String [] {
-                "Mã sản phẩm", "Tên khách hàng", "Tên sách", "Số lượng trả", "SÐT ", "Đơn giá"
+                "ID Sach", "Ten Sach", "So Luong", "tenNXB", "tenNN", "tenTG", "Don gia"
             }
         ));
         jScrollPane2.setViewportView(tbl_danhsachsanpham);
@@ -282,8 +389,20 @@ private HoaDonTraHangService svTraHang;
     }//GEN-LAST:event_txt_timkiemhoadonActionPerformed
 
     private void txt_timkiemhoadonCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_timkiemhoadonCaretUpdate
-       
+        TimTheoID();
     }//GEN-LAST:event_txt_timkiemhoadonCaretUpdate
+
+    private void txt_timkiemhoadonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_timkiemhoadonFocusGained
+        lbl_thongBao.setText("");
+    }//GEN-LAST:event_txt_timkiemhoadonFocusGained
+
+    private void txt_timkiemhoadonKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_timkiemhoadonKeyReleased
+        TimTheoID();
+    }//GEN-LAST:event_txt_timkiemhoadonKeyReleased
+
+    private void tbl_thongtinhoadonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_thongtinhoadonMouseClicked
+        insertTraHang();
+    }//GEN-LAST:event_tbl_thongtinhoadonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

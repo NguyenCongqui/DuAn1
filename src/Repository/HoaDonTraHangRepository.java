@@ -12,54 +12,62 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
+
 /**
  *
  * @author quanh
  */
 public class HoaDonTraHangRepository {
-    public List<TraHangViewModel> getAll(){
-        String query = "SELECT dbo.HoaDonBan.IdHoaDonBan, dbo.Sach.MaSach, dbo.KhachHang.Hoten, dbo.Sach.TenSach, dbo.CTHoaDonBan.SoLuong, dbo.KhachHang.Sdt, dbo.CTHoaDonBan.DonGia\n" +
-"FROM     dbo.HoaDonBan INNER JOIN\n" +
-"                  dbo.CTHoaDonBan ON dbo.HoaDonBan.IdHoaDonBan = dbo.CTHoaDonBan.IdHoaDonBan INNER JOIN\n" +
-"                  dbo.HoaDonTraHang ON dbo.HoaDonBan.IdHoaDonBan = dbo.HoaDonTraHang.IDHoaDonBanHang INNER JOIN\n" +
-"                  dbo.chitietHoaDonTraHang ON dbo.HoaDonTraHang.IDHoaDonTraHang = dbo.chitietHoaDonTraHang.IDHoaDonTraHang INNER JOIN\n" +
-"                  dbo.KhachHang ON dbo.HoaDonBan.IdKhachHang = dbo.KhachHang.IdKhachHang AND dbo.HoaDonTraHang.IDKhachHang = dbo.KhachHang.IdKhachHang CROSS JOIN\n" +
-"                  dbo.Sach";
+
+    public List<TraHangViewModel> getAll() {
+        String query = "SELECT I.IdHoaDonBan,P.IdSach,P.TenSach,E.SoLuong,S.TenNXB,M.TenNgonNGu,A.TenTacGia, E.DonGia,C.Hoten\n"
+                + "                FROM dbo.CTHoaDonBan E\n"
+                + "                JOIN dbo.HoaDonBan I ON I.IdHoaDonBan = E.IdHoaDonBan\n"
+                + "                JOIN dbo.KhachHang C ON C.IdKhachHang = I.IdKhachHang\n"
+                + "                JOIN dbo.ChiTietSach D ON D.IdCTSach = E.IdCTSach\n"
+                + "                JOIN dbo.Sach P ON P.IdSach = D.IdSach\n"
+                + "                JOIN dbo.NXB S ON S.IdNXB = D.IdNXB\n"
+                + "                JOIN dbo.NgonNgu M ON M.IdNgonNgu = D.IdNgonNgu\n"
+                + "                JOIN dbo.TacGia A ON A.IdTacGia = D.IdTacGia";
         List<TraHangViewModel> listTh = new ArrayList<>();
-        try(Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)){
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-               TraHangViewModel th = new TraHangViewModel(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getFloat(7));
-               listTh.add(th);
+            while (rs.next()) {
+                TraHangViewModel th = new TraHangViewModel(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getFloat(8), rs.getString(9));
+                listTh.add(th);
             }
             return listTh;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
         }
-    catch(Exception e){
-        e.printStackTrace(System.out);
-    }
         return null;
     }
-    public List<TraHangViewModel> searchTen(String temp){
-        String query = "SELECT dbo.HoaDonBan.IdHoaDonBan, dbo.Sach.MaSach, dbo.KhachHang.Hoten, dbo.Sach.TenSach, dbo.CTHoaDonBan.SoLuong, dbo.KhachHang.Sdt, dbo.CTHoaDonBan.DonGia\n" +
-"FROM     dbo.HoaDonBan INNER JOIN\n" +
-"                  dbo.CTHoaDonBan ON dbo.HoaDonBan.IdHoaDonBan = dbo.CTHoaDonBan.IdHoaDonBan INNER JOIN\n" +
-"                  dbo.HoaDonTraHang ON dbo.HoaDonBan.IdHoaDonBan = dbo.HoaDonTraHang.IDHoaDonBanHang INNER JOIN\n" +
-"                  dbo.chitietHoaDonTraHang ON dbo.HoaDonTraHang.IDHoaDonTraHang = dbo.chitietHoaDonTraHang.IDHoaDonTraHang INNER JOIN\n" +
-"                  dbo.KhachHang ON dbo.HoaDonBan.IdKhachHang = dbo.KhachHang.IdKhachHang AND dbo.HoaDonTraHang.IDKhachHang = dbo.KhachHang.IdKhachHang CROSS JOIN\n" +
-"                  dbo.Sach where Sach.MaSach LIKE '%"+temp+"%' order by Sach.MaSach asc";
-        List<TraHangViewModel> listTHV = new ArrayList<>();
-        try(Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)){
+
+    public List<TraHangViewModel> searchId(int id) {
+        String query = "SELECT I.IdHoaDonBan,P.IdSach,P.TenSach,E.SoLuong,S.TenNXB,M.TenNgonNGu,A.TenTacGia, E.DonGia,C.Hoten\n"
+                + "                FROM dbo.CTHoaDonBan E\n"
+                + "                JOIN dbo.HoaDonBan I ON I.IdHoaDonBan = E.IdHoaDonBan\n"
+                + "                JOIN dbo.KhachHang C ON C.IdKhachHang = I.IdKhachHang\n"
+                + "                JOIN dbo.ChiTietSach D ON D.IdCTSach = E.IdCTSach\n"
+                + "                JOIN dbo.Sach P ON P.IdSach = D.IdSach\n"
+                + "                JOIN dbo.NXB S ON S.IdNXB = D.IdNXB\n"
+                + "                JOIN dbo.NgonNgu M ON M.IdNgonNgu = D.IdNgonNgu\n"
+                + "                JOIN dbo.TacGia A ON A.IdTacGia = D.IdTacGia\n"
+                + "               WHERE E.IdHoaDonBan = ?";
+        List<TraHangViewModel> listSearch = new ArrayList<>();
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, id);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-               TraHangViewModel th = new TraHangViewModel(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getFloat(7));
-               listTHV.add(th);
+            
+            while (rs.next()) {
+                TraHangViewModel th = new TraHangViewModel(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getFloat(8), rs.getString(9));
+                listSearch.add(th);
             }
-            return listTHV;
+            return listSearch;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
         }
-    catch(Exception e){
-        e.printStackTrace(System.out);
-    }
         return null;
     }
-  
+
 }

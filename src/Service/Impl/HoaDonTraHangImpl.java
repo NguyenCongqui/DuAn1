@@ -22,8 +22,14 @@ private HoaDonTraHangRepository rp = new HoaDonTraHangRepository();
     }
 
     @Override
-    public List<TraHangViewModel> searchTen(String temp) {
-       return rp.searchTen(temp);
+    public List<TraHangViewModel> searchID(int id) {
+        return rp.searchId(id);
     }
+
+   
+
+    
+
+    
     
 }

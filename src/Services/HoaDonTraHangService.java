@@ -13,5 +13,5 @@ import java.util.List;
  */
 public interface HoaDonTraHangService {
     List<TraHangViewModel> getAll();
-    List<TraHangViewModel> searchTen(String temp);
+    List<TraHangViewModel> searchID(int id);
 }

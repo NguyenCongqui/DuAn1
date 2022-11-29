@@ -102,6 +102,11 @@ public class ViewHoaDonNhapHang extends javax.swing.JPanel {
 
         btn_TimKiem.setText("Tim Kiem");
         btn_TimKiem.setRadius(20);
+        btn_TimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TimKiemActionPerformed(evt);
+            }
+        });
 
         lbl_Search.setForeground(new java.awt.Color(255, 51, 51));
 
@@ -412,6 +417,10 @@ public void reset(){
         // TODO add your handling code here:
        reset();
     }//GEN-LAST:event_btn_ResetActionPerformed
+
+    private void btn_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_TimKiemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
