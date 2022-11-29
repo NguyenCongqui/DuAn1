@@ -12,4 +12,5 @@ import DomainModel.HoaDonBanHang;
  */
 public interface HoaDonBanHangService {
     String insert (HoaDonBanHang hdbh);
+
 }

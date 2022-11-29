@@ -23,5 +23,7 @@ public class HoaDonBanHangImpl implements HoaDonBanHangService{
     public String insert(HoaDonBanHang hdbh) {
      return rep.insert(hdbh);
     }
+
+
     
 }

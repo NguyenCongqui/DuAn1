@@ -7,11 +7,16 @@ package Repository;
 
 import DomainModel.HoaDonBanHang;
 import Utilities.DBConnection;
+import ViewModel.HDBanViewModel;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -66,4 +71,44 @@ public class HoaDonBanHangRepository {
         }
         return "Them khong thanh cong";
     }
+     
+     
+     public HDBanViewModel FindHDB(int k) {
+        String sql = "SELECT IdHoaDonBan,HoaDonBan.IdKhachHang,IdVoucher,NGAYTHANHTOAN,GhiChu,\n" +
+"statusPay,statusInvoice,TongTien,TienKhachDua,TienTraLai,TENKhachHang,\n" +
+"Users.IdUsers, Users.HoTen FROM dbo.HoaDonBan\n" +
+"JOIN dbo.Users ON Users.IdUsers = HoaDonBan.IdUsers \n" +
+"JOIN dbo.KhachHang ON KhachHang.IdKhachHang = HoaDonBan.IdKhachHang\n" +
+"WHERE IdHoaDonBan = ?";
+        List<HDBanViewModel > list = new ArrayList<>();
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+            ps.setObject(1, k);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                HDBanViewModel i = new HDBanViewModel();
+                i.setIdHoaDonBan(rs.getInt("IdHoaDonBan"));
+                i.setIdKhachHang(rs.getInt("IdKhachHang"));
+                i.setIdUsers(rs.getInt("IdUsers"));
+                i.setIdVoucher(rs.getInt("idVoucher"));
+                i.setNGAYTHANHTOAN(rs.getString("NGAYTHANHTOAN"));
+                i.setGhiChu(rs.getString("GhiChu"));
+                i.setStatusPay(rs.getBoolean("statusPay"));
+                i.setStatusInvoice(rs.getBoolean("statusInvoice"));
+                i.setTenKhachHang(rs.getString("TENKhachHang"));
+                i.setTenUser(rs.getString("HoTen"));
+                i.setTongTien(rs.getDouble("TongTien"));
+                i.setTienKhachDua(rs.getDouble("TienKhachDua"));
+                i.setTienTraLai(rs.getDouble("TienTraLai"));
+                return i;
+                // listHDNhap.add(i);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(NhapHangRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+
 }

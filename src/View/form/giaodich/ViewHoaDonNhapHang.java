@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author ADMIN
  */
 public class ViewHoaDonNhapHang extends javax.swing.JPanel {
-
+    
     DefaultTableModel tableModel = new DefaultTableModel();
     List<HDNhapSPViewModel> listCTHDNhap;
     NhapHangService nhapHangService = new NhapHangImpl();
@@ -33,7 +33,7 @@ public class ViewHoaDonNhapHang extends javax.swing.JPanel {
         nhapHangService = new NhapHangImpl();
         fillData();
     }
-
+    
     public void fillData() {
         tableModel = (DefaultTableModel) tbl1.getModel();
         tableModel.setRowCount(0);
@@ -46,7 +46,7 @@ public class ViewHoaDonNhapHang extends javax.swing.JPanel {
                 i.getTenNCC(),
                 i.getSdtNCC(),
                 i.getNGAYTAODON(),
-                 tongTien + " đ",
+                tongTien + " đ",
                 i.getMoTa()
             });
         }
@@ -94,12 +94,16 @@ public class ViewHoaDonNhapHang extends javax.swing.JPanel {
                 txt_SearchCaretUpdate(evt);
             }
         });
+        txt_Search.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_SearchFocusGained(evt);
+            }
+        });
 
         btn_TimKiem.setText("Tim Kiem");
         btn_TimKiem.setRadius(20);
 
         lbl_Search.setForeground(new java.awt.Color(255, 51, 51));
-        lbl_Search.setText("jLabel2");
 
         btn_Xuat.setText("Xuat");
         btn_Xuat.setRadius(20);
@@ -141,8 +145,8 @@ public class ViewHoaDonNhapHang extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_Search)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(lbl_Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -195,6 +199,11 @@ public class ViewHoaDonNhapHang extends javax.swing.JPanel {
 
         btn_Reset.setText("Reset");
         btn_Reset.setRadius(20);
+        btn_Reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ResetActionPerformed(evt);
+            }
+        });
 
         tbl1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -345,38 +354,64 @@ public class ViewHoaDonNhapHang extends javax.swing.JPanel {
 
     private void tbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl1MouseClicked
         // TODO add your handling code here:
-         if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             int row = tbl1.getSelectedRow();
             int id = (int) tbl1.getValueAt(row, 0);
             String totalMoney = (String) tbl1.getValueAt(row, 5);
             new ViewHoaDonChiTietNhapHang(id, totalMoney, (DefaultTableModel) tbl1.getModel(), tbl1.getSelectedRow()).setVisible(true);
         }
     }//GEN-LAST:event_tbl1MouseClicked
-
-    private void txt_SearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_SearchCaretUpdate
-  if (txt_Search.getText().isEmpty()) {
-            return;
+public void search(){
+    if (txt_Search.getText().isEmpty()) {
+            return ;
         }
-     tableModel = (DefaultTableModel) tbl1.getModel();
+    lbl_Search.setVisible(true);
+       DefaultTableModel tableModel = (DefaultTableModel) tbl1.getModel();
         tableModel.setRowCount(0);
-      int id = Integer.valueOf(txt_Search.getText());
-       HDNhapSPViewModel i  = nhapHangService.FindHDN(id);
-        if (listCTHDNhap.isEmpty()) {
+        int id = Integer.valueOf(txt_Search.getText());
+        HDNhapSPViewModel i = nhapHangService.FindHDN(id);
+        if (i == null) {
+            //lbl_Search.setVisible(true);
             lbl_Search.setText("Không có mặt hàng : " + id);
             return;
         }
         Float tongTien = nhapHangService.TongTien(i.getIDHoaDonNhapSanPham());
-            tableModel.addRow(new Object[]{
-                i.getIDHoaDonNhapSanPham(),
-                i.getTenUser(),
-                i.getTenNCC(),
-                i.getSdtNCC(),
-                i.getNGAYTAODON(),
-                 tongTien + " đ",
-                i.getMoTa()
-            });
+        tableModel.addRow(new Object[]{
+            i.getIDHoaDonNhapSanPham(),
+            i.getTenUser(),
+            i.getTenNCC(),
+            i.getSdtNCC(),
+            i.getNGAYTAODON(),
+            tongTien + " đ",
+            i.getMoTa()
+        });
         lbl_Search.setText("");
+}
+    private void txt_SearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_SearchCaretUpdate
+      search();
+        if(txt_Search.getText().isEmpty()){
+            lbl_Search.setVisible(false);
+            fillData();
+        }
     }//GEN-LAST:event_txt_SearchCaretUpdate
+
+    private void txt_SearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_SearchFocusGained
+        // TODO add your handling code here:
+        search();
+        if(txt_Search.getText().isEmpty()){
+            lbl_Search.setVisible(false);
+            fillData();
+        }
+    }//GEN-LAST:event_txt_SearchFocusGained
+public void reset(){
+     txt_Search.setText("");
+        lbl_Search.setVisible(false);
+        fillData();
+}
+    private void btn_ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ResetActionPerformed
+        // TODO add your handling code here:
+       reset();
+    }//GEN-LAST:event_btn_ResetActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

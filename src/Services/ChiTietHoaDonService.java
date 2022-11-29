@@ -23,4 +23,6 @@ public interface ChiTietHoaDonService {
     List<HDBanViewModel> getAll();
     
     List<CTHDBanViewModel> selectByIdBan(int id);
+    
+    HDBanViewModel FindHDB(int k) ;
 }

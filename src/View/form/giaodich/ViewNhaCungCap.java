@@ -115,6 +115,11 @@ public class ViewNhaCungCap extends javax.swing.JPanel {
                 txt_SearchCaretUpdate(evt);
             }
         });
+        txt_Search.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_SearchFocusGained(evt);
+            }
+        });
 
         btn_xuat.setText("Xuất");
         btn_xuat.setRadius(20);
@@ -350,7 +355,7 @@ public class ViewNhaCungCap extends javax.swing.JPanel {
             list = service.getAll();
             fillData();
         }
-Reset();
+        Reset();
     }//GEN-LAST:event_btn_CapNhapActionPerformed
 
     private void btn_ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ResetActionPerformed
@@ -387,18 +392,33 @@ Reset();
         txt_DiaChi.setText(k.getDiaChi());
         txt_SDT.setText(k.getSdt());
     }//GEN-LAST:event_tbl1MouseClicked
-
-    private void txt_SearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_SearchCaretUpdate
-        // TODO add your handling code here:
+    public void Search() {
+        DefaultTableModel model = (DefaultTableModel) tbl1.getModel();
+        model.setRowCount(0);
         String keyString = txt_Search.getText();
         list = service.search(keyString);
         if (list.isEmpty()) {
             lbl_Search.setText("Không có nhà cung câp : " + keyString);
             return;
         }
-        fillData();
+         for (NCC x : list) {
+            tableModel.addRow(new Object[]{
+                x.getIdNCC(),
+                x.getTenNCC(),
+                x.getDiaChi(),
+                x.getSdt(),});
+        }
         lbl_Search.setText("");
+    }
+    private void txt_SearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_SearchCaretUpdate
+        // TODO add your handling code here:
+        Search();
     }//GEN-LAST:event_txt_SearchCaretUpdate
+
+    private void txt_SearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_SearchFocusGained
+        // TODO add your handling code here:
+        Search();
+    }//GEN-LAST:event_txt_SearchFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,6 +6,7 @@ package Service.Impl;
 
 import DomainModel.ChiTietHoaDonBan;
 import Repository.ChiTietHoaDonRepository;
+import Repository.HoaDonBanHangRepository;
 import Services.ChiTietHoaDonService;
 import ViewModel.CTHDBanViewModel;
 import ViewModel.HDBanViewModel;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class ChiTietHoaDonImpl implements ChiTietHoaDonService{
     ChiTietHoaDonRepository rep = new ChiTietHoaDonRepository();
-    
+    HoaDonBanHangRepository rep1 =new HoaDonBanHangRepository();
     @Override
     public String insert(ChiTietHoaDonBan cthd) {
         return rep.insert(cthd);
@@ -33,4 +34,8 @@ public class ChiTietHoaDonImpl implements ChiTietHoaDonService{
         return rep.selectByIdBan(id);
     }
     
+        @Override
+    public  HDBanViewModel FindHDB(int k) {
+        return rep1.FindHDB(k);
+    }
 }
