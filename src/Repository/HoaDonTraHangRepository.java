@@ -65,29 +65,29 @@ public class HoaDonTraHangRepository {
         }
         return null;
     }
-    public List<CTHDTraHangViewModel> getAllTraChiTiet() {
-        String query = "SELECT I.IdHoaDonBan,P.IdSach,P.TenSach,E.SoLuong,S.TenNXB,M.TenNgonNGu,A.TenTacGia, E.DonGia,C.Hoten\n"
-                + "                FROM dbo.CTHoaDonBan E\n"
-                + "                JOIN dbo.HoaDonBan I ON I.IdHoaDonBan = E.IdHoaDonBan\n"
-                + "                JOIN dbo.KhachHang C ON C.IdKhachHang = I.IdKhachHang\n"
-                + "                JOIN dbo.ChiTietSach D ON D.IdCTSach = E.IdCTSach\n"
-                + "                JOIN dbo.Sach P ON P.IdSach = D.IdSach\n"
-                + "                JOIN dbo.NXB S ON S.IdNXB = D.IdNXB\n"
-                + "                JOIN dbo.NgonNgu M ON M.IdNgonNgu = D.IdNgonNgu\n"
-                + "                JOIN dbo.TacGia A ON A.IdTacGia = D.IdTacGia";
-        List<HDTraHangViewModel> listTra = new ArrayList<>();
-        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                HDTraHangViewModel th = new HDTraHangViewModel(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getString(4), rs.getInt(5), rs.getFloat(6), rs.getString(7));
-                listTra.add(th);
-            }
-            return listTra;
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
-        return null;
-    }
+//    public List<CTHDTraHangViewModel> getAllTraChiTiet() {
+//        String query = "SELECT I.IdHoaDonBan,P.IdSach,P.TenSach,E.SoLuong,S.TenNXB,M.TenNgonNGu,A.TenTacGia, E.DonGia,C.Hoten\n"
+//                + "                FROM dbo.CTHoaDonBan E\n"
+//                + "                JOIN dbo.HoaDonBan I ON I.IdHoaDonBan = E.IdHoaDonBan\n"
+//                + "                JOIN dbo.KhachHang C ON C.IdKhachHang = I.IdKhachHang\n"
+//                + "                JOIN dbo.ChiTietSach D ON D.IdCTSach = E.IdCTSach\n"
+//                + "                JOIN dbo.Sach P ON P.IdSach = D.IdSach\n"
+//                + "                JOIN dbo.NXB S ON S.IdNXB = D.IdNXB\n"
+//                + "                JOIN dbo.NgonNgu M ON M.IdNgonNgu = D.IdNgonNgu\n"
+//                + "                JOIN dbo.TacGia A ON A.IdTacGia = D.IdTacGia";
+//        List<HDTraHangViewModel> listTra = new ArrayList<>();
+//        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()) {
+//                HDTraHangViewModel th = new HDTraHangViewModel(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getString(4), rs.getInt(5), rs.getFloat(6), rs.getString(7));
+//                listTra.add(th);
+//            }
+//            return listTra;
+//        } catch (Exception e) {
+//            e.printStackTrace(System.out);
+//        }
+//        return null;
+//    }
     
     
     
