@@ -7,6 +7,8 @@ package Service.Impl;
 import Repository.HoaDonBanHangRepository;
 import Repository.HoaDonTraHangRepository;
 import Services.HoaDonTraHangService;
+import ViewModel.HDBanViewModel;
+import ViewModel.HDTraHangViewModel;
 import ViewModel.TraHangViewModel;
 import java.util.List;
 
@@ -26,10 +28,23 @@ private HoaDonTraHangRepository rp = new HoaDonTraHangRepository();
         return rp.searchId(id);
     }
 
+    @Override
+    public String insert(HDTraHangViewModel hdthvm) {
+        boolean in = rp.insert(hdthvm);
+        if(in){
+            return "them thanh cong";
+    }
+        return "them that bai";
    
+}
 
-    
+    @Override
+    public List<HDTraHangViewModel> getAllTra() {
+        return rp.getAllTra();
+    }
 
-    
-    
+    @Override
+    public Float TongTien(Float idHDT) {
+        return rp.TongTien(idHDT);
+    }
 }

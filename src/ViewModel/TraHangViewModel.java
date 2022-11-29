@@ -18,6 +18,7 @@ public class TraHangViewModel {
     private String tenTG;   
     private float donGia;
     private String tenKh;
+    private int idKhachHang;
 
 
     public TraHangViewModel() {
@@ -43,9 +44,14 @@ public class TraHangViewModel {
         this.tenSach = tenSach;
     }
 
-    
+    public int getIdKhachHang() {
+        return idKhachHang;
+    }
 
-    
+    public void setIdKhachHang(int idKhachHang) {
+        this.idKhachHang = idKhachHang;
+    }
+
 
     public float getDonGia() {
         return donGia;

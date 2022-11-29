@@ -4,18 +4,29 @@
  */
 package View.form.giaodich;
 
+import DomainModel.ChiTietHoaDonBan;
+import DomainModel.ChiTietSach;
+import DomainModel.HDTra;
+import DomainModel.KhachHang;
 import Service.Impl.HoaDonBanHangImpl;
 import Service.Impl.HoaDonTraHangImpl;
 import Services.HoaDonTraHangService;
+import View.login.Auth;
+import View.login.XDate;
 import View.login.txtField;
+import ViewModel.CTHDTraViewModel;
+import ViewModel.HDTraHangViewModel;
 import ViewModel.NhapHangViewModel;
 import ViewModel.TraHangViewModel;
 import com.fpt.utils.MsgBox;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,7 +37,7 @@ public class ViewTraHang extends javax.swing.JPanel {
 
     private DefaultTableModel tblModel = new DefaultTableModel();
     private DefaultTableModel tblModelList = new DefaultTableModel();
-    private List<TraHangViewModel> listTraHang = new ArrayList<>();
+    private List<HDTraHangViewModel> listTraHang = new ArrayList<>();
     private List<TraHangViewModel> list = new ArrayList<>();
     
     private HoaDonTraHangService svTraHang = new HoaDonTraHangImpl();
@@ -38,7 +49,7 @@ public class ViewTraHang extends javax.swing.JPanel {
         initComponents();
 //        tblModel = (DefaultTableModel) tbl_thongtinhoadon.getModel();
         svTraHang = (HoaDonTraHangService) new HoaDonTraHangImpl();
-        listTraHang = svTraHang.getAll();
+//        listTraHang = svTraHang.getAll();
 //        fillTable();
         showData();
     }
@@ -108,7 +119,7 @@ public class ViewTraHang extends javax.swing.JPanel {
     public void insertTraHang() {
         try {
             boolean flag = false;
-            int quatity = Integer.valueOf(MsgBox.prompt(this, "Nhập số lượng cần hoàn trả"));
+            int quatity = Integer.valueOf(JOptionPane.showInputDialog(this, "Nhập số lượng cần hoàn trả"));
             int row = tbl_thongtinhoadon.getSelectedRow();
             int idMaHD = (int) tbl_thongtinhoadon.getValueAt(row, 0);
             int idSach = (int) tbl_thongtinhoadon.getValueAt(row, 1);
@@ -121,7 +132,7 @@ public class ViewTraHang extends javax.swing.JPanel {
             String tenKh = (String) tbl_thongtinhoadon.getValueAt(row, 8);
 
             if (quatity > (int) tbl_thongtinhoadon.getValueAt(row, 3) || quatity < 0) {
-                MsgBox.warring(this, "Số lượng trả hàng không hợp lệ!!!");
+                JOptionPane.showMessageDialog(this, "Số lượng trả hàng không hợp lệ!!!");
             } else {
                 tblModel = (DefaultTableModel) tbl_danhsachsanpham.getModel();
                 tblModel.addRow(new Object[]{
@@ -139,10 +150,48 @@ public class ViewTraHang extends javax.swing.JPanel {
                  tbl_thongtinhoadon.clearSelection();
             }
         } catch (Exception e) {
-            MsgBox.alert(this, "Chưa chọn số lượng hoàn trả ???");
+            JOptionPane.showMessageDialog(this, "Chưa chọn số lượng hoàn trả ???");
         }
 
     }
+        public HDTraHangViewModel getInvoiceReturn() {
+        HDTraHangViewModel ir = new HDTraHangViewModel();
+//        Calendar c = Calendar.getInstance();
+//        ir.setThoiGian(c.getTime());
+        ir.setGhiChu(txt_ghichu.getText());
+        ir.setMaHoaDonBan(Integer.valueOf(txt_mahoadon.getText()));
+        ir.setTongTienHoanTra(TotalBuy());
+        ir.setIDUsers(Auth.user.getIdusers());
+        ir.setIdKhachHang(1);
+        List<TraHangViewModel> items = svTraHang.searchID(Integer.valueOf(txt_timkiemhoadon.getText()));
+//        for (TraHangViewModel p : items) {
+//            ir.setIdKhachHang(p.getIdKhachHang());
+//            ir.setKhachHang(p.getTenKh());
+//            break;
+//        }
+
+        return ir;
+    }
+        public void insertInvoiceReturn() {
+        HDTraHangViewModel ir = getInvoiceReturn();
+        svTraHang.insert(ir);
+        JOptionPane.showMessageDialog(this,"them thanh cong");
+        int row = tbl_danhsachsanpham.getRowCount();
+        for (int i = 0; i < listTraHang.size(); i++) {
+            HDTraHangViewModel de = listTraHang.get(i);
+            svTraHang.insert(de);
+           
+        }
+    }
+
+    private boolean validatFrom1() {
+        if (txt_ghichu.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Không de trong ghi chu !");
+            return false;
+        } 
+        return true;
+       }
+       
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -222,7 +271,7 @@ public class ViewTraHang extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
@@ -311,18 +360,36 @@ public class ViewTraHang extends javax.swing.JPanel {
 
         txt_tienhoantra.setLabelText("Tiền Hoàn Trả");
 
+        btn_trahang.setText("Trả Hàng");
+        btn_trahang.setRadius(20);
+        btn_trahang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_trahangActionPerformed(evt);
+            }
+        });
+
+        btn_xoa.setText("Xóa");
+        btn_xoa.setRadius(20);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_khachhang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt_mahoadon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt_ghichu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt_tienhoantra, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_trahang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(112, 112, 112))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_khachhang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_mahoadon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_ghichu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_tienhoantra, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))
+                        .addContainerGap(28, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,19 +402,12 @@ public class ViewTraHang extends javax.swing.JPanel {
                 .addComponent(txt_ghichu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(txt_tienhoantra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_trahang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        btn_trahang.setText("Trả Hàng");
-        btn_trahang.setRadius(20);
-        btn_trahang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_trahangActionPerformed(evt);
-            }
-        });
-
-        btn_xoa.setText("Xóa");
-        btn_xoa.setRadius(20);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -364,29 +424,19 @@ public class ViewTraHang extends javax.swing.JPanel {
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(12, 12, 12)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(btn_trahang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(127, 127, 127))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addGap(5, 5, 5)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_trahang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(133, 133, 133))
+                .addGap(90, 90, 90))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -411,7 +461,7 @@ public class ViewTraHang extends javax.swing.JPanel {
     }//GEN-LAST:event_tbl_thongtinhoadonMouseClicked
 
     private void btn_trahangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_trahangActionPerformed
-        
+    insertInvoiceReturn();
     }//GEN-LAST:event_btn_trahangActionPerformed
 
 

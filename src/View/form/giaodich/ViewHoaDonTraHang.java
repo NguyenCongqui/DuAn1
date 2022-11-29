@@ -4,17 +4,48 @@
  */
 package View.form.giaodich;
 
+import DomainModel.HoaDonTraHang;
+import Service.Impl.HoaDonTraHangImpl;
+import Services.HoaDonTraHangService;
+import ViewModel.HDTraHangViewModel;
+import java.lang.reflect.Array;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ADMIN
  */
 public class ViewHoaDonTraHang extends javax.swing.JPanel {
-
+private DefaultTableModel tblModel = new DefaultTableModel();
+private HoaDonTraHangService svTraHang = new HoaDonTraHangImpl();
+private List<HDTraHangViewModel> listTra = new ArrayList<>();
     /**
      * Creates new form TraHang
      */
     public ViewHoaDonTraHang() {
         initComponents();
+        fillData();
+    }
+    public void fillData() {
+        tblModel = (DefaultTableModel) tbl_HoaDonTraHang.getModel();
+        tblModel.setRowCount(0);
+        listTra = svTraHang.getAllTra();
+        for (HDTraHangViewModel i : listTra) {
+            Float tongTien = svTraHang.TongTien(Float.valueOf(i.getMaHoaDonBan()));
+            tblModel.addRow(new Object[]{
+                i.getMaHoaDonTra(),
+                i.getMaHoaDonBan(),
+                i.getThoiGian(),
+                i.getKhachHang(),
+                i.getSdt(),
+                1000 + "đ",
+                i.getGhiChu(),
+            });
+        }
     }
 
     /**
@@ -90,13 +121,13 @@ public class ViewHoaDonTraHang extends javax.swing.JPanel {
 
         tbl_HoaDonTraHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Ma Tra Hang", "Ma Hoa Don", "Thoi Gian", "Khach Hang", "SDT", "Tong Tien Hoan Tra", "Ghi Chu"
             }
         ));
         jScrollPane1.setViewportView(tbl_HoaDonTraHang);
