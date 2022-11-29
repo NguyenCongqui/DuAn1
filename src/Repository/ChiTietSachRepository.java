@@ -142,7 +142,7 @@ public class ChiTietSachRepository {
     }
 
     public List<MatHang01> getListConHang() {
-        String select = "SELECT MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu \n"
+        String select = "SELECT IdCTSach,MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu \n"
                 + "	INNER JOIN dbo.TacGia ON TacGia.IdTacGia = ChiTietSach.IdTacGia\n"
                 + "	INNER JOIN dbo.NXB ON NXB.IdNXB = ChiTietSach.IdNXB\n"
                 + "	WHERE SoLuongTon >0";
@@ -151,7 +151,7 @@ public class ChiTietSachRepository {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(select);
             while (rs.next()) {
-                ListMatHang.add(new MatHang01(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7)));
+                ListMatHang.add(new MatHang01(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
             }
             rs.close();
         } catch (SQLException ex) {
@@ -161,7 +161,7 @@ public class ChiTietSachRepository {
     }
 
     public List<MatHang01> getListHetHang() {
-        String select = "SELECT MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu \n"
+        String select = "SELECT IdCTSach,MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu \n"
                 + "	INNER JOIN dbo.TacGia ON TacGia.IdTacGia = ChiTietSach.IdTacGia\n"
                 + "	INNER JOIN dbo.NXB ON NXB.IdNXB = ChiTietSach.IdNXB\n"
                 + "	WHERE SoLuongTon <=0";
@@ -170,7 +170,7 @@ public class ChiTietSachRepository {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(select);
             while (rs.next()) {
-                ListMatHang.add(new MatHang01(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7)));
+                ListMatHang.add(new MatHang01(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
             }
             rs.close();
         } catch (SQLException ex) {
@@ -180,7 +180,7 @@ public class ChiTietSachRepository {
     }
 
     public List<MatHang01> getListDangKinhDoanh() {
-        String select = "SELECT MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu \n"
+        String select = "SELECT IdCTSach,MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu \n"
                 + "	INNER JOIN dbo.TacGia ON TacGia.IdTacGia = ChiTietSach.IdTacGia\n"
                 + "	INNER JOIN dbo.NXB ON NXB.IdNXB = ChiTietSach.IdNXB\n"
                 + "	WHERE Sach.TrangThai = 1";
@@ -189,7 +189,7 @@ public class ChiTietSachRepository {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(select);
             while (rs.next()) {
-                ListMatHang.add(new MatHang01(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7)));
+                ListMatHang.add(new MatHang01(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
             }
             rs.close();
         } catch (SQLException ex) {
@@ -199,7 +199,7 @@ public class ChiTietSachRepository {
     }
 
     public List<MatHang01> getListNgungKinhDoanh() {
-        String select = "SELECT MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu \n"
+        String select = "SELECT IdCTSach,MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu \n"
                 + "	INNER JOIN dbo.TacGia ON TacGia.IdTacGia = ChiTietSach.IdTacGia\n"
                 + "	INNER JOIN dbo.NXB ON NXB.IdNXB = ChiTietSach.IdNXB\n"
                 + "	WHERE Sach.TrangThai = 0";
@@ -208,7 +208,7 @@ public class ChiTietSachRepository {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(select);
             while (rs.next()) {
-                ListMatHang.add(new MatHang01(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7)));
+                ListMatHang.add(new MatHang01(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
             }
             rs.close();
         } catch (SQLException ex) {
@@ -218,7 +218,7 @@ public class ChiTietSachRepository {
     }
 
     public List<MatHang01> getListThapToiCao() {
-        String select = "SELECT MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu \n"
+        String select = "SELECT IdCTSach,MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu \n"
                 + "	INNER JOIN dbo.TacGia ON TacGia.IdTacGia = ChiTietSach.IdTacGia\n"
                 + "	INNER JOIN dbo.NXB ON NXB.IdNXB = ChiTietSach.IdNXB\n"
                 + "	ORDER BY GiaBan ASC";
@@ -227,7 +227,7 @@ public class ChiTietSachRepository {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(select);
             while (rs.next()) {
-                ListMatHang.add(new MatHang01(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7)));
+                ListMatHang.add(new MatHang01(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
             }
             rs.close();
         } catch (SQLException ex) {
@@ -237,7 +237,7 @@ public class ChiTietSachRepository {
     }
 
     public List<MatHang01> getListTuCaoToiThap() {
-        String select = "SELECT MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu \n"
+        String select = "SELECT IdCTSach,MaSach,TenSach,GiaBan,TenNgonNGu,TenTacGia,TenNXB,SoLuongTon FROM dbo.ChiTietSach INNER JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach INNER JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu \n"
                 + "	INNER JOIN dbo.TacGia ON TacGia.IdTacGia = ChiTietSach.IdTacGia\n"
                 + "	INNER JOIN dbo.NXB ON NXB.IdNXB = ChiTietSach.IdNXB\n"
                 + "	ORDER BY GiaBan DESC";
@@ -246,7 +246,7 @@ public class ChiTietSachRepository {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(select);
             while (rs.next()) {
-                ListMatHang.add(new MatHang01(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7)));
+                ListMatHang.add(new MatHang01(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
             }
             rs.close();
         } catch (SQLException ex) {

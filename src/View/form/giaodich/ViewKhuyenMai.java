@@ -215,6 +215,11 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
 
         btn_sua.setText("Sửa");
         btn_sua.setRadius(20);
+        btn_sua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_suaActionPerformed(evt);
+            }
+        });
 
         btn_xoa.setText("Xóa");
         btn_xoa.setRadius(20);
@@ -365,6 +370,16 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
         filldata();
         reset();
     }//GEN-LAST:event_btn_xoaActionPerformed
+
+    private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
+        // TODO add your handling code here:
+        Voucher newv= guidata();
+        newv.setIDVoucher(getVoucher());
+        JOptionPane.showMessageDialog(this, voucherService.updateVoucher(guidata()));
+        ListVoucher = voucherService.getListVouchers();
+        filldata();
+        reset();
+    }//GEN-LAST:event_btn_suaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
