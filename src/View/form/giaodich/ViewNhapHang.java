@@ -78,7 +78,7 @@ public class ViewNhapHang extends javax.swing.JPanel {
 
     private boolean validatFrom() {
         if (txt_SLgNhap.getText().isEmpty() || txt_Gia.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "ko dc de trong");
+            JOptionPane.showMessageDialog(this, "Không duoc de trong");
             return false;
         } else {
             try {
@@ -144,6 +144,11 @@ public class ViewNhapHang extends javax.swing.JPanel {
         txt_Search.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 txt_SearchCaretUpdate(evt);
+            }
+        });
+        txt_Search.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_SearchFocusGained(evt);
             }
         });
         txt_Search.addActionListener(new java.awt.event.ActionListener() {
@@ -495,7 +500,7 @@ public class ViewNhapHang extends javax.swing.JPanel {
     }
        private boolean validatFrom1() {
         if (txt_GhiChu.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "ko dc de trong");
+            JOptionPane.showMessageDialog(this, "Không de trong ghi chu !");
             return false;
         } 
         return true;
@@ -620,6 +625,11 @@ public String deleteLastKey(String str) {
     private void txt_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_SearchActionPerformed
+
+    private void txt_SearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_SearchFocusGained
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_txt_SearchFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
