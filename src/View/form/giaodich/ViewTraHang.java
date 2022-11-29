@@ -7,6 +7,7 @@ package View.form.giaodich;
 import Service.Impl.HoaDonBanHangImpl;
 import Service.Impl.HoaDonTraHangImpl;
 import Services.HoaDonTraHangService;
+import View.login.txtField;
 import ViewModel.NhapHangViewModel;
 import ViewModel.TraHangViewModel;
 import com.fpt.entity.CTHDTra;
@@ -87,8 +88,9 @@ public class ViewTraHang extends javax.swing.JPanel {
             i.getDonGia(),
             i.getTenKh(),
         });
+            txt_khachhang.setText(i.getTenKh());
+            txt_mahoadon.setText(String.valueOf(i.getIDMaHoaDon()));
         }
-        
         lbl_thongBao.setText("");
     }
     
