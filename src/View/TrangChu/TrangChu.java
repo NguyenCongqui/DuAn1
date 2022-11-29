@@ -32,6 +32,7 @@ import java.awt.Component;
 import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
@@ -52,6 +53,7 @@ public class TrangChu extends javax.swing.JFrame {
     public TrangChu() {
         initComponents();
         init();
+       setExtendedState(JFrame.MAXIMIZED_BOTH);
         
     }
 private void init(){
