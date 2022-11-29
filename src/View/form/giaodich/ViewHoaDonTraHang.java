@@ -4,7 +4,7 @@
  */
 package View.form.giaodich;
 
-import DomainModel.HoaDonTraHang;
+
 import Service.Impl.HoaDonTraHangImpl;
 import Services.HoaDonTraHangService;
 import ViewModel.HDTraHangViewModel;
