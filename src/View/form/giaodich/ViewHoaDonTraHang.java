@@ -130,13 +130,30 @@ private List<HDTraHangViewModel> listTra = new ArrayList<>();
             new String [] {
                 "Ma Tra Hang", "Ma Hoa Don", "Thoi Gian", "Khach Hang", "SDT", "Tong Tien Hoan Tra", "Ghi Chu"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbl_HoaDonTraHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_HoaDonTraHangMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbl_HoaDonTraHang);
+        if (tbl_HoaDonTraHang.getColumnModel().getColumnCount() > 0) {
+            tbl_HoaDonTraHang.getColumnModel().getColumn(0).setResizable(false);
+            tbl_HoaDonTraHang.getColumnModel().getColumn(1).setResizable(false);
+            tbl_HoaDonTraHang.getColumnModel().getColumn(2).setResizable(false);
+            tbl_HoaDonTraHang.getColumnModel().getColumn(3).setResizable(false);
+            tbl_HoaDonTraHang.getColumnModel().getColumn(4).setResizable(false);
+            tbl_HoaDonTraHang.getColumnModel().getColumn(5).setResizable(false);
+            tbl_HoaDonTraHang.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -184,12 +201,12 @@ private List<HDTraHangViewModel> listTra = new ArrayList<>();
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbl_HoaDonTraHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_HoaDonTraHangMouseClicked
-        if (evt.getClickCount() == 2) {
+          
             int row = tbl_HoaDonTraHang.getSelectedRow();
             int id = (int) tbl_HoaDonTraHang.getValueAt(row, 0);
             String totalMoney = (String) tbl_HoaDonTraHang.getValueAt(row, 5);
             new ViewHoaDonTraChiTiet(id, totalMoney, (DefaultTableModel) tbl_HoaDonTraHang.getModel(), tbl_HoaDonTraHang.getSelectedRow()).setVisible(true);
-        }
+        
     }//GEN-LAST:event_tbl_HoaDonTraHangMouseClicked
 
 
