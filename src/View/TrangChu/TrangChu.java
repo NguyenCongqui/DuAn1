@@ -139,6 +139,7 @@ menu1.addEvent(new EvenMenuSelected() {
                             return;
                         }
                     }
+            
             } else {
                 if (menuIndex == 3) {
                  if (subMenuIndex ==0) {
@@ -151,8 +152,6 @@ menu1.addEvent(new EvenMenuSelected() {
                              main.showForm(new ViewMatHang());
                         }else if (subMenuIndex == 1) {
                         main.showForm(new ViewSanPham() );
-                    }else if (subMenuIndex == 2) {
-                        main.showForm(new ViewNhaCungCap() );
                     }
                        
                     }else if (menuIndex == 0) {
@@ -164,24 +163,45 @@ menu1.addEvent(new EvenMenuSelected() {
                     else
                         if (menuIndex == 2) {
                         if (subMenuIndex ==2) {
-                             main.showForm(new ViewTraHang());
+                             main.showForm(new ViewDoiHang());
                         }else if (subMenuIndex == 3) {
-                            main.showForm(new ViewDoiHang());
-                        }else if (subMenuIndex == 4) {
                             main.showForm(new ViewHoaDonBanHang());
-                        }else if (subMenuIndex == 5) {
+                        }else if (subMenuIndex == 4) {
                             main.showForm(new ViewHoaDonNhapHang());
-                        }else if (subMenuIndex == 6) {
+                        }else if (subMenuIndex == 5) {
                             main.showForm(new ViewHoaDonTraHang());
-                        }else if (subMenuIndex == 7) {
+                        }else if (subMenuIndex == 6) {
                             main.showForm(new ViewHoaDonDoiHang());
                         }else if (subMenuIndex == 1) {
-                            main.showForm(new ViewNhapHang());
+                            main.showForm(new ViewTraHang());
                         }else if (subMenuIndex == 0) {
                             main.showForm(new ViewBanHang());
                         }
+                    }else if (menuIndex == 4) {
+                        if (subMenuIndex ==0) {
+                             main.showForm(new ViewThongKeDoanhThu());
+                        }else if (subMenuIndex == 1) {
+                            main.showForm(new ViewThongKeDoanhSo());
+                        }
+                        }else if (menuIndex == 5) {
+                        if (subMenuIndex ==0) {
+                             main.showForm(new ViewThongtincanhan());
+                        }else if (subMenuIndex == 1) {
+                            main.showForm(new ViewDoiMatKhau());
+                        }
+                        }else {
+
+                        int i = JOptionPane.showConfirmDialog(rootPane, "bạn có muốn đăng xuất không ");
+                        if (i == JOptionPane.YES_OPTION) {
+                            
+                            dispose();
+                            login.setVisible(true);
+                           
+                        } else {
+                            return;
+                        }
                     }
-                
+                   
             }
                
         }
