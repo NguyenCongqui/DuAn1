@@ -37,7 +37,18 @@ public class Users {
         this.role = role;
         this.TrangThai = TrangThai;
     }
+ public Users(String Hoten, Date Ngaysinh, boolean gioitinh, String DiaChi, String SoDienThoai, String Email, float Luong, boolean role, boolean TrangThai) {
 
+        this.Hoten = Hoten;
+        this.Ngaysinh = Ngaysinh;
+        this.gioitinh = gioitinh;
+        this.DiaChi = DiaChi;
+        this.SoDienThoai = SoDienThoai;
+        this.Email = Email;
+        this.Luong = Luong;
+        this.role = role;
+        this.TrangThai = TrangThai;
+    }
     
 
     public int getIdusers() {

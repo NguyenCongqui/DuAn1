@@ -4,17 +4,79 @@
  */
 package View.form.giaodich;
 
+import DomainModel.Users;
+
+import Service.Impl.UsersImpl;
+
+import Services.UsersService;
+import View.login.XDate;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ADMIN
  */
 public class ViewThemNhanVienFrame extends javax.swing.JFrame {
 
+    private DefaultTableModel tblModel;
+    private List<Users> us = new ArrayList<>();
+    private UsersService usersService = new UsersImpl();
+
     /**
      * Creates new form ViewThemNhanVienFrame
      */
     public ViewThemNhanVienFrame() {
         initComponents();
+
+    }
+
+    public void clearForm() {
+        txt_ten.setText("");
+        txt_dienthoai.setText("");
+        txt_email.setText("");
+        txt_luong.setText("");
+        txt_ngaysinh.setText("");
+        txt_diachi.setText("");
+        txt_username.setText("");
+        txt_password.setText("");
+        rbt_danglamviec.setSelected(false);
+        rbt_nghilam.setSelected(false);
+        rbt_quanly.setSelected(false);
+        rbt_nhanvien.setSelected(false);
+        rbt_nam.setSelected(false);
+        rbt_nu.setSelected(false);
+        btn_them.setEnabled(true);
+    }
+
+    public Users getGui() {
+        Users us = new Users();
+        us.setHoten(txt_ten.getText());
+        us.setSoDienThoai(txt_dienthoai.getText());
+        us.setEmail(txt_email.getText());
+        us.setLuong(Float.parseFloat(txt_luong.getText()));
+        if (rbt_danglamviec.isSelected() == true) {
+            us.setTrangThai(true);
+        } else {
+            us.setTrangThai(false);
+        }
+        us.setNgaysinh(XDate.toDate(txt_ngaysinh.getText(), "dd-MM-yyyy"));
+        if (rbt_nam.isSelected() == true) {
+            us.setTrangThai(true);
+        } else {
+            us.setTrangThai(false);
+        }
+        if (rbt_quanly.isSelected() == true) {
+            us.setTrangThai(true);
+        } else {
+            us.setTrangThai(false);
+        }
+        return us;
+
     }
 
     /**
@@ -26,32 +88,35 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        textField1 = new View.form.TextField();
-        textField2 = new View.form.TextField();
-        textField3 = new View.form.TextField();
-        textField4 = new View.form.TextField();
-        textField5 = new View.form.TextField();
-        textField6 = new View.form.TextField();
+        txt_ten = new View.form.TextField();
+        txt_ngaysinh = new View.form.TextField();
+        txt_email = new View.form.TextField();
+        txt_dienthoai = new View.form.TextField();
+        txt_luong = new View.form.TextField();
+        txt_password = new View.form.TextField();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txt_diachi = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
-        radioButtonCustom1 = new View.form.RadioButtonCustom();
-        radioButtonCustom2 = new View.form.RadioButtonCustom();
-        textField7 = new View.form.TextField();
+        rbt_nam = new View.form.RadioButtonCustom();
+        rbt_nu = new View.form.RadioButtonCustom();
+        txt_username = new View.form.TextField();
         jLabel4 = new javax.swing.JLabel();
-        radioButtonCustom3 = new View.form.RadioButtonCustom();
-        radioButtonCustom4 = new View.form.RadioButtonCustom();
+        rbt_danglamviec = new View.form.RadioButtonCustom();
+        rbt_nghilam = new View.form.RadioButtonCustom();
         jLabel5 = new javax.swing.JLabel();
-        radioButtonCustom5 = new View.form.RadioButtonCustom();
-        radioButtonCustom6 = new View.form.RadioButtonCustom();
-        myButton1 = new View.form.MyButton();
-        myButton2 = new View.form.MyButton();
-        myButton3 = new View.form.MyButton();
-        myButton4 = new View.form.MyButton();
+        rbt_quanly = new View.form.RadioButtonCustom();
+        rbt_nhanvien = new View.form.RadioButtonCustom();
+        btn_them = new View.form.MyButton();
+        btn_sua = new View.form.MyButton();
+        btn_lammoi = new View.form.MyButton();
+        btn_huy = new View.form.MyButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,64 +125,80 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Thêm Nhân Viên");
 
-        textField1.setLabelText("Tên");
+        txt_ten.setLabelText("Tên");
 
-        textField2.setLabelText("Ngày Sinh");
+        txt_ngaysinh.setLabelText("Ngày Sinh");
 
-        textField3.setLabelText("Email");
+        txt_email.setLabelText("Email");
 
-        textField4.setLabelText("Điện Thoại");
+        txt_dienthoai.setLabelText("Điện Thoại");
 
-        textField5.setLabelText("Lương");
+        txt_luong.setLabelText("Lương");
 
-        textField6.setLabelText("PassWord");
+        txt_password.setLabelText("PassWord");
 
         jLabel2.setText("Địa chỉ");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txt_diachi.setColumns(20);
+        txt_diachi.setRows(5);
+        jScrollPane1.setViewportView(txt_diachi);
 
         jLabel3.setText("Giới Tính ");
 
-        radioButtonCustom1.setBackground(new java.awt.Color(255, 255, 255));
-        radioButtonCustom1.setText("Nam");
+        rbt_nam.setBackground(new java.awt.Color(102, 255, 102));
+        buttonGroup1.add(rbt_nam);
+        rbt_nam.setText("Nam");
 
-        radioButtonCustom2.setBackground(new java.awt.Color(255, 255, 255));
-        radioButtonCustom2.setText("Nữ");
+        rbt_nu.setBackground(new java.awt.Color(51, 255, 51));
+        buttonGroup1.add(rbt_nu);
+        rbt_nu.setText("Nữ");
 
-        textField7.setLabelText("UserName");
+        txt_username.setLabelText("UserName");
 
         jLabel4.setText("Tình Trạng");
 
-        radioButtonCustom3.setBackground(new java.awt.Color(255, 255, 255));
-        radioButtonCustom3.setText("Đang Làm Việc");
+        rbt_danglamviec.setBackground(new java.awt.Color(51, 255, 51));
+        buttonGroup2.add(rbt_danglamviec);
+        rbt_danglamviec.setText("Đang Làm Việc");
 
-        radioButtonCustom4.setBackground(new java.awt.Color(255, 255, 255));
-        radioButtonCustom4.setText("Nghỉ Làm");
+        rbt_nghilam.setBackground(new java.awt.Color(51, 255, 51));
+        buttonGroup2.add(rbt_nghilam);
+        rbt_nghilam.setText("Nghỉ Làm");
 
         jLabel5.setText("Chức Vụ");
 
-        radioButtonCustom5.setBackground(new java.awt.Color(255, 255, 255));
-        radioButtonCustom5.setText("Quản Lý ");
+        rbt_quanly.setBackground(new java.awt.Color(102, 255, 102));
+        buttonGroup3.add(rbt_quanly);
+        rbt_quanly.setText("Quản Lý ");
 
-        radioButtonCustom6.setBackground(new java.awt.Color(255, 255, 255));
-        radioButtonCustom6.setText("Nhân Viên");
+        rbt_nhanvien.setBackground(new java.awt.Color(51, 255, 51));
+        buttonGroup3.add(rbt_nhanvien);
+        rbt_nhanvien.setText("Nhân Viên");
 
-        myButton1.setText("Thêm ");
-        myButton1.setRadius(20);
-
-        myButton2.setText("Sửa");
-        myButton2.setRadius(20);
-
-        myButton3.setText("Làm Mới");
-        myButton3.setRadius(20);
-
-        myButton4.setText("Hủy");
-        myButton4.setRadius(20);
-        myButton4.addActionListener(new java.awt.event.ActionListener() {
+        btn_them.setText("Thêm ");
+        btn_them.setRadius(20);
+        btn_them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton4ActionPerformed(evt);
+                btn_themActionPerformed(evt);
+            }
+        });
+
+        btn_sua.setText("Sửa");
+        btn_sua.setRadius(20);
+
+        btn_lammoi.setText("Làm Mới");
+        btn_lammoi.setRadius(20);
+        btn_lammoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_lammoiActionPerformed(evt);
+            }
+        });
+
+        btn_huy.setText("Hủy");
+        btn_huy.setRadius(20);
+        btn_huy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_huyActionPerformed(evt);
             }
         });
 
@@ -132,41 +213,41 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(49, 49, 49)
-                                .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(textField4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(textField5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(textField7, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_ten, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_dienthoai, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_luong, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel4)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(radioButtonCustom3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rbt_danglamviec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(radioButtonCustom4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(rbt_nghilam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(50, 50, 50)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(myButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_lammoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(48, 48, 48)
-                                .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btn_huy, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(radioButtonCustom5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rbt_quanly, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(radioButtonCustom6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(rbt_nhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel5)
-                            .addComponent(textField6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(textField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_ngaysinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel3)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(radioButtonCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rbt_nam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(radioButtonCustom2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(rbt_nu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -176,8 +257,8 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_ten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_ngaysinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -188,35 +269,35 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(9, 9, 9)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(radioButtonCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(radioButtonCustom2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(rbt_nam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rbt_nu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(textField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_dienthoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(textField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_luong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(radioButtonCustom3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbt_danglamviec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(radioButtonCustom4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(radioButtonCustom5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(radioButtonCustom6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(rbt_nghilam, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rbt_quanly, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rbt_nhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(43, 43, 43)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(myButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_lammoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_huy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
@@ -255,10 +336,48 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void myButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton4ActionPerformed
+    private void btn_huyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_huyActionPerformed
         // TODO add your handling code here:
+         this.dispose();
 
-    }//GEN-LAST:event_myButton4ActionPerformed
+    }//GEN-LAST:event_btn_huyActionPerformed
+
+    private void btn_lammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lammoiActionPerformed
+        // TODO add your handling code here:
+        clearForm();
+    }//GEN-LAST:event_btn_lammoiActionPerformed
+
+    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
+        // TODO add your handling code here:
+        
+        String ten = txt_ten.getText();
+        String dienthoai = txt_dienthoai.getText();
+        String email = txt_email.getText();
+        Float luong = Float.parseFloat(txt_luong.getText());
+        Date ngaysinh = XDate.toDate(txt_ngaysinh.getText(), "dd-MM-yyyy");
+        boolean gt = rbt_nam.isSelected();
+        if (gt) {
+            rbt_nam.setSelected(true);
+        } else {
+            rbt_nu.setSelected(true);
+        }
+
+        boolean tt = rbt_danglamviec.isSelected();
+        if (tt) {
+            rbt_danglamviec.setSelected(true);
+        }
+        rbt_nghilam.setSelected(true);
+
+        boolean cv = rbt_quanly.isSelected();
+        if (cv) {
+            rbt_quanly.setSelected(true);
+        } else {
+            rbt_nhanvien.setSelected(true);
+        }
+       Users us= new Users( ten, ngaysinh, gt, email, dienthoai, email, luong, cv, tt);
+        JOptionPane.showMessageDialog(this, usersService.them(us));
+
+    }//GEN-LAST:event_btn_themActionPerformed
 
     /**
      * @param args the command line arguments
@@ -296,6 +415,13 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private View.form.MyButton btn_huy;
+    private View.form.MyButton btn_lammoi;
+    private View.form.MyButton btn_sua;
+    private View.form.MyButton btn_them;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -304,23 +430,19 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private View.form.MyButton myButton1;
-    private View.form.MyButton myButton2;
-    private View.form.MyButton myButton3;
-    private View.form.MyButton myButton4;
-    private View.form.RadioButtonCustom radioButtonCustom1;
-    private View.form.RadioButtonCustom radioButtonCustom2;
-    private View.form.RadioButtonCustom radioButtonCustom3;
-    private View.form.RadioButtonCustom radioButtonCustom4;
-    private View.form.RadioButtonCustom radioButtonCustom5;
-    private View.form.RadioButtonCustom radioButtonCustom6;
-    private View.form.TextField textField1;
-    private View.form.TextField textField2;
-    private View.form.TextField textField3;
-    private View.form.TextField textField4;
-    private View.form.TextField textField5;
-    private View.form.TextField textField6;
-    private View.form.TextField textField7;
+    private View.form.RadioButtonCustom rbt_danglamviec;
+    private View.form.RadioButtonCustom rbt_nam;
+    private View.form.RadioButtonCustom rbt_nghilam;
+    private View.form.RadioButtonCustom rbt_nhanvien;
+    private View.form.RadioButtonCustom rbt_nu;
+    private View.form.RadioButtonCustom rbt_quanly;
+    private javax.swing.JTextArea txt_diachi;
+    private View.form.TextField txt_dienthoai;
+    private View.form.TextField txt_email;
+    private View.form.TextField txt_luong;
+    private View.form.TextField txt_ngaysinh;
+    private View.form.TextField txt_password;
+    private View.form.TextField txt_ten;
+    private View.form.TextField txt_username;
     // End of variables declaration//GEN-END:variables
 }

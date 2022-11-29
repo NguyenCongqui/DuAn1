@@ -4,15 +4,46 @@
  */
 package View.form.giaodich;
 
+import DomainModel.Users;
+import Service.Impl.UsersImpl;
+import Services.UsersService;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ADMIN
  */
 public class ViewNhanVien extends javax.swing.JPanel {
 
+    private DefaultTableModel tblModel;
+    private List<Users> us = new ArrayList<>();
+    private UsersService usersService = new UsersImpl();
     ViewThemNhanVienFrame nhanvien = new ViewThemNhanVienFrame();
+
     public ViewNhanVien() {
         initComponents();
+        tblModel = (DefaultTableModel) tbl_nhanvien.getModel();
+        us = usersService.getListnhanvien();
+        showData(us);
+        
+    }
+
+    public void showData(List<Users> listnv) {
+        tblModel.setRowCount(0);
+        for (Users us : listnv) {
+            Object[] row = new Object[]{us.getIdusers(),
+                us.getHoten(),
+                us.isRole() == true ? "quan li" : "nhan vien",
+                us.isGioitinh() == true ? "Nam" : "Nu",
+                us.getNgaysinh(), 
+                us.getDiaChi(),
+                us.getSoDienThoai(),
+                us.getEmail(),
+                us.getLuong()};
+            tblModel.addRow(row);
+        }
     }
 
     /**
@@ -27,15 +58,15 @@ public class ViewNhanVien extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        textField1 = new View.form.TextField();
-        myButton1 = new View.form.MyButton();
-        combobox1 = new View.form.Combobox();
-        btn_ThemNhanVien = new View.form.MyButton();
-        btn_xoa1 = new View.form.MyButton();
-        btn_xoa2 = new View.form.MyButton();
+        txt_tim = new View.form.TextField();
+        btn_tim = new View.form.MyButton();
+        cbb_tinhtrang = new View.form.Combobox();
+        btn_themnhanvien = new View.form.MyButton();
+        btn_xoanhanvien = new View.form.MyButton();
+        btn_xuat = new View.form.MyButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableColumn1 = new View.form.TableColumn();
+        tbl_nhanvien = new View.form.TableColumn();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -44,26 +75,31 @@ public class ViewNhanVien extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Nhân Viên");
 
-        textField1.setLabelText("Tìm theo tên hoặc mã");
-
-        myButton1.setText("Tìm");
-        myButton1.setRadius(20);
-
-        combobox1.setLabeText("Tình Trạng ");
-
-        btn_ThemNhanVien.setText("Thêm Nhân Viên");
-        btn_ThemNhanVien.setRadius(20);
-        btn_ThemNhanVien.addActionListener(new java.awt.event.ActionListener() {
+        txt_tim.setLabelText("Tìm theo tên hoặc mã");
+        txt_tim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_ThemNhanVienActionPerformed(evt);
+                txt_timActionPerformed(evt);
             }
         });
 
-        btn_xoa1.setText("Xóa Nhân Viên");
-        btn_xoa1.setRadius(20);
+        btn_tim.setText("Tìm");
+        btn_tim.setRadius(20);
 
-        btn_xoa2.setText("Xuất");
-        btn_xoa2.setRadius(20);
+        cbb_tinhtrang.setLabeText("Tình Trạng ");
+
+        btn_themnhanvien.setText("Thêm Nhân Viên");
+        btn_themnhanvien.setRadius(20);
+        btn_themnhanvien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themnhanvienActionPerformed(evt);
+            }
+        });
+
+        btn_xoanhanvien.setText("Xóa Nhân Viên");
+        btn_xoanhanvien.setRadius(20);
+
+        btn_xuat.setText("Xuất");
+        btn_xuat.setRadius(20);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -73,17 +109,17 @@ public class ViewNhanVien extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_tim, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_tim, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
-                .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbb_tinhtrang, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73)
-                .addComponent(btn_ThemNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_themnhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
-                .addComponent(btn_xoa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_xoanhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(btn_xoa2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_xuat, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -92,32 +128,32 @@ public class ViewNhanVien extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_tim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_tim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbb_tinhtrang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_ThemNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_xoa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_xoa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_themnhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_xoanhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_xuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
 
-        tableColumn1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_nhanvien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Họ Tên", "Chức Vụ", "giới Tính", "Ngày Sinh", "Địa Chỉ", "Số Điện Thoại", "email", "lương"
             }
         ));
-        jScrollPane1.setViewportView(tableColumn1);
+        jScrollPane1.setViewportView(tbl_nhanvien);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -161,25 +197,29 @@ public class ViewNhanVien extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_ThemNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemNhanVienActionPerformed
+    private void btn_themnhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themnhanvienActionPerformed
         // TODO add your handling code here:
         nhanvien.setVisible(true);
-        
-    }//GEN-LAST:event_btn_ThemNhanVienActionPerformed
+
+    }//GEN-LAST:event_btn_themnhanvienActionPerformed
+
+    private void txt_timActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_timActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_timActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private View.form.MyButton btn_ThemNhanVien;
-    private View.form.MyButton btn_xoa1;
-    private View.form.MyButton btn_xoa2;
-    private View.form.Combobox combobox1;
+    private View.form.MyButton btn_themnhanvien;
+    private View.form.MyButton btn_tim;
+    private View.form.MyButton btn_xoanhanvien;
+    private View.form.MyButton btn_xuat;
+    private View.form.Combobox cbb_tinhtrang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private View.form.MyButton myButton1;
-    private View.form.TableColumn tableColumn1;
-    private View.form.TextField textField1;
+    private View.form.TableColumn tbl_nhanvien;
+    private View.form.TextField txt_tim;
     // End of variables declaration//GEN-END:variables
 }

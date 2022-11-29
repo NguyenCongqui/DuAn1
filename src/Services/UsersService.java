@@ -4,7 +4,6 @@
  */
 package Services;
 
-
 import DomainModel.Users;
 import java.util.List;
 
@@ -13,5 +12,10 @@ import java.util.List;
  * @author ADMIN
  */
 public interface UsersService {
-   Users getUsers(int k);
+List<Users> getListnhanvien();
+    Users getUsers(int k);
+
+    String them(Users us);
+
+    
 }
