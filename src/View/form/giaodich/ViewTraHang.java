@@ -14,7 +14,6 @@ import Services.HoaDonTraHangService;
 import View.login.Auth;
 import View.login.XDate;
 import View.login.txtField;
-
 import ViewModel.HDTraHangViewModel;
 import ViewModel.NhapHangViewModel;
 import ViewModel.TraHangViewModel;

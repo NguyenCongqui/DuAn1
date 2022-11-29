@@ -7,6 +7,7 @@ package Service.Impl;
 import Repository.HoaDonBanHangRepository;
 import Repository.HoaDonTraHangRepository;
 import Services.HoaDonTraHangService;
+import ViewModel.CTHDTraHangViewModel;
 import ViewModel.HDBanViewModel;
 import ViewModel.HDTraHangViewModel;
 import ViewModel.TraHangViewModel;
@@ -46,5 +47,15 @@ private HoaDonTraHangRepository rp = new HoaDonTraHangRepository();
     @Override
     public Float TongTien(Float idHDT) {
         return rp.TongTien(idHDT);
+    }
+
+    @Override
+    public List<CTHDTraHangViewModel> getAllTRaCT() {
+        return rp.getAllTraChiTiet();
+    }
+
+    @Override
+    public List<CTHDTraHangViewModel> SearchTKID(int id) {
+        return rp.selectByIdNhap(id);
     }
 }

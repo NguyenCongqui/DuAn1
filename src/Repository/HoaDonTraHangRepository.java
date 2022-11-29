@@ -65,29 +65,31 @@ public class HoaDonTraHangRepository {
         }
         return null;
     }
-//    public List<CTHDTraHangViewModel> getAllTraChiTiet() {
-//        String query = "SELECT I.IdHoaDonBan,P.IdSach,P.TenSach,E.SoLuong,S.TenNXB,M.TenNgonNGu,A.TenTacGia, E.DonGia,C.Hoten\n"
-//                + "                FROM dbo.CTHoaDonBan E\n"
-//                + "                JOIN dbo.HoaDonBan I ON I.IdHoaDonBan = E.IdHoaDonBan\n"
-//                + "                JOIN dbo.KhachHang C ON C.IdKhachHang = I.IdKhachHang\n"
-//                + "                JOIN dbo.ChiTietSach D ON D.IdCTSach = E.IdCTSach\n"
-//                + "                JOIN dbo.Sach P ON P.IdSach = D.IdSach\n"
-//                + "                JOIN dbo.NXB S ON S.IdNXB = D.IdNXB\n"
-//                + "                JOIN dbo.NgonNgu M ON M.IdNgonNgu = D.IdNgonNgu\n"
-//                + "                JOIN dbo.TacGia A ON A.IdTacGia = D.IdTacGia";
-//        List<HDTraHangViewModel> listTra = new ArrayList<>();
-//        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                HDTraHangViewModel th = new HDTraHangViewModel(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getString(4), rs.getInt(5), rs.getFloat(6), rs.getString(7));
-//                listTra.add(th);
-//            }
-//            return listTra;
-//        } catch (Exception e) {
-//            e.printStackTrace(System.out);
-//        }
-//        return null;
-//    }
+    public List<CTHDTraHangViewModel> getAllTraChiTiet() {
+        String query = "SELECT dbo.chitietHoaDonTraHang.IDchitietHoaDonTraHang, dbo.Sach.TenSach, dbo.KhachHang.Hoten, dbo.NgonNgu.TenNgonNGu, dbo.NXB.TenNXB, dbo.TacGia.TenTacGia, dbo.chitietHoaDonTraHang.SoLuong, \n" +
+"                  dbo.HoaDonTraHang.totalReturn\n" +
+"FROM     dbo.chitietHoaDonTraHang INNER JOIN\n" +
+"                  dbo.ChiTietSach ON dbo.chitietHoaDonTraHang.IDChiTietSach = dbo.ChiTietSach.IdCTSach INNER JOIN\n" +
+"                  dbo.HoaDonTraHang ON dbo.chitietHoaDonTraHang.IDHoaDonTraHang = dbo.HoaDonTraHang.IDHoaDonTraHang INNER JOIN\n" +
+"                  dbo.HoaDonBan ON dbo.HoaDonTraHang.IDHoaDonBanHang = dbo.HoaDonBan.IdHoaDonBan INNER JOIN\n" +
+"                  dbo.KhachHang ON dbo.HoaDonTraHang.IDKhachHang = dbo.KhachHang.IdKhachHang AND dbo.HoaDonBan.IdKhachHang = dbo.KhachHang.IdKhachHang INNER JOIN\n" +
+"                  dbo.NgonNgu ON dbo.ChiTietSach.IdNgonNgu = dbo.NgonNgu.IdNgonNgu INNER JOIN\n" +
+"                  dbo.NXB ON dbo.ChiTietSach.IdNXB = dbo.NXB.IdNXB INNER JOIN\n" +
+"                  dbo.Sach ON dbo.ChiTietSach.IdSach = dbo.Sach.IdSach INNER JOIN\n" +
+"                  dbo.TacGia ON dbo.ChiTietSach.IdTacGia = dbo.TacGia.IdTacGia";
+        List<CTHDTraHangViewModel> listTra = new ArrayList<>();
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                CTHDTraHangViewModel th = new CTHDTraHangViewModel(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7),  rs.getInt(8));
+                listTra.add(th);
+            }
+            return listTra;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
     
     
     
@@ -161,5 +163,31 @@ public class HoaDonTraHangRepository {
         }
         return null;
     }
+    public List<CTHDTraHangViewModel> selectByIdNhap(int id)  {
+        String sql = " SELECT dbo.chitietHoaDonTraHang.IDchitietHoaDonTraHang, dbo.Sach.TenSach, dbo.KhachHang.Hoten, dbo.NgonNgu.TenNgonNGu, dbo.NXB.TenNXB, dbo.TacGia.TenTacGia, dbo.chitietHoaDonTraHang.SoLuong, \n" +
+"                  dbo.HoaDonTraHang.totalReturn\n" +
+"FROM     dbo.chitietHoaDonTraHang INNER JOIN\n" +
+"                  dbo.ChiTietSach ON dbo.chitietHoaDonTraHang.IDChiTietSach = dbo.ChiTietSach.IdCTSach INNER JOIN\n" +
+"                  dbo.HoaDonTraHang ON dbo.chitietHoaDonTraHang.IDHoaDonTraHang = dbo.HoaDonTraHang.IDHoaDonTraHang INNER JOIN\n" +
+"                  dbo.HoaDonBan ON dbo.HoaDonTraHang.IDHoaDonBanHang = dbo.HoaDonBan.IdHoaDonBan INNER JOIN\n" +
+"                  dbo.KhachHang ON dbo.HoaDonTraHang.IDKhachHang = dbo.KhachHang.IdKhachHang AND dbo.HoaDonBan.IdKhachHang = dbo.KhachHang.IdKhachHang INNER JOIN\n" +
+"                  dbo.NgonNgu ON dbo.ChiTietSach.IdNgonNgu = dbo.NgonNgu.IdNgonNgu INNER JOIN\n" +
+"                  dbo.NXB ON dbo.ChiTietSach.IdNXB = dbo.NXB.IdNXB INNER JOIN\n" +
+"                  dbo.Sach ON dbo.ChiTietSach.IdSach = dbo.Sach.IdSach INNER JOIN\n" +
+"                  dbo.TacGia ON dbo.ChiTietSach.IdTacGia = dbo.TacGia.IdTacGia where dbo.chitietHoaDonTraHang.IDchitietHoaDonTraHang = ?";
+        List<CTHDTraHangViewModel> list = new ArrayList<>();
+        try(Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                CTHDTraHangViewModel t = new CTHDTraHangViewModel(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8));
+                list.add(t);
+            }
+            return list;
+        }catch(SQLException e){
+            e.printStackTrace(System.out);
+        }
+            return null;
 
 }
+}
+

@@ -28,6 +28,7 @@ private List<HDTraHangViewModel> listTra = new ArrayList<>();
      */
     public ViewHoaDonTraHang() {
         initComponents();
+        setOpaque(false);
         fillData();
     }
     public void fillData() {
@@ -130,6 +131,11 @@ private List<HDTraHangViewModel> listTra = new ArrayList<>();
                 "Ma Tra Hang", "Ma Hoa Don", "Thoi Gian", "Khach Hang", "SDT", "Tong Tien Hoan Tra", "Ghi Chu"
             }
         ));
+        tbl_HoaDonTraHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_HoaDonTraHangMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_HoaDonTraHang);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -176,6 +182,15 @@ private List<HDTraHangViewModel> listTra = new ArrayList<>();
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tbl_HoaDonTraHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_HoaDonTraHangMouseClicked
+        if (evt.getClickCount() == 2) {
+            int row = tbl_HoaDonTraHang.getSelectedRow();
+            int id = (int) tbl_HoaDonTraHang.getValueAt(row, 0);
+            String totalMoney = (String) tbl_HoaDonTraHang.getValueAt(row, 5);
+            new ViewHoaDonTraChiTiet(id, totalMoney, (DefaultTableModel) tbl_HoaDonTraHang.getModel(), tbl_HoaDonTraHang.getSelectedRow()).setVisible(true);
+        }
+    }//GEN-LAST:event_tbl_HoaDonTraHangMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

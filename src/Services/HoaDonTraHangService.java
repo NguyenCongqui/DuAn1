@@ -4,6 +4,7 @@
  */
 package Services;
 
+import ViewModel.CTHDTraHangViewModel;
 import ViewModel.HDBanViewModel;
 import ViewModel.HDTraHangViewModel;
 import ViewModel.TraHangViewModel;
@@ -19,4 +20,6 @@ public interface HoaDonTraHangService {
     List<TraHangViewModel> searchID(int id);
     String insert(HDTraHangViewModel hdthvm);
     Float TongTien(Float idHDT);
+    List<CTHDTraHangViewModel> getAllTRaCT();
+    List<CTHDTraHangViewModel> SearchTKID(int id);
 }
