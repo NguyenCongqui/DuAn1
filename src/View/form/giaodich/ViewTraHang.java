@@ -10,7 +10,6 @@ import Services.HoaDonTraHangService;
 import View.login.txtField;
 import ViewModel.NhapHangViewModel;
 import ViewModel.TraHangViewModel;
-import com.fpt.entity.CTHDTra;
 import com.fpt.utils.MsgBox;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -341,6 +340,11 @@ public class ViewTraHang extends javax.swing.JPanel {
 
         btn_trahang.setText("Trả Hàng");
         btn_trahang.setRadius(20);
+        btn_trahang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_trahangActionPerformed(evt);
+            }
+        });
 
         btn_xoa.setText("Xóa");
         btn_xoa.setRadius(20);
@@ -405,6 +409,10 @@ public class ViewTraHang extends javax.swing.JPanel {
     private void tbl_thongtinhoadonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_thongtinhoadonMouseClicked
         insertTraHang();
     }//GEN-LAST:event_tbl_thongtinhoadonMouseClicked
+
+    private void btn_trahangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_trahangActionPerformed
+        
+    }//GEN-LAST:event_btn_trahangActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

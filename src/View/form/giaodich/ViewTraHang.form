@@ -426,6 +426,9 @@
         <Property name="text" type="java.lang.String" value="Tr&#x1ea3; H&#xe0;ng"/>
         <Property name="radius" type="int" value="20"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_trahangActionPerformed"/>
+      </Events>
     </Component>
     <Component class="View.form.MyButton" name="btn_xoa">
       <Properties>
