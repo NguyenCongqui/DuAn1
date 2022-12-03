@@ -39,6 +39,10 @@ public class ViewNhanVien extends javax.swing.JPanel {
         tblModel = (DefaultTableModel) tbl_nhanvien.getModel();
         us = nhanvienservice.ListgetNhanVien();
         showData();
+//        if (webcam == null) {
+//            return;
+//        }
+//        webcam.close();
         
     }
     Locale lc = new Locale("vn", "VN");

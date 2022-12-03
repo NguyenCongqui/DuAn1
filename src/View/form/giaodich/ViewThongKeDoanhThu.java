@@ -79,6 +79,7 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btn_xuat = new View.form.MyButton();
@@ -128,6 +129,7 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
+        buttonGroup1.add(rdo_bieudoduong);
         rdo_bieudoduong.setText("Biểu Đồ Đường");
         rdo_bieudoduong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,6 +137,7 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
             }
         });
 
+        buttonGroup1.add(rdo_bieudocot);
         rdo_bieudocot.setText("Biểu Đồ Cột");
 
         btn_bieudo.setText("Biểu đồ");
@@ -262,6 +265,7 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.form.MyButton btn_bieudo;
     private View.form.MyButton btn_xuat;
+    private javax.swing.ButtonGroup buttonGroup1;
     private View.form.Combobox cbo_nam;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

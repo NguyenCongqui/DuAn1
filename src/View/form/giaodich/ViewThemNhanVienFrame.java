@@ -62,7 +62,7 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
        //  webcam.close();
-       //initwebcam();
+//       initwebcam();
        
 
     }
@@ -125,7 +125,7 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
     panel.setPreferredSize(size);
     panel.setFPSDisplayed(true);
   
-   jPanel3.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 300));
+   jPanel3.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 150));
   
     executor.execute(this);
     
