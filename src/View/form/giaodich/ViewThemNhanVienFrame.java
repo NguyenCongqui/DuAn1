@@ -710,8 +710,13 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
         if (txt2.length == 7) {
              txt_cccd.setText(txt2[0]);
              txt_ten.setText(txt2[2]);
-             txt_ngaysinh.setText(txt2[3]);
+             String ngaysinh = txt2[3];
+             String ngay = ngaysinh.substring(0,2);
+             String Thang = ngaysinh.substring(2,4);
+             String Nam = ngaysinh.substring(4,8);
+          //   txt_ngaysinh.setText(txt2[3]);
              txt_diachi.setText(txt2[5]);
+             txt_ngaysinh.setText(ngay+"-"+Thang+"-"+Nam);
             // Txt_02.setText(txt2[6]);
 
             if (txt2[4].equalsIgnoreCase("nam")) {
