@@ -74,8 +74,8 @@ public void addEventShowPopup(EventShowPopupMenu eventShowPopup) {
      public void initMenuItem() {
          if (Auth.isManager()) {
              addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\1.png"), "Trang Chủ"));
-          addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\12.png"), "Quản Lý Sách", "Mặt Hàng", "Sản Phẩm", "Nhà Cung Cấp"));
-          addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\4.png"), "Giao Dịch", "Bán Hàng", "Nhập Hàng", "Trả Hàng","Đổi Hàng","Hóa Đơn Bán Hàng","Hóa Đơn Nhập Hàng","Hóa Đơn Trả Hàng","Hóa Đơn Đổi Hàng"));
+          addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\12.png"), "Quản Lý Sách", "Sách", "Chi Tiết Sách", "Nhà Cung Cấp"));
+          addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\4.png"), "Giao Dịch", "Nhập Hàng", "Bán Hàng", "Trả Hàng","Đổi Hàng","Hóa Đơn Bán Hàng","Hóa Đơn Nhập Hàng","Hóa Đơn Trả Hàng","Hóa Đơn Đổi Hàng"));
           addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\10.png"), "Khách Hàng", "Danh Sách Khách Hàng"));
           addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\5.png"), "Nhân Viên", "Danh Sách Nhân Viên"));
           addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\3.png"), "Thống Kế", "Doanh Thu", "Doanh Số "));
@@ -84,10 +84,10 @@ public void addEventShowPopup(EventShowPopupMenu eventShowPopup) {
           addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\18.png"), "Đăng Xuất"));
          } else {
           addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\1.png"), "Trang Chủ"));
-          addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\12.png"), "Quản Lý Sách", "Mặt Hàng", "Sản Phẩm"));
+          addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\12.png"), "Quản Lý Sách", "Sách", "Chi Tiết Sách", "Nhà Cung Cấp"));
           addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\4.png"), "Giao Dịch", "Bán Hàng", "Trả Hàng","Đổi Hàng","Hóa Đơn Bán Hàng","Hóa Đơn Nhập Hàng","Hóa Đơn Trả Hàng","Hóa Đơn Đổi Hàng"));
           addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\10.png"), "Khách Hàng", "Danh Sách Khách Hàng"));
-          addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\3.png"), "Thống Kế", "Doanh Thu", "Doanh Số "));
+          addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\3.png"), "Thống Kê", "Doanh Thu", "Doanh Số "));
           addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\canhan.png"), "Cá Nhân", "Thông Tin Cá Nhân ", "Đổi Mật Khẩu"));  
           addMenu(new ModelMenu(new ImageIcon("src\\icon\\icon\\18.png"), "Đăng Xuất"));
          }

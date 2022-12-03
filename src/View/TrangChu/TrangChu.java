@@ -76,9 +76,10 @@ menu1.addEvent(new EvenMenuSelected() {
                 }else
                     if (menuIndex == 1) {
                         if (subMenuIndex ==0) {
-                             main.showForm(new ViewMatHang());
+                             main.showForm(new ViewSanPham() );
                         }else if (subMenuIndex == 1) {
-                        main.showForm(new ViewSanPham() );
+                            main.showForm(new ViewMatHang());
+                        
                     }else if (subMenuIndex == 2) {
                         main.showForm(new ViewNhaCungCap() );
                     }
@@ -104,9 +105,10 @@ menu1.addEvent(new EvenMenuSelected() {
                         }else if (subMenuIndex == 7) {
                             main.showForm(new ViewHoaDonDoiHang());
                         }else if (subMenuIndex == 1) {
-                            main.showForm(new ViewNhapHang());
-                        }else if (subMenuIndex == 0) {
                             main.showForm(new ViewBanHang());
+                        }else if (subMenuIndex == 0) {
+                             main.showForm(new ViewNhapHang());
+                           
                         }
                     }else
                             if (menuIndex == 4) {
@@ -149,9 +151,10 @@ menu1.addEvent(new EvenMenuSelected() {
                 }else
                     if (menuIndex == 1) {
                         if (subMenuIndex ==0) {
-                             main.showForm(new ViewMatHang());
+                            main.showForm(new ViewSanPham() );
+                             
                         }else if (subMenuIndex == 1) {
-                        main.showForm(new ViewSanPham() );
+                        main.showForm(new ViewMatHang());
                     }
                        
                     }else if (menuIndex == 0) {
