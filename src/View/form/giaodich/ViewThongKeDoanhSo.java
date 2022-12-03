@@ -4,17 +4,52 @@
  */
 package View.form.giaodich;
 
+import Repository.ThongKeDoanhSoRepository;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ACER
  */
 public class ViewThongKeDoanhSo extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ThongKeDoanhSo
-     */
+    ThongKeDoanhSoRepository rep = new ThongKeDoanhSoRepository();
     public ViewThongKeDoanhSo() {
         initComponents();
+        fillComboboxNam();
+        rdo_bieudocot.setSelected(true);
+    }
+     public void fillComboboxNam() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cbo_nam.getModel();
+        model.removeAllElements();
+        List<Integer> list = rep.selectNam();
+        for (Integer nam : list) {
+            model.addElement(nam);
+        }
+
+    }
+     public void fillComboboxThang() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cbo_thang.getModel();
+        model.removeAllElements();
+        int years = (int) cbo_nam.getSelectedItem();
+
+        List<Integer> list = rep.selectMonths(years);
+        for (Integer nam : list) {
+            model.addElement(nam);
+        }
+        fillTable();
+    }
+     public void fillTable() {
+        DefaultTableModel model = (DefaultTableModel) tbl_thongkedoanhso.getModel();
+        model.setRowCount(0);
+        int year = (int) cbo_nam.getSelectedItem();
+        int month = (int) cbo_thang.getSelectedItem();
+        List<Object[]> list = rep.getSalesStatisticalDAO(year, month);
+        for (Object[] row : list) {
+            model.addRow(row);
+        }
     }
 
     /**
@@ -26,15 +61,16 @@ public class ViewThongKeDoanhSo extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btn_xuat = new View.form.MyButton();
         jPanel2 = new javax.swing.JPanel();
-        txt_nam = new View.form.TextField();
-        txt_thang = new View.form.TextField();
-        rbt_bieudoduong = new javax.swing.JRadioButton();
-        rbt_bieudocot = new javax.swing.JRadioButton();
+        rdo_bieudoduong = new javax.swing.JRadioButton();
+        rdo_bieudocot = new javax.swing.JRadioButton();
         btn_bieudo = new View.form.MyButton();
+        cbo_thang = new View.form.Combobox();
+        cbo_nam = new View.form.Combobox();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_thongkedoanhso = new View.form.TableColumn();
@@ -77,18 +113,16 @@ public class ViewThongKeDoanhSo extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        txt_nam.setLabelText("Năm");
-
-        txt_thang.setLabelText("Tháng");
-
-        rbt_bieudoduong.setText("Biểu Đồ Đường");
-        rbt_bieudoduong.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(rdo_bieudoduong);
+        rdo_bieudoduong.setText("Biểu Đồ Đường");
+        rdo_bieudoduong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbt_bieudoduongActionPerformed(evt);
+                rdo_bieudoduongActionPerformed(evt);
             }
         });
 
-        rbt_bieudocot.setText("Biểu Đồ Cột");
+        buttonGroup1.add(rdo_bieudocot);
+        rdo_bieudocot.setText("Biểu Đồ Cột");
 
         btn_bieudo.setText("Biểu Đồ");
         btn_bieudo.setToolTipText("");
@@ -99,35 +133,45 @@ public class ViewThongKeDoanhSo extends javax.swing.JPanel {
             }
         });
 
+        cbo_thang.setLabeText("Tháng");
+        cbo_thang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbo_thangActionPerformed(evt);
+            }
+        });
+
+        cbo_nam.setLabeText("Năm");
+        cbo_nam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbo_namActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_nam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt_thang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(rbt_bieudoduong)
-                    .addComponent(rbt_bieudocot, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rdo_bieudoduong)
+                    .addComponent(rdo_bieudocot, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_bieudo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(67, Short.MAX_VALUE))
+            .addComponent(cbo_thang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(cbo_nam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(txt_nam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(txt_thang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(rbt_bieudoduong)
+                .addGap(30, 30, 30)
+                .addComponent(cbo_nam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbo_thang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(rdo_bieudoduong)
                 .addGap(18, 18, 18)
-                .addComponent(rbt_bieudocot)
+                .addComponent(rdo_bieudocot)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_bieudo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
@@ -138,23 +182,26 @@ public class ViewThongKeDoanhSo extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã Sản Phẩm", "Tên Sản Phẩm", "Số Lượng Bán"
             }
         ));
         jScrollPane1.setViewportView(tbl_thongkedoanhso);
+        if (tbl_thongkedoanhso.getColumnModel().getColumnCount() > 0) {
+            tbl_thongkedoanhso.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 837, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1024, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -168,9 +215,9 @@ public class ViewThongKeDoanhSo extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +228,7 @@ public class ViewThongKeDoanhSo extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -189,27 +236,48 @@ public class ViewThongKeDoanhSo extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_xuatActionPerformed
 
-    private void rbt_bieudoduongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbt_bieudoduongActionPerformed
+    private void rdo_bieudoduongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_bieudoduongActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rbt_bieudoduongActionPerformed
+    }//GEN-LAST:event_rdo_bieudoduongActionPerformed
 
     private void btn_bieudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bieudoActionPerformed
         // TODO add your handling code here:
+        if (rdo_bieudocot.isSelected()) {
+            new BieuDoCot((DefaultTableModel) tbl_thongkedoanhso.getModel(), null).setVisible(true);
+        
+        } else {
+            new BieuDoDuong((DefaultTableModel) tbl_thongkedoanhso.getModel()).setVisible(true);
+        }
     }//GEN-LAST:event_btn_bieudoActionPerformed
+
+    private void cbo_namActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_namActionPerformed
+        // TODO add your handling code here:
+        fillComboboxThang();
+    }//GEN-LAST:event_cbo_namActionPerformed
+
+    private void cbo_thangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_thangActionPerformed
+        // TODO add your handling code here:
+        if (cbo_thang.getSelectedItem() == null) {
+            return;
+        } else {
+            fillTable();
+        }
+    }//GEN-LAST:event_cbo_thangActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.form.MyButton btn_bieudo;
     private View.form.MyButton btn_xuat;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private View.form.Combobox cbo_nam;
+    private View.form.Combobox cbo_thang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JRadioButton rbt_bieudocot;
-    private javax.swing.JRadioButton rbt_bieudoduong;
+    private javax.swing.JRadioButton rdo_bieudocot;
+    private javax.swing.JRadioButton rdo_bieudoduong;
     private View.form.TableColumn tbl_thongkedoanhso;
-    private View.form.TextField txt_nam;
-    private View.form.TextField txt_thang;
     // End of variables declaration//GEN-END:variables
 }

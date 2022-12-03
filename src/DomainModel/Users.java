@@ -5,6 +5,7 @@
  */
 package DomainModel;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -19,13 +20,15 @@ public class Users {
     private String DiaChi,SoDienThoai,Email;
     private float Luong;
     private boolean role,TrangThai;
+    private String CCCD;
+    
     
 
     public Users() {
         
     }
 
-    public Users(int idusers, String Hoten, Date Ngaysinh, boolean gioitinh, String DiaChi, String SoDienThoai, String Email, float Luong, boolean role, boolean TrangThai) {
+    public Users(int idusers, String Hoten, Date Ngaysinh, boolean gioitinh, String DiaChi, String SoDienThoai, String Email, float Luong, boolean role, boolean TrangThai, String CCCD) {
         this.idusers = idusers;
         this.Hoten = Hoten;
         this.Ngaysinh = Ngaysinh;
@@ -36,19 +39,11 @@ public class Users {
         this.Luong = Luong;
         this.role = role;
         this.TrangThai = TrangThai;
+        this.CCCD = CCCD;
     }
- public Users(String Hoten, Date Ngaysinh, boolean gioitinh, String DiaChi, String SoDienThoai, String Email, float Luong, boolean role, boolean TrangThai) {
 
-        this.Hoten = Hoten;
-        this.Ngaysinh = Ngaysinh;
-        this.gioitinh = gioitinh;
-        this.DiaChi = DiaChi;
-        this.SoDienThoai = SoDienThoai;
-        this.Email = Email;
-        this.Luong = Luong;
-        this.role = role;
-        this.TrangThai = TrangThai;
-    }
+    
+
     
 
     public int getIdusers() {
@@ -70,7 +65,10 @@ public class Users {
     public Date getNgaysinh() {
         return Ngaysinh;
     }
-
+// public String getNgaysinh() {
+//        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+//        return df.format(Ngaysinh);
+//    }
     public void setNgaysinh(Date Ngaysinh) {
         this.Ngaysinh = Ngaysinh;
     }
@@ -129,6 +127,14 @@ public class Users {
 
     public void setTrangThai(boolean TrangThai) {
         this.TrangThai = TrangThai;
+    }
+
+    public String getCCCD() {
+        return CCCD;
+    }
+
+    public void setCCCD(String CCCD) {
+        this.CCCD = CCCD;
     }
 
  

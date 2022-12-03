@@ -6,6 +6,7 @@ package Repository;
 
 import Utilities.DBConnection;
 import Utilities.jdbcHelper;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -16,17 +17,18 @@ import java.util.List;
  *
  * @author ADMIN
  */
-public class DoanhThuRepository {
-    DBConnection db;
+public class ThongKeDoanhSoRepository {
+     DBConnection db;
     ResultSet rs = null;
     Statement st = null;
     PreparedStatement pst = null;
 
-    public DoanhThuRepository() {
+    public ThongKeDoanhSoRepository() {
     }
+
     
     
-    public List<Integer> selectYears() {
+    public List<Integer> selectNam() {
         String sql = "SELECT DISTINCT YEAR(ngayTao) FROM dbo.HoaDonBan ORDER BY YEAR(ngayTao) DESC";
         List<Integer> list = new ArrayList<>();
         try {
@@ -42,7 +44,44 @@ public class DoanhThuRepository {
         }
         return list;
     }
-       List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
+    public List<Integer> selectThang(int nam) {
+        String sql01 = "SELECT MONTH(ngayTao) FROM dbo.HoaDonBan WHERE YEAR(ngayTao) = ?  GROUP BY MONTH(ngayTao)";
+        List<Integer> list = new ArrayList<>();
+        try {
+           // ResultSet rs = jdbcHelper.query(sql);
+           st = db.getConnection().createStatement();
+            rs = st.executeQuery(sql01);
+            while (rs.next()) {
+                list.add(rs.getInt(1));
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    public List<Integer> selectMonths(int year) {
+        String sql = "SELECT MONTH(ngayTao) FROM dbo.HoaDonBan WHERE YEAR(ngayTao) = ?  GROUP BY MONTH(ngayTao)";
+        List<Integer> list = new ArrayList<>();
+        try {
+
+            ResultSet rs = jdbcHelper.query(sql, year);
+            while (rs.next()) {
+                list.add(rs.getInt(1));
+            }
+
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    public List<Object[]> getSalesStatisticalDAO(Integer year, Integer month) {
+        String sql = "{call sach_thongKe(?,?)}";
+        String[] cols = {"Id", "TenSach", "SoLuongBan"};
+        return getListOfArray(sql, cols, year, month);
+    }
+    List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
         List<Object[]> list = new ArrayList<>();
         try {
             ResultSet rs = jdbcHelper.query(sql, args);
@@ -59,26 +98,4 @@ public class DoanhThuRepository {
         }
         return list;
     }
-         public List<Object[]> getSalesStatisticalRevenue(Integer year) {
-        String sql = "{call Sach_DoanhThu(?)}";
-        String[] cols = {"Thang", "SanPamBan", "TongGiaBan", "TongGiaChi", "TongNhapHang"};
-        return getListOfArray(sql, cols, year);
-    }
-         
-         
-          public int getSelectImport(int month, int year) throws Exception {
-        String sql = "SELECT IIF(SUM(SoLuong *priceImport) IS NULL, 0, SUM(SoLuong *priceImport)) moneyImport FROM\n" +
-"	dbo.HoaDonNhapSanPham JOIN dbo.ChiTietHoaDonNhapSanPham ON\n" +
-"	ChiTietHoaDonNhapSanPham.IDHoaDonNhapSanPham = HoaDonNhapSanPham.IDHoaDonNhapSanPham\n" +
-"                WHERE MONTH(NGAYTAODON) = ? and YEAR(NGAYTAODON) = ?\n" +
-"            GROUP BY MONTH(NGAYTAODON)";
-        int moneyImport = 0;
-        ResultSet rs = jdbcHelper.query(sql, month, year);
-        while (rs.next()) {
-            moneyImport = rs.getInt(1);
-        }
-        rs.getStatement().getConnection().close();
-        return moneyImport;
-    }
-         
 }

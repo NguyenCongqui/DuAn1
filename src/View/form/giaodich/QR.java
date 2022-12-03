@@ -30,18 +30,18 @@ import org.w3c.dom.css.Counter;
  *
  * @author ADMIN
  */
-public class QR extends javax.swing.JFrame implements Runnable,ThreadFactory{
+public class QR extends javax.swing.JFrame implements ThreadFactory{
 
     private WebcamPanel panel = null;
     private static Webcam webcam = null;
     private Executor executor = Executors.newSingleThreadExecutor(this);
-    
+  
     
     
     
     public QR() {
         initComponents();
-        initwebcam();
+     // initwebcam();
         
     }
     public static void closeCam(){
@@ -61,21 +61,19 @@ public class QR extends javax.swing.JFrame implements Runnable,ThreadFactory{
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         result_field = new javax.swing.JTextField();
         btn_ma = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 30, -1, 10));
-
         jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 65, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 40, -1, -1));
         jPanel1.add(result_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 430, 238, 39));
 
         btn_ma.setText("su dung ma");
@@ -93,6 +91,17 @@ public class QR extends javax.swing.JFrame implements Runnable,ThreadFactory{
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 470, -1, -1));
+
+        jButton2.setText("Mo cam");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 440, -1, -1));
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 520, 300));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,6 +133,17 @@ public class QR extends javax.swing.JFrame implements Runnable,ThreadFactory{
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        initwebcam();
+        
+//        Runnable r = null;
+//        Thread t = new Thread(r);
+//        t.setDaemon(true);
+//        t.start();
+       // jPanel2.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 300));
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public static void main(String[] args) {
         QR qr = new QR();
         qr.setVisible(true);
@@ -139,8 +159,10 @@ private void initwebcam(){
     panel.setFPSDisplayed(true);
   
    jPanel2.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 300));
+   
   
-    executor.execute(this);
+//    executor.execute(this);
+    //run();
     
 }
 public void run(){
@@ -178,6 +200,7 @@ public void run(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_ma;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -186,7 +209,7 @@ public void run(){
 
     @Override
     public Thread newThread(Runnable r) {
-        Thread t = new Thread(r, "My Thread");
+        Thread t = new Thread(r);
         t.setDaemon(true);
         return t ;
         

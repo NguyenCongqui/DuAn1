@@ -420,9 +420,53 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
                 txt_SearchCaretUpdate(evt);
             }
         });
+        txt_Search.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                txt_SearchHierarchyChanged(evt);
+            }
+        });
+        txt_Search.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                txt_SearchAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                txt_SearchAncestorMoved(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         txt_Search.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txt_SearchFocusGained(evt);
+            }
+        });
+        txt_Search.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
+                txt_SearchAncestorMoved1(evt);
+            }
+            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
+                txt_SearchAncestorResized(evt);
+            }
+        });
+        txt_Search.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txt_SearchMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                txt_SearchMouseReleased(evt);
+            }
+        });
+        txt_Search.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentMoved(java.awt.event.ComponentEvent evt) {
+                txt_SearchComponentMoved(evt);
+            }
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                txt_SearchComponentResized(evt);
+            }
+        });
+        txt_Search.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txt_SearchPropertyChange(evt);
             }
         });
         txt_Search.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -872,7 +916,7 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
 //           return;
 //       }
 //        filldata01();
-fillTableWhenFind();
+//fillTableWhenFind();
     }//GEN-LAST:event_txt_SearchCaretUpdate
 
     private void txt_SearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_SearchKeyReleased
@@ -901,8 +945,59 @@ fillTableWhenFind();
 
     private void txt_SearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_SearchFocusGained
         // TODO add your handling code here:
-        fillTableWhenFind();
+        
+        
     }//GEN-LAST:event_txt_SearchFocusGained
+
+    private void txt_SearchAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txt_SearchAncestorAdded
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txt_SearchAncestorAdded
+
+    private void txt_SearchAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txt_SearchAncestorMoved
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txt_SearchAncestorMoved
+
+    private void txt_SearchComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_txt_SearchComponentMoved
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txt_SearchComponentMoved
+
+    private void txt_SearchAncestorMoved1(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_txt_SearchAncestorMoved1
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_txt_SearchAncestorMoved1
+
+    private void txt_SearchAncestorResized(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_txt_SearchAncestorResized
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_txt_SearchAncestorResized
+
+    private void txt_SearchComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_txt_SearchComponentResized
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txt_SearchComponentResized
+
+    private void txt_SearchHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_txt_SearchHierarchyChanged
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_txt_SearchHierarchyChanged
+
+    private void txt_SearchMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_SearchMouseReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txt_SearchMouseReleased
+
+    private void txt_SearchMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_SearchMousePressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txt_SearchMousePressed
+
+    private void txt_SearchPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txt_SearchPropertyChange
+        // TODO add your handling code here:
+        fillTableWhenFind();
+    }//GEN-LAST:event_txt_SearchPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

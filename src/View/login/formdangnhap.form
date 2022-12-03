@@ -62,7 +62,7 @@
   <SubComponents>
     <Component class="View.login.txtField" name="txt_users">
       <Properties>
-        <Property name="text" type="java.lang.String" value="admin"/>
+        <Property name="text" type="java.lang.String" value="admin01"/>
         <Property name="hint" type="java.lang.String" value="USERSNAME"/>
       </Properties>
     </Component>

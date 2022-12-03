@@ -84,7 +84,7 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
         btn_xuat = new View.form.MyButton();
         jPanel2 = new javax.swing.JPanel();
         rdo_bieudoduong = new javax.swing.JRadioButton();
-        rbt_bieudocot = new javax.swing.JRadioButton();
+        rdo_bieudocot = new javax.swing.JRadioButton();
         btn_bieudo = new View.form.MyButton();
         cbo_nam = new View.form.Combobox();
         jPanel3 = new javax.swing.JPanel();
@@ -135,12 +135,22 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
             }
         });
 
-        rbt_bieudocot.setText("Biểu Đồ Cột");
+        rdo_bieudocot.setText("Biểu Đồ Cột");
 
         btn_bieudo.setText("Biểu đồ");
         btn_bieudo.setRadius(20);
+        btn_bieudo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_bieudoActionPerformed(evt);
+            }
+        });
 
         cbo_nam.setLabeText("Năm");
+        cbo_nam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbo_namActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -151,7 +161,7 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rbt_bieudocot)
+                            .addComponent(rdo_bieudocot)
                             .addComponent(rdo_bieudoduong)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(74, 74, 74)
@@ -169,7 +179,7 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(rdo_bieudoduong)
                 .addGap(26, 26, 26)
-                .addComponent(rbt_bieudocot)
+                .addComponent(rdo_bieudocot)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
                 .addComponent(btn_bieudo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(83, 83, 83))
@@ -227,6 +237,27 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_rdo_bieudoduongActionPerformed
 
+    private void cbo_namActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_namActionPerformed
+        // TODO add your handling code here:
+         try {
+            // TODO add your handling code here:
+            fillTable();
+        } catch (Exception ex) {
+            
+        }
+        
+    }//GEN-LAST:event_cbo_namActionPerformed
+
+    private void btn_bieudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bieudoActionPerformed
+        // TODO add your handling code here:
+        if (rdo_bieudocot.isSelected()) {
+            new BieuDoCot((DefaultTableModel) tbl_thongkedoanhthu.getModel(), null).setVisible(true);
+        
+        } else {
+            new BieuDoDuong((DefaultTableModel) tbl_thongkedoanhthu.getModel()).setVisible(true);
+        }
+    }//GEN-LAST:event_btn_bieudoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.form.MyButton btn_bieudo;
@@ -237,7 +268,7 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JRadioButton rbt_bieudocot;
+    private javax.swing.JRadioButton rdo_bieudocot;
     private javax.swing.JRadioButton rdo_bieudoduong;
     private View.form.TableColumn tbl_thongkedoanhthu;
     // End of variables declaration//GEN-END:variables

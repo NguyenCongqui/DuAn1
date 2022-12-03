@@ -13,8 +13,10 @@ import View.login.Auth;
 import View.login.XDate;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -39,13 +41,17 @@ public class ViewNhanVien extends javax.swing.JPanel {
         showData();
         
     }
+    Locale lc = new Locale("vn", "VN");
+    NumberFormat nf = NumberFormat.getInstance(lc);
+    
 
     public void showData() {
         tblModel.setRowCount(0);
         for (Users us : us) {
             Object[] row = new Object[]{us.getIdusers(),
+                us.getCCCD(),
                 us.getHoten(),
-                us.isRole() == true ? "quan li" : "nhan vien",
+                us.isRole() == true ? "Quản Lý" : "Nhân Viên",
                 us.isGioitinh() == true ? "Nam" : "Nu",
                 us.getNgaysinh(), 
                 us.getDiaChi(),
@@ -55,19 +61,21 @@ public class ViewNhanVien extends javax.swing.JPanel {
             tblModel.addRow(row);
         }
     }
+    
     public void showDataKhongLam() {
         tblModel.setRowCount(0);
         List<Users>  list = nhanvienservice.ListgetNhanVienKhongLam();
        for (Users us : list) {
             Object[] row = new Object[]{us.getIdusers(),
+                us.getCCCD(),
                 us.getHoten(),
-                us.isRole() == true ? "quan li" : "nhan vien",
+                us.isRole() == true ? "Quản Lý" : "Nhân Viên",
                 us.isGioitinh() == true ? "Nam" : "Nu",
                 us.getNgaysinh(), 
                 us.getDiaChi(),
                 us.getSoDienThoai(),
                 us.getEmail(),
-                us.getLuong()};
+                nf.format(us.getLuong()) + " đ"};
             tblModel.addRow(row);
         }
     }
@@ -195,13 +203,13 @@ public class ViewNhanVien extends javax.swing.JPanel {
 
         tbl_nhanvien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Họ Tên", "Chức Vụ", "giới Tính", "Ngày Sinh", "Địa Chỉ", "Số Điện Thoại", "email", "lương"
+                "ID", "Căn Cước Công Dân", "Họ Tên", "Chức Vụ", "giới Tính", "Ngày Sinh", "Địa Chỉ", "Số Điện Thoại", "email", "lương"
             }
         ));
         tbl_nhanvien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -273,15 +281,16 @@ public class ViewNhanVien extends javax.swing.JPanel {
         // if (evt.getClickCount() == 2) {
             int index = tbl_nhanvien.getSelectedRow();
             int idUser = (int) tbl_nhanvien.getValueAt(index, 0);
-            String Hoten = tbl_nhanvien.getValueAt(index, 1).toString();
-            String ChucVu = tbl_nhanvien.getValueAt(index, 2).toString();
-            String GioiTinh = tbl_nhanvien.getValueAt(index, 3).toString();
-            String NgaySinh = tbl_nhanvien.getValueAt(index, 4).toString();
-            String DiaChi = tbl_nhanvien.getValueAt(index, 5).toString();
-            String SoDienThoai = tbl_nhanvien.getValueAt(index, 6).toString();
-            String email = tbl_nhanvien.getValueAt(index, 7).toString();
-            String Luong = tbl_nhanvien.getValueAt(index, 8).toString();
-            thenhanvienUpdate = new ViewThemNhanVienFrame(Hoten,ChucVu,GioiTinh,NgaySinh,DiaChi,SoDienThoai,email,Luong,idUser,cbo_tinhtrang.getSelectedIndex());
+            String CCCD = tbl_nhanvien.getValueAt(index, 1).toString();
+            String Hoten = tbl_nhanvien.getValueAt(index, 2).toString();
+            String ChucVu = tbl_nhanvien.getValueAt(index, 3).toString();
+            String GioiTinh = tbl_nhanvien.getValueAt(index, 4).toString();
+            String NgaySinh = tbl_nhanvien.getValueAt(index, 5).toString();
+            String DiaChi = tbl_nhanvien.getValueAt(index, 6).toString();
+            String SoDienThoai = tbl_nhanvien.getValueAt(index, 7).toString();
+            String email = tbl_nhanvien.getValueAt(index, 8).toString();
+            String Luong = tbl_nhanvien.getValueAt(index, 9).toString();
+            thenhanvienUpdate = new ViewThemNhanVienFrame(CCCD,Hoten,ChucVu,GioiTinh,NgaySinh,DiaChi,SoDienThoai,email,Luong,idUser,cbo_tinhtrang.getSelectedIndex());
             thenhanvienUpdate.setVisible(true);
         //}
 

@@ -65,7 +65,7 @@ public class home extends javax.swing.JPanel {
         noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(218, 49, 238), "Thời gian làm việc", "2h ago", "Thời gian mở cửa shop từ 6h00 tới 23h00. Làm việc cả thứ bảy và chủ nhật"));
         noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(255, 51, 0), "Chính sách đổi trả", "2h ago", "Khi khách hàng gặp sự cố về sản phẩm lỗi bên shop như sản phẩm không vừa, hỏng, lỗi... Thời gian đổi trả trong vòng 2 ngày. Chi tiết liên hệ 0123456789"));
 
-        noticeBoard.addDate("Hướng dẫn sử dụng phần mềm ITSHOP");
+        noticeBoard.addDate("Hướng dẫn sử dụng phần mềm Nhà Sách");
         noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(32, 171, 43), "Further Reading", "12:30 PM", "There are more information to digest regarding MigLayout. The resources are all available at www.migcomponents.com"));
         noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(50, 93, 215), "Span", "10:30 AM", "Spans the current cell (merges) over a number of cells. Practically this means that this cell and the count number of cells will be treated as one cell and the component can use the space that all these cells have."));
         noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(27, 188, 204), "Skip ", "9:00 AM", "Skips a number of cells in the flow. This is used to jump over a number of cells before the next free cell is looked for. The skipping is done before this component is put in a cell and thus this cells is affected by it. \"count\" defaults to 1 if not specified."));

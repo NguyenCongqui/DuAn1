@@ -30,18 +30,20 @@ DBConnection db;
     
         
     public boolean them(Users us) {
-        String query = "INSERT INTO [dbo].[Users]\n"
-                + "           ([HoTen]\n"
-                + "           ,[NgaySinh]\n"
-                + "           ,[GioiTinh]\n"
-                + "           ,[DiaChi]\n"
-                + "           ,[Sdt]\n"
-                + "           ,[Email]\n"
-                + "           ,[Luong]\n"
-                + "           ,[Role]\n"
-                + "           ,[TrangThai])\n"
-                + "     VALUES\n"
-                + "           (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO dbo.Users\n" +
+"            (\n" +
+"                HoTen,\n" +
+"                NgaySinh,\n" +
+"                GioiTinh,\n" +
+"                DiaChi,\n" +
+"                Sdt,\n" +
+"                Email,\n" +
+"                Luong,\n" +
+"                Role,\n" +
+"                TrangThai,\n" +
+"                CCCD\n" +
+"            )\n" +
+"            VALUES(?,?,?,?,?,?,?,?,?,?)";
         int check = 0;
         try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
 
@@ -54,6 +56,7 @@ DBConnection db;
             ps.setObject(7, us.getLuong());
             ps.setObject(8, us.isRole());
             ps.setObject(9, us.isTrangThai());
+            ps.setObject(10, us.getCCCD());
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -62,23 +65,13 @@ DBConnection db;
     }
     
     public List<Users> getListnhanvien() {
-        String select = "SELECT [IdUsers]\n"
-                + "      ,[HoTen]\n"
-                + "      ,[NgaySinh]\n"
-                + "      ,[GioiTinh]\n"
-                + "      ,[DiaChi]\n"
-                + "      ,[Sdt]\n"
-                + "      ,[Email]\n"
-                + "      ,[Luong]\n"
-                + "      ,[Role]\n"
-                + "      ,[TrangThai]\n"
-                + "  FROM [dbo].[Users] WHERE TrangThai =1 order by IdUsers desc";
+        String select = "SELECT * FROM dbo.Users WHERE TrangThai =1 ORDER BY IdUsers DESC";
         ListUsers = new ArrayList<>();
         try {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(select);
             while (rs.next()) {
-                ListUsers.add(new Users(rs.getInt(1),rs.getString(2),rs.getDate(3), rs.getBoolean(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getFloat(8), rs.getBoolean(9), rs.getBoolean(10)));
+                ListUsers.add(new Users(rs.getInt(1),rs.getString(2),rs.getDate(3), rs.getBoolean(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getFloat(8), rs.getBoolean(9), rs.getBoolean(10),rs.getString(11)));
             }
             rs.close();
         } catch (Exception e) {
@@ -86,23 +79,13 @@ DBConnection db;
         return ListUsers;
     }
      public List<Users> getListnhanvienKhonglam() {
-        String select = "SELECT [IdUsers]\n"
-                + "      ,[HoTen]\n"
-                + "      ,[NgaySinh]\n"
-                + "      ,[GioiTinh]\n"
-                + "      ,[DiaChi]\n"
-                + "      ,[Sdt]\n"
-                + "      ,[Email]\n"
-                + "      ,[Luong]\n"
-                + "      ,[Role]\n"
-                + "      ,[TrangThai]\n"
-                + "  FROM [dbo].[Users] WHERE TrangThai =0 order by IdUsers desc";
+        String select = "SELECT * FROM dbo.Users WHERE TrangThai =0 ORDER BY IdUsers DESC";
         ListUsers = new ArrayList<>();
         try {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(select);
             while (rs.next()) {
-                ListUsers.add(new Users(rs.getInt(1),rs.getString(2),rs.getDate(3), rs.getBoolean(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getFloat(8), rs.getBoolean(9), rs.getBoolean(10)));
+                ListUsers.add(new Users(rs.getInt(1),rs.getString(2),rs.getDate(3), rs.getBoolean(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getFloat(8), rs.getBoolean(9), rs.getBoolean(10),rs.getString(1)));
             }
             rs.close();
         } catch (Exception e) {
@@ -146,7 +129,7 @@ DBConnection db;
     }
     	  
 public String updataNhanVien (Users us) {
-        String update = "UPDATE dbo.Users SET HoTen = ?,NgaySinh = ?,GioiTinh = ?,DiaChi = ?,Sdt = ?,Email = ? , Luong = ?,Role = ?,TrangThai =? WHERE IdUsers = ?";
+        String update = "UPDATE dbo.Users SET HoTen = ?,NgaySinh = ?,GioiTinh = ?,DiaChi = ?,Sdt = ?,Email = ?, Luong = ?,Role = ?,TrangThai =? ,CCCD = ? WHERE IdUsers = ?";
         try {
             pst = db.getConnection().prepareStatement(update);
 
@@ -159,7 +142,8 @@ public String updataNhanVien (Users us) {
             pst.setObject(7, us.getLuong());
             pst.setObject(8, us.isRole());
             pst.setObject(9, us.isTrangThai());
-            pst.setInt(10, us.getIdusers());
+            pst.setObject(10, us.getCCCD());
+            pst.setInt(11, us.getIdusers());
            
             pst.executeUpdate();
             return "Sua Nhan Vien thanh cong";

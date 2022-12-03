@@ -90,7 +90,7 @@ public void addEventLogin(ActionListener event) {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        txt_users.setText("admin");
+        txt_users.setText("admin01");
         txt_users.setHint("USERSNAME");
 
         txt_word.setText("123456");
