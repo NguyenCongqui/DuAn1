@@ -44,6 +44,7 @@ public class ViewHoaDonChiTietNhapHang extends javax.swing.JFrame {
         list = nhapHangService.selectByIdNhap(id);
         for (CTHDNhapSpViewModel d : list) {
             model.addRow(new Object[]{
+                d.getIdHDCTNhap(),
                 d.getTenSp(),
                 d.getNgonNgu(),
                 d.getTacGia(),
@@ -83,7 +84,7 @@ public class ViewHoaDonChiTietNhapHang extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tên Sách", "Ngôn Ngữ", "Tác GIả", "NXB", "Số Lượng nhập", "GIá nhập"
+                "ID", "Tên Sách", "Ngôn Ngữ", "Tác GIả", "NXB", "Số Lượng nhập", "GIá nhập"
             }
         ));
         tbl1.setSelectionBackground(new java.awt.Color(255, 255, 255));

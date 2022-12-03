@@ -12,6 +12,7 @@ import Service.Impl.NhapHangImpl;
 import Services.ChiTietSachService;
 import Services.NCCService;
 import Services.NhapHangService;
+import View.login.Auth;
 import ViewModel.CTHDNhapSpViewModel;
 import ViewModel.HDNhapSPViewModel;
 import ViewModel.NhapHangViewModel;
@@ -491,7 +492,7 @@ public class ViewNhapHang extends javax.swing.JPanel {
         // Calendar calendar = Calendar.getInstance();
         //  hdnspvm.setNGAYTAODON(sdf.format( calendar.getTime()));
         hdnspvm.setTINHTRANGTRATIEN(false);
-        hdnspvm.setIDUsers(1);
+        hdnspvm.setIDUsers(Auth.user.getIdusers());
         hdnspvm.setMoTa(txt_GhiChu.getText());
         NCC ncc = (NCC) cbo_NCC.getSelectedItem();
         hdnspvm.setIDNhaCungCap(ncc.getIdNCC());

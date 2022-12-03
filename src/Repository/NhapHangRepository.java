@@ -249,14 +249,14 @@ public class NhapHangRepository {
     }
 
     public List<CTHDNhapSpViewModel> selectByIdNhap(int id) {
-        String sql = " SELECT P.TenSach, N.TenNgonNGu, X.TenNXB,T.TenTacGia ,D.SoLuong,D.priceImport\n"
-                + "FROM dbo.ChiTietHoaDonNhapSanPham D\n"
-                + "JOIN dbo.ChiTietSach De ON De.IdCTSach = D.IDChiTietSach\n"
-                + "JOIN dbo.Sach P ON P.IdSach = De.IdSach\n"
-                + "JOIN dbo.NgonNgu N ON N.IdNgonNgu = De.IdNgonNgu\n"
-                + "JOIN dbo.NXB X ON X.IdNXB = De.IdNXB\n"
-                + "JOIN dbo.TacGia T ON T.IdTacGia = De.IdTacGia\n"
-                + "WHERE D.IDHoaDonNhapSanPham = ?";
+        String sql = " SELECT P.TenSach, N.TenNgonNGu, X.TenNXB,T.TenTacGia ,D.SoLuong,D.priceImport,d.IDChiTietHoaDonNhapSanPham\n" +
+"FROM dbo.ChiTietHoaDonNhapSanPham D\n" +
+"JOIN dbo.ChiTietSach De ON De.IdCTSach = D.IDChiTietSach\n" +
+"JOIN dbo.Sach P ON P.IdSach = De.IdSach\n" +
+"JOIN dbo.NgonNgu N ON N.IdNgonNgu = De.IdNgonNgu\n" +
+"JOIN dbo.NXB X ON X.IdNXB = De.IdNXB\n" +
+"JOIN dbo.TacGia T ON T.IdTacGia = De.IdTacGia\n" +
+"WHERE D.IDHoaDonNhapSanPham = ? ORDER BY d.IDChiTietHoaDonNhapSanPham DESC";
         try {
             //st = db.getConnection().createStatement();
             pst = db.getConnection().prepareStatement(sql);
@@ -265,6 +265,7 @@ public class NhapHangRepository {
             listCTHDNhap = new ArrayList<>();
             while (rs.next()) {
                 CTHDNhapSpViewModel de = new CTHDNhapSpViewModel();
+                de.setIdHDCTNhap(rs.getInt("IDChiTietHoaDonNhapSanPham"));
                 de.setTenSp(rs.getString("TenSach"));
                 de.setNgonNgu(rs.getString("TenNgonNGu"));
                 de.setNXB(rs.getString("TenNXB"));

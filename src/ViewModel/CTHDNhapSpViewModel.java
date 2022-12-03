@@ -19,7 +19,7 @@ public class CTHDNhapSpViewModel {
     private String TacGia;
     private String NgonNgu;
     private String NXB;
-    
+    private int idHDCTNhap;
     public CTHDNhapSpViewModel() {
     }
 
@@ -33,6 +33,19 @@ public class CTHDNhapSpViewModel {
         this.TacGia = TacGia;
         this.NgonNgu = NgonNgu;
         this.NXB = NXB;
+    }
+
+    public CTHDNhapSpViewModel(int DetailsInvoice, int IDHoaDonNhapSanPham, int IDChiTietSach, int SoLuong, float price, String tenSp, String TacGia, String NgonNgu, String NXB, int idHDCTNhap) {
+        this.DetailsInvoice = DetailsInvoice;
+        this.IDHoaDonNhapSanPham = IDHoaDonNhapSanPham;
+        this.IDChiTietSach = IDChiTietSach;
+        this.SoLuong = SoLuong;
+        this.price = price;
+        this.tenSp = tenSp;
+        this.TacGia = TacGia;
+        this.NgonNgu = NgonNgu;
+        this.NXB = NXB;
+        this.idHDCTNhap = idHDCTNhap;
     }
 
     public int getDetailsInvoice() {
@@ -105,6 +118,14 @@ public class CTHDNhapSpViewModel {
 
     public void setNXB(String NXB) {
         this.NXB = NXB;
+    }
+
+    public int getIdHDCTNhap() {
+        return idHDCTNhap;
+    }
+
+    public void setIdHDCTNhap(int idHDCTNhap) {
+        this.idHDCTNhap = idHDCTNhap;
     }
 
    
