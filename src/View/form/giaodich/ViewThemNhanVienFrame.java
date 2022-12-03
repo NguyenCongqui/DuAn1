@@ -272,17 +272,17 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
             JOptionPane.showMessageDialog(this,"Bạn ơi Dịa Chỉ đang trống");
             return false;
         }
-        if (txt_cccd.getText().isEmpty()) {
+        if (txt_dienthoai.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this,"Bạn ơi Số Điện Thoại đang trống");
             return false;
         }
         try {
-            Integer.parseInt(txt_cccd.getText());
+            Integer.parseInt(txt_dienthoai.getText());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,"Số điện thoại phải là số nha");
             return false;
         }
-        if (Integer.parseInt(txt_cccd.getText())<10) {
+        if (Integer.parseInt(txt_dienthoai.getText())>10) {
             JOptionPane.showMessageDialog(this,"Bạn ơi số Điện Thoại phải nhỏ hơn 10 số nha");
             return false;
         }

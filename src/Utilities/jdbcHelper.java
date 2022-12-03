@@ -21,7 +21,7 @@ public class jdbcHelper {
 //<<<<<<< HEAD
     static String user = "sa";
     static String pass = "123456";
-    static String url = "jdbc:sqlserver://localhost;databaseName=DUAN1b";
+    static String url = "jdbc:sqlserver://localhost;databaseName=DUAN1a";
 //=======
 //     static String user = EnvUtil.get("DB_USER");
 //    static String pass = EnvUtil.get("DB_PASSWORD");

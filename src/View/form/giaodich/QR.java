@@ -34,6 +34,7 @@ public class QR extends javax.swing.JFrame implements ThreadFactory{
 
     private WebcamPanel panel = null;
     private static Webcam webcam = null;
+    private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
   
     
