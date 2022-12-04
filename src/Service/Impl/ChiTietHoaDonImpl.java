@@ -25,8 +25,8 @@ public class ChiTietHoaDonImpl implements ChiTietHoaDonService{
     }
 
     @Override
-    public List<HDBanViewModel> getAll() {
-        return rep.getAll();
+    public List<HDBanViewModel> getAll(String Stringdate) {
+        return rep.getAll(Stringdate);
     }
 
     @Override

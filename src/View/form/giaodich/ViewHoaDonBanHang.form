@@ -5,7 +5,7 @@
     <Component class="com.raven.datechooser.DateChooser" name="dateChooser1">
       <Properties>
         <Property name="textRefernce" type="javax.swing.JTextField" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="textField2"/>
+          <ComponentRef name="txt_ThoiGian"/>
         </Property>
       </Properties>
     </Component>
@@ -165,7 +165,7 @@
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Component id="btn_reset" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="textField2" min="-2" pref="187" max="-2" attributes="0"/>
+                      <Component id="txt_ThoiGian" min="-2" pref="187" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="54" max="32767" attributes="0"/>
@@ -176,7 +176,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="textField2" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_ThoiGian" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btn_loc" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -190,7 +190,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="View.form.TextField" name="textField2">
+        <Component class="View.form.TextField" name="txt_ThoiGian">
           <Properties>
             <Property name="labelText" type="java.lang.String" value="Th&#x1edd;i Gian"/>
           </Properties>
@@ -200,6 +200,9 @@
             <Property name="text" type="java.lang.String" value="L&#x1ecd;c"/>
             <Property name="radius" type="int" value="20"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_locActionPerformed"/>
+          </Events>
         </Component>
         <Component class="View.form.MyButton" name="btn_reset">
           <Properties>

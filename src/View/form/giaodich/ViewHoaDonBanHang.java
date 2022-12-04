@@ -11,6 +11,7 @@ import Services.ChiTietHoaDonService;
 import Services.KhachHangService;
 import ViewModel.HDBanViewModel;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,7 +23,8 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
     List<HDBanViewModel> listCTB;
     ChiTietHoaDonService chitiethoadonservice = new ChiTietHoaDonImpl();
     List<KhachHang> listKHg;
-    
+        Integer totalData = 0;
+    boolean flag = false;
     /**
      * Creates new form HoaDonBanHang
      */
@@ -35,7 +37,34 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
 
     public void fillData(){
          tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
-        listCTB = chitiethoadonservice.getAll();
+        listCTB = chitiethoadonservice.getAll("");
+        KhachHangService khachHangService = new KhachHangIMpl();
+        listKHg = khachHangService.getlistKhachHang();
+         String phone = "";
+        for (HDBanViewModel i : listCTB) {
+            for (int j = 0; j < listKHg.size(); j++) {
+                if(i.getIdKhachHang() == listKHg.get(j).getIdKhachHang()){
+                    phone = listKHg.get(j).getSoDienThoai();
+                }
+            }
+            tableModel.addRow(new Object[]{
+                i.getIdHoaDonBan(),
+                i.getTenKhachHang(),
+                phone,
+                i.getTenUser(),
+                i.getTongTien() +" đ",
+                i.getNGAYTHANHTOAN(),
+                i.getGhiChu()
+            });
+        }
+    }
+     public void searchDateFillTable() {
+        if (totalData == 0) {
+            JOptionPane.showMessageDialog(this, "Ngày bạn chọn không có hóa đơn nào");
+            return;
+        }
+  tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
+        listCTB = chitiethoadonservice.getAll(txt_ThoiGian.getText());
         KhachHangService khachHangService = new KhachHangIMpl();
         listKHg = khachHangService.getlistKhachHang();
          String phone = "";
@@ -72,7 +101,7 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
         lbl_Search = new javax.swing.JLabel();
         btn_Tim = new View.form.MyButton();
         jPanel2 = new javax.swing.JPanel();
-        textField2 = new View.form.TextField();
+        txt_ThoiGian = new View.form.TextField();
         btn_loc = new View.form.MyButton();
         btn_reset = new View.form.MyButton();
         jLabel2 = new javax.swing.JLabel();
@@ -80,7 +109,7 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_hoadonbanhang = new View.form.TableColumn();
 
-        dateChooser1.setTextRefernce(textField2);
+        dateChooser1.setTextRefernce(txt_ThoiGian);
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -150,10 +179,15 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        textField2.setLabelText("Thời Gian");
+        txt_ThoiGian.setLabelText("Thời Gian");
 
         btn_loc.setText("Lọc");
         btn_loc.setRadius(20);
+        btn_loc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_locActionPerformed(evt);
+            }
+        });
 
         btn_reset.setText("Reset");
         btn_reset.setRadius(20);
@@ -176,7 +210,7 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
                         .addComponent(btn_loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
                         .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_ThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
@@ -184,7 +218,7 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_ThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -345,6 +379,12 @@ public void search(){
         fillData();
     }//GEN-LAST:event_btn_resetActionPerformed
 
+    private void btn_locActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_locActionPerformed
+        // TODO add your handling code here:
+         searchDateFillTable();
+        flag = true;
+    }//GEN-LAST:event_btn_locActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.form.MyButton btn_Tim;
@@ -359,7 +399,7 @@ public void search(){
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_Search;
     private View.form.TableColumn tbl_hoadonbanhang;
-    private View.form.TextField textField2;
+    private View.form.TextField txt_ThoiGian;
     private View.form.TextField txt_timtheoma;
     // End of variables declaration//GEN-END:variables
 }

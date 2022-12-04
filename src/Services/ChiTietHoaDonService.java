@@ -20,7 +20,7 @@ import java.util.List;
 public interface ChiTietHoaDonService {
     String insert (ChiTietHoaDonBan cthd);
     
-    List<HDBanViewModel> getAll();
+    List<HDBanViewModel> getAll(String Stringdate);
     
     List<CTHDBanViewModel> selectByIdBan(int id);
     
