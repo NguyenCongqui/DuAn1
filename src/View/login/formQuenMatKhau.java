@@ -4,17 +4,26 @@
  */
 package View.login;
 
+import Repository.QuenMatKhauRepository;
+import ViewModel.NhanVienViewModel;
 import java.awt.event.ActionListener;
+import static java.lang.ProcessBuilder.Redirect.to;
+import java.util.Properties;
+import java.util.Random;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author ADMIN
  */
 public class formQuenMatKhau extends javax.swing.JPanel {
-
-    /**
-     * Creates new form formQuenMatKhau
-     */
+    QuenMatKhauRepository rep = new QuenMatKhauRepository();
+    int randomCode;
     public formQuenMatKhau() {
         initComponents();
     }
@@ -23,6 +32,74 @@ public class formQuenMatKhau extends javax.swing.JPanel {
     }
  public void addEventBackLogin(ActionListener event) {
         cmdBackLogin.addActionListener(event);
+    }
+ public boolean checkUser(String acc) {
+        for (int i = 0; i < rep.getAll().size(); i++) {
+            if (rep.getAll().get(i).getUsername().equals(acc.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
+ public void sendCode() {
+        try {
+            Random rand = new Random();
+            randomCode = rand.nextInt(999999);
+            String host = "smtp.gmail.com";
+            String user = "quincph23871@fpt.edu.vn";
+            String pass = "";
+           String to = txt_email.getText();
+            String subject = "Reseting Code";
+            String message = "Your reset code is " + randomCode;
+            boolean sessionDebug = false;
+            Properties pros = System.getProperties();
+            pros.put("mail.smtp.starttls.enable", "true");
+            pros.put("mail.smtp.starttls.required", "true");
+            pros.put("mail.smtp.host", host);
+            pros.put("mail.smtp.port", "587");
+            pros.put("mail.smtp.auth", "true");
+       java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+            Session mailSession = Session.getDefaultInstance(pros, null);
+            mailSession.setDebug(sessionDebug);
+            Message msg = new MimeMessage(mailSession);
+            msg.setFrom(new InternetAddress(user));
+            InternetAddress[] address = {new InternetAddress(to)};
+            msg.setRecipients(Message.RecipientType.TO, address);
+            msg.setSubject(subject);
+            msg.setText(message);
+            Transport transport = mailSession.getTransport("smtp");
+            transport.connect(host, user, pass);
+            transport.sendMessage(msg, msg.getAllRecipients());
+            transport.close();
+            JOptionPane.showMessageDialog(null, "Code đã gửi đến Email");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+  Thread time;
+  public void countDown() {
+        time = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 60; i >= 0; i--) {
+                    lblTime.setText("" + i);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+//                txtVerify.setEnabled(false);
+//                btnSend.setEnabled(true);
+            }
+        });
+        time.start();
+    }
+    NhanVienViewModel getForm() {
+        NhanVienViewModel em = new NhanVienViewModel();
+        em.setPassword(new String(txt_Verify.getPassword()));
+        em.setUsername(txt_USERS.getText());
+        return em;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,11 +114,14 @@ public class formQuenMatKhau extends javax.swing.JPanel {
         button2 = new View.login.button();
         txt_USERS = new View.login.txtField();
         jLabel1 = new javax.swing.JLabel();
-        txtField2 = new View.login.txtField();
+        txt_email = new View.login.txtField();
         password1 = new View.login.password();
         txtField5 = new View.login.txtField();
-        password2 = new View.login.password();
-        password3 = new View.login.password();
+        txt_Verify = new View.login.password();
+        lblTime = new javax.swing.JLabel();
+        button3 = new View.login.button();
+        button4 = new View.login.button();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -50,8 +130,13 @@ public class formQuenMatKhau extends javax.swing.JPanel {
         cmdBackLogin.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         button2.setBackground(new java.awt.Color(104, 159, 158));
-        button2.setText("Đổi Mật Khẩu");
+        button2.setText("Gửi Mã Code");
         button2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
 
         txt_USERS.setHint("USERSNAME");
         txt_USERS.addActionListener(new java.awt.event.ActionListener() {
@@ -63,7 +148,35 @@ public class formQuenMatKhau extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("QUÊN MẬT KHẨU");
 
-        txtField2.setHint("EMAIL");
+        txt_email.setHint("EMAIL");
+
+        password1.setHint("PassWord");
+
+        txtField5.setHint("Verify");
+
+        txt_Verify.setHint("Venrify Password");
+
+        lblTime.setText("Thoi Gian");
+
+        button3.setBackground(new java.awt.Color(104, 159, 158));
+        button3.setText("Reset");
+        button3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button3ActionPerformed(evt);
+            }
+        });
+
+        button4.setBackground(new java.awt.Color(104, 159, 158));
+        button4.setText("Verify");
+        button4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        button4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button4ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon/chuong_32.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -72,17 +185,22 @@ public class formQuenMatKhau extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(password2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(button3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(button4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txt_USERS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtField2, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                    .addComponent(txt_email, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(password1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtField5, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                    .addComponent(password3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmdBackLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(65, Short.MAX_VALUE))
+                    .addComponent(txt_Verify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmdBackLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(button2, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                    .addComponent(txtField5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTime)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(128, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(83, 83, 83))
         );
@@ -94,20 +212,25 @@ public class formQuenMatKhau extends javax.swing.JPanel {
                 .addGap(32, 32, 32)
                 .addComponent(txt_USERS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(txtField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(txtField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTime)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(password1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(password3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(password2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(txt_Verify, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(cmdBackLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addGap(18, 18, 18))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -115,16 +238,37 @@ public class formQuenMatKhau extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_USERSActionPerformed
 
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        // TODO add your handling code here:
+        if (checkUser(txt_USERS.getText())) {
+            JOptionPane.showMessageDialog(this,"khong ton tai users");
+            return;
+        }
+        sendCode();
+        countDown();
+    }//GEN-LAST:event_button2ActionPerformed
+
+    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button3ActionPerformed
+
+    private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.login.button button2;
+    private View.login.button button3;
+    private View.login.button button4;
     private View.login.button cmdBackLogin;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblTime;
     private View.login.password password1;
-    private View.login.password password2;
-    private View.login.password password3;
-    private View.login.txtField txtField2;
     private View.login.txtField txtField5;
     private View.login.txtField txt_USERS;
+    private View.login.password txt_Verify;
+    private View.login.txtField txt_email;
     // End of variables declaration//GEN-END:variables
 }

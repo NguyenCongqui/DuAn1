@@ -7,7 +7,10 @@ package View.form.giaodich;
 import chartBieuDoDuong.ModelChart;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
-
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.text.NumberFormat;
+import java.util.Locale;
 /**
  *
  * @author ADMIN
@@ -45,13 +48,13 @@ public class BieuDoDuong extends javax.swing.JFrame {
         String pattern = deleteLastKey(txt);
         return pattern = pattern.replaceAll(",", "");
     }
-     private void init(DefaultTableModel tableShow) {
+     private void init(DefaultTableModel tbl_BieuDoDuong) {
         chart.addLegend("Sản phẩm", new Color(12, 84, 175), new Color(0, 108, 247));
-        for (int j = 0; j < tableShow.getRowCount(); j++) {
+        for (int j = 0; j < tbl_BieuDoDuong.getRowCount(); j++) {
             if (j == 10) {
                 break;
             }
-            chart.addData(new ModelChart((String) tableShow.getValueAt(j, 1), new double[]{(int) tableShow.getValueAt(j, 2)}));
+            chart.addData(new ModelChart(  (String) tbl_BieuDoDuong.getValueAt(j, 1), new double[]{(int) tbl_BieuDoDuong.getValueAt(j, 2)}));
         }
         chart.start();
     }
@@ -59,19 +62,19 @@ public class BieuDoDuong extends javax.swing.JFrame {
     private BieuDoDuong() {
         
     }
-     private void initRevenue(DefaultTableModel tableShow) {
+     private void initRevenue(DefaultTableModel tbl_thongkedoanhso) {
         chart.addLegend("Tổng giá bán", new Color(5, 125, 0), new Color(95, 209, 69));
         chart.addLegend("Tống giá chi", new Color(186, 37, 37), new Color(241, 100, 120));
         chart.addLegend("Tổng giá nhập", new Color(54, 4, 143), new Color(104, 49, 200));
         chart.addLegend("Doanh thu", new Color(12, 84, 175), new Color(0, 108, 247));
 
-        for (int j = 0; j < tableShow.getRowCount(); j++) {
-            chart.addData(new ModelChart((int) tableShow.getValueAt(j, 0) + "", new double[]{
+        for (int j = 0; j < tbl_thongkedoanhso.getRowCount(); j++) {
+            chart.addData(new ModelChart((int) tbl_thongkedoanhso.getValueAt(j, 0) + "", new double[]{
                 //                (int) tableShow.getValueAt(j, 1),
-                Float.parseFloat(fomartFloat((String) tableShow.getValueAt(j, 2))),
-                Float.parseFloat(fomartFloat((String) tableShow.getValueAt(j, 3))),
-                Float.parseFloat(fomartFloat((String) tableShow.getValueAt(j, 4))),
-                Float.parseFloat(fomartFloat((String) tableShow.getValueAt(j, 5)))
+                Float.parseFloat(fomartFloat((String) tbl_thongkedoanhso.getValueAt(j, 2))),
+                Float.parseFloat(fomartFloat((String) tbl_thongkedoanhso.getValueAt(j, 3))),
+                Float.parseFloat(fomartFloat((String) tbl_thongkedoanhso.getValueAt(j, 4))),
+                Float.parseFloat(fomartFloat((String) tbl_thongkedoanhso.getValueAt(j, 5)))
 
             }));
         }

@@ -23,11 +23,11 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
         initComponents();
         fillYear();
          rdo_bieudoduong.setSelected(true);
-        for (int i = 0; i < tbl_thongkedoanhthu.getRowCount(); i++) {
-            tbl_thongkedoanhthu.setValueAt(nf.format(tbl_thongkedoanhthu.getValueAt(i, 2)) + " đ", i, 2);
-            tbl_thongkedoanhthu.setValueAt(nf.format(tbl_thongkedoanhthu.getValueAt(i, 3)) + " đ", i, 3);
-            tbl_thongkedoanhthu.setValueAt(nf.format(tbl_thongkedoanhthu.getValueAt(i, 4)) + " đ", i, 4);
-            tbl_thongkedoanhthu.setValueAt(nf.format(tbl_thongkedoanhthu.getValueAt(i, 5)) + " đ", i, 5);
+        for (int i = 0; i < tbl_thongkedoanhso.getRowCount(); i++) {
+            tbl_thongkedoanhso.setValueAt(nf.format(tbl_thongkedoanhso.getValueAt(i, 2)) + " đ", i, 2);
+            tbl_thongkedoanhso.setValueAt(nf.format(tbl_thongkedoanhso.getValueAt(i, 3)) + " đ", i, 3);
+            tbl_thongkedoanhso.setValueAt(nf.format(tbl_thongkedoanhso.getValueAt(i, 4)) + " đ", i, 4);
+            tbl_thongkedoanhso.setValueAt(nf.format(tbl_thongkedoanhso.getValueAt(i, 5)) + " đ", i, 5);
         }
         
     }
@@ -54,19 +54,19 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
         return pattern = pattern.replaceAll(",", "");
     }
       public void fillTable() throws Exception {
-        DefaultTableModel model = (DefaultTableModel) tbl_thongkedoanhthu.getModel();
+        DefaultTableModel model = (DefaultTableModel) tbl_thongkedoanhso.getModel();
         model.setRowCount(0);
         int year = (int) cbo_nam.getSelectedItem();
         List<Object[]> list = rep.getSalesStatisticalRevenue(year);
         for (Object[] o : list) {
             model.addRow(o);
         }
-        for (int i = 0; i < tbl_thongkedoanhthu.getRowCount(); i++) {
-            int moneyImport = rep.getSelectImport((int) tbl_thongkedoanhthu.getValueAt(i, 0), (int) cbo_nam.getSelectedItem());
-            int moneyReturn = (int) tbl_thongkedoanhthu.getValueAt(i, 3);
-            tbl_thongkedoanhthu.setValueAt(moneyReturn, i, 3);
-            tbl_thongkedoanhthu.setValueAt(moneyImport, i, 4);
-            tbl_thongkedoanhthu.setValueAt((int) tbl_thongkedoanhthu.getValueAt(i, 2) - (moneyImport + moneyReturn), i, 5);
+        for (int i = 0; i < tbl_thongkedoanhso.getRowCount(); i++) {
+            int moneyImport = rep.getSelectImport((int) tbl_thongkedoanhso.getValueAt(i, 0), (int) cbo_nam.getSelectedItem());
+            int moneyReturn = (int) tbl_thongkedoanhso.getValueAt(i, 3);
+            tbl_thongkedoanhso.setValueAt(moneyReturn, i, 3);
+            tbl_thongkedoanhso.setValueAt(moneyImport, i, 4);
+            tbl_thongkedoanhso.setValueAt((int) tbl_thongkedoanhso.getValueAt(i, 2) - (moneyImport + moneyReturn), i, 5);
         }
     }
 
@@ -90,7 +90,7 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
         cbo_nam = new View.form.Combobox();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_thongkedoanhthu = new View.form.TableColumn();
+        tbl_thongkedoanhso = new View.form.TableColumn();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -188,7 +188,7 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
                 .addGap(83, 83, 83))
         );
 
-        tbl_thongkedoanhthu.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_thongkedoanhso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -196,7 +196,7 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
                 "Tháng ", "Sản Phẩm Bán ", "Tổng giá bán", "Tổng Giá Chi", "Tổng Nhập Hàng", "Lợi Nhuận "
             }
         ));
-        jScrollPane1.setViewportView(tbl_thongkedoanhthu);
+        jScrollPane1.setViewportView(tbl_thongkedoanhso);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -254,10 +254,10 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
     private void btn_bieudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bieudoActionPerformed
         // TODO add your handling code here:
         if (rdo_bieudocot.isSelected()) {
-            new BieuDoCot((DefaultTableModel) tbl_thongkedoanhthu.getModel(), null).setVisible(true);
+            new BieuDoCot((DefaultTableModel) tbl_thongkedoanhso.getModel(), null).setVisible(true);
         
         } else {
-            new BieuDoDuong((DefaultTableModel) tbl_thongkedoanhthu.getModel()).setVisible(true);
+            new BieuDoDuong((DefaultTableModel) tbl_thongkedoanhso.getModel()).setVisible(true);
         }
     }//GEN-LAST:event_btn_bieudoActionPerformed
 
@@ -274,6 +274,6 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rdo_bieudocot;
     private javax.swing.JRadioButton rdo_bieudoduong;
-    private View.form.TableColumn tbl_thongkedoanhthu;
+    private View.form.TableColumn tbl_thongkedoanhso;
     // End of variables declaration//GEN-END:variables
 }

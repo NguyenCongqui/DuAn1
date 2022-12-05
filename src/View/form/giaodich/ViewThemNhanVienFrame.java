@@ -126,7 +126,7 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
     panel.setFPSDisplayed(true);
   
    jPanel3.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 150));
-  
+  jPanel4.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 150));
     executor.execute(this);
     
 }
@@ -282,8 +282,8 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
             JOptionPane.showMessageDialog(this,"Số điện thoại phải là số nha");
             return false;
         }
-        if (Integer.parseInt(txt_dienthoai.getText())>10) {
-            JOptionPane.showMessageDialog(this,"Bạn ơi số Điện Thoại phải nhỏ hơn 10 số nha");
+        if (Integer.parseInt(txt_dienthoai.getText())<10) {
+            JOptionPane.showMessageDialog(this,"Bạn ơi số Điện Thoại phải la 10 số nha");
             return false;
         }
         if (txt_email.getText().isEmpty()) {
@@ -367,6 +367,7 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
         btn_huy = new View.form.MyButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         txt_ThongTinNhanVien = new View.form.TextField();
         myButton1 = new View.form.MyButton();
         myButton2 = new View.form.MyButton();
@@ -468,6 +469,9 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Máy Quét Thông Tin Nhân Viên"));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 150));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -801,6 +805,7 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_IDusers;
     private View.form.MyButton myButton1;

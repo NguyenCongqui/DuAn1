@@ -30,9 +30,9 @@ import org.w3c.dom.css.Counter;
  *
  * @author ADMIN
  */
-public class QR extends javax.swing.JFrame implements ThreadFactory{
+public class QR extends javax.swing.JFrame implements ThreadFactory,Runnable{
 
-    private WebcamPanel panel = null;
+   private WebcamPanel panel = null;
     private static Webcam webcam = null;
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
@@ -42,7 +42,7 @@ public class QR extends javax.swing.JFrame implements ThreadFactory{
     
     public QR() {
         initComponents();
-     // initwebcam();
+        initwebcam();
         
     }
     public static void closeCam(){
@@ -152,7 +152,8 @@ public class QR extends javax.swing.JFrame implements ThreadFactory{
     }
     
 private void initwebcam(){
-    Dimension size = WebcamResolution.QQVGA.getSize();
+    try {
+        Dimension size = WebcamResolution.QQVGA.getSize();
     webcam = Webcam.getWebcams().get(0);
     webcam.setViewSize(size);
     panel = new WebcamPanel(webcam);
@@ -160,16 +161,24 @@ private void initwebcam(){
     panel.setFPSDisplayed(true);
   
    jPanel2.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 300));
+   executor.execute(this);
+    } catch (Exception e) {
+    }
+    
    
   
 //    executor.execute(this);
     //run();
     
 }
+    @Override
 public void run(){
+        try {
+            
+       
     do {        
         try {
-             Thread.sleep(100);
+             Thread.sleep(500);
         } catch (Exception e) {
         }
         Result result =null;
@@ -189,7 +198,11 @@ public void run(){
         } catch (Exception e) {
         }
         if (result != null) {
-            result_field.setText(result.getText());
+            System.out.println(result);
+                  //  loadTheoId(result.getText());
+                  result_field.setText(result.getText());
+                    System.out.println(result);
+            
             
         }
        
@@ -197,6 +210,8 @@ public void run(){
         
        
     } while (true);
+     } catch (Exception e) {
+        }
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_ma;
@@ -210,9 +225,14 @@ public void run(){
 
     @Override
     public Thread newThread(Runnable r) {
-        Thread t = new Thread(r);
+        try {
+            Thread t = new Thread(r);
         t.setDaemon(true);
         return t ;
+        } catch (Exception e) {
+            return null;
+        }
+        
         
     }
 }

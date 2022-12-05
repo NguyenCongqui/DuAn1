@@ -24,19 +24,24 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="password2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="button3" max="32767" attributes="0"/>
+                  <Component id="button4" max="32767" attributes="0"/>
                   <Component id="txt_USERS" max="32767" attributes="0"/>
-                  <Component id="txtField2" alignment="0" pref="252" max="32767" attributes="0"/>
+                  <Component id="txt_email" alignment="0" max="32767" attributes="0"/>
                   <Component id="password1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtField5" alignment="0" pref="252" max="32767" attributes="0"/>
-                  <Component id="password3" alignment="0" max="32767" attributes="0"/>
-                  <Component id="button2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txt_Verify" alignment="0" max="32767" attributes="0"/>
                   <Component id="cmdBackLogin" max="32767" attributes="0"/>
+                  <Component id="button2" alignment="0" pref="253" max="32767" attributes="0"/>
+                  <Component id="txtField5" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="65" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblTime" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="128" max="32767" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
           </Group>
@@ -50,20 +55,26 @@
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Component id="txt_USERS" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="txtField2" min="-2" max="-2" attributes="0"/>
+              <Component id="txt_email" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Component id="txtField5" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtField5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTime" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="password1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="password3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Component id="password2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="46" max="32767" attributes="0"/>
+              <Component id="txt_Verify" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="button2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="button4" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="button3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="cmdBackLogin" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -85,11 +96,14 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="9e" green="9f" red="68" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&#x110;&#x1ed5;i M&#x1ead;t Kh&#x1ea9;u"/>
+        <Property name="text" type="java.lang.String" value="G&#x1eed;i M&#xe3; Code"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="1"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button2ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="View.login.txtField" name="txt_USERS">
       <Properties>
@@ -107,18 +121,65 @@
         <Property name="text" type="java.lang.String" value="QU&#xca;N M&#x1eac;T KH&#x1ea8;U"/>
       </Properties>
     </Component>
-    <Component class="View.login.txtField" name="txtField2">
+    <Component class="View.login.txtField" name="txt_email">
       <Properties>
         <Property name="hint" type="java.lang.String" value="EMAIL"/>
       </Properties>
     </Component>
     <Component class="View.login.password" name="password1">
+      <Properties>
+        <Property name="hint" type="java.lang.String" value="PassWord"/>
+      </Properties>
     </Component>
     <Component class="View.login.txtField" name="txtField5">
+      <Properties>
+        <Property name="hint" type="java.lang.String" value="Verify"/>
+      </Properties>
     </Component>
-    <Component class="View.login.password" name="password2">
+    <Component class="View.login.password" name="txt_Verify">
+      <Properties>
+        <Property name="hint" type="java.lang.String" value="Venrify Password"/>
+      </Properties>
     </Component>
-    <Component class="View.login.password" name="password3">
+    <Component class="javax.swing.JLabel" name="lblTime">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Thoi Gian"/>
+      </Properties>
+    </Component>
+    <Component class="View.login.button" name="button3">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="9e" green="9f" red="68" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Reset"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="1"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button3ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="View.login.button" name="button4">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="9e" green="9f" red="68" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Verify"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="1"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button4ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icon/icon/chuong_32.png"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

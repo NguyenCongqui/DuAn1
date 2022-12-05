@@ -916,7 +916,7 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
 //           return;
 //       }
 //        filldata01();
-//fillTableWhenFind();
+fillTableWhenFind();
     }//GEN-LAST:event_txt_SearchCaretUpdate
 
     private void txt_SearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_SearchKeyReleased
