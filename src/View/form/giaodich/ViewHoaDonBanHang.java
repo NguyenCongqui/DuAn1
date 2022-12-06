@@ -9,6 +9,7 @@ import Service.Impl.ChiTietHoaDonImpl;
 import Service.Impl.KhachHangIMpl;
 import Services.ChiTietHoaDonService;
 import Services.KhachHangService;
+import View.login.XDate;
 import ViewModel.HDBanViewModel;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -19,12 +20,14 @@ import javax.swing.table.DefaultTableModel;
  * @author ACER
  */
 public class ViewHoaDonBanHang extends javax.swing.JPanel {
+
     DefaultTableModel tableModel = new DefaultTableModel();
     List<HDBanViewModel> listCTB;
     ChiTietHoaDonService chitiethoadonservice = new ChiTietHoaDonImpl();
     List<KhachHang> listKHg;
-        Integer totalData = 0;
+    Integer totalData = 0;
     boolean flag = false;
+
     /**
      * Creates new form HoaDonBanHang
      */
@@ -35,15 +38,16 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
         fillData();
     }
 
-    public void fillData(){
-         tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
-        listCTB = chitiethoadonservice.getAll("");
+    public void fillData() {
+        totalData = chitiethoadonservice.ThoiGian("");
+        tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
+       listCTB = chitiethoadonservice.getAll("");
         KhachHangService khachHangService = new KhachHangIMpl();
         listKHg = khachHangService.getlistKhachHang();
-         String phone = "";
+        String phone = "";
         for (HDBanViewModel i : listCTB) {
             for (int j = 0; j < listKHg.size(); j++) {
-                if(i.getIdKhachHang() == listKHg.get(j).getIdKhachHang()){
+                if (i.getIdKhachHang() == listKHg.get(j).getIdKhachHang()) {
                     phone = listKHg.get(j).getSoDienThoai();
                 }
             }
@@ -52,25 +56,26 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
                 i.getTenKhachHang(),
                 phone,
                 i.getTenUser(),
-                i.getTongTien() +" đ",
+                i.getTongTien() + " đ",
                 i.getNGAYTHANHTOAN(),
                 i.getGhiChu()
             });
         }
     }
-     public void searchDateFillTable() {
+
+    public void searchDateFillTable() {
         if (totalData == 0) {
             JOptionPane.showMessageDialog(this, "Ngày bạn chọn không có hóa đơn nào");
             return;
         }
-  tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
+        tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
         listCTB = chitiethoadonservice.getAll(txt_ThoiGian.getText());
         KhachHangService khachHangService = new KhachHangIMpl();
         listKHg = khachHangService.getlistKhachHang();
-         String phone = "";
+        String phone = "";
         for (HDBanViewModel i : listCTB) {
             for (int j = 0; j < listKHg.size(); j++) {
-                if(i.getIdKhachHang() == listKHg.get(j).getIdKhachHang()){
+                if (i.getIdKhachHang() == listKHg.get(j).getIdKhachHang()) {
                     phone = listKHg.get(j).getSoDienThoai();
                 }
             }
@@ -79,12 +84,14 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
                 i.getTenKhachHang(),
                 phone,
                 i.getTenUser(),
-                i.getTongTien() +" đ",
+                i.getTongTien() + " đ",
                 i.getNGAYTHANHTOAN(),
                 i.getGhiChu()
             });
         }
     }
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -104,11 +111,11 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
         txt_ThoiGian = new View.form.TextField();
         btn_loc = new View.form.MyButton();
         btn_reset = new View.form.MyButton();
-        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_hoadonbanhang = new View.form.TableColumn();
 
+        dateChooser1.setDateFormat("yyyy-MM-dd");
         dateChooser1.setTextRefernce(txt_ThoiGian);
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -118,7 +125,7 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Hóa Đơn Bán Hàng");
 
-        txt_timtheoma.setLabelText("Tìm Theo Mã Phiếu Nhập");
+        txt_timtheoma.setLabelText("Tìm Theo Mã HD");
         txt_timtheoma.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 txt_timtheomaCaretUpdate(evt);
@@ -197,8 +204,6 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setText("Page 1 for 10");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -210,8 +215,7 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
                         .addComponent(btn_loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
                         .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt_ThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_ThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -223,8 +227,6 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -306,18 +308,20 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
 
     private void tbl_hoadonbanhangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_hoadonbanhangMouseClicked
         // TODO add your handling code here:
-                if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             int row = tbl_hoadonbanhang.getSelectedRow();
             int id = (int) tbl_hoadonbanhang.getValueAt(row, 0);
             new ViewHoaDonChiTietBanHang(id, (DefaultTableModel) tbl_hoadonbanhang.getModel(), tbl_hoadonbanhang.getSelectedRow()).setVisible(true);
+         System.out.println(tbl_hoadonbanhang.getValueAt(row, 5).toString());
         }
+       
     }//GEN-LAST:event_tbl_hoadonbanhangMouseClicked
-public void search(){
-    if (txt_timtheoma.getText().isEmpty()) {
-            return ;
+    public void search() {
+        if (txt_timtheoma.getText().isEmpty()) {
+            return;
         }
-    lbl_Search.setVisible(true);
-       DefaultTableModel tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
+        lbl_Search.setVisible(true);
+        DefaultTableModel tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
         tableModel.setRowCount(0);
         int id = Integer.valueOf(txt_timtheoma.getText());
         HDBanViewModel i = chitiethoadonservice.FindHDB(id);
@@ -326,28 +330,28 @@ public void search(){
             lbl_Search.setText("Không có mặt hàng : " + id);
             return;
         }
-                String phone = "";
-    
-            for (int j = 0; j < listKHg.size(); j++) {
-                if(i.getIdKhachHang() == listKHg.get(j).getIdKhachHang()){
-                    phone = listKHg.get(j).getSoDienThoai();
-                }
+        String phone = "";
+
+        for (int j = 0; j < listKHg.size(); j++) {
+            if (i.getIdKhachHang() == listKHg.get(j).getIdKhachHang()) {
+                phone = listKHg.get(j).getSoDienThoai();
             }
-            tableModel.addRow(new Object[]{
-                i.getIdHoaDonBan(),
-                i.getTenKhachHang(),
-                phone,
-                i.getTenUser(),
-                i.getTongTien() +" đ",
-                i.getNGAYTHANHTOAN(),
-                i.getGhiChu()
-            });
-        
+        }
+        tableModel.addRow(new Object[]{
+            i.getIdHoaDonBan(),
+            i.getTenKhachHang(),
+            phone,
+            i.getTenUser(),
+            i.getTongTien() + " đ",
+            i.getNGAYTHANHTOAN(),
+            i.getGhiChu()
+        });
+
         lbl_Search.setText("");
-}
+    }
     private void txt_timtheomaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_timtheomaCaretUpdate
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_txt_timtheomaCaretUpdate
 
     private void txt_timtheomaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_timtheomaFocusGained
@@ -365,10 +369,14 @@ public void search(){
 
     private void btn_TimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimActionPerformed
         // TODO add your handling code here:
-        search();
-        if(txt_timtheoma.getText().isEmpty()){
+        try {
+             search();
+        if (txt_timtheoma.getText().isEmpty()) {
             lbl_Search.setVisible(false);
             fillData();
+        }
+        } catch (NumberFormatException e) {
+           lbl_Search.setText("Mã phải là số ");
         }
     }//GEN-LAST:event_btn_TimActionPerformed
 
@@ -381,8 +389,8 @@ public void search(){
 
     private void btn_locActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_locActionPerformed
         // TODO add your handling code here:
-         searchDateFillTable();
-        flag = true;
+//        searchDateFillTable();
+//        flag = true;
     }//GEN-LAST:event_btn_locActionPerformed
 
 
@@ -392,7 +400,6 @@ public void search(){
     private View.form.MyButton btn_reset;
     private com.raven.datechooser.DateChooser dateChooser1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

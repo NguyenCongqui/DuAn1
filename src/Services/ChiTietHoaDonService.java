@@ -25,4 +25,6 @@ public interface ChiTietHoaDonService {
     List<CTHDBanViewModel> selectByIdBan(int id);
     
     HDBanViewModel FindHDB(int k) ;
+    
+    int ThoiGian(String Stringdate) ;
 }

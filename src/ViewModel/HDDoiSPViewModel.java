@@ -13,7 +13,8 @@ public class HDDoiSPViewModel {
 
     private int IDHoaDonDoiSanPham,IDHoaDonBanHang, IDKhachHang,IdUsers;
     private String ngaytaoHDTra, MoTa,tenKhachHang;
-
+    private String tenUsers,SDTkH;//tu them
+    
     public HDDoiSPViewModel() {
     }
 
@@ -81,6 +82,22 @@ public class HDDoiSPViewModel {
 
     public void setTenKhachHang(String tenKhachHang) {
         this.tenKhachHang = tenKhachHang;
+    }
+
+    public String getTenUsers() {
+        return tenUsers;
+    }
+
+    public void setTenUsers(String tenUsers) {
+        this.tenUsers = tenUsers;
+    }
+
+    public String getSDTkH() {
+        return SDTkH;
+    }
+
+    public void setSDTkH(String SDTkH) {
+        this.SDTkH = SDTkH;
     }
 
    

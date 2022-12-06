@@ -4,6 +4,7 @@
   <NonVisualComponents>
     <Component class="com.raven.datechooser.DateChooser" name="dateChooser1">
       <Properties>
+        <Property name="dateFormat" type="java.lang.String" value="yyyy-MM-dd"/>
         <Property name="textRefernce" type="javax.swing.JTextField" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="txt_ThoiGian"/>
         </Property>
@@ -116,7 +117,7 @@
         </Component>
         <Component class="View.form.TextField" name="txt_timtheoma">
           <Properties>
-            <Property name="labelText" type="java.lang.String" value="T&#xec;m Theo M&#xe3; Phi&#x1ebf;u Nh&#x1ead;p"/>
+            <Property name="labelText" type="java.lang.String" value="T&#xec;m Theo M&#xe3; HD"/>
           </Properties>
           <Events>
             <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txt_timtheomaCaretUpdate"/>
@@ -166,7 +167,6 @@
                           <Component id="btn_reset" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="txt_ThoiGian" min="-2" pref="187" max="-2" attributes="0"/>
-                      <Component id="jLabel2" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="54" max="32767" attributes="0"/>
               </Group>
@@ -182,8 +182,6 @@
                       <Component id="btn_loc" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_reset" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -212,11 +210,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_resetActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Page 1 for 10"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

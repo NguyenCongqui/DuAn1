@@ -4,6 +4,8 @@
  */
 package ViewModel;
 
+import java.util.Date;
+
 /**
  *
  * @author ADMIN
@@ -11,7 +13,7 @@ package ViewModel;
 public class HDBanViewModel {
         private int IdHoaDonBan, IdKhachHang, IdUsers,IdVoucher;
     private String GhiChu, tenUser, tenKhachHang;
-    private String NGAYTHANHTOAN;
+    private Date NGAYTHANHTOAN;
     private boolean statusPay, statusInvoice;
     private double TongTien, TienKhachDua, TienTraLai;
 
@@ -74,13 +76,14 @@ public class HDBanViewModel {
         this.tenKhachHang = tenKhachHang;
     }
 
-    public String getNGAYTHANHTOAN() {
+    public Date getNGAYTHANHTOAN() {
         return NGAYTHANHTOAN;
     }
 
-    public void setNGAYTHANHTOAN(String NGAYTHANHTOAN) {
+    public void setNGAYTHANHTOAN(Date NGAYTHANHTOAN) {
         this.NGAYTHANHTOAN = NGAYTHANHTOAN;
     }
+
 
     public boolean isStatusPay() {
         return statusPay;

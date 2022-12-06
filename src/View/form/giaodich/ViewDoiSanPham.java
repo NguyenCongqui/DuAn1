@@ -259,7 +259,7 @@ public class ViewDoiSanPham extends javax.swing.JFrame {
             tbl2.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        jLabel1.setText("Tổng tiền phải trả thêm");
+        jLabel1.setText("Tiền cần trả khách");
 
         txt_TienTra.setLabelText("");
 

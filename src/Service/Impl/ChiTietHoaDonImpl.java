@@ -38,4 +38,9 @@ public class ChiTietHoaDonImpl implements ChiTietHoaDonService{
     public  HDBanViewModel FindHDB(int k) {
         return rep1.FindHDB(k);
     }
+
+    @Override
+    public int ThoiGian(String Stringdate) {
+        return rep.ThoiGian(Stringdate);
+    }
 }

@@ -297,10 +297,13 @@ public class ViewDoiHang extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addGap(118, 118, 118)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_timkiemhoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(txt_timkiemhoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -613,7 +616,7 @@ public class ViewDoiHang extends javax.swing.JPanel {
             if (checkDayChange() == false) {
                 return;
             }
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(txt_timkiemhoadon, "Vui lòng nhập lại ");
             lbl_Search.setText("Vui lòng nhập lại ");

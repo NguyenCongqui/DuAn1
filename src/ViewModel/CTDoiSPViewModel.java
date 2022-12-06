@@ -10,7 +10,7 @@ package ViewModel;
  */
 public class CTDoiSPViewModel {
   
-    private int idCTDoiHD, idCTHDDoi;
+    private int idCTDoiSP, idCTHDDoi;
     private int idCTSach;
     private int soLuong;
     private float gia;
@@ -23,8 +23,8 @@ public class CTDoiSPViewModel {
     public CTDoiSPViewModel() {
     }
 
-    public CTDoiSPViewModel(int idCTDoiHD, int idCTHDDoi, int idCTSach, int soLuong, float gia, String tenSach, String tenNXB, String tenTacGia, String tenNgonNgu) {
-        this.idCTDoiHD = idCTDoiHD;
+    public CTDoiSPViewModel(int idCTDoiSP, int idCTHDDoi, int idCTSach, int soLuong, float gia, String tenSach, String tenNXB, String tenTacGia, String tenNgonNgu) {
+        this.idCTDoiSP = idCTDoiSP;
         this.idCTHDDoi = idCTHDDoi;
         this.idCTSach = idCTSach;
         this.soLuong = soLuong;
@@ -35,12 +35,12 @@ public class CTDoiSPViewModel {
         this.tenNgonNgu = tenNgonNgu;
     }
 
-    public int getIdCTDoiHD() {
-        return idCTDoiHD;
+    public int getidCTDoiSP() {
+        return idCTDoiSP;
     }
 
-    public void setIdCTDoiHD(int idCTDoiHD) {
-        this.idCTDoiHD = idCTDoiHD;
+    public void setidCTDoiSP(int idCTDoiSP) {
+        this.idCTDoiSP = idCTDoiSP;
     }
 
     public int getIdCTHDDoi() {

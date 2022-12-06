@@ -261,7 +261,7 @@
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="T&#x1ed5;ng ti&#x1ec1;n ph&#x1ea3;i tr&#x1ea3; th&#xea;m"/>
+            <Property name="text" type="java.lang.String" value="Ti&#x1ec1;n c&#x1ea7;n tr&#x1ea3; kh&#xe1;ch"/>
           </Properties>
         </Component>
         <Component class="View.form.TextField" name="txt_TienTra">
