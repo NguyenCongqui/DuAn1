@@ -4,6 +4,7 @@
   <NonVisualComponents>
     <Component class="com.raven.datechooser.DateChooser" name="NgayBatDau">
       <Properties>
+        <Property name="dateFormat" type="java.lang.String" value="yyyy-MM-dd"/>
         <Property name="textRefernce" type="javax.swing.JTextField" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="txt_NgayBatDau"/>
         </Property>
@@ -11,6 +12,7 @@
     </Component>
     <Component class="com.raven.datechooser.DateChooser" name="NgayKetThuc">
       <Properties>
+        <Property name="dateFormat" type="java.lang.String" value="yyyy-MM-dd"/>
         <Property name="textRefernce" type="javax.swing.JTextField" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="txt_NgayKetThuc"/>
         </Property>

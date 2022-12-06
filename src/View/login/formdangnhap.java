@@ -34,8 +34,8 @@ public class formdangnhap extends javax.swing.JPanel {
         initComponents();
         txt_users.grabFocus();
     }
-    public void login01() {
-       // txt_users.grabFocus();
+    public void backLogin() {
+       txt_users.grabFocus();
     }
     public boolean login() {
         String userName = txt_users.getText();
