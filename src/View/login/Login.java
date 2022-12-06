@@ -31,6 +31,7 @@ public class Login extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent ae) {
                 //  Show register form
                 Slide1.show(1);
+                
                 quenmk.register();
             }
         });
@@ -38,6 +39,7 @@ public class Login extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 Slide1.show(0);
+               
                 login.backLogin();
             }
         });
@@ -45,6 +47,7 @@ public class Login extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (login.login() == true) {
+                  
                     dispose01();
                 }
             }

@@ -35,6 +35,8 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -52,6 +54,8 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
     private WebcamPanel panel = null;
     private static Webcam webcam = null;
     private Executor executor = Executors.newSingleThreadExecutor(this);
+    private  static final String Email = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6}$)";
+    
     
 
     /**
@@ -264,16 +268,21 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
         return true;
     }
     public boolean validate01(){
-        if (txt_ten.getText().isEmpty()) {
+        if (txt_ten.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this,"Bạn ơi Họ và Tên đang trống");
             return false;
         }
-        if (txt_diachi.getText().isEmpty()) {
+        if (txt_diachi.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this,"Bạn ơi Dịa Chỉ đang trống");
             return false;
         }
-        if (txt_dienthoai.getText().isEmpty()) {
+        if (txt_dienthoai.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this,"Bạn ơi Số Điện Thoại đang trống");
+            return false;
+        }
+        
+        if (Integer.parseInt(txt_dienthoai.getText())<10) {
+            JOptionPane.showMessageDialog(this,"Bạn ơi số Điện Thoại phải la 10 số nha");
             return false;
         }
         try {
@@ -282,27 +291,23 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
             JOptionPane.showMessageDialog(this,"Số điện thoại phải là số nha");
             return false;
         }
-        if (Integer.parseInt(txt_dienthoai.getText())<10) {
-            JOptionPane.showMessageDialog(this,"Bạn ơi số Điện Thoại phải la 10 số nha");
-            return false;
-        }
-        if (txt_email.getText().isEmpty()) {
+        if (txt_email.getText().trim().isEmpty()) {
              JOptionPane.showMessageDialog(this,"Bạn ơi Email đang trống nha");
             return false;
         }
-        if (txt_ngaysinh.getText().isEmpty()) {
+        if (txt_ngaysinh.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this,"Bạn ơi Ngày Sinh đang trống");
             return false;
         }
-        if (txt_password.getText().isEmpty()) {
+        if (txt_password.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this,"Bạn ơi pass đang trống");
             return false;
         }
-        if (txt_username.getText().isEmpty()) {
+        if (txt_username.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this,"Bạn ơi users đang trống");
             return false;
         }
-        if (txt_luong.getText().isEmpty()) {
+        if (txt_luong.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this,"Bạn ơi Lương đang trống");
             return false;
         }
@@ -324,6 +329,12 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
             JOptionPane.showMessageDialog(this,"Bạn ơi Lương phải là số nha");
             return false;
         }
+        Matcher matcher = Pattern.compile(Email).matcher(txt_email.getText());
+         if (!matcher.matches()) {
+             JOptionPane.showMessageDialog(this,"Email sai định dạnh rồi nha, phải có @gmail.com");
+             return false;
+        }
+         
         return true;
     }
 
@@ -537,7 +548,7 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
                                     .addGap(18, 18, 18)
                                     .addComponent(rbt_nghilam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(txt_dienthoai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(lbl_IDusers, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbl_IDusers))
                         .addGap(50, 50, 50)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -659,6 +670,8 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
         }
         webcam.close();
         //this.dispose();
+        clearForm();
+      
         
     }//GEN-LAST:event_btn_huyActionPerformed
 
@@ -750,7 +763,7 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
         // TODO add your handling code here:
-        this.update();
+//        this.update();
     }//GEN-LAST:event_btn_suaActionPerformed
 
     /**

@@ -7,11 +7,14 @@ package View.login;
 import Repository.QuenMatKhauRepository;
 import Service.Impl.QuenMatKhauImpl;
 import Services.QuenMatKhauService;
+import static View.login.Auth.user;
 import ViewModel.NhanVienViewModel;
 import java.awt.event.ActionListener;
 import static java.lang.ProcessBuilder.Redirect.to;
 import java.util.Properties;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -25,6 +28,8 @@ import javax.swing.JOptionPane;
  */
 public class formQuenMatKhau extends javax.swing.JPanel {
     QuenMatKhauService quenmatkhauservice = new QuenMatKhauImpl();
+    private  static final String Email = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6}$)";
+    
    
     int randomCode;
     public formQuenMatKhau() {
@@ -36,6 +41,7 @@ public class formQuenMatKhau extends javax.swing.JPanel {
         btnReset.setEnabled(false);
         lblTime.setText("");
         lbl_chuong.hide();
+    
     }
     public void register() {
         txt_USERS.grabFocus();
@@ -124,6 +130,7 @@ public class formQuenMatKhau extends javax.swing.JPanel {
                 }
                 txt_Verify.setEnabled(false);
                 btnSend.setEnabled(true);
+                btnVerify.setEnabled(false);
             }
         });
         time.start();
@@ -134,6 +141,7 @@ public class formQuenMatKhau extends javax.swing.JPanel {
         em.setUsername(txt_USERS.getText());
         return em;
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -286,11 +294,11 @@ public class formQuenMatKhau extends javax.swing.JPanel {
 
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
         // TODO add your handling code here:
-        if (txt_USERS.getText().isEmpty()) {
+        if (txt_USERS.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this,"Bạn ơi, Bạn chưa nhập Users để quên mật khẩu");
             return;
         }
-        if (txt_email.getText().isEmpty()) {
+        if (txt_email.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this,"Bạn ơi, Bạn chưa nhập Email để quên mật khẩu");
             return;
         }
@@ -303,6 +311,13 @@ public class formQuenMatKhau extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"Không tồn tại Email");
             return;
         }
+         Matcher matcher = Pattern.compile(Email).matcher(txt_email.getText());
+         if (!matcher.matches()) {
+             JOptionPane.showMessageDialog(this,"Email sai định dạnh");
+             return;
+        }
+       
+
         sendCode();
         btnSend.setEnabled(false);
             btnVerify.setEnabled(true);
@@ -331,6 +346,10 @@ public class formQuenMatKhau extends javax.swing.JPanel {
 
     private void btnVerifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerifyActionPerformed
         // TODO add your handling code here:
+        if (txt_Verify.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this,"Bạn chưa nhập Mã Code nha");
+            return;
+        }
         if (Integer.valueOf(txt_Verify.getText()) == randomCode) {
             lblTime.setText("");
             lbl_chuong.hide();
@@ -340,8 +359,11 @@ public class formQuenMatKhau extends javax.swing.JPanel {
             btnVerify.setEnabled(false);
             lbl_chuong.setIcon(null);
             btnReset.setEnabled(true);
+//            time.stop();
+//            btnReset.setEnabled(false);
+            
         } else {
-            JOptionPane.showMessageDialog(this,"code khong hop le");
+            JOptionPane.showMessageDialog(this,"Code Không Đúng Với Gmail,Vui lòng nhập lại");
         }
     }//GEN-LAST:event_btnVerifyActionPerformed
 

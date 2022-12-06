@@ -39,10 +39,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
         tblModel = (DefaultTableModel) tbl_nhanvien.getModel();
         us = nhanvienservice.ListgetNhanVien();
         showData();
-//        if (webcam == null) {
-//            return;
-//        }
-//        webcam.close();
+
         
     }
     Locale lc = new Locale("vn", "VN");
@@ -79,7 +76,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
                 us.getDiaChi(),
                 us.getSoDienThoai(),
                 us.getEmail(),
-                nf.format(us.getLuong()) + " đ"};
+               us.getLuong()};
             tblModel.addRow(row);
         }
     }
@@ -268,6 +265,8 @@ public class ViewNhanVien extends javax.swing.JPanel {
     private void btn_themnhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themnhanvienActionPerformed
         // TODO add your handling code here:
         nhanvien.setVisible(true);
+        us = nhanvienservice.ListgetNhanVien();
+        showData();
 
     }//GEN-LAST:event_btn_themnhanvienActionPerformed
 
@@ -296,7 +295,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
             String Luong = tbl_nhanvien.getValueAt(index, 9).toString();
             thenhanvienUpdate = new ViewThemNhanVienFrame(CCCD,Hoten,ChucVu,GioiTinh,NgaySinh,DiaChi,SoDienThoai,email,Luong,idUser,cbo_tinhtrang.getSelectedIndex());
             thenhanvienUpdate.setVisible(true);
-        //}
+       // }
 
         if (thenhanvienUpdate == null) {
             return;
@@ -305,9 +304,10 @@ public class ViewNhanVien extends javax.swing.JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     thenhanvienUpdate.update();
-//                    MsgBox.alert(this, "Update thành công");
                     cbo_tinhtrang.setSelectedIndex(0);
-                    showData();
+                    us = nhanvienservice.ListgetNhanVien();
+        showData();
+
                 }
             }
                     
