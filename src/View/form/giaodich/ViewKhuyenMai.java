@@ -72,6 +72,15 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
         v.setSoLuong(Integer.parseInt(txt_soluong.getText()));
         return v;
     }
+     public  Voucher guidata01 (){
+        Voucher v= new Voucher();
+        v.setMaGiamGia(randomAlphaNumeric(8));
+        v.setNgayBatDau(XDate.toDate(txt_NgayBatDau.getText(), "yyyy-MM-dd"));
+        v.setNgayKetThuc(XDate.toDate(txt_NgayKetThuc.getText(), "yyyy-MM-dd"));
+        v.setGiamgia(Float.parseFloat(txt_giamgia.getText()));
+        v.setSoLuong(Integer.parseInt(txt_soluong.getText()));
+        return v;
+    }
     public void reset(){
         txt_NgayBatDau.setText("");
         txt_NgayKetThuc.setText("");
@@ -130,8 +139,10 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
         btn_taomoi = new View.form.MyButton();
         txt_ID = new View.form.TextField();
 
+        NgayBatDau.setDateFormat("yyyy-MM-dd");
         NgayBatDau.setTextRefernce(txt_NgayBatDau);
 
+        NgayKetThuc.setDateFormat("yyyy-MM-dd");
         NgayKetThuc.setTextRefernce(txt_NgayKetThuc);
         NgayKetThuc.setVerifyInputWhenFocusTarget(false);
 
@@ -365,7 +376,7 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
         // TODO add your handling code here:
         Voucher newv= guidata();
         newv.setIDVoucher(getVoucher());
-        JOptionPane.showMessageDialog(this, voucherService.DeleteVoucher(guidata()));
+        JOptionPane.showMessageDialog(this, voucherService.DeleteVoucher(newv));
         ListVoucher = voucherService.getListVouchers();
         filldata();
         reset();
@@ -373,9 +384,9 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
         // TODO add your handling code here:
-        Voucher newv= guidata();
+        Voucher newv= guidata01();
         newv.setIDVoucher(getVoucher());
-        JOptionPane.showMessageDialog(this, voucherService.updateVoucher(guidata()));
+        JOptionPane.showMessageDialog(this, voucherService.updateVoucher(newv));
         ListVoucher = voucherService.getListVouchers();
         filldata();
         reset();

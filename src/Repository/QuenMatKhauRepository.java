@@ -21,11 +21,16 @@ import java.util.logging.Logger;
  * @author ADMIN
  */
 public class QuenMatKhauRepository {
-    DBConnection dbConnection;
+    DBConnection db;
    Connection con = null;
     ResultSet rs = null;
     PreparedStatement ps = null;
+        PreparedStatement pst = null;
     List<NhanVienViewModel> list = null;
+
+    public QuenMatKhauRepository() {
+    }
+    
 
     public List<NhanVienViewModel> getAll() {
         String sql = "SELECT TaiKhoan.IdUsers,IdTaiKhoan,CCCD\n" +
@@ -36,7 +41,7 @@ public class QuenMatKhauRepository {
 "TaiKhoan.IdUsers DESC";
         try {
            // pst = db.getConnection().prepareStatement(sql);
-            con = dbConnection.getConnection();
+            con = db.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             list = new ArrayList<>();
@@ -49,5 +54,21 @@ public class QuenMatKhauRepository {
             Logger.getLogger(NCCRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+    
+    public String update(NhanVienViewModel nv){
+        String update ="UPDATE dbo.TaiKhoan SET MatKhau = ? FROM dbo.TaiKhoan INNER JOIN dbo.Users \n" +
+"ON Users.IdUsers = TaiKhoan.IdUsers WHERE UserName = ?";
+        try {
+            pst = db.getConnection().prepareStatement(update);
+            pst.setNString(1, nv.getPassword());
+            pst.setString(2, nv.getUsername());
+           // System.out.println(ListNhaXuatBan.size());
+           pst.executeUpdate();
+            return "Đổi Mật Khẩu Thành Công";
+        } catch (Exception e) {
+            
+        }
+        return "Đổi Mật Khẩu Không Thành Công";
     }
 }

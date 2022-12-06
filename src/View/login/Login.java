@@ -38,7 +38,7 @@ public class Login extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 Slide1.show(0);
-                login.login();
+                login.backLogin();
             }
         });
           login.addEventLogin(new ActionListener() {
