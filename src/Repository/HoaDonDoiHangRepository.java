@@ -32,38 +32,38 @@ public class HoaDonDoiHangRepository {
     List<HDDoiSPViewModel> list = null;
 
     public List<HDDoiSPViewModel> selectAllHDDoi(String Stringdate) {
-        if (!Stringdate.isEmpty()) {
-            java.util.Date date = XDate.toDate(Stringdate, "yyyy-MM-dd");
-            String sql = "SELECT H.IDHoaDonThayDoiSanPham, H.IDHoaDonBanHang,\n"
-                    + "dbo.Users.HoTen, H.ngaytaohoadon, dbo.KhachHang.Hoten , dbo.KhachHang.Sdt, \n"
-                    + "H.MoTa FROM dbo.HoaDonThayDoiSanPham H\n"
-                    + "INNER JOIN dbo.KhachHang ON H.IDKhachHang = dbo.KhachHang.IdKhachHang \n"
-                    + "INNER JOIN dbo.Users ON H.IdUsers = dbo.Users.IdUsers\n"
-                    + "WHERE H.ngaytaohoadon BETWEEN '" + new java.sql.Date(date.getTime()) + "'" + "AND '" + new java.sql.Date(date.getTime()) + " ' \n"
-                    + "ORDER BY H.IDHoaDonThayDoiSanPham DESC";
-            try {
-                st = db.getConnection().createStatement();
-                rs = st.executeQuery(sql);
-                list = new ArrayList<>();
-                while (rs.next()) {
-                    HDDoiSPViewModel p = new HDDoiSPViewModel();
-                    p.setIDHoaDonDoiSanPham(rs.getInt("IDHoaDonThayDoiSanPham"));
-                    p.setIDHoaDonBanHang(rs.getInt("IDHoaDonBanHang"));
-                    p.setNgaytaoHDTra(rs.getString("ngaytaohoadon"));
-                    //    p.setIDKhachHang(rs.getInt("idCustomer"));
-                    p.setMoTa(rs.getString("MoTa"));
-                    p.setTenKhachHang(rs.getString("KhachHang.Hoten"));
-                    //  p.setIdUsers(rs.getInt("idUser"));
-                    p.setTenUsers(rs.getString("Users.HoTen"));
-                    p.setSDTkH(rs.getString("Sdt"));
-                    list.add(p);
-                }
-                rs.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return list;
-        }
+//        if (!Stringdate.isEmpty()) {
+//            java.util.Date date = XDate.toDate(Stringdate, "yyyy-MM-dd");
+//            String sql = "SELECT H.IDHoaDonThayDoiSanPham, H.IDHoaDonBanHang,\n"
+//                    + "dbo.Users.HoTen, H.ngaytaohoadon, dbo.KhachHang.Hoten , dbo.KhachHang.Sdt, \n"
+//                    + "H.MoTa FROM dbo.HoaDonThayDoiSanPham H\n"
+//                    + "INNER JOIN dbo.KhachHang ON H.IDKhachHang = dbo.KhachHang.IdKhachHang \n"
+//                    + "INNER JOIN dbo.Users ON H.IdUsers = dbo.Users.IdUsers\n"
+//                    + "WHERE H.ngaytaohoadon BETWEEN '" + new java.sql.Date(date.getTime()) + "'" + "AND '" + new java.sql.Date(date.getTime()) + " ' \n"
+//                    + "ORDER BY H.IDHoaDonThayDoiSanPham DESC";
+//            try {
+//                st = db.getConnection().createStatement();
+//                rs = st.executeQuery(sql);
+//                list = new ArrayList<>();
+//                while (rs.next()) {
+//                    HDDoiSPViewModel p = new HDDoiSPViewModel();
+//                    p.setIDHoaDonDoiSanPham(rs.getInt("IDHoaDonThayDoiSanPham"));
+//                    p.setIDHoaDonBanHang(rs.getInt("IDHoaDonBanHang"));
+//                    p.setNgaytaoHDTra(rs.getString("ngaytaohoadon"));
+//                    //    p.setIDKhachHang(rs.getInt("idCustomer"));
+//                    p.setMoTa(rs.getString("MoTa"));
+//                    p.setTenKhachHang(rs.getString("KhachHang.Hoten"));
+//                    //  p.setIdUsers(rs.getInt("idUser"));
+//                    p.setTenUsers(rs.getString("Users.HoTen"));
+//                    p.setSDTkH(rs.getString("Sdt"));
+//                    list.add(p);
+//                }
+//                rs.close();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            return list;
+//        }
 
         String sql = "SELECT H.IDHoaDonThayDoiSanPham, H.IDHoaDonBanHang,\n"
                 + "dbo.Users.HoTen, H.ngaytaohoadon, dbo.KhachHang.Hoten , dbo.KhachHang.Sdt, \n"
