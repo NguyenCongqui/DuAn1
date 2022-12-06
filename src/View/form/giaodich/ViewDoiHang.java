@@ -326,13 +326,32 @@ public class ViewDoiHang extends javax.swing.JPanel {
             new String [] {
                 "IDHDBan", "ID Sach", "Ten Sach", "So luong", "So luong doi", "NXB", "Tac Gia", "Ngon Ngu", "Don gia"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbl1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl1MouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbl1);
+        if (tbl1.getColumnModel().getColumnCount() > 0) {
+            tbl1.getColumnModel().getColumn(0).setResizable(false);
+            tbl1.getColumnModel().getColumn(1).setResizable(false);
+            tbl1.getColumnModel().getColumn(2).setResizable(false);
+            tbl1.getColumnModel().getColumn(3).setResizable(false);
+            tbl1.getColumnModel().getColumn(4).setResizable(false);
+            tbl1.getColumnModel().getColumn(5).setResizable(false);
+            tbl1.getColumnModel().getColumn(6).setResizable(false);
+            tbl1.getColumnModel().getColumn(7).setResizable(false);
+            tbl1.getColumnModel().getColumn(8).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -495,7 +514,8 @@ public class ViewDoiHang extends javax.swing.JPanel {
 
     private void btn_doitraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doitraActionPerformed
         // TODO add your handling code here:
-        insertInvoiceChange();
+        try {
+            insertInvoiceChange();
         model.setRowCount(0);
         modelList.setRowCount(0);
         lbl_Search.setText("");
@@ -503,6 +523,8 @@ public class ViewDoiHang extends javax.swing.JPanel {
         txt_mahoadon.setText("");
         txt_GhiChu.setText("");
         txt_timkiemhoadon.setText("");
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_btn_doitraActionPerformed
 
        public boolean checkVoucher() {
@@ -531,9 +553,9 @@ public class ViewDoiHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         txt_sanphamtra.setText((String) tbl1.getValueAt(tbl1.getSelectedRow(), 2));
-        if (evt.getClickCount() > 1) {
-            return;
-        }
+//        if (evt.getClickCount() > 1) {
+//            return;
+//        }
         if (checkDayChange() == false) {
             JOptionPane.showMessageDialog(this, "Hoá đơn đã quá hạn đổi");
             return;
