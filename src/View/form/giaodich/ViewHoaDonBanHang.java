@@ -39,7 +39,7 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
     }
 
     public void fillData() {
-        totalData = chitiethoadonservice.ThoiGian("");
+     //   totalData = chitiethoadonservice.ThoiGian("");
         tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
        listCTB = chitiethoadonservice.getAll("");
         KhachHangService khachHangService = new KhachHangIMpl();
@@ -63,34 +63,34 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
         }
     }
 
-    public void searchDateFillTable() {
-        if (totalData == 0) {
-            JOptionPane.showMessageDialog(this, "Ngày bạn chọn không có hóa đơn nào");
-            return;
-        }
-        tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
-        listCTB = chitiethoadonservice.getAll(txt_ThoiGian.getText());
-        KhachHangService khachHangService = new KhachHangIMpl();
-        listKHg = khachHangService.getlistKhachHang();
-        String phone = "";
-        for (HDBanViewModel i : listCTB) {
-            for (int j = 0; j < listKHg.size(); j++) {
-                if (i.getIdKhachHang() == listKHg.get(j).getIdKhachHang()) {
-                    phone = listKHg.get(j).getSoDienThoai();
-                }
-            }
-            tableModel.addRow(new Object[]{
-                i.getIdHoaDonBan(),
-                i.getTenKhachHang(),
-                phone,
-                i.getTenUser(),
-                i.getTongTien() + " đ",
-                i.getNGAYTHANHTOAN(),
-                i.getGhiChu()
-            });
-        }
-    }
-    
+//    public void searchDateFillTable() {
+//        if (totalData == 0) {
+//            JOptionPane.showMessageDialog(this, "Ngày bạn chọn không có hóa đơn nào");
+//            return;
+//        }
+//        tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
+//        listCTB = chitiethoadonservice.getAll(txt_ThoiGian.getText());
+//        KhachHangService khachHangService = new KhachHangIMpl();
+//        listKHg = khachHangService.getlistKhachHang();
+//        String phone = "";
+//        for (HDBanViewModel i : listCTB) {
+//            for (int j = 0; j < listKHg.size(); j++) {
+//                if (i.getIdKhachHang() == listKHg.get(j).getIdKhachHang()) {
+//                    phone = listKHg.get(j).getSoDienThoai();
+//                }
+//            }
+//            tableModel.addRow(new Object[]{
+//                i.getIdHoaDonBan(),
+//                i.getTenKhachHang(),
+//                phone,
+//                i.getTenUser(),
+//                i.getTongTien() + " đ",
+//                i.getNGAYTHANHTOAN(),
+//                i.getGhiChu()
+//            });
+//        }
+//    }
+//    
 
     /**
      * This method is called from within the constructor to initialize the form.

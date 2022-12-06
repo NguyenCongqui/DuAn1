@@ -26,5 +26,5 @@ public interface ChiTietHoaDonService {
     
     HDBanViewModel FindHDB(int k) ;
     
-    int ThoiGian(String Stringdate) ;
+   // int ThoiGian(String Stringdate) ;
 }

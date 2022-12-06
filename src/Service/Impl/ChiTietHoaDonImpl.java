@@ -39,8 +39,8 @@ public class ChiTietHoaDonImpl implements ChiTietHoaDonService{
         return rep1.FindHDB(k);
     }
 
-    @Override
-    public int ThoiGian(String Stringdate) {
-        return rep.ThoiGian(Stringdate);
-    }
+//    @Override
+//    public int ThoiGian(String Stringdate) {
+//        return rep.ThoiGian(Stringdate);
+//    }
 }
