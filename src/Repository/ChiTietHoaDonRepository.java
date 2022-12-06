@@ -76,7 +76,7 @@ public class ChiTietHoaDonRepository {
                     i.setIdKhachHang(rs.getInt("IdKhachHang"));
                     i.setIdUsers(rs.getInt("IdUsers"));
                     i.setIdVoucher(rs.getInt("IdVoucher"));
-                    i.setNGAYTHANHTOAN(rs.getDate("NGAYTHANHTOAN"));
+                    i.setNGAYTHANHTOAN(rs.getString("NGAYTHANHTOAN"));
                     i.setGhiChu(rs.getString("GhiChu"));
                     i.setStatusPay(rs.getBoolean("statusPay"));
                     i.setStatusInvoice(rs.getBoolean("statusInvoice"));
@@ -106,7 +106,7 @@ public class ChiTietHoaDonRepository {
                 i.setIdKhachHang(rs.getInt("IdKhachHang"));
                 i.setIdUsers(rs.getInt("IdUsers"));
                 i.setIdVoucher(rs.getInt("IdVoucher"));
-                i.setNGAYTHANHTOAN(rs.getDate("NGAYTHANHTOAN"));
+                i.setNGAYTHANHTOAN(rs.getString("NGAYTHANHTOAN"));
                 i.setGhiChu(rs.getString("GhiChu"));
                 i.setStatusPay(rs.getBoolean("statusPay"));
                 i.setStatusInvoice(rs.getBoolean("statusInvoice"));
