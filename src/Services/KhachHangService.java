@@ -14,7 +14,7 @@ import java.util.List;
 public interface KhachHangService {
      List<KhachHang> getlistKhachHang();
     String them(KhachHang kh);
-    String capnhat (int ID, KhachHang khachHang );
+    String capnhat (KhachHang khachHang );
    String delete(int id);
    List<KhachHang> search(String temp);
 }

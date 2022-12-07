@@ -34,15 +34,6 @@ public class KhachHangIMpl implements KhachHangService {
     }
 
     @Override
-    public String capnhat(int ID, KhachHang khachHang) {
-        boolean cn = rep.capnhat(ID, khachHang);
-        if(cn){
-            return "sua thanh cong";
-        }
-        return "sua that bai";
-    }
-
-    @Override
     public String delete(int id) {
         boolean de = rep.delete(id);
         if(de){
@@ -54,6 +45,15 @@ public class KhachHangIMpl implements KhachHangService {
     @Override
     public List<KhachHang> search(String temp) {
          return rep.search(temp);
+    }
+
+    @Override
+    public String capnhat(KhachHang khachHang) {
+        boolean cn = rep.capnhat(khachHang);
+        if(cn){
+            return "sua thanh cong";
+        }
+        return "sua that bai";
     }
    
 }

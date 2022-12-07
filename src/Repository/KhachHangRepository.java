@@ -77,7 +77,7 @@ public class KhachHangRepository {
         return check > 0;
     }
 
-    public boolean capnhat(int ID, KhachHang khachHang) {
+    public boolean capnhat(KhachHang khachHang) {
         int check = 0;
         try {
             String sql = "UPDATE [dbo].[KhachHang]\n"
@@ -97,7 +97,7 @@ public class KhachHangRepository {
             pst.setObject(4, khachHang.getSoDienThoai());
             pst.setObject(5, khachHang.getDiaChi());
             pst.setObject(6, khachHang.isTrangThai());
-            pst.setObject(7, ID);
+            pst.setObject(7, khachHang.getIdKhachHang());
             check = pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(NCCRepository.class.getName()).log(Level.SEVERE, null, ex);

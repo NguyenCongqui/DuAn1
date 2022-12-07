@@ -30,6 +30,7 @@ public class ViewKhachHang extends javax.swing.JPanel {
         tblModel = (DefaultTableModel) tbl_khachhang.getModel();
         listKH = svKH.getlistKhachHang();
         showData(listKH);
+        clearForm();
         txt_id.disable();
     }
 
@@ -47,9 +48,9 @@ public void clearForm() {
         txt_ngaysinh.setText("");
         txt_Sdt.setText("");
         txt_id.setText("");
-        rbt_hailong.setSelected(false);
+        rbt_hailong.setSelected(true);
         rbt_khonghailong.setSelected(false);
-        rbt_nam.setSelected(false);
+        rbt_nam.setSelected(true);
         rbt_nu.setSelected(false);
         btn_them.setEnabled(true);
     }
@@ -361,6 +362,7 @@ public KhachHang getGui() {
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
         // TODO add your handling code here:
+         int id =Integer.parseInt(txt_id.getText());
          String ten = txt_ten.getText();
         String diaChi = txt_diachi.getText();
         String sdt = txt_Sdt.getText();
@@ -377,8 +379,8 @@ public KhachHang getGui() {
             rbt_hailong.setSelected(true);
         }
         rbt_khonghailong.setSelected(true);
-        KhachHang kh = new KhachHang(ten, ngaySinh, gt, sdt, diaChi, tt);
-        JOptionPane.showMessageDialog(this, svKH.them(kh));
+        KhachHang kh = new KhachHang(id,ten, ngaySinh, gt, sdt, diaChi, tt);
+        JOptionPane.showMessageDialog(this, svKH.capnhat(kh));
         showData(svKH.getlistKhachHang());
     }//GEN-LAST:event_btn_suaActionPerformed
 
