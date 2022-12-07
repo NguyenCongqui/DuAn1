@@ -10,6 +10,11 @@ import Service.Impl.ThongTinCaNhanImpl;
 import Services.ThongTinCaNhanService;
 import View.login.Auth;
 import View.login.XDate;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,13 +23,16 @@ import View.login.XDate;
 public class ViewThongtincanhan extends javax.swing.JPanel {
 
     ThongTinCaNhanService thongtincanhanservice = new ThongTinCaNhanImpl();
+    List<Users> listUsers = new ArrayList<>();
+    Users us = new Users();
     
     public ViewThongtincanhan() {
         initComponents();
         txt_ma.setEnabled(false);
         txt_Luong.setEnabled(false);
         txt_ChucVu.setEnabled(false);
-        //txt_ma.setEnabled(false);
+        
+//        
         edit();
     }
     public void setForm(Users user) {
@@ -33,17 +41,35 @@ public class ViewThongtincanhan extends javax.swing.JPanel {
         txt_ngaysinh.setText(XDate.toString(user.getNgaysinh(), "dd-MM-yyyy"));
         txt_Hoten.setText(user.getHoten());
         txt_SoDienThoai.setText(user.getSoDienThoai());
-        txt_Luong.setText(user.getLuong() + "");
+        txt_Luong.setText(nf.format(user.getLuong())+ " đ" + "");
         rdo_nam.setSelected(user.isGioitinh());
         rdo_nu.setSelected(!user.isGioitinh());
         txt_Email.setText(user.getEmail());
         txt_DiaChi.setText(user.getDiaChi());
     }
+    Locale lc = new Locale("vn", "VN");
+    NumberFormat nf = NumberFormat.getInstance(lc);
     public void edit() {
         int idUser = Auth.user.getIdusers();
         Users user = thongtincanhanservice.getlistUsers(idUser);
       setForm(user);
     }
+    public Users guidata(){
+        Users us =  new Users();
+        us.setDiaChi(txt_DiaChi.getText());
+      us.setEmail(txt_Email.getText());
+      us.setSoDienThoai(txt_SoDienThoai.getText());
+      us.setIdusers(Integer.parseInt(txt_ma.getText()));
+      us.setHoten(txt_Hoten.getText());
+        if (rdo_nam.isSelected()) {
+            us.setGioitinh(true);
+        } else {
+            us.setGioitinh(false);
+        }
+        us.setNgaysinh(XDate.toDate(txt_ngaysinh.getText(), "dd-MM-yyyy"));
+        return us;
+    }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,6 +135,11 @@ public class ViewThongtincanhan extends javax.swing.JPanel {
 
         myButton1.setText("Sửa");
         myButton1.setRadius(20);
+        myButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -191,6 +222,13 @@ public class ViewThongtincanhan extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
+        // TODO add your handling code here:
+        int id = Integer.parseInt(txt_ma.getText());
+        JOptionPane.showMessageDialog(this,thongtincanhanservice.update(Integer.parseInt(txt_ma.getText()),guidata()));
+        listUsers = thongtincanhanservice.getListThongTin();
+    }//GEN-LAST:event_myButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

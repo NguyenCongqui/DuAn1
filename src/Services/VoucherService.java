@@ -17,4 +17,7 @@ public interface VoucherService {
     String insert(Voucher v);
     String updateVoucher(Voucher v);
     String DeleteVoucher(Voucher v);
+    List<Voucher> selectAllDate();
+    public void updateSoLuongVouchers (Integer id);
+    List<Voucher> searchTen(String temp) ;
 }

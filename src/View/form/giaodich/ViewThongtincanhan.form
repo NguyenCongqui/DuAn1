@@ -221,6 +221,9 @@
             <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
             <Property name="radius" type="int" value="20"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton1ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

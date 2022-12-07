@@ -65,6 +65,7 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
     VoucherService voucherService = new VoucherImpl();
     HoaDonBanHangService hoadonbanhangservice = new HoaDonBanHangImpl();
     ChiTietHoaDonService chitiethoadonservice = new ChiTietHoaDonImpl();
+   
         private NCCService svNCC;
     private WebcamPanel panel = null;
     private static Webcam webcam = null;
@@ -159,7 +160,7 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
     public void fillComboxVoucher() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cbo_MaGiamGia.getModel();
         cbo_MaGiamGia.removeAllItems();
-       ListVoucher = voucherService.getListVouchers();
+       ListVoucher = voucherService.selectAllDate();
         for (Voucher v : ListVoucher) {
             model.addElement(v);
         }
@@ -232,8 +233,7 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
                 
                 
             }
-{
-                
+{   
             }
         }
     }
@@ -340,7 +340,7 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
             
                 if (chk_Voucher.isSelected()) {
                     Voucher v1 =  (Voucher) cbo_MaGiamGia.getSelectedItem();
-                   // ListVoucher = voucherService.updateSoLuongTon( v1.getIDVoucher());
+                   voucherService.updateSoLuongTon(v1.getIDVoucher());
                     
                 }
                 DefaultTableModel model = (DefaultTableModel) tbl2.getModel();

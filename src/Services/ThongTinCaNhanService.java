@@ -5,6 +5,8 @@
 package Services;
 
 import DomainModel.Users;
+import java.util.List;
+
 
 /**
  *
@@ -12,4 +14,8 @@ import DomainModel.Users;
  */
 public interface ThongTinCaNhanService {
     Users getlistUsers(Integer id);
+    String update (int id,Users us);
+    List<Users> getListThongTin();
+
+    
 }

@@ -7,6 +7,7 @@ package Repository;
 
 import DomainModel.Voucher;
 import Utilities.DBConnection;
+import View.login.XDate;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,6 +43,22 @@ public class VoucherRepository {
         
         return ListVoucher;
     }
+    public List<Voucher> selectAllDate() {
+        String select = "select * from Voucher where SoLuong > 0 AND ? BETWEEN StartsAt AND EndsAt AND TrangThai =1";
+        ListVoucher = new ArrayList<>();
+        try {
+            pst = db.getConnection().prepareStatement(select);
+            pst.setString(1,XDate.toString(new java.util.Date(), "yyyy-MM-dd")  );            
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                ListVoucher.add(new Voucher(rs.getInt(1),rs.getString(2),rs.getFloat(3),rs.getString(4),rs.getDate(5),rs.getDate(6),rs.getInt(7),rs.getBoolean(8)));
+            }
+            rs.close();
+        } catch (Exception e) {
+        }
+        
+        return ListVoucher;
+    }
     public String updateSoLuongTon( Integer idVoucher) {
         String update = "UPDATE dbo.Voucher SET SoLuong = SoLuong - 1 WHERE IdVoucher = ?";
         try {
@@ -63,9 +80,10 @@ public class VoucherRepository {
 "    StartsAt,\n" +
 "    EndsAt,\n" +
 "    SoLuong,\n" +
+"    TrangThai,\n"  +
 "	NgayTao\n" +
 ")\n" +
-"VALUES(?,?,?,?,?,GETDATE())";
+"VALUES(?,?,?,?,?,?,GETDATE())";
       
         try {
             pst = db.getConnection().prepareStatement(insert);
@@ -74,17 +92,18 @@ public class VoucherRepository {
             pst.setObject(3, v.getNgayBatDau());
             pst.setObject(4,  v.getNgayKetThuc());
             pst.setInt(5, v.getSoLuong());
+            pst.setBoolean(6, v.isTrangThai());
            
             
             pst.executeUpdate();
-            return "them thanh cong";
+            return "Bạn Đã Thêm Voucher Thành Công";
         } catch (Exception e) {
             
         }
-        return "Them khong thanh cong";
+        return "Bạn Đã Thêm Voucher Không Thành Công";
     }
          public String updateVoucher (Voucher v){
-        String update = "UPDATE dbo.Voucher SET GiamGia = ? , StartsAt = ?,EndsAt =?, SoLuong = ? WHERE IdVoucher = ?";
+        String update = "UPDATE dbo.Voucher SET GiamGia = ? , StartsAt = ?,EndsAt =?, SoLuong = ?,TrangThai= ? WHERE IdVoucher = ?";
       
         try {
             pst = db.getConnection().prepareStatement(update);
@@ -92,7 +111,8 @@ public class VoucherRepository {
             pst.setObject(2, v.getNgayBatDau());
             pst.setObject(3,  v.getNgayKetThuc());
             pst.setInt(4, v.getSoLuong());
-            pst.setInt(5, v.getIDVoucher());
+            pst.setBoolean(5, v.isTrangThai());
+            pst.setInt(6, v.getIDVoucher());
 
             pst.executeUpdate();
             return "Sua thanh cong";
@@ -115,6 +135,20 @@ public class VoucherRepository {
         }
         return "Xoa khong thanh cong";
     }
+         public void update (Integer id) {
+        String update = "UPDATE dbo.Voucher SET SoLuong= SoLuong - 1 WHERE IdVoucher = ?";
+        try {
+            pst = db.getConnection().prepareStatement(update);
+
+            pst.setInt(1, id);
+           
+            pst.executeUpdate();
+           
+        } catch (Exception e) {
+
+        }
+   
+    }
          public int getindex (int id){
         for (int i = 0; i < ListVoucher.size(); i++) {
             if (ListVoucher.get(i).getIDVoucher() == id) {
@@ -122,5 +156,14 @@ public class VoucherRepository {
             }
         }
         return -3;
+    }
+         public List<Voucher> searchTen(String temp) {
+        List<Voucher> listTemp = new ArrayList<>();
+        for (Voucher x : ListVoucher) {
+            if (x.getMaGiamGia().contains(temp)) {
+                listTemp.add(x);
+            }
+        }
+        return listTemp;
     }
 }

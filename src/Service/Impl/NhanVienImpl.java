@@ -14,6 +14,7 @@ import java.util.List;
  *
  * @author ADMIN
  */
+
 public class NhanVienImpl implements NhanVienService{
     NhanVienRepository rep = new NhanVienRepository();
     
@@ -49,6 +50,11 @@ public class NhanVienImpl implements NhanVienService{
     @Override
     public List<Users> ListgetNhanVienKhongLam() {
          return rep.getListnhanvienKhonglam();
+    }
+
+    @Override
+    public List<Users> TimKiemTenNhanVien(String tim) {
+       return (List<Users>) rep.searchTen(tim);
     }
 
     

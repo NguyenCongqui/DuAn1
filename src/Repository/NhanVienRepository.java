@@ -152,4 +152,30 @@ public String updataNhanVien (Users us) {
         }
         return "Sua khong thanh cong";
     }
+    public Users TimKiemTenNhanVien(String tim) {
+        String sql = "SELECT * FROM dbo.Users WHERE HoTen = ?";
+        ListUsers = new ArrayList<>();
+        try {
+            pst = db.getConnection().prepareStatement(sql);
+           pst.setString(1, tim);
+           rs = pst.executeQuery();
+         
+           while (rs.next()) {
+                ListUsers.add(new Users(rs.getInt(1),rs.getString(2),rs.getDate(3), rs.getBoolean(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getFloat(8), rs.getBoolean(9), rs.getBoolean(10),rs.getString(1)));
+            }
+           rs.close();
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+    public List<Users> searchTen(String temp) {
+        List<Users> listTemp = new ArrayList<>();
+        for (Users x : ListUsers) {
+            if (x.getHoten().contains(temp)) {
+                listTemp.add(x);
+            }
+        }
+        return listTemp;
+    }
 }

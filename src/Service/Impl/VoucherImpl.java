@@ -39,5 +39,20 @@ public class VoucherImpl implements VoucherService{
     public String DeleteVoucher(Voucher v) {
        return rep.DeleteVoucher(v);
     }
+
+    @Override
+    public List<Voucher> selectAllDate() {
+        return rep.selectAllDate();
+    }
+
+    @Override
+    public void updateSoLuongVouchers(Integer id) {
+       return;
+    }
+
+    @Override
+    public List<Voucher> searchTen(String temp) {
+       return rep.searchTen(temp);
+    }
     
 }

@@ -19,4 +19,5 @@ public interface NhanVienService {
     String ThemTaiKhoan(TaiKhoan tk);
     String XoaNhanVien(int k);
     String SuaNhanVien(Users us);
+    List<Users> TimKiemTenNhanVien(String tim);
 }
