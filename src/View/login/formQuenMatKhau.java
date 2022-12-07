@@ -85,8 +85,8 @@ public class formQuenMatKhau extends javax.swing.JPanel {
             Random rand = new Random();
             randomCode = rand.nextInt(999999);
             String host = "smtp.gmail.com";
-            String user = "quincph23871@fpt.edu.vn";
-            String pass = "";
+            String user = "nhasachpolynhom2it17317@gmail.com";
+            String pass = "xniejwfpqisipyuz";
            String to = txt_email.getText();
             String subject = "Reseting Code";
             String message = "Your reset code is " + randomCode;
