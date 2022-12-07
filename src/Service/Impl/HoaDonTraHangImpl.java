@@ -4,13 +4,13 @@
  */
 package Service.Impl;
 
-import Repository.HoaDonBanHangRepository;
 import Repository.HoaDonTraHangRepository;
 import Services.HoaDonTraHangService;
 import ViewModel.CTHDTraHangViewModel;
 import ViewModel.HDBanViewModel;
+import ViewModel.HDDoiSPViewModel;
 import ViewModel.HDTraHangViewModel;
-import ViewModel.TraHangViewModel;
+import ViewModel.NhapHangViewModel;
 import java.util.List;
 
 /**
@@ -19,25 +19,6 @@ import java.util.List;
  */
 public class HoaDonTraHangImpl implements HoaDonTraHangService{
 private HoaDonTraHangRepository rp = new HoaDonTraHangRepository();
-    @Override
-    public List<TraHangViewModel> getAll() {
-        return rp.getAll();
-    }
-
-    @Override
-    public List<TraHangViewModel> searchID(int id) {
-        return rp.searchId(id);
-    }
-
-    @Override
-    public String insert(HDTraHangViewModel hdthvm) {
-        boolean in = rp.insert(hdthvm);
-        if(in){
-            return "them thanh cong";
-    }
-        return "them that bai";
-   
-}
 
     @Override
     public List<HDTraHangViewModel> getAllTra() {
@@ -50,12 +31,42 @@ private HoaDonTraHangRepository rp = new HoaDonTraHangRepository();
     }
 
     @Override
-    public List<CTHDTraHangViewModel> getAllTRaCT() {
-        return rp.getAllTraChiTiet();
+    public List<CTHDTraHangViewModel> SearchTKID(int id) {
+        return rp.selectByIdNhap(id);
     }
 
     @Override
-    public List<CTHDTraHangViewModel> SearchTKID(int id) {
-        return rp.selectByIdNhap(id);
+    public List<NhapHangViewModel> selectByIdInvoiceReturn(int id) {
+        return rp.selectByIdInvoiceReturn(id);
+    }
+
+    @Override
+    public List<HDBanViewModel> selectAllCheckVoucher() {
+        return rp.selectAllCheckVoucher();
+    }
+
+    @Override
+    public List<HDTraHangViewModel> selectAllHDTra() {
+        return rp.selectAllHDTra();
+    }
+
+    @Override
+    public List<HDDoiSPViewModel> selectAllHDDoi() {
+        return rp.selectAllHDDoi();
+    }
+
+    @Override
+    public String insertHDTra(HDTraHangViewModel e) {
+        return rp.insertHDTra(e);
+    }
+
+    @Override
+    public String insertCTHDTra(CTHDTraHangViewModel e) {
+        return rp.insertCTHDTra(e);
+    }
+
+    @Override
+    public String updateSlgCTSach(Integer soluong, Integer id) {
+        return rp.updateSlgCTSach(soluong, id);
     }
 }

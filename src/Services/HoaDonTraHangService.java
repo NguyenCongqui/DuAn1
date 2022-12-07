@@ -6,8 +6,9 @@ package Services;
 
 import ViewModel.CTHDTraHangViewModel;
 import ViewModel.HDBanViewModel;
+import ViewModel.HDDoiSPViewModel;
 import ViewModel.HDTraHangViewModel;
-import ViewModel.TraHangViewModel;
+import ViewModel.NhapHangViewModel;
 import java.util.List;
 
 /**
@@ -15,11 +16,21 @@ import java.util.List;
  * @author quanh
  */
 public interface HoaDonTraHangService {
-    List<TraHangViewModel> getAll();
     List<HDTraHangViewModel> getAllTra();
-    List<TraHangViewModel> searchID(int id);
-    String insert(HDTraHangViewModel hdthvm);
     Float TongTien(Float idHDT);
-    List<CTHDTraHangViewModel> getAllTRaCT();
     List<CTHDTraHangViewModel> SearchTKID(int id);
+    
+    List<NhapHangViewModel> selectByIdInvoiceReturn(int id);
+    
+    List<HDBanViewModel> selectAllCheckVoucher();
+    
+    List<HDTraHangViewModel> selectAllHDTra();
+    
+    List<HDDoiSPViewModel> selectAllHDDoi();
+    
+    String insertHDTra(HDTraHangViewModel e);
+    
+    String insertCTHDTra(CTHDTraHangViewModel e);
+    
+    String updateSlgCTSach(Integer soluong, Integer id) ;
 }

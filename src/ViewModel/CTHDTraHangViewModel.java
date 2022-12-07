@@ -9,15 +9,16 @@ package ViewModel;
  * @author quanh
  */
 public class CTHDTraHangViewModel {
-    private int idHDChiTiet;
-    private String tenSach;
-    private String tenKhach;
-    private  String tenNN;
-    private String tenNXB;
-    private String tenTG;
-    private int soLuong;
-    private float tongTien;
-
+    private int idHDChiTiet;//idDetailInvoiceReturn
+    private String tenSach;//
+    private String tenKhach;//
+    private  String tenNN;//
+    private String tenNXB;//
+    private String tenTG;//
+    private int soLuong;//
+    private float tongTien;//price
+    private int idHoaDonTra,idCtSach;
+    
     public CTHDTraHangViewModel() {
     }
 
@@ -94,6 +95,22 @@ public class CTHDTraHangViewModel {
 
     public void setTongTien(float tongTien) {
         this.tongTien = tongTien;
+    }
+
+    public int getIdHoaDonTra() {
+        return idHoaDonTra;
+    }
+
+    public void setIdHoaDonTra(int idHoaDonTra) {
+        this.idHoaDonTra = idHoaDonTra;
+    }
+
+    public int getIdCtSach() {
+        return idCtSach;
+    }
+
+    public void setIdCtSach(int idCtSach) {
+        this.idCtSach = idCtSach;
     }
     
     
