@@ -9,6 +9,7 @@ import Repository.SachRepository;
 import Services.SachService;
 import Services.SachService;
 import ViewModel.SachViewModel;
+import ViewModel.sachMatHangViewModel;
 import java.util.List;
 
 /**
@@ -63,9 +64,11 @@ public class SachImpl implements SachService {
         return rp.searchTen(temp);
     }
 
+  
+
     @Override
-    public Sach selectName01(String name) {
-       return rp.selectName01(name);
+    public sachMatHangViewModel selectByName(String name) {
+        return rp.selectByName(name);
     }
 
     

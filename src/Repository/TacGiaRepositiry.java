@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Connection;
 
 /**
  *
@@ -67,18 +68,37 @@ public class TacGiaRepositiry {
         }
         return "sua khong thanh cong";
     }
-    public TacGia selectName(String name){
+//    public TacGia selectName(String name){
+//        ListTacGia = new ArrayList<>();
+//        String select = "SELECT * FROM dbo.TacGia WHERE TenTacGia = ?";
+//        try {
+//            pst = db.getConnection().prepareStatement(select);
+//           pst.setString(1, name);
+//           rs = pst.executeQuery();
+//            while (rs.next()) {                
+//                ListTacGia.add(new TacGia(rs.getInt(1), rs.getNString(2)));
+//            }
+//        } catch (Exception e) {
+//        }
+//        return null;
+//    }
+     public TacGia selectName(String name) {
+        String sql = "SELECT * FROM dbo.TacGia WHERE TenTacGia = ? ";
+               
         ListTacGia = new ArrayList<>();
-        String select = "SELECT * FROM dbo.TacGia WHERE TenTacGia = ?";
-        try {
-            pst = db.getConnection().prepareStatement(select);
-           pst.setString(1, name);
-           rs = pst.executeQuery();
-            while (rs.next()) {                
-                ListTacGia.add(new TacGia(rs.getInt(1), rs.getNString(2)));
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+            ps.setObject(1, name);
+            ResultSet rs = ps.executeQuery();
+           if (rs.next()) {
+                TacGia p = new TacGia();
+                p.setIdTacGia(rs.getInt("IdTacGia"));
+                p.setTenGiaGia(rs.getString("TenTacGia"));                
+                return p;
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
+
     }
 }

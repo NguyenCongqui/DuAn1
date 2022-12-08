@@ -253,7 +253,7 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
 
     private void btn_bieudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bieudoActionPerformed
         // TODO add your handling code here:
-        if (rdo_bieudocot.isSelected()) {
+        if (rdo_bieudoduong.isSelected()) {
             new BieuDoDuong((DefaultTableModel) tbl_thongkedoanhso.getModel(),null).setVisible(true);
         
         } else {

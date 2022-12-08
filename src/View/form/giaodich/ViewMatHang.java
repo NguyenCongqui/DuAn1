@@ -6,6 +6,7 @@ package View.form.giaodich;
 
 import Service.Impl.ChiTietSachImpl;
 import Services.ChiTietSachService;
+import ViewModel.BanHangViewModel;
 import ViewModel.MatHang01;
 import ViewModel.MatHangViewModel;
 import java.awt.ActiveEvent;
@@ -94,9 +95,10 @@ public class ViewMatHang extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        textField1 = new View.form.TextField();
+        txt_tim = new View.form.TextField();
         myButton1 = new View.form.MyButton();
         myButton2 = new View.form.MyButton();
+        lbl_tim = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         btn_dangKinhDoanh = new View.form.RadioButtonCustom();
@@ -119,7 +121,12 @@ public class ViewMatHang extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Mặt Hàng");
 
-        textField1.setLabelText("Tìm theo mã hoặc tên");
+        txt_tim.setLabelText("Tìm theo mã hoặc tên");
+        txt_tim.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txt_timCaretUpdate(evt);
+            }
+        });
 
         myButton1.setText("Tìm");
         myButton1.setRadius(20);
@@ -142,28 +149,33 @@ public class ViewMatHang extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jLabel1)
-                .addGap(139, 139, 139)
-                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(106, 106, 106)
-                .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel1)
+                        .addGap(143, 143, 143)
+                        .addComponent(txt_tim, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(106, 106, 106)
+                        .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(294, 294, 294)
+                        .addComponent(lbl_tim, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_tim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_tim)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -362,7 +374,7 @@ public class ViewMatHang extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,7 +462,7 @@ public class ViewMatHang extends javax.swing.JPanel {
                 }
             }
               String tenSach = (String) tbl_matHang.getValueAt(index, 2);
-         //     Float gia =  (Float) tbl_matHang.getValueAt(index, 3);
+             // Float gia =  (Float) tbl_matHang.getValueAt(index, 3);
                String tenNgonNgu = (String) tbl_matHang.getValueAt(index, 4);
                 String tenTacGia = (String) tbl_matHang.getValueAt(index, 5);
                  String tenNhaXuatBan = (String) tbl_matHang.getValueAt(index, 6);
@@ -459,7 +471,9 @@ public class ViewMatHang extends javax.swing.JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                    suamatHang.update();
-                   filldata01();
+                   ListMatHangViewModel = chitietsachService.getlist();
+        filldata01();
+              
                 }
                  });
                  suamatHang.setVisible(true);
@@ -468,6 +482,26 @@ public class ViewMatHang extends javax.swing.JPanel {
     //   }
         
     }//GEN-LAST:event_tbl_matHangMouseClicked
+
+    private void txt_timCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_timCaretUpdate
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tbl_matHang.getModel();
+        model.setRowCount(0);
+        String keyString = txt_tim.getText();
+        List<MatHangViewModel> list =  chitietsachService.timkiemtheoma(keyString);
+        if (list.isEmpty()) {
+            lbl_tim.setText("Không có khách hàng " + keyString);
+            return;
+        }
+       for (MatHangViewModel mh : list) {
+            tbl_model.addRow(new Object[]{
+               mh.getIdchitietsach(), mh.getMasach(),mh.getTenSach(),nf.format(mh.getGiaban()) + " đ",mh.getTenNgonNgu(),mh.getTenTacGia(),mh.getTenNxb(),mh.getSoluongton()
+            });
+        }
+        
+        lbl_tim.setText("");
+    
+    }//GEN-LAST:event_txt_timCaretUpdate
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -486,6 +520,7 @@ public class ViewMatHang extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_tim;
     private View.form.MyButton myButton1;
     private View.form.MyButton myButton2;
     private View.form.RadioButtonCustom radioButtonCustom2;
@@ -493,6 +528,6 @@ public class ViewMatHang extends javax.swing.JPanel {
     private View.form.RadioButtonCustom rdo_hetHang;
     private View.form.RadioButtonCustom rdo_tatca;
     private View.form.TableColumn tbl_matHang;
-    private View.form.TextField textField1;
+    private View.form.TextField txt_tim;
     // End of variables declaration//GEN-END:variables
 }

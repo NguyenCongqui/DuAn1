@@ -21,10 +21,12 @@ import Services.SachService;
 import Services.TacGiaService;
 import View.TrangChu.mainform;
 import ViewModel.MatHangViewModel;
+import ViewModel.sachMatHangViewModel;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,6 +44,7 @@ public class FormSuaMatHang extends javax.swing.JFrame {
     List<Sach> ListSach = new ArrayList<>();
     List<MatHangViewModel> listMatHangViewModel = new ArrayList<>();
     List<ChiTietSach> listchitietsach = new ArrayList<>();
+    List<sachMatHangViewModel> listsachMatHangViewModel = new ArrayList<>();
     ChiTietSachService chitietsachService = new ChiTietSachImpl();
     public FormSuaMatHang() {
         initComponents();
@@ -63,16 +66,18 @@ public class FormSuaMatHang extends javax.swing.JFrame {
         txt_ID.setText(Integer.toString(idchitietsach));
         txt_ID.setEditable(false);
         txt_GiaBan.setText(Float.toString(GiaBan));
-//       NhaXuatBan nxb = (NhaXuatBan) NhaXuatBanService.Select(tennhaxuatban);
-//       TacGia tg = TacGiaService.selectName(tenTacGIa);
-//      Sach s = SachService.selectName01(Tensach);
-//       NgonNgu nn = NgonNguService.selectName(tenngonngu);
-//       cbo_NgonNgu.getModel().setSelectedItem(nn);
-//       cbo_NhaXuatBan.getModel().setSelectedItem(nxb);
-//       cbo_TacGia.getModel().setSelectedItem(tg);
-//       cbo_TenSach.getModel().setSelectedItem(s);
-//       cbo_TenSach.setEditable(false);
-//       cbo_TenSach.setEnabled(false);
+        
+       NhaXuatBan nxb = (NhaXuatBan) NhaXuatBanService.Select(tennhaxuatban);
+       TacGia tg = TacGiaService.selectName(tenTacGIa);
+      sachMatHangViewModel s = SachService.selectByName(Tensach);
+       NgonNgu nn = NgonNguService.selectName(tenngonngu);
+       
+       cbo_NgonNgu.getModel().setSelectedItem(nn);
+       cbo_NhaXuatBan.getModel().setSelectedItem(nxb);
+       cbo_TacGia.getModel().setSelectedItem(tg);
+       cbo_TenSach.getModel().setSelectedItem(s);
+       cbo_TenSach.setEditable(false);
+       cbo_TenSach.setEnabled(false);
        
        
        
@@ -119,13 +124,13 @@ public class FormSuaMatHang extends javax.swing.JFrame {
         NhaXuatBan nxb = (NhaXuatBan) cbo_NhaXuatBan.getSelectedItem();
         NgonNgu nn = (NgonNgu) cbo_NgonNgu.getSelectedItem();
         TacGia tg = (TacGia) cbo_TacGia.getSelectedItem();
-        Sach s = (Sach) cbo_TenSach.getSelectedItem();
+        sachMatHangViewModel s =  (sachMatHangViewModel) cbo_TenSach.getSelectedItem();
         MatHangViewModel mh = new MatHangViewModel();
         mh.setGiaban(Float.parseFloat(txt_GiaBan.getText()));
         mh.setIdchitietsach(Integer.parseInt(txt_ID.getText()));
         mh.setIdNgonNgu(nn.getIdNgonNgu());
         mh.setTenNgonNgu(nn.getTenNgonNgu());
-        mh.setIdsach(s.getIdSach());
+        mh.setIdsach(s.getIdsach());
         mh.setTenSach(s.getTenSach());
         mh.setTrangThai(true);
         mh.setSoluongton(0);
@@ -138,11 +143,27 @@ public class FormSuaMatHang extends javax.swing.JFrame {
         
         return mh;
     }
+     public boolean validate1(){
+//         try {
+//             Integer.parseInt(txt_GiaBan.getText());
+//         } catch (Exception e) {
+//             JOptionPane.showMessageDialog(this,"Bạn Ơi, Giá Bán Phải Là Số Nha");
+//             return false;
+//         }
+         if (txt_GiaBan.getText().trim().isEmpty()) {
+             JOptionPane.showMessageDialog(this, "Bạn Ơi, Giá Bán Không Được Để Trống Nha");
+             return false;
+         }
+         return true;
+     }
      public void update(){
+         if (validate1()) {
+             
+         
          MatHangViewModel mh = getfromMatHang();
-         chitietsachService.update(mh);
+         JOptionPane.showMessageDialog(this,chitietsachService.update(mh));
          new mainform().showForm(new ViewMatHang());
-         this.dispose();
+         this.dispose();}
      }
 
     /**

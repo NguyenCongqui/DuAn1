@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Connection;
 
 /**
  *
@@ -70,22 +71,41 @@ public class NgonNguRepository {
         }
         return "sua khong thanh cong";
     }
-    public NgonNgu selectName(String name){
+//    public NgonNgu selectName(String name){
+//        ListNgonNgu = new ArrayList<>();
+//        String select = "SELECT * FROM dbo.NgonNgu WHERE TenNgonNGu = ? ";
+//        try {
+////            st = db.getConnection().createStatement();
+////            rs = st.executeQuery(select);
+//            
+//            pst = db.getConnection().prepareStatement(select);
+//           pst.setString(1, name);
+//        pst.executeQuery();
+//            while (rs.next()) {                
+//                ListNgonNgu.add(new NgonNgu(rs.getInt(1), rs.getNString(2)));
+//            }
+//            rs.close();
+//        } catch (Exception e) {
+//        }
+//        return null;
+//    }
+     public NgonNgu selectName(String name) {
+        String sql = "SELECT * FROM dbo.NgonNgu WHERE TenNgonNGu = ? ";
+               
         ListNgonNgu = new ArrayList<>();
-        String select = "SELECT * FROM dbo.NgonNgu WHERE TenNgonNGu = ? ";
-        try {
-//            st = db.getConnection().createStatement();
-//            rs = st.executeQuery(select);
-            
-            pst = db.getConnection().prepareStatement(select);
-           pst.setString(1, name);
-           rs = pst.executeQuery();
-            while (rs.next()) {                
-                ListNgonNgu.add(new NgonNgu(rs.getInt(1), rs.getNString(2)));
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+            ps.setObject(1, name);
+            ResultSet rs = ps.executeQuery();
+           if (rs.next()) {
+                NgonNgu p = new NgonNgu();
+                p.setIdNgonNgu(rs.getInt("IdNgonNgu"));
+                p.setTenNgonNgu(rs.getString("TenNgonNGu"));                
+                return p;
             }
-            rs.close();
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
+
     }
 }

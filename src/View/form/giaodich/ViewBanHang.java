@@ -355,7 +355,7 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
         DefaultTableModel model = (DefaultTableModel) tbl1.getModel();
         model.setRowCount(0);
         String keyString = txt_Search.getText();
-        List<BanHangViewModel> list = chitietsachService.timkiemtheoma(keyString);
+        List<BanHangViewModel> list = chitietsachService.timkiemtheomaBanHang(keyString);
         if (list.isEmpty()) {
             lbl_tim.setText("Không có khách hàng " + keyString);
             return;

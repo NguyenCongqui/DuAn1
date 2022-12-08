@@ -348,7 +348,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
                     thenhanvienUpdate.update();
                     cbo_tinhtrang.setSelectedIndex(0);
                     us = nhanvienservice.ListgetNhanVien();
-        showData();
+                    showData();
 
                 }
             }

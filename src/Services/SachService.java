@@ -6,6 +6,7 @@ package Services;
 
 import DomainModel.Sach;
 import ViewModel.SachViewModel;
+import ViewModel.sachMatHangViewModel;
 import java.util.List;
 
 /**
@@ -19,6 +20,6 @@ public interface SachService {
     String update(Sach s , String id);
     String delete(String id);
     List<SachViewModel> searchTen(String temp);
-    Sach selectName01(String name);
+    sachMatHangViewModel selectByName(String name);
 
 }

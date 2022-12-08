@@ -83,13 +83,22 @@ public class ChiTietSachImpl implements ChiTietSachService{
 
     @Override
     public BanHangViewModel TimKiemmSach(String tim) {
-        return rep.TimKiemSach(tim);
+       return rep.TimKiemSach(tim);
     }
 
     @Override
-    public List<BanHangViewModel> timkiemtheoma(String tim) {
-         return rep.search(tim);
+    public List<MatHangViewModel> timkiemtheoma(String tim) {
+       return rep.search(tim);
     }
+
+    @Override
+    public List<BanHangViewModel> timkiemtheomaBanHang(String tim) {
+       return rep.search01(tim);
+    }
+
+    
+
+    
 
     
     

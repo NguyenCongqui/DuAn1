@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import sun.misc.Unsafe;
+import java.sql.Connection;
 
 /**
  *
@@ -79,23 +80,42 @@ NhaXuatBan nxb;
         }
         
      }
-     public NhaXuatBan selectName (String name){
-         String sql = "SELECT * FROM dbo.NXB WHERE TenNXB = ?";
-         ListNhaXuatBan =new  ArrayList<>();
-         try {
-//              st=db.getConnection().createStatement();
-//            rs = st.executeQuery(sql);
-            pst = db.getConnection().prepareStatement(sql);
-           pst.setString(1, name);
-           rs = pst.executeQuery();
-            while (rs.next()) {                
-                ListNhaXuatBan.add(new NhaXuatBan(rs.getInt(1), rs.getNString(2)));
-                
+//     public NhaXuatBan selectName (String name){
+//         String sql = "SELECT * FROM dbo.NXB WHERE TenNXB = ?";
+//         ListNhaXuatBan =new  ArrayList<>();
+//         try {
+////              st=db.getConnection().createStatement();
+////            rs = st.executeQuery(sql);
+//            pst = db.getConnection().prepareStatement(sql);
+//           pst.setString(1, name);
+//          pst.executeQuery();
+//            while (rs.next()) {                
+//                ListNhaXuatBan.add(new NhaXuatBan(rs.getInt(1), rs.getNString(2)));
+//                
+//            }
+//            rs.close();
+//         } catch (Exception e) {
+//         }
+//         return nxb;
+//                 
+//     }
+     public NhaXuatBan selectName(String name) {
+        String sql = "SELECT * FROM dbo.NXB WHERE TenNXB = ? ";
+               
+        ListNhaXuatBan = new ArrayList<>();
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+            ps.setObject(1, name);
+            ResultSet rs = ps.executeQuery();
+           if (rs.next()) {
+                NhaXuatBan p = new NhaXuatBan();
+                p.setId(rs.getInt("IdNXB"));
+                p.setNhaXuatBan(rs.getString("TenNXB"));                
+                return p;
             }
-            rs.close();
-         } catch (Exception e) {
-         }
-         return nxb;
-                 
-     }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
 }

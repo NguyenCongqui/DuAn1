@@ -120,11 +120,11 @@ public class ChiTietSachRepository {
             pst.setFloat(5, cts.getGiaban());
             pst.setInt(6, cts.getIdchitietsach());
             pst.executeUpdate();
-            return "sua thanh cong";
+            return "Sửa Thành Công";
         } catch (Exception e) {
 
         }
-        return "sua khong thanh cong";
+        return "Sửa Không Thành Côngg";
     }
     public String updateSoLuongTon(Integer soluong, Integer id) {
         String update = "UPDATE dbo.ChiTietSach SET SoLuongTon = SoLuongTon - ? WHERE IdCTSach = ?";
@@ -276,7 +276,16 @@ public class ChiTietSachRepository {
         return null;
 
     }
-        public List<BanHangViewModel> search(String temp) {
+        public List<MatHangViewModel> search(String temp) {
+        List<MatHangViewModel> listTemp = new ArrayList<>();
+        for (MatHangViewModel x : listMatHangViewModel) {
+            if (x.getMasach().contains(temp)) {
+                listTemp.add(x);
+            }
+        }
+        return listTemp;
+    }
+        public List<BanHangViewModel> search01(String temp) {
         List<BanHangViewModel> listTemp = new ArrayList<>();
         for (BanHangViewModel x : listBanHangViewModel) {
             if (x.getMaSach().contains(temp)) {
@@ -285,6 +294,16 @@ public class ChiTietSachRepository {
         }
         return listTemp;
     }
+//        
+//         public List<Voucher> searchTen(String temp) {
+//        List<Voucher> listTemp = new ArrayList<>();
+//        for (Voucher x : ListVoucher) {
+//            if (x.getMaGiamGia().contains(temp)) {
+//                listTemp.add(x);
+//            }
+//        }
+//        return listTemp;
+//    }
 
    
 }

@@ -6,7 +6,9 @@ package Repository;
 
 import DomainModel.Sach;
 import Utilities.DBConnection;
+import Utilities.jdbcHelper;
 import ViewModel.SachViewModel;
+import ViewModel.sachMatHangViewModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
@@ -25,6 +27,7 @@ public class SachRepository {
     Statement st = null;
     PreparedStatement pst = null;
     List<Sach> listSach = null;
+    List<sachMatHangViewModel> listsachMatHang = null;
     
     public List<Sach> getAllSach() {
         String query = "select * from sach";
@@ -155,24 +158,47 @@ public class SachRepository {
         }
         return null;
     }
-    public Sach selectName01 (String name){
-         String sql = "SELECT * FROM dbo.Sach INNER JOIN dbo.TheLoai ON TheLoai.IdTheLoai = Sach.Idtheloai WHERE TenSach = ?";
-         listSach =new  ArrayList<>();
-         try {
-//              st=db.getConnection().createStatement();
-//            rs = st.executeQuery(sql);
-            pst = db.getConnection().prepareStatement(sql);
-           pst.setString(1, name);
-           rs = pst.executeQuery();
-            while (rs.next()) {                
-                listSach.add(new Sach(rs.getInt(1), rs.getString(4), rs.getString(5), rs.getInt(2), rs.getInt(3), rs.getBoolean(6)));
-                
+//    public Sach selectName01 (String name){
+//         String sql = "SELECT * FROM dbo.Sach INNER JOIN dbo.TheLoai ON TheLoai.IdTheLoai = Sach.Idtheloai WHERE TenSach = ?";
+//         listSach =new  ArrayList<>();
+//         try {
+////              st=db.getConnection().createStatement();
+////            rs = st.executeQuery(sql);
+//            pst = db.getConnection().prepareStatement(sql);
+//           pst.setString(1, name);
+//       pst.executeQuery();
+//            while (rs.next()) {                
+//                listSach.add(new Sach(rs.getInt(1), rs.getString(4), rs.getString(5), rs.getInt(2), rs.getInt(3), rs.getBoolean(6)));
+//                
+//            }
+//            rs.close();
+//         } catch (Exception e) {
+//         }
+//         return null;
+//                 
+//     }
+   public sachMatHangViewModel selectByName(String name) {
+        String sql = "SELECT * FROM dbo.Sach INNER JOIN dbo.TheLoai ON TheLoai.IdTheLoai = Sach.Idtheloai WHERE TenSach = ?";
+               
+        listsachMatHang = new ArrayList<>();
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+            ps.setObject(1, name);
+            ResultSet rs = ps.executeQuery();
+           if (rs.next()) {
+                sachMatHangViewModel p = new sachMatHangViewModel();
+                p.setIdsach(rs.getInt("IdSach"));
+                p.setTenSach(rs.getString("TenSach"));
+                p.setMaSach(rs.getString("MaSach"));
+                p.setIdtheloai(rs.getInt("Idtheloai"));
+                p.setTenTheLoai(rs.getString("TenTheLoai"));
+                p.setTrangThai(rs.getBoolean("TrangThai"));
+                return p;
             }
-            rs.close();
-         } catch (Exception e) {
-         }
-         return null;
-                 
-     }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
 
 }
