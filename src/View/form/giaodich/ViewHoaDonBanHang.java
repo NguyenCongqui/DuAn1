@@ -6,13 +6,15 @@ package View.form.giaodich;
 
 import DomainModel.KhachHang;
 import Service.Impl.ChiTietHoaDonImpl;
+import Service.Impl.HoaDonTraHangImpl;
 import Service.Impl.KhachHangIMpl;
 import Services.ChiTietHoaDonService;
+import Services.HoaDonTraHangService;
 import Services.KhachHangService;
-import View.login.XDate;
 import ViewModel.HDBanViewModel;
+import ViewModel.HDDoiSPViewModel;
+import ViewModel.HDTraHangViewModel;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +29,7 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
     List<KhachHang> listKHg;
     Integer totalData = 0;
     boolean flag = false;
+    HoaDonTraHangService donTraHangService = new HoaDonTraHangImpl();
 
     /**
      * Creates new form HoaDonBanHang
@@ -39,12 +42,14 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
     }
 
     public void fillData() {
-     //   totalData = chitiethoadonservice.ThoiGian("");
         tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
-       listCTB = chitiethoadonservice.getAll("");
+        listCTB = chitiethoadonservice.getAll("");
         KhachHangService khachHangService = new KhachHangIMpl();
         listKHg = khachHangService.getlistKhachHang();
         String phone = "";
+        String status = "";
+        List<HDDoiSPViewModel> listChange = donTraHangService.selectAllHDDoi();
+        List<HDTraHangViewModel> listReturn = donTraHangService.selectAllHDTra();
         for (HDBanViewModel i : listCTB) {
             for (int j = 0; j < listKHg.size(); j++) {
                 if (i.getIdKhachHang() == listKHg.get(j).getIdKhachHang()) {
@@ -61,6 +66,23 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
                 i.getGhiChu()
             });
         }
+        for (int i = 0; i < listCTB.size(); i++) {
+            for (int j = 0; j < listReturn.size(); j++) {
+                if (listReturn.get(j).getMaHoaDonBan() == listCTB.get(i).getIdHoaDonBan() ) {
+//                    status = "Đã trả hàng";
+                    tbl_hoadonbanhang.setValueAt("Đã trả hàng", i, 7);
+                }
+            }
+        }
+        for (int i = 0; i < listCTB.size(); i++) {
+            for (int z = 0; z < listChange.size(); z++) {
+                if (listChange.get(z).getIDHoaDonBanHang() == listCTB.get(i).getIdHoaDonBan()) {
+//                    status = "Đã đổi hàng";
+                    tbl_hoadonbanhang.setValueAt("Đã đổi hàng", i, 7);
+                }
+            }
+        }
+
     }
 
 //    public void searchDateFillTable() {
@@ -91,7 +113,6 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
 //        }
 //    }
 //    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -312,26 +333,32 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
             int row = tbl_hoadonbanhang.getSelectedRow();
             int id = (int) tbl_hoadonbanhang.getValueAt(row, 0);
             new ViewHoaDonChiTietBanHang(id, (DefaultTableModel) tbl_hoadonbanhang.getModel(), tbl_hoadonbanhang.getSelectedRow()).setVisible(true);
-         System.out.println(tbl_hoadonbanhang.getValueAt(row, 5).toString());
+            System.out.println(tbl_hoadonbanhang.getValueAt(row, 5).toString());
         }
-       
+
     }//GEN-LAST:event_tbl_hoadonbanhangMouseClicked
     public void search() {
-        if (txt_timtheoma.getText().isEmpty()) {
+        if (txt_timtheoma.getText().trim().equals("")) {
             return;
         }
         lbl_Search.setVisible(true);
-        DefaultTableModel tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
+        tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
         tableModel.setRowCount(0);
         int id = Integer.valueOf(txt_timtheoma.getText());
         HDBanViewModel i = chitiethoadonservice.FindHDB(id);
+        
+       
+        KhachHangService khachHangService = new KhachHangIMpl();
+        listKHg = khachHangService.getlistKhachHang();   
+        
         if (i == null) {
-            //lbl_Search.setVisible(true);
+            lbl_Search.setVisible(true);
             lbl_Search.setText("Không có mặt hàng : " + id);
             return;
         }
         String phone = "";
-
+        List<HDDoiSPViewModel> listChange = donTraHangService.selectAllHDDoi();
+        List<HDTraHangViewModel> listReturn = donTraHangService.selectAllHDTra();
         for (int j = 0; j < listKHg.size(); j++) {
             if (i.getIdKhachHang() == listKHg.get(j).getIdKhachHang()) {
                 phone = listKHg.get(j).getSoDienThoai();
@@ -348,6 +375,27 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
         });
 
         lbl_Search.setText("");
+//          for (int j = 0; j < listReturn.size(); j++) {
+//            if (id == listReturn.get(j).getMaHoaDonBan()) {
+//                tbl_hoadonbanhang.setValueAt("Đã trả hàng", j, 7);
+//            }
+//        }
+
+        for (int z = 0; z < listChange.size(); z++) {
+            if (id == listChange.get(z).getIDHoaDonBanHang()) {
+                tbl_hoadonbanhang.setValueAt("Đã đổi hàng", z, 7);
+            }
+        }
+
+      
+//            for (int z = 0; z < listChange.size(); z++) {
+//                if (id == listCTB.get(z).getIdHoaDonBan()) {
+////                    status = "Đã đổi hàng";
+//                    tbl_hoadonbanhang.setValueAt("Đã đổi hàng", z, 7);
+//                }
+//            }
+        
+
     }
     private void txt_timtheomaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_timtheomaCaretUpdate
         // TODO add your handling code here:
@@ -370,13 +418,13 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
     private void btn_TimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimActionPerformed
         // TODO add your handling code here:
         try {
-             search();
-        if (txt_timtheoma.getText().isEmpty()) {
-            lbl_Search.setVisible(false);
-            fillData();
-        }
+            search();
+            if (txt_timtheoma.getText().isEmpty()) {
+                lbl_Search.setVisible(false);
+                fillData();
+            }
         } catch (NumberFormatException e) {
-           lbl_Search.setText("Mã phải là số ");
+            lbl_Search.setText("Mã phải là số ");
         }
     }//GEN-LAST:event_btn_TimActionPerformed
 

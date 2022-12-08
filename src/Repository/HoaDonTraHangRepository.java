@@ -172,8 +172,7 @@ public class HoaDonTraHangRepository {
     }
 
     public List<HDTraHangViewModel> selectAllHDTra() {
-        String sql = "SELECT IDHoaDonTraHang,IDHoaDonBanHang,NgayDoiHang,KhachHang.IdKhachHang,totalReturn,"
-                + "MoTa,Hoten FROM dbo.HoaDonTraHang JOIN dbo.KhachHang ON KhachHang.IdKhachHang = HoaDonTraHang.IDKhachHang ORDER BY IDHoaDonTraHang DESC";
+        String sql = "SELECT * FROM dbo.HoaDonTraHang JOIN dbo.KhachHang ON KhachHang.IdKhachHang = HoaDonTraHang.IDKhachHang ORDER BY IDHoaDonTraHang DESC";
         List<HDTraHangViewModel> list = new ArrayList<>();
         try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
