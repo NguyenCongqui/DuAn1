@@ -73,6 +73,36 @@ public KhachHang getGui() {
         return kh;
         
     }
+public boolean validate01(){
+    if (txt_Sdt.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this,"Bạn ơi, Số Điện Thoại Đang Trống Kìa");
+        return false;
+    }
+    if (txt_diachi.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this,"Bạn ơi, Địa Chỉ Đang Trống Kìa");
+        return false;
+    }
+    if (txt_ten.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this,"Bạn ơi, Họ Và Tên Đang Trống Kìa");
+        return false;
+    }
+    if (!rbt_nam.isSelected()&& !rbt_nu.isSelected()) {
+        JOptionPane.showMessageDialog(this,"Bạn Ơi, Bạn chưa chọn giới Tính Kìa");
+        return false;
+    }
+    if (!rbt_hailong.isSelected()&& !rbt_khonghailong.isSelected()) {
+        JOptionPane.showMessageDialog(this,"Bạn Ơi, Bạn chưa chọn Tình trạng Kìa");
+        return false;
+    }
+    try {
+        Integer.parseInt(txt_Sdt.getText());
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this,"Bạn Ơi, Số Điện Thoại Phải là số nha");
+        return false;
+    }
+    
+    return true;
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -181,6 +211,7 @@ public KhachHang getGui() {
         txt_id.setLabelText("ID");
 
         btn_them.setText("Thêm");
+        btn_them.setRadius(20);
         btn_them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_themActionPerformed(evt);
@@ -188,6 +219,7 @@ public KhachHang getGui() {
         });
 
         btn_new.setText("New");
+        btn_new.setRadius(20);
         btn_new.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_newActionPerformed(evt);
@@ -195,6 +227,7 @@ public KhachHang getGui() {
         });
 
         btn_sua.setText("Sửa");
+        btn_sua.setRadius(20);
         btn_sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_suaActionPerformed(evt);
@@ -202,6 +235,7 @@ public KhachHang getGui() {
         });
 
         btn_xoa.setText("Xóa");
+        btn_xoa.setRadius(20);
         btn_xoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_xoaActionPerformed(evt);
@@ -229,16 +263,17 @@ public KhachHang getGui() {
                         .addComponent(rbt_nu, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(rbt_hailong, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
-                            .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_them, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                            .addComponent(btn_sua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_new, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rbt_khonghailong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(rbt_khonghailong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(btn_xoa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_new, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)))
                         .addGap(15, 15, 15))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -339,6 +374,9 @@ public KhachHang getGui() {
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
+        if (validate01()) {
+            
+       
          String ten = txt_ten.getText();
         String diaChi = txt_diachi.getText();
         String sdt = txt_Sdt.getText();
@@ -357,7 +395,7 @@ public KhachHang getGui() {
         rbt_khonghailong.setSelected(true);
         KhachHang kh = new KhachHang(ten, ngaySinh, gt, sdt, diaChi, tt);
         JOptionPane.showMessageDialog(this, svKH.them(kh));
-        showData(svKH.getlistKhachHang());
+        showData(svKH.getlistKhachHang());}
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed

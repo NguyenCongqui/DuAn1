@@ -254,10 +254,10 @@ public class ViewThongKeDoanhThu extends javax.swing.JPanel {
     private void btn_bieudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bieudoActionPerformed
         // TODO add your handling code here:
         if (rdo_bieudocot.isSelected()) {
-            new BieuDoCot((DefaultTableModel) tbl_thongkedoanhso.getModel(), null).setVisible(true);
+            new BieuDoDuong((DefaultTableModel) tbl_thongkedoanhso.getModel(),null).setVisible(true);
         
         } else {
-            new BieuDoDuong((DefaultTableModel) tbl_thongkedoanhso.getModel()).setVisible(true);
+            new BieuDoCot((DefaultTableModel) tbl_thongkedoanhso.getModel()).setVisible(true);
         }
     }//GEN-LAST:event_btn_bieudoActionPerformed
 

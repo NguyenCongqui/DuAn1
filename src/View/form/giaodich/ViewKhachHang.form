@@ -221,17 +221,19 @@
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="rbt_hailong" alignment="0" min="-2" pref="77" max="-2" attributes="0"/>
                                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btn_them" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btn_sua" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_them" alignment="0" pref="92" max="32767" attributes="0"/>
+                                  <Component id="btn_sua" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="37" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btn_xoa" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btn_new" min="-2" max="-2" attributes="0"/>
                                   <Component id="rbt_khonghailong" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="btn_xoa" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="btn_new" alignment="0" pref="81" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           </Group>
@@ -358,6 +360,7 @@
             <Component class="View.form.MyButton" name="btn_them">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+                <Property name="radius" type="int" value="20"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_themActionPerformed"/>
@@ -366,6 +369,7 @@
             <Component class="View.form.MyButton" name="btn_new">
               <Properties>
                 <Property name="text" type="java.lang.String" value="New"/>
+                <Property name="radius" type="int" value="20"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_newActionPerformed"/>
@@ -374,6 +378,7 @@
             <Component class="View.form.MyButton" name="btn_sua">
               <Properties>
                 <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
+                <Property name="radius" type="int" value="20"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_suaActionPerformed"/>
@@ -382,6 +387,7 @@
             <Component class="View.form.MyButton" name="btn_xoa">
               <Properties>
                 <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
+                <Property name="radius" type="int" value="20"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_xoaActionPerformed"/>
