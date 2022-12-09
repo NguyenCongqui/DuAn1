@@ -175,7 +175,7 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
 //                rdoNKDcts.setSelected(true);
 //            }
 //        }
-            if(tl.isTrangThai()==false){
+            if(tl.isTrangThai()==true){
                 rdoDKDCTS.setSelected(true);
             }else{
                 rdoNKDcts.setSelected(true);
@@ -210,7 +210,7 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
         if(tt){
             tl.setTrangThai(true);
         }else{
-            tl.setTrangThai(true);
+            tl.setTrangThai(false);
         }
         
         return tl;

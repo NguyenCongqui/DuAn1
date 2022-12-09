@@ -31,6 +31,12 @@ public class TheLoai implements Serializable{
 
     }
 
+    public TheLoai(int IdTheLoai, String TenTheLoai, boolean trangThai) {
+        this.IdTheLoai = IdTheLoai;
+        this.TenTheLoai = TenTheLoai;
+        this.trangThai = trangThai;
+    }
+
     public TheLoai(String TenTheLoai, boolean trangThai) {
         this.TenTheLoai = TenTheLoai;
         this.trangThai = trangThai;

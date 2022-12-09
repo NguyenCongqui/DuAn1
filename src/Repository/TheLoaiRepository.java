@@ -27,7 +27,7 @@ public class TheLoaiRepository {
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                TheLoai tl = new TheLoai(rs.getInt(1), rs.getString(2));
+                TheLoai tl = new TheLoai(rs.getInt(1), rs.getString(2),rs.getBoolean(3));
                 lisTl.add(tl);
             }
             return lisTl;
