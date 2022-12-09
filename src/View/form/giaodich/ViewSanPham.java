@@ -210,7 +210,7 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
         if(tt){
             tl.setTrangThai(true);
         }else{
-            tl.setTrangThai(false);
+            tl.setTrangThai(true);
         }
         
         return tl;
