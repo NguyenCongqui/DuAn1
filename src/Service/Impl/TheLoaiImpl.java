@@ -32,8 +32,8 @@ private TheLoaiRepository rp = new TheLoaiRepository();
     }
 
     @Override
-    public String update(TheLoai tl) {
-           boolean upd = rp.sua(tl);
+    public String update(TheLoai tl,int id) {
+           boolean upd = rp.sua(tl,id);
         if(upd){
             return "sua thanh cong";
         }

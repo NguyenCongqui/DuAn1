@@ -39,13 +39,14 @@ public class TheLoaiRepository {
 
     public boolean insert(TheLoai tl) {
         String query = "INSERT INTO [dbo].[TheLoai]\n"
-                + "           ([TenTheLoai])\n"
+                + "           ([TenTheLoai]\n"
+                + "           ,[TRANGTHAI])\n"
                 + "     VALUES\n"
-                + "           (?)";
+                + "           (?,?)";
         int check = 0;
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, tl.getTenTheLoai());
-
+            ps.setObject(2, tl.isTrangThai());
             check = ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -54,7 +55,24 @@ public class TheLoaiRepository {
         return check > 0;
     }
 
-    public boolean sua(TheLoai tl) {
+    public boolean sua(TheLoai tl,int id) {
+        String query = "UPDATE [dbo].[TheLoai]\n"
+                + "   SET [TenTheLoai] = ?\n"
+                + "      ,[TRANGTHAI] = ?\n"
+                + " WHERE IdTheLoai = ?";
+        int check = 0;
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, tl.getTenTheLoai());
+            ps.setObject(2, tl.isTrangThai());
+            ps.setObject(3,id);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
+    public boolean delete(TheLoai tl) {
         String query = "UPDATE [dbo].[TheLoai]\n"
                 + "   SET [TenTheLoai] = ?\n"
                 + " WHERE IdTheLoai = ?";
@@ -68,21 +86,8 @@ public class TheLoaiRepository {
         }
         return check > 0;
     }
-public boolean delete(TheLoai tl) {
-        String query = "UPDATE [dbo].[TheLoai]\n"
-                + "   SET [TenTheLoai] = ?\n"
-                + " WHERE IdTheLoai = ?";
-        int check = 0;
-        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setObject(1, tl.getTenTheLoai());
-            ps.setObject(2, tl.getIdTheLoai());
-            check = ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
-        return check > 0;
-    }
-public TheLoai selectName(String name) {
+
+    public TheLoai selectName(String name) {
         String query = "SELECT * FROM dbo.TheLoai WHERE IdTheLoai = ?";
         List<TheLoai> lisTl = new ArrayList<>();
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {

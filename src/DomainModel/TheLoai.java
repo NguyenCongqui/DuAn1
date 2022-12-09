@@ -19,6 +19,7 @@ public class TheLoai implements Serializable{
     
    // @Column(name = "TenTheLoai",length = 200,nullable = false)
     private String TenTheLoai;
+    private boolean trangThai;
     
 
     public TheLoai() {
@@ -28,6 +29,19 @@ public class TheLoai implements Serializable{
         this.IdTheLoai = IdTheLoai;
         this.TenTheLoai = TenTheLoai;
 
+    }
+
+    public TheLoai(String TenTheLoai, boolean trangThai) {
+        this.TenTheLoai = TenTheLoai;
+        this.trangThai = trangThai;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
 
     
