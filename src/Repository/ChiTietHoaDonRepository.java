@@ -59,40 +59,40 @@ public class ChiTietHoaDonRepository {
     }
 
     public List<HDBanViewModel> getAll(String Stringdate) {
-//        if (!Stringdate.isEmpty()) {
-//            java.util.Date date = XDate.toDate(Stringdate, "yyyy-MM-dd");
-//            String sql = " SELECT * FROM dbo.HoaDonBan JOIN dbo.Users \n"
-//                    + " ON  Users.IdUsers = HoaDonBan.IdUsers JOIN dbo.KhachHang \n"
-//                    + " ON KhachHang.IdKhachHang = HoaDonBan.IdKhachHang \n"
-//                    + "WHERE HoaDonBan.ngayTao BETWEEN '" + new java.sql.Date(date.getTime()) + " 00:00:00.000'" + "AND '" + new java.sql.Date(date.getTime()) + " 23:59:59.000' \n"
-//                    + "ORDER BY dbo.HoaDonBan.ngayTao DESC";
-//            try {
-//                st = db.getConnection().createStatement();
-//                rs = st.executeQuery(sql);
-//                listViewMD = new ArrayList<>();
-//                while (rs.next()) {
-//                    HDBanViewModel i = new HDBanViewModel();
-//                    i.setIdHoaDonBan(rs.getInt("IdHoaDonBan"));
-//                    i.setIdKhachHang(rs.getInt("IdKhachHang"));
-//                    i.setIdUsers(rs.getInt("IdUsers"));
-//                    i.setIdVoucher(rs.getInt("IdVoucher"));
-//                    i.setNGAYTHANHTOAN(rs.getString("NGAYTHANHTOAN"));
-//                    i.setGhiChu(rs.getString("GhiChu"));
-//                    i.setStatusPay(rs.getBoolean("statusPay"));
-//                    i.setStatusInvoice(rs.getBoolean("statusInvoice"));
-//                    i.setTenKhachHang(rs.getString(26));
-//                    i.setTenUser(rs.getString(16));
-//                    i.setTongTien(rs.getDouble("TongTien"));
-//                    i.setTienKhachDua(rs.getDouble("TienKhachDua"));
-//                    i.setTienTraLai(rs.getDouble("TienTraLai"));
-//                    listViewMD.add(i);
-//                }
-//                rs.close();
-//            } catch (SQLException ex) {
-//                Logger.getLogger(NCCRepository.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            return listViewMD;
-//        }
+        if (!Stringdate.isEmpty()) {
+            java.util.Date date = XDate.toDate(Stringdate, "yyyy-MM-dd");
+            String sql = " SELECT * FROM dbo.HoaDonBan JOIN dbo.Users \n"
+                    + " ON  Users.IdUsers = HoaDonBan.IdUsers JOIN dbo.KhachHang \n"
+                    + " ON KhachHang.IdKhachHang = HoaDonBan.IdKhachHang \n"
+                    + "WHERE HoaDonBan.ngayTao BETWEEN '" + new java.sql.Date(date.getTime()) + " 00:00:00.000'" + "AND '" + new java.sql.Date(date.getTime()) + " 23:59:59.000' \n"
+                    + "ORDER BY dbo.HoaDonBan.ngayTao DESC";
+            try {
+                st = db.getConnection().createStatement();
+                rs = st.executeQuery(sql);
+                listViewMD = new ArrayList<>();
+                while (rs.next()) {
+                    HDBanViewModel i = new HDBanViewModel();
+                    i.setIdHoaDonBan(rs.getInt("IdHoaDonBan"));
+                    i.setIdKhachHang(rs.getInt("IdKhachHang"));
+                    i.setIdUsers(rs.getInt("IdUsers"));
+                    i.setIdVoucher(rs.getInt("IdVoucher"));
+                    i.setNGAYTHANHTOAN(rs.getString("NGAYTHANHTOAN"));
+                    i.setGhiChu(rs.getString("GhiChu"));
+                    i.setStatusPay(rs.getBoolean("statusPay"));
+                    i.setStatusInvoice(rs.getBoolean("statusInvoice"));
+                    i.setTenKhachHang(rs.getString(26));
+                    i.setTenUser(rs.getString(16));
+                    i.setTongTien(rs.getDouble("TongTien"));
+                    i.setTienKhachDua(rs.getDouble("TienKhachDua"));
+                    i.setTienTraLai(rs.getDouble("TienTraLai"));
+                    listViewMD.add(i);
+                }
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(NCCRepository.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return listViewMD;
+        }
         String sql = "   SELECT * FROM dbo.HoaDonBan JOIN dbo.Users \n"
                 + " ON  Users.IdUsers = HoaDonBan.IdUsers JOIN dbo.KhachHang \n"
                 + " ON KhachHang.IdKhachHang = HoaDonBan.IdKhachHang ORDER BY dbo.HoaDonBan.ngayTao DESC";

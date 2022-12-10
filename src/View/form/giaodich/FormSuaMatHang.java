@@ -198,13 +198,13 @@ public class FormSuaMatHang extends javax.swing.JFrame {
 
         txt_GiaBan.setLabelText("Giá Bán");
 
-        cbo_TenSach.setLabeText("Tên Sách");
+        cbo_TenSach.setLabeText("");
 
-        cbo_NhaXuatBan.setLabeText("Nhà Xuất Bản");
+        cbo_NhaXuatBan.setLabeText("");
 
-        cbo_NgonNgu.setLabeText("Ngôn Ngữ");
+        cbo_NgonNgu.setLabeText("");
 
-        cbo_TacGia.setLabeText("Tác Giả");
+        cbo_TacGia.setLabeText("");
 
         btn_hoanThanh.setText("Hoàn Thành");
         btn_hoanThanh.setRadius(20);

@@ -15,6 +15,7 @@ import ViewModel.HDBanViewModel;
 import ViewModel.HDDoiSPViewModel;
 import ViewModel.HDTraHangViewModel;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -85,34 +86,38 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
 
     }
 
-//    public void searchDateFillTable() {
-//        if (totalData == 0) {
-//            JOptionPane.showMessageDialog(this, "Ngày bạn chọn không có hóa đơn nào");
-//            return;
-//        }
-//        tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
-//        listCTB = chitiethoadonservice.getAll(txt_ThoiGian.getText());
-//        KhachHangService khachHangService = new KhachHangIMpl();
-//        listKHg = khachHangService.getlistKhachHang();
-//        String phone = "";
-//        for (HDBanViewModel i : listCTB) {
-//            for (int j = 0; j < listKHg.size(); j++) {
-//                if (i.getIdKhachHang() == listKHg.get(j).getIdKhachHang()) {
-//                    phone = listKHg.get(j).getSoDienThoai();
-//                }
-//            }
-//            tableModel.addRow(new Object[]{
-//                i.getIdHoaDonBan(),
-//                i.getTenKhachHang(),
-//                phone,
-//                i.getTenUser(),
-//                i.getTongTien() + " đ",
-//                i.getNGAYTHANHTOAN(),
-//                i.getGhiChu()
-//            });
-//        }
-//    }
-//    
+    public void searchDateFillTable() {
+//        totalData = iDao.totalPage("");
+//        rowCountPerPage = Integer.valueOf(cbbPagination.getSelectedItem().toString());
+//        Double totalPageD = Math.ceil(totalData.doubleValue() / rowCountPerPage);
+//        totalPage = totalPageD.intValue();
+        if (totalData == 0) {
+            JOptionPane.showMessageDialog(this, "Ngày bạn chọn không có hóa đơn nào");
+            return;
+        }
+        tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
+        listCTB = chitiethoadonservice.getAll(txt_ThoiGian.getText());
+        KhachHangService khachHangService = new KhachHangIMpl();
+        listKHg = khachHangService.getlistKhachHang();
+        String phone = "";
+        for (HDBanViewModel i : listCTB) {
+            for (int j = 0; j < listKHg.size(); j++) {
+                if (i.getIdKhachHang() == listKHg.get(j).getIdKhachHang()) {
+                    phone = listKHg.get(j).getSoDienThoai();
+                }
+            }
+            tableModel.addRow(new Object[]{
+                i.getIdHoaDonBan(),
+                i.getTenKhachHang(),
+                phone,
+                i.getTenUser(),
+                i.getTongTien() + " đ",
+                i.getNGAYTHANHTOAN(),
+                i.getGhiChu()
+            });
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -437,8 +442,8 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
 
     private void btn_locActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_locActionPerformed
         // TODO add your handling code here:
-//        searchDateFillTable();
-//        flag = true;
+        searchDateFillTable();
+        flag = true;
     }//GEN-LAST:event_btn_locActionPerformed
 
 

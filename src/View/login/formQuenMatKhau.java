@@ -208,7 +208,7 @@ public class formQuenMatKhau extends javax.swing.JPanel {
         lblTime.setText("Thoi Gian");
 
         btnReset.setBackground(new java.awt.Color(104, 159, 158));
-        btnReset.setText("Reset");
+        btnReset.setText("Đổi Mật Khẩu Mới");
         btnReset.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
