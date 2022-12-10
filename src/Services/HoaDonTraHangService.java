@@ -17,8 +17,8 @@ import java.util.List;
  */
 public interface HoaDonTraHangService {
     List<HDTraHangViewModel> getAllTra();
-    Float TongTien(Float idHDT);
-    List<CTHDTraHangViewModel> SearchTKID(int id);
+   // Float TongTien(Float idHDT);
+    List<CTHDTraHangViewModel> selectByIdNhap(int id);
     
     List<NhapHangViewModel> selectByIdInvoiceReturn(int id);
     
@@ -33,4 +33,6 @@ public interface HoaDonTraHangService {
     String insertCTHDTra(CTHDTraHangViewModel e);
     
     String updateSlgCTSach(Integer soluong, Integer id) ;
+    
+    HDTraHangViewModel FindIDHdTra(Integer k);
 }

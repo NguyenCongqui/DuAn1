@@ -25,13 +25,13 @@ private HoaDonTraHangRepository rp = new HoaDonTraHangRepository();
         return rp.getAllTra();
     }
 
-    @Override
-    public Float TongTien(Float idHDT) {
-        return rp.TongTien(idHDT);
-    }
+//    @Override
+//    public Float TongTien(Float idHDT) {
+//        return rp.TongTien(idHDT);
+//    }
 
     @Override
-    public List<CTHDTraHangViewModel> SearchTKID(int id) {
+    public List<CTHDTraHangViewModel> selectByIdNhap(int id) {
         return rp.selectByIdNhap(id);
     }
 
@@ -68,5 +68,10 @@ private HoaDonTraHangRepository rp = new HoaDonTraHangRepository();
     @Override
     public String updateSlgCTSach(Integer soluong, Integer id) {
         return rp.updateSlgCTSach(soluong, id);
+    }
+
+    @Override
+    public HDTraHangViewModel FindIDHdTra(Integer k) {
+        return rp.FindIDHdTra(k);
     }
 }

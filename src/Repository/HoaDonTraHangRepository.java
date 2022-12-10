@@ -33,17 +33,24 @@ public class HoaDonTraHangRepository {
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
     public List<HDTraHangViewModel> getAllTra() {
-        String query = "SELECT dbo.HoaDonTraHang.IDHoaDonTraHang, dbo.HoaDonBan.IdHoaDonBan, dbo.HoaDonTraHang.NgayDoiHang, dbo.KhachHang.Hoten, dbo.KhachHang.Sdt, dbo.HoaDonTraHang.totalReturn, dbo.HoaDonTraHang.MoTa\n"
-                + "FROM     dbo.HoaDonTraHang INNER JOIN\n"
-                + "                  dbo.HoaDonBan ON dbo.HoaDonTraHang.IDHoaDonBanHang = dbo.HoaDonBan.IdHoaDonBan INNER JOIN\n"
-                + "                  dbo.KhachHang ON dbo.HoaDonTraHang.IDKhachHang = dbo.KhachHang.IdKhachHang AND dbo.HoaDonBan.IdKhachHang = dbo.KhachHang.IdKhachHang CROSS JOIN\n"
-                + "                  dbo.ChiTietHoaDonNhapSanPham";
+        String sql = "SELECT IDHoaDonTraHang,IDHoaDonBanHang,NgayDoiHang,HoaDonTraHang.IDKhachHang,totalReturn,MoTa,Hoten,Sdt\n" +
+"FROM dbo.HoaDonTraHang JOIN dbo.KhachHang ON KhachHang.IdKhachHang = HoaDonTraHang.IDKhachHang ORDER BY IDHoaDonTraHang DESC";
         List<HDTraHangViewModel> listTra = new ArrayList<>();
-        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
-            ResultSet rs = ps.executeQuery();
+        try {
+            st = db.getConnection().createStatement();
+            rs = st.executeQuery(sql);
+            listTra = new ArrayList<>();
             while (rs.next()) {
-                HDTraHangViewModel th = new HDTraHangViewModel(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getString(4), rs.getInt(5), rs.getFloat(6), rs.getString(7));
-                listTra.add(th);
+                HDTraHangViewModel p = new HDTraHangViewModel();
+                 p.setMaHoaDonTra(rs.getInt("IDHoaDonTraHang"));
+                p.setMaHoaDonBan(rs.getInt("IDHoaDonBanHang"));
+                p.setThoiGian(rs.getDate("NgayDoiHang"));
+                p.setIdKhachHang(rs.getInt("IDKhachHang"));
+                p.setTongTienHoanTra(rs.getFloat("totalReturn"));
+                p.setGhiChu(rs.getString("MoTa"));
+                p.setKhachHang(rs.getString("Hoten"));
+                p.setSdt(rs.getInt("Sdt"));
+                listTra.add(p);
             }
             return listTra;
         } catch (Exception e) {
@@ -53,52 +60,89 @@ public class HoaDonTraHangRepository {
     }
 
     //////$$$$$$
-    public Float TongTien(Float idHDT) {
-        String sql = "SELECT  IDchitietHoaDonTraHang, SUM(SoLuong * GIA ) as totalCash FROM dbo.chitietHoaDonTraHang \n"
-                + "                GROUP BY IDchitietHoaDonTraHang \n"
-                + "                HAVING IDchitietHoaDonTraHang = ?";
-        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-
-            ps.setObject(1, idHDT);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                return rs.getFloat("totalCash");
-            }
-            rs.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+//    public Float TongTien(Float idHDT) {
+//        String sql = "SELECT  IDchitietHoaDonTraHang, SUM(SoLuong * GIA ) as totalCash FROM dbo.chitietHoaDonTraHang \n"
+//                + "                GROUP BY IDchitietHoaDonTraHang \n"
+//                + "                HAVING IDchitietHoaDonTraHang = ?";
+//        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+//
+//            ps.setObject(1, idHDT);
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()) {
+//                return rs.getFloat("totalCash");
+//            }
+//            rs.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
     //////$$$$$$
     public List<CTHDTraHangViewModel> selectByIdNhap(int id) {
-        String sql = " SELECT dbo.chitietHoaDonTraHang.IDchitietHoaDonTraHang, dbo.Sach.TenSach, dbo.KhachHang.Hoten, dbo.NgonNgu.TenNgonNGu, dbo.NXB.TenNXB, dbo.TacGia.TenTacGia, dbo.chitietHoaDonTraHang.SoLuong, \n"
-                + "                  dbo.HoaDonTraHang.totalReturn\n"
-                + "FROM     dbo.chitietHoaDonTraHang INNER JOIN\n"
-                + "                  dbo.ChiTietSach ON dbo.chitietHoaDonTraHang.IDChiTietSach = dbo.ChiTietSach.IdCTSach INNER JOIN\n"
-                + "                  dbo.HoaDonTraHang ON dbo.chitietHoaDonTraHang.IDHoaDonTraHang = dbo.HoaDonTraHang.IDHoaDonTraHang INNER JOIN\n"
-                + "                  dbo.HoaDonBan ON dbo.HoaDonTraHang.IDHoaDonBanHang = dbo.HoaDonBan.IdHoaDonBan INNER JOIN\n"
-                + "                  dbo.KhachHang ON dbo.HoaDonTraHang.IDKhachHang = dbo.KhachHang.IdKhachHang AND dbo.HoaDonBan.IdKhachHang = dbo.KhachHang.IdKhachHang INNER JOIN\n"
-                + "                  dbo.NgonNgu ON dbo.ChiTietSach.IdNgonNgu = dbo.NgonNgu.IdNgonNgu INNER JOIN\n"
-                + "                  dbo.NXB ON dbo.ChiTietSach.IdNXB = dbo.NXB.IdNXB INNER JOIN\n"
-                + "                  dbo.Sach ON dbo.ChiTietSach.IdSach = dbo.Sach.IdSach INNER JOIN\n"
-                + "                  dbo.TacGia ON dbo.ChiTietSach.IdTacGia = dbo.TacGia.IdTacGia where dbo.chitietHoaDonTraHang.IDchitietHoaDonTraHang = ?";
+        String sql = " SELECT IDchitietHoaDonTraHang,SoLuong,GIA,TenNXB,TenTacGia,TenNgonNGu,TenSach,Hoten FROM dbo.HoaDonTraHang\n" +
+"JOIN dbo.chitietHoaDonTraHang ON chitietHoaDonTraHang.IDHoaDonTraHang = HoaDonTraHang.IDHoaDonTraHang\n" +
+"JOIN dbo.KhachHang ON KhachHang.IdKhachHang = HoaDonTraHang.IDKhachHang\n" +
+"JOIN dbo.ChiTietSach ON ChiTietSach.IdCTSach = chitietHoaDonTraHang.IDChiTietSach\n" +
+"JOIN dbo.Sach ON Sach.IdSach = ChiTietSach.IdSach\n" +
+"JOIN dbo.NXB ON NXB.IdNXB = ChiTietSach.IdNXB\n" +
+"JOIN dbo.TacGia ON TacGia.IdTacGia = ChiTietSach.IdTacGia\n" +
+"JOIN dbo.NgonNgu ON NgonNgu.IdNgonNgu = ChiTietSach.IdNgonNgu\n" +
+"WHERE chitietHoaDonTraHang.IDHoaDonTraHang = ?";
         List<CTHDTraHangViewModel> list = new ArrayList<>();
-        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-            ResultSet rs = ps.executeQuery();
+        try {
+              pst = db.getConnection().prepareStatement(sql);
+            pst.setInt(1, id);
+            rs = pst.executeQuery();
             while (rs.next()) {
-                CTHDTraHangViewModel t = new CTHDTraHangViewModel(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8));
-                list.add(t);
+                CTHDTraHangViewModel de = new CTHDTraHangViewModel();
+                 de.setIdHDChiTiet(rs.getInt("IDchitietHoaDonTraHang"));
+                de.setSoLuong(rs.getInt("SoLuong"));
+                de.setTongTien(rs.getInt("GIA"));
+                de.setTenNXB(rs.getString("TenNXB"));
+                de.setTenTG(rs.getString("TenTacGia"));
+                de.setTenNN(rs.getString("TenNgonNGu"));
+                de.setTenSach(rs.getString("TenSach"));
+                de.setTenKhach(rs.getString("Hoten"));
+                list.add(de);
             }
-            return list;
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
-        return null;
+        return list;
 
     }
 
+      public HDTraHangViewModel FindIDHdTra(Integer k) {
+          String sql = "SELECT IDHoaDonTraHang,IDHoaDonBanHang,NgayDoiHang,HoaDonTraHang.IDKhachHang,totalReturn,MoTa,Hoten,Sdt\n" +
+"FROM dbo.HoaDonTraHang JOIN dbo.KhachHang ON KhachHang.IdKhachHang = HoaDonTraHang.IDKhachHang WHERE IDHoaDonTraHang = ?";
+          List<HDTraHangViewModel> list = new ArrayList<>();
+           try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+            ps.setObject(1, k);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                HDTraHangViewModel p = new HDTraHangViewModel();
+                   p.setMaHoaDonTra(rs.getInt("IDHoaDonTraHang"));
+                p.setMaHoaDonBan(rs.getInt("IDHoaDonBanHang"));
+                p.setThoiGian(rs.getDate("NgayDoiHang"));
+                p.setIdKhachHang(rs.getInt("IDKhachHang"));
+                p.setTongTienHoanTra(rs.getFloat("totalReturn"));
+                p.setGhiChu(rs.getString("MoTa"));
+                p.setKhachHang(rs.getString("Hoten"));
+                p.setSdt(rs.getInt("Sdt"));
+                return p;
+                // listHDNhap.add(i);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(NhapHangRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+      }
+    
     public List<NhapHangViewModel> selectByIdInvoiceReturn(int id) {
         String sql = "SELECT HoaDonBan.IdHoaDonBan,CTHoaDonBan.IdCTSach,TenSach,SoLuong,TenNXB,TenTacGia,TenNgonNGu,DonGia,Hoten,KhachHang.IdKhachHang,ngayTao \n"
                 + "FROM dbo.CTHoaDonBan \n"
