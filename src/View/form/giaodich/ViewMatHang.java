@@ -119,7 +119,7 @@ public class ViewMatHang extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Mặt Hàng");
+        jLabel1.setText("Mặt Hàng ");
 
         txt_tim.setLabelText("Tìm theo mã hoặc tên");
         txt_tim.addCaretListener(new javax.swing.event.CaretListener() {

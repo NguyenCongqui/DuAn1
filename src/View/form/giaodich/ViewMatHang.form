@@ -123,7 +123,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="M&#x1eb7;t H&#xe0;ng"/>
+                <Property name="text" type="java.lang.String" value="M&#x1eb7;t H&#xe0;ng "/>
               </Properties>
             </Component>
             <Component class="View.form.TextField" name="txt_tim">

@@ -162,34 +162,34 @@ public class ChiTietHoaDonRepository {
     }
     
     
-//      public int ThoiGian(String Stringdate) {
-//        ResultSet rs;
-//        if (!Stringdate.isEmpty()) {
-//            java.util.Date date = XDate.toDate(Stringdate, "yyyy-MM-dd");
-//            String sql = " SELECT COUNT(*) as soLuong FROM dbo.HoaDonBan WHERE NGAYTHANHTOAN BETWEEN '" + new java.sql.Date(date.getTime()) + " '" + "AND '" + new java.sql.Date(date.getTime()) + " ' ";
-//            try {
-//                pst = db.getConnection().prepareStatement(sql);
-//            pst.setObject(1, Stringdate);
-//            rs = pst.executeQuery();
-//                while (rs.next()) {
-//                    return rs.getInt("soLuong");
-//                }
-//                rs.close();
-//            } catch (Exception ex) {
-//                ex.printStackTrace();
-//            }
-//        }
-//        String sql = "SELECT COUNT(*) as soLuong FROM dbo.HoaDonBan ";
-//        try {
-//             pst = db.getConnection().prepareStatement(sql);
-//             rs = pst.executeQuery();
-//            while (rs.next()) {
-//                return rs.getInt("soLuong");
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return 0;
-//    }
+      public int ThoiGian(String Stringdate) {
+        ResultSet rs;
+        if (!Stringdate.isEmpty()) {
+            java.util.Date date = XDate.toDate(Stringdate, "yyyy-MM-dd");
+            String sql = " SELECT COUNT(*) as soLuong FROM dbo.HoaDonBan WHERE NGAYTHANHTOAN BETWEEN '" + new java.sql.Date(date.getTime()) + " '" + "AND '" + new java.sql.Date(date.getTime()) + " ' ";
+            try {
+                pst = db.getConnection().prepareStatement(sql);
+            pst.setObject(1, Stringdate);
+            rs = pst.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt("soLuong");
+                }
+                rs.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        String sql = "SELECT COUNT(*) as soLuong FROM dbo.HoaDonBan ";
+        try {
+             pst = db.getConnection().prepareStatement(sql);
+             rs = pst.executeQuery();
+            while (rs.next()) {
+                return rs.getInt("soLuong");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
 }

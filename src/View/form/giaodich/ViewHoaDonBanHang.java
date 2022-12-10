@@ -28,7 +28,7 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
     List<HDBanViewModel> listCTB;
     ChiTietHoaDonService chitiethoadonservice = new ChiTietHoaDonImpl();
     List<KhachHang> listKHg;
-    Integer totalData = 0;
+    
     boolean flag = false;
     HoaDonTraHangService donTraHangService = new HoaDonTraHangImpl();
 
@@ -40,6 +40,31 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
         setOpaque(false);
         chitiethoadonservice = new ChiTietHoaDonImpl();
         fillData();
+    }
+    int totalPage = 1;
+    int page = 1;
+    Integer totalData = 0;
+    int rowCountPerPage = 5;
+    public void edit() {
+        if (page == 1) {
+            btnFirst.setEnabled(false);
+            btnBack.setEnabled(false);
+        } else {
+            btnFirst.setEnabled(true);
+            btnBack.setEnabled(true);
+        }
+
+        if (page == totalPage) {
+            btnLast.setEnabled(false);
+            btnNext.setEnabled(false);
+        } else {
+            btnLast.setEnabled(true);
+            btnNext.setEnabled(true);
+        }
+
+        if (page > totalPage) {
+            page = 1;
+        }
     }
 
     public void fillData() {
@@ -87,19 +112,23 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
     }
 
     public void searchDateFillTable() {
-//        totalData = iDao.totalPage("");
-//        rowCountPerPage = Integer.valueOf(cbbPagination.getSelectedItem().toString());
-//        Double totalPageD = Math.ceil(totalData.doubleValue() / rowCountPerPage);
-//        totalPage = totalPageD.intValue();
+        totalData = chitiethoadonservice.ThoiGian("");
+        rowCountPerPage = Integer.valueOf(cbbPagination.getSelectedItem().toString());
+        Double totalPageD = Math.ceil(totalData.doubleValue() / rowCountPerPage);
+        totalPage = totalPageD.intValue();
+        //edit();
         if (totalData == 0) {
             JOptionPane.showMessageDialog(this, "Ngày bạn chọn không có hóa đơn nào");
             return;
         }
+        edit();
         tableModel = (DefaultTableModel) tbl_hoadonbanhang.getModel();
+        tableModel.setRowCount(0);
         listCTB = chitiethoadonservice.getAll(txt_ThoiGian.getText());
         KhachHangService khachHangService = new KhachHangIMpl();
         listKHg = khachHangService.getlistKhachHang();
         String phone = "";
+        String status = "";
         for (HDBanViewModel i : listCTB) {
             for (int j = 0; j < listKHg.size(); j++) {
                 if (i.getIdKhachHang() == listKHg.get(j).getIdKhachHang()) {
@@ -116,6 +145,25 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
                 i.getGhiChu()
             });
         }
+        List<HDDoiSPViewModel> listChange = donTraHangService.selectAllHDDoi();
+        List<HDTraHangViewModel> listReturn = donTraHangService.selectAllHDTra();
+         for (int i = 0; i < listCTB.size(); i++) {
+            for (int j = 0; j < listReturn.size(); j++) {
+                if (listReturn.get(j).getMaHoaDonBan() == listCTB.get(i).getIdHoaDonBan() ) {
+//                    status = "Đã trả hàng";
+                    tbl_hoadonbanhang.setValueAt("Đã trả hàng", i, 7);
+                }
+            }
+        }
+        for (int i = 0; i < listCTB.size(); i++) {
+            for (int z = 0; z < listChange.size(); z++) {
+                if (listChange.get(z).getIDHoaDonBanHang() == listCTB.get(i).getIdHoaDonBan()) {
+//                    status = "Đã đổi hàng";
+                    tbl_hoadonbanhang.setValueAt("Đã đổi hàng", i, 7);
+                }
+            }
+        }
+        lbl_Count.setText("Page " + page + " for " + totalPage);
     }
     
     /**
@@ -137,6 +185,12 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
         txt_ThoiGian = new View.form.TextField();
         btn_loc = new View.form.MyButton();
         btn_reset = new View.form.MyButton();
+        btnFirst = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        btnNext = new javax.swing.JButton();
+        btnLast = new javax.swing.JButton();
+        cbbPagination = new javax.swing.JComboBox<>();
+        lbl_Count = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_hoadonbanhang = new View.form.TableColumn();
@@ -230,19 +284,74 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
             }
         });
 
+        btnFirst.setText("<<");
+        btnFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstActionPerformed(evt);
+            }
+        });
+
+        btnBack.setText("<");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        btnNext.setText(">");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+
+        btnLast.setText(">>");
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
+            }
+        });
+
+        cbbPagination.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "10", "15", "20", "25", "30" }));
+        cbbPagination.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbbPaginationItemStateChanged(evt);
+            }
+        });
+
+        lbl_Count.setText("jLabel2");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btn_loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt_ThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_ThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btn_loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lbl_Count, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(btnFirst)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBack)))
+                        .addGap(9, 9, 9)
+                        .addComponent(cbbPagination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnNext)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLast)))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,6 +362,15 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnFirst)
+                    .addComponent(btnBack)
+                    .addComponent(btnNext)
+                    .addComponent(btnLast)
+                    .addComponent(cbbPagination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(lbl_Count)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -302,7 +420,7 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -380,11 +498,11 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
         });
 
         lbl_Search.setText("");
-//          for (int j = 0; j < listReturn.size(); j++) {
-//            if (id == listReturn.get(j).getMaHoaDonBan()) {
-//                tbl_hoadonbanhang.setValueAt("Đã trả hàng", j, 7);
-//            }
-//        }
+          for (int j = 0; j < listReturn.size(); j++) {
+            if (id == listReturn.get(j).getMaHoaDonBan()) {
+                tbl_hoadonbanhang.setValueAt("Đã trả hàng", j, 7);
+            }
+        }
 
         for (int z = 0; z < listChange.size(); z++) {
             if (id == listChange.get(z).getIDHoaDonBanHang()) {
@@ -393,12 +511,12 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
         }
 
       
-//            for (int z = 0; z < listChange.size(); z++) {
-//                if (id == listCTB.get(z).getIdHoaDonBan()) {
-////                    status = "Đã đổi hàng";
-//                    tbl_hoadonbanhang.setValueAt("Đã đổi hàng", z, 7);
-//                }
-//            }
+            for (int z = 0; z < listChange.size(); z++) {
+                if (id == listCTB.get(z).getIdHoaDonBan()) {
+                  //  status = "Đã đổi hàng";
+                    tbl_hoadonbanhang.setValueAt("Đã đổi hàng", z, 7);
+                }
+            }
         
 
     }
@@ -446,17 +564,72 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
         flag = true;
     }//GEN-LAST:event_btn_locActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+         page--;
+         if (flag) {
+            searchDateFillTable();
+            return;
+        }
+        fillData();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        page++;
+         if (flag) {
+            searchDateFillTable();
+            return;
+        }
+        fillData();
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void cbbPaginationItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbPaginationItemStateChanged
+        // TODO add your handling code here:
+        if (flag) {
+            searchDateFillTable();
+            return;
+        }
+        fillData();
+    }//GEN-LAST:event_cbbPaginationItemStateChanged
+
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
+        // TODO add your handling code here:
+        page = 1;
+        if (flag) {
+            searchDateFillTable();
+            return;
+        }
+        fillData();
+    }//GEN-LAST:event_btnFirstActionPerformed
+
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        // TODO add your handling code here:
+        page = totalPage;
+        if (flag) {
+            searchDateFillTable();
+            return;
+        }
+        fillData();
+    }//GEN-LAST:event_btnLastActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnFirst;
+    private javax.swing.JButton btnLast;
+    private javax.swing.JButton btnNext;
     private View.form.MyButton btn_Tim;
     private View.form.MyButton btn_loc;
     private View.form.MyButton btn_reset;
+    private javax.swing.JComboBox<String> cbbPagination;
     private com.raven.datechooser.DateChooser dateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_Count;
     private javax.swing.JLabel lbl_Search;
     private View.form.TableColumn tbl_hoadonbanhang;
     private View.form.TextField txt_ThoiGian;
