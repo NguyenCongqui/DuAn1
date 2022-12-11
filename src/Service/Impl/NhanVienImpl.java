@@ -8,6 +8,7 @@ import DomainModel.TaiKhoan;
 import DomainModel.Users;
 import Repository.NhanVienRepository;
 import Services.NhanVienService;
+import ViewModel.NhanVienViewModel;
 import java.util.List;
 
 /**
@@ -55,6 +56,11 @@ public class NhanVienImpl implements NhanVienService{
     @Override
     public List<Users> TimKiemTenNhanVien(String tim) {
        return (List<Users>) rep.searchTen(tim);
+    }
+
+    @Override
+    public List<NhanVienViewModel> getAll() {
+      return rep.getAll();
     }
 
     

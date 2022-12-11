@@ -65,6 +65,7 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        Users us ;
        //  webcam.close();
 //       initwebcam();
        
@@ -86,6 +87,7 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
         btn_them.setVisible(false);
         
         txt_cccd.setText(CCCD);
+        txt_cccd.setEnabled(false);
         txt_ten.setText(Hoten);
         txt_ngaysinh.setText(NgaySinh);
         txt_diachi.setText(DiaChi);
@@ -267,6 +269,39 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
         System.out.println(years);
         return true;
     }
+    public boolean checkUser(String acc) {
+        for (int i = 0; i < nhanVienService.getAll().size(); i++) {
+            if (nhanVienService.getAll().get(i).getUsername().equals(acc.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean checkEmail(String acc) {
+        for (int i = 0; i < nhanVienService.getAll().size(); i++) {
+            if (nhanVienService.getAll().get(i).getEmail().trim().equals(acc.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean checkSoDienThoai(String acc) {
+        for (int i = 0; i < nhanVienService.getAll().size(); i++) {
+            if (nhanVienService.getAll().get(i).getSoDienThoai().trim().equals(acc.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean checkCCCD(String acc) {
+        for (int i = 0; i < nhanVienService.getAll().size(); i++) {
+            if (nhanVienService.getAll().get(i).getCCCD().trim().equals(acc.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public boolean validate01(){
         if (txt_ten.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this,"Bạn ơi Họ và Tên đang trống");
@@ -334,6 +369,8 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
              JOptionPane.showMessageDialog(this,"Email sai định dạnh rồi nha, phải có @gmail.com");
              return false;
         }
+         
+         
          
         return true;
     }
@@ -682,38 +719,30 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
 
-        //        String ten = txt_ten.getText();
-        //        String dienthoai = txt_dienthoai.getText();
-        //        String email = txt_email.getText();
-        //        Float luong = Float.parseFloat(txt_luong.getText());
-        //        Date ngaysinh = XDate.toDate(txt_ngaysinh.getText(), "dd-MM-yyyy");
-        //        boolean gt = rbt_nam.isSelected();
-        //        if (gt) {
-            //            rbt_nam.setSelected(true);
-            //        } else {
-            //            rbt_nu.setSelected(true);
-            //        }
-        //
-        //        boolean tt = rbt_danglamviec.isSelected();
-        //        if (tt) {
-            //            rbt_danglamviec.setSelected(true);
-            //        }
-        //        rbt_nghilam.setSelected(true);
-        //
-        //        boolean cv = rbt_quanly.isSelected();
-        //        if (cv) {
-            //            rbt_quanly.setSelected(true);
-            //        } else {
-            //            rbt_nhanvien.setSelected(true);
-            //        }
-        //       Users us= new Users( ten, ngaysinh, gt, email, dienthoai, email, luong, cv, tt);
+        
         if (validate01()) {
+            if (checkCCCD(txt_cccd.getText())==true) {
+                    JOptionPane.showMessageDialog(this,"Bạn Ơi,Nhân Viên Này có trong hệ thống rồi nha");
+                    return;
+                }else
             if (checkDate()) {
+                if (checkSoDienThoai(txt_dienthoai.getText())== true) {
+                    JOptionPane.showMessageDialog(this,"Bạn Ơi, Số điện thoại có trong hệ thống rồi nha");
+                    return;
+                }else if (checkEmail(txt_email.getText())==true) {
+                    JOptionPane.showMessageDialog(this,"Bạn Ơi, Email có trong hệ thống rồi nha");
+                    return;
+                }else if (checkUser(txt_username.getText()) == true) {
+                    JOptionPane.showMessageDialog(this,"Bạn Ơi,Tên Users có trong hệ thống rồi nha");
+                    return;
+                } else
+                      {
+                         
                 JOptionPane.showMessageDialog(this, nhanVienService.themNhanVien(getGui()));
-        JOptionPane.showMessageDialog(this,nhanVienService.ThemTaiKhoan(GetGuidataTaiKhoan()));
+        nhanVienService.ThemTaiKhoan(GetGuidataTaiKhoan());
         clearForm();
             }
-             
+            }
         }
 
        

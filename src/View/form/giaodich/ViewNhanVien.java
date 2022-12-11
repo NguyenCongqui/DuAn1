@@ -88,12 +88,13 @@ public class ViewNhanVien extends javax.swing.JPanel {
         int idUser = (int) tbl_nhanvien.getValueAt(index, 0);
         if (idUser == Auth.user.getIdusers()) {
             JOptionPane.showMessageDialog(this,"Bạn không thể xoá được bạn ???");
-            return;
-        } 
+         return;
+        }else{
+ 
            JOptionPane.showMessageDialog(this, nhanvienservice.XoaNhanVien(idUser));
            us = nhanvienservice.ListgetNhanVien();
             showData();
-           
+        }
         
     }
      public void fillTableTimTenNhanVien() {

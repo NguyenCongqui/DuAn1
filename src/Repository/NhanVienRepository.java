@@ -7,12 +7,16 @@ package Repository;
 import DomainModel.TaiKhoan;
 import DomainModel.Users;
 import Utilities.DBConnection;
+import ViewModel.NhanVienViewModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,10 +25,12 @@ import java.util.List;
 public class NhanVienRepository {
 DBConnection db;
     ResultSet rs = null;
+    Connection con = null;
     Statement st = null;
     PreparedStatement pst = null;
     List<Users> ListUsers = null;
     Users users = null;
+     List<NhanVienViewModel> list = null;
     public NhanVienRepository() {
     }
     
@@ -78,6 +84,30 @@ DBConnection db;
         }
         return ListUsers;
     }
+   public List<NhanVienViewModel> getAll() {
+        String sql = "SELECT TaiKhoan.IdUsers,IdTaiKhoan,CCCD\n" +
+",HoTen,Sdt,DiaChi,Email,UserName,MatKhau,\n" +
+"GioiTinh,Role,TrangThai,NgaySinh,Luong \n" +
+"FROM dbo.TaiKhoan INNER JOIN dbo.Users \n" +
+"ON Users.IdUsers = TaiKhoan.IdUsers ORDER BY \n" +
+"TaiKhoan.IdUsers DESC";
+        try {
+           // pst = db.getConnection().prepareStatement(sql);
+            con = db.getConnection();
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            list = new ArrayList<>();
+
+            while (rs.next()) {
+                list.add(new NhanVienViewModel(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getBoolean(10), rs.getBoolean(11), rs.getBoolean(12), rs.getDate(13),rs.getFloat(14)));
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(NCCRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+   
      public List<Users> getListnhanvienKhonglam() {
         String select = "SELECT * FROM dbo.Users WHERE TrangThai =0 ORDER BY IdUsers DESC";
         ListUsers = new ArrayList<>();

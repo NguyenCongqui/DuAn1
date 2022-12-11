@@ -331,18 +331,27 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
                     System.out.println(cthd.getSoLuong());
                    chitiethoadonservice.insert(cthd);
                    chitietsachService.updateSoLuongTon(cthd.getSoLuong(),cthd.getIdChiTietSach());
+                   txt_TongTien.setText("");
+                   txt_TienKhachDua.setText("");
+                   txt_TienThua.setText("");
                   
                 }
                 hdbh.setTongTien(TotalBuy());
                 JOptionPane.showMessageDialog(this, "Bán " + ListChiTietHoaDonBan.size() + " Hóa Đơn Thành công");
                 
                
-            
-                if (chk_Voucher.isSelected()) {
+                try {
+                    if (chk_Voucher.isSelected()) {
                     Voucher v1 =  (Voucher) cbo_MaGiamGia.getSelectedItem();
                    voucherService.updateSoLuongTon(v1.getIDVoucher());
-                    
+                 
+                } 
+                } catch (Exception e) {
+                    System.out.println("haha");
                 }
+              
+                    
+              
                 DefaultTableModel model = (DefaultTableModel) tbl2.getModel();
                 model.setRowCount(0);
                 ListChiTietHoaDonBan.clear();

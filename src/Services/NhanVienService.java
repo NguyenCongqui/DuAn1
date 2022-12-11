@@ -6,6 +6,7 @@ package Services;
 
 import DomainModel.TaiKhoan;
 import DomainModel.Users;
+import ViewModel.NhanVienViewModel;
 import java.util.List;
 
 /**
@@ -20,4 +21,5 @@ public interface NhanVienService {
     String XoaNhanVien(int k);
     String SuaNhanVien(Users us);
     List<Users> TimKiemTenNhanVien(String tim);
+    List<NhanVienViewModel> getAll();
 }
