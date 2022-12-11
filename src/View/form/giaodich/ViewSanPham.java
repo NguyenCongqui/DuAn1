@@ -140,6 +140,14 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
         txtIDTheLoai.setVisible(false);
 //        myButton1.setVisible(false);
     }
+    public boolean checkMaSach(String acc) {
+        for (int i = 0; i < svSach.getAll().size(); i++) {
+            if (svSach.getAll().get(i).getMaSach().trim().equals(acc.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void initTable() {
         String[] cols = new String[]{"ID Sach", "Ten Sach", "Loai Sach", "Trang thai"};
@@ -651,10 +659,16 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
 //        String tenSach = txtTenSach.getText();
 //        boolean trangThai = rdo_DangKinhDoanh.isSelected();
 //        Sach s = new Sach( tenSach, tl.getIdTheLoai(), trangThai);
+if (checkMaSach(txtMaSach.getText())==true) {
+            JOptionPane.showMessageDialog(this,"Bạn ơi,Mã sách có trong hệ thống rồi nha");
+            return;
+        } else {
+
         JOptionPane.showMessageDialog(this, svSach.inert(guiDataSach()));
         listSachView = svSach.getAll();
         showData(listSachView);
-
+    
+    }
     }//GEN-LAST:event_myButton4ActionPerformed
 
     private void myButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton3ActionPerformed

@@ -41,6 +41,14 @@ public class ViewKhachHang extends javax.swing.JPanel {
             tblModel.addRow(row);
         }
     }
+    public boolean checkSoDienThoai(String acc) {
+        for (int i = 0; i < svKH.getlistKhachHang().size(); i++) {
+            if (svKH.getlistKhachHang().get(i).getSoDienThoai().trim().equals(acc.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
 public void clearForm() {
         tbl_khachhang.clearSelection();
         txt_ten.setText("");
@@ -375,7 +383,11 @@ public boolean validate01(){
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
         if (validate01()) {
+            if (checkSoDienThoai(txt_Sdt.getText())==true) {
+                JOptionPane.showMessageDialog(this,"Bạn ơi, số điện thoại của khách hàng có trên hệ thống rồi");
+                return;
             
+            }
        
          String ten = txt_ten.getText();
         String diaChi = txt_diachi.getText();
@@ -396,6 +408,7 @@ public boolean validate01(){
         KhachHang kh = new KhachHang(ten, ngaySinh, gt, sdt, diaChi, tt);
         JOptionPane.showMessageDialog(this, svKH.them(kh));
         showData(svKH.getlistKhachHang());}
+       
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed

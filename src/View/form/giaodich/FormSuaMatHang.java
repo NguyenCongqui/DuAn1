@@ -96,6 +96,7 @@ public class FormSuaMatHang extends javax.swing.JFrame {
             cbModel.addElement(c);
         }
     }
+    
     public void fillComboboxNgonNgu() {
         DefaultComboBoxModel cbModel = (DefaultComboBoxModel) cbo_NgonNgu.getModel();
         cbo_NgonNgu.removeAllItems();
