@@ -34,14 +34,14 @@ public class ViewHoaDonChiTietDoi extends javax.swing.JFrame {
 
     
     public ViewHoaDonChiTietDoi(int id, DefaultTableModel model, int row) {
-        initComponents();
         this.model = model;
         this.row = row;
+        initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         fillTable1(id);
-        fillTable2(id);
+        fillTable2((int) tbl1.getValueAt(tbl1.getRowCount() - 1, 0));
     }
     
     public void fillTable1(int id){
@@ -129,6 +129,11 @@ public class ViewHoaDonChiTietDoi extends javax.swing.JFrame {
                 "ID", "ID Sach", "Ten Sach", "NXB", "Tac Gia", "Ngon Ngu", "So Luong", "Gia Tien"
             }
         ));
+        tbl1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbl1);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -197,6 +202,11 @@ public class ViewHoaDonChiTietDoi extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl1MouseClicked
+        // TODO add your handling code here:
+        fillTable2((int) tbl1.getValueAt(tbl1.getSelectedRow(), 0));
+    }//GEN-LAST:event_tbl1MouseClicked
 
     /**
      * @param args the command line arguments
