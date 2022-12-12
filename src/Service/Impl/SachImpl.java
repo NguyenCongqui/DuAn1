@@ -71,6 +71,15 @@ public class SachImpl implements SachService {
         return rp.selectByName(name);
     }
 
+    @Override
+    public String update01(Sach s, int id) {
+        boolean up = rp.sua(s, id);
+        if(up){
+            return "update thanh cong";
+        }
+        return "update that bai";
+    }
+
     
 
     

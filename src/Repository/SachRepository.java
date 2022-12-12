@@ -81,6 +81,19 @@ public class SachRepository {
         }
         return null;
     }
+        public boolean sua(Sach s,int id) {
+        String query = "UPDATE dbo.Sach SET TrangThai = (SELECT TRANGTHAI FROM dbo.TheLoai WHERE IdTheLoai = ?) WHERE Sach.Idtheloai = ?";
+        int check = 0;
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, id);
+            ps.setObject(2, id);
+           
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
 
     public boolean update(Sach s, String id) {
         String query = "UPDATE [dbo].[Sach]\n"

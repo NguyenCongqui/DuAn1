@@ -685,6 +685,7 @@ if (checkMaSach(txtMaSach.getText())==true) {
         JOptionPane.showMessageDialog(this, svSach.inert(guiDataSach()));
         listSachView = svSach.getAll();
         showData(listSachView);
+        lammoi();
     
     }
     }//GEN-LAST:event_btn_themsachActionPerformed
@@ -772,7 +773,10 @@ if (checkMaSach(txtMaSach.getText())==true) {
 //        } else {
         int id = Integer.valueOf(txtIDTheLoai.getText());
         JOptionPane.showMessageDialog(this,svTheLoai.update(guidata(),id));
+        svSach.update01(guiDataSach(), id);
         fillcomboxTheLoai();
+        listSachView = svSach.getAll();
+        showData(listSachView);
         //}
     }//GEN-LAST:event_btn_suaActionPerformed
 

@@ -21,5 +21,6 @@ public interface SachService {
     String delete(String id);
     List<SachViewModel> searchTen(String temp);
     sachMatHangViewModel selectByName(String name);
+    String update01(Sach s , int id);
 
 }

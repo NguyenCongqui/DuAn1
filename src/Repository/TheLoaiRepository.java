@@ -71,6 +71,7 @@ public class TheLoaiRepository {
         }
         return check > 0;
     }
+    
 
     public boolean delete(TheLoai tl) {
         String query = "UPDATE [dbo].[TheLoai]\n"
