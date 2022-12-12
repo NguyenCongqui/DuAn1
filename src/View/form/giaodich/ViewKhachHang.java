@@ -29,14 +29,14 @@ public class ViewKhachHang extends javax.swing.JPanel {
         initComponents();
         tblModel = (DefaultTableModel) tbl_khachhang.getModel();
         listKH = svKH.getlistKhachHang();
-        showData(listKH);
+        showData();
         clearForm();
         txt_id.disable();
         btn_sua.setEnabled(false);
         btn_xoa.setEnabled(false);
     }
 
-    public void showData(List<KhachHang> listKH) {
+    public void showData() {
         tblModel.setRowCount(0);
         for (KhachHang s : listKH) {
             Object[] row = new Object[]{s.getIdKhachHang(), s.getHoTen(), s.getNgaySinh(), s.isGioiTinh() == true ? "Nam" : "Nu", s.getSoDienThoai(), s.getDiaChi(), s.isTrangThai() == true ? "Hài lòng" : "Không hài lòng"};
@@ -127,6 +127,7 @@ public boolean validate01(){
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        dateChooser1 = new com.raven.datechooser.DateChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txt_search = new View.form.TextField();
@@ -150,6 +151,8 @@ public boolean validate01(){
         btn_sua = new View.form.MyButton();
         btn_xoa = new View.form.MyButton();
         nbl_search = new javax.swing.JLabel();
+
+        dateChooser1.setTextRefernce(txt_ngaysinh);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -335,7 +338,7 @@ public boolean validate01(){
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -345,7 +348,7 @@ public boolean validate01(){
                             .addComponent(txt_search, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(308, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,7 +415,9 @@ public boolean validate01(){
         rbt_khonghailong.setSelected(true);
         KhachHang kh = new KhachHang(ten, ngaySinh, gt, sdt, diaChi, tt);
         JOptionPane.showMessageDialog(this, svKH.them(kh));
-        showData(svKH.getlistKhachHang());}
+        listKH= svKH.getlistKhachHang();
+        showData();
+        }
        
     }//GEN-LAST:event_btn_themActionPerformed
 
@@ -437,7 +442,8 @@ public boolean validate01(){
         rbt_khonghailong.setSelected(true);
         KhachHang kh = new KhachHang(id,ten, ngaySinh, gt, sdt, diaChi, tt);
         JOptionPane.showMessageDialog(this, svKH.capnhat(kh));
-        showData(svKH.getlistKhachHang());
+        listKH= svKH.getlistKhachHang();
+        showData();
         clearForm();
     }//GEN-LAST:event_btn_suaActionPerformed
 
@@ -455,7 +461,7 @@ public boolean validate01(){
                 int id = Integer.valueOf(txt_id.getText());
         JOptionPane.showMessageDialog(this, svKH.delete(id));
         listKH = svKH.getlistKhachHang();
-        showData(listKH);
+        showData();
         clearForm();
     }//GEN-LAST:event_btn_xoaActionPerformed
 
@@ -467,7 +473,7 @@ public boolean validate01(){
            nbl_search.setText("Không có khách hàng : " + keyString);
             return;
         }
-        showData(listKH);
+        showData();
     }//GEN-LAST:event_txt_searchCaretUpdate
 
     private void tbl_khachhangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_khachhangMouseClicked
@@ -475,7 +481,7 @@ public boolean validate01(){
           int row = tbl_khachhang.getSelectedRow();
         KhachHang k = listKH.get(row);
         txt_id.setText(String.valueOf(k.getIdKhachHang()));
-        txt_ten.setText(String.valueOf(k.getHoTen()));
+        txt_ten.setText((k.getHoTen()));
         txt_diachi.setText(k.getDiaChi());
         txt_Sdt.setText(k.getSoDienThoai());
         txt_ngaysinh.setText(k.getNgaySinh());
@@ -502,6 +508,7 @@ public boolean validate01(){
     private View.form.MyButton btn_xoa;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private com.raven.datechooser.DateChooser dateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
