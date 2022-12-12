@@ -63,26 +63,21 @@ public class SachRepository {
         }
         return null;
     }
-    public SachViewModel getOneByMa(String ma) {
-        String sql = "SELECT dbo.Sach.IdSach, dbo.Sach.MaSach, dbo.Sach.TenSach, dbo.TheLoai.TenTheLoai, dbo.NhaCungCap.TenNhaCungCap, dbo.Sach.TrangThai\n"
-                + "FROM     dbo.NhaCungCap INNER JOIN\n"
-                + "                  dbo.Sach ON dbo.NhaCungCap.IdNhaCungCap = dbo.Sach.IdNhaCungCap INNER JOIN\n"
-                + "                  dbo.TheLoai ON dbo.Sach.Idtheloai = dbo.TheLoai.IdTheLoai where MaSach =? ";
-        SachViewModel list = new SachViewModel();
-        try (Connection con = new DBConnection().getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setObject(1, ma);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                list = new SachViewModel(0, rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6));
-                return list;
-            }
-
+            public boolean sua(Sach s,int id) {
+        String query = "UPDATE dbo.Sach SET TrangThai = (SELECT TRANGTHAI FROM dbo.TheLoai WHERE IdTheLoai = ?) WHERE Sach.Idtheloai = ?";
+        int check = 0;
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, id);
+            ps.setObject(2, id);
+           
+            check = ps.executeUpdate();
         } catch (Exception e) {
-             e.printStackTrace(System.out);
+            e.printStackTrace(System.out);
         }
-        return null;
+        return check > 0;
     }
+   
+    
         public List<SachViewModel> searchTen(String temp) {
         String query = "SELECT dbo.Sach.IdSach, dbo.Sach.MaSach, dbo.Sach.TenSach, dbo.TheLoai.TenTheLoai, dbo.NhaCungCap.TenNhaCungCap, dbo.Sach.TrangThai\n"
                 + "FROM     dbo.NhaCungCap INNER JOIN\n"
@@ -197,6 +192,7 @@ public class SachRepository {
 //         return null;
 //                 
 //     }
+
    public sachMatHangViewModel selectByName(String name) {
         String sql = "SELECT * FROM dbo.Sach INNER JOIN dbo.TheLoai ON TheLoai.IdTheLoai = Sach.Idtheloai WHERE TenSach = ?";
                

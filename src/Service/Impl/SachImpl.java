@@ -79,7 +79,11 @@ public class SachImpl implements SachService {
 
     @Override
     public String update01(Sach s, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        boolean up = rp.sua(s, id);
+        if(up){
+            return "update thanh cong";
+        }
+        return "update that bai";
     }
 
  

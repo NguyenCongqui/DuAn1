@@ -771,6 +771,12 @@ if (checkMaSach(txtMaSach.getText())==true) {
 //            JOptionPane.showMessageDialog(this,"Bạn ơi, Tên sách đã có trong hệ thống");
 //            return;
 //        } else {
+//        int id = Integer.valueOf(txtIDTheLoai.getText());
+//        JOptionPane.showMessageDialog(this,svTheLoai.update(guidata(),id));
+//        svSach.update01(guiDataSach(), id);
+//        fillcomboxTheLoai();
+//        listSachView = svSach.getAll();
+//        showData(listSachView);
         int id = Integer.valueOf(txtIDTheLoai.getText());
         JOptionPane.showMessageDialog(this,svTheLoai.update(guidata(),id));
         svSach.update01(guiDataSach(), id);
