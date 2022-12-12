@@ -49,7 +49,7 @@ public class SachRepository {
         String query = "SELECT dbo.Sach.IdSach, dbo.Sach.MaSach, dbo.Sach.TenSach, dbo.TheLoai.TenTheLoai, dbo.NhaCungCap.TenNhaCungCap, dbo.Sach.TrangThai\n"
                 + "FROM     dbo.NhaCungCap INNER JOIN\n"
                 + "                  dbo.Sach ON dbo.NhaCungCap.IdNhaCungCap = dbo.Sach.IdNhaCungCap INNER JOIN\n"
-                + "                  dbo.TheLoai ON dbo.Sach.Idtheloai = dbo.TheLoai.IdTheLoai";
+                + "                  dbo.TheLoai ON dbo.Sach.Idtheloai = dbo.TheLoai.IdTheLoai ORDER BY IdSach DESC";
         List<SachViewModel> listSp = new ArrayList<>();
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
@@ -60,6 +60,26 @@ public class SachRepository {
             return listSp;
         } catch (Exception e) {
             e.printStackTrace(System.out);
+        }
+        return null;
+    }
+    public SachViewModel getOneByMa(String ma) {
+        String sql = "SELECT dbo.Sach.IdSach, dbo.Sach.MaSach, dbo.Sach.TenSach, dbo.TheLoai.TenTheLoai, dbo.NhaCungCap.TenNhaCungCap, dbo.Sach.TrangThai\n"
+                + "FROM     dbo.NhaCungCap INNER JOIN\n"
+                + "                  dbo.Sach ON dbo.NhaCungCap.IdNhaCungCap = dbo.Sach.IdNhaCungCap INNER JOIN\n"
+                + "                  dbo.TheLoai ON dbo.Sach.Idtheloai = dbo.TheLoai.IdTheLoai where MaSach =? ";
+        SachViewModel list = new SachViewModel();
+        try (Connection con = new DBConnection().getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, ma);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                list = new SachViewModel(0, rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6));
+                return list;
+            }
+
+        } catch (Exception e) {
+             e.printStackTrace(System.out);
         }
         return null;
     }
@@ -80,19 +100,6 @@ public class SachRepository {
             e.printStackTrace(System.out);
         }
         return null;
-    }
-        public boolean sua(Sach s,int id) {
-        String query = "UPDATE dbo.Sach SET TrangThai = (SELECT TRANGTHAI FROM dbo.TheLoai WHERE IdTheLoai = ?) WHERE Sach.Idtheloai = ?";
-        int check = 0;
-        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setObject(1, id);
-            ps.setObject(2, id);
-           
-            check = ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
-        return check > 0;
     }
 
     public boolean update(Sach s, String id) {
