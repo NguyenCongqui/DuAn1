@@ -66,6 +66,8 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         Users us ;
+        setResizable(false);
+        btn_sua.setEnabled(false);
        //  webcam.close();
 //       initwebcam();
        
@@ -85,9 +87,11 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         btn_them.setEnabled(false);
         btn_them.setVisible(false);
+        btn_lammoi.setEnabled(false);
+        btn_lammoi.setVisible(false);
         
         txt_cccd.setText(CCCD);
-        txt_cccd.setEnabled(false);
+        txt_cccd.setEditable(false);
         txt_ten.setText(Hoten);
         txt_ngaysinh.setText(NgaySinh);
         txt_diachi.setText(DiaChi);
@@ -215,6 +219,7 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
         txt_username.setText("");
         txt_password.setText("");
         txt_cccd.setText("");
+        txt_dienthoai.setText("");
         rbt_danglamviec.setSelected(false);
         rbt_nghilam.setSelected(false);
         rbt_quanly.setSelected(false);
@@ -741,6 +746,7 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
                 JOptionPane.showMessageDialog(this, nhanVienService.themNhanVien(getGui()));
         nhanVienService.ThemTaiKhoan(GetGuidataTaiKhoan());
         clearForm();
+        this.dispose();
             }
             }
         }

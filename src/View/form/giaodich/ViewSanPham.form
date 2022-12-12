@@ -298,13 +298,13 @@
                                   <Component id="rdo_NgungKinhDoanh" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="myButton3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_Moi" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="btn_themsach" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                  <Component id="btn_suaSach" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="myButton4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="myButton5" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="myButton6" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_xoasach" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="txtIDTheLoai" alignment="0" min="-2" pref="235" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
@@ -372,10 +372,10 @@
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="myButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="myButton4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="myButton5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="myButton6" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_Moi" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_themsach" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_suaSach" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_xoasach" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
@@ -415,40 +415,40 @@
                     <Property name="text" type="java.lang.String" value="Ng&#x1eeb;ng Kinh Doanh"/>
                   </Properties>
                 </Component>
-                <Component class="View.form.MyButton" name="myButton3">
+                <Component class="View.form.MyButton" name="btn_Moi">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="T&#x1ea1;o M&#x1edb;i"/>
                     <Property name="radius" type="int" value="20"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton3ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_MoiActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="View.form.MyButton" name="myButton4">
+                <Component class="View.form.MyButton" name="btn_themsach">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
                     <Property name="radius" type="int" value="20"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton4ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_themsachActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="View.form.MyButton" name="myButton5">
+                <Component class="View.form.MyButton" name="btn_suaSach">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="C&#x1ead;p Nh&#x1ead;p"/>
                     <Property name="radius" type="int" value="20"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton5ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_suaSachActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="View.form.MyButton" name="myButton6">
+                <Component class="View.form.MyButton" name="btn_xoasach">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
                     <Property name="radius" type="int" value="20"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton6ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_xoasachActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="View.form.MyButton" name="myButton7">

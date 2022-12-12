@@ -72,6 +72,8 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
         txtID.disable();
         txtIDTheLoai.disable();
         initwebcam();
+        btn_suaSach.setEnabled(false);
+        btn_xoasach.setEnabled(false);
         
 
     }
@@ -148,6 +150,14 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
         }
         return false;
     }
+    public boolean checkTenTheLoai(String acc) {
+        for (int i = 0; i < svTheLoai.getlistTheLoai().size(); i++) {
+            if (svTheLoai.getlistTheLoai().get(i).getTenTheLoai().trim().equals(acc.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void initTable() {
         String[] cols = new String[]{"ID Sach", "Ten Sach", "Loai Sach", "Trang thai"};
@@ -204,6 +214,14 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
             comode.addElement(tl);
         }
 
+    }
+    public void lammoi(){
+        txtID.setText("");
+        txtMaSach.setText("");
+        txtMaSach.setText("");
+        rdo_DangKinhDoanh.setSelected(true);
+         btn_suaSach.setEnabled(false);
+        btn_xoasach.setEnabled(false);
     }
     public void fillData(int index){
         SachViewModel s = svSach.getAll().get(index);
@@ -274,10 +292,10 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
         jLabel3 = new javax.swing.JLabel();
         rdo_DangKinhDoanh = new View.form.RadioButtonCustom();
         rdo_NgungKinhDoanh = new View.form.RadioButtonCustom();
-        myButton3 = new View.form.MyButton();
-        myButton4 = new View.form.MyButton();
-        myButton5 = new View.form.MyButton();
-        myButton6 = new View.form.MyButton();
+        btn_Moi = new View.form.MyButton();
+        btn_themsach = new View.form.MyButton();
+        btn_suaSach = new View.form.MyButton();
+        btn_xoasach = new View.form.MyButton();
         myButton7 = new View.form.MyButton();
         txt_tenLoaiSach = new View.form.TextField();
         btn_them = new View.form.MyButton();
@@ -357,35 +375,35 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
         buttonGroup1.add(rdo_NgungKinhDoanh);
         rdo_NgungKinhDoanh.setText("Ngừng Kinh Doanh");
 
-        myButton3.setText("Tạo Mới");
-        myButton3.setRadius(20);
-        myButton3.addActionListener(new java.awt.event.ActionListener() {
+        btn_Moi.setText("Tạo Mới");
+        btn_Moi.setRadius(20);
+        btn_Moi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton3ActionPerformed(evt);
+                btn_MoiActionPerformed(evt);
             }
         });
 
-        myButton4.setText("Thêm");
-        myButton4.setRadius(20);
-        myButton4.addActionListener(new java.awt.event.ActionListener() {
+        btn_themsach.setText("Thêm");
+        btn_themsach.setRadius(20);
+        btn_themsach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton4ActionPerformed(evt);
+                btn_themsachActionPerformed(evt);
             }
         });
 
-        myButton5.setText("Cập Nhập");
-        myButton5.setRadius(20);
-        myButton5.addActionListener(new java.awt.event.ActionListener() {
+        btn_suaSach.setText("Cập Nhập");
+        btn_suaSach.setRadius(20);
+        btn_suaSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton5ActionPerformed(evt);
+                btn_suaSachActionPerformed(evt);
             }
         });
 
-        myButton6.setText("Xóa");
-        myButton6.setRadius(20);
-        myButton6.addActionListener(new java.awt.event.ActionListener() {
+        btn_xoasach.setText("Xóa");
+        btn_xoasach.setRadius(20);
+        btn_xoasach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton6ActionPerformed(evt);
+                btn_xoasachActionPerformed(evt);
             }
         });
 
@@ -477,13 +495,13 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
                         .addGap(30, 30, 30)
                         .addComponent(rdo_NgungKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(myButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_Moi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_themsach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(btn_suaSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(myButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(myButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_xoasach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtIDTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -536,10 +554,10 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
                     .addComponent(rdo_NgungKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(myButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(myButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(myButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_Moi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_themsach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_suaSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_xoasach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
         );
 
@@ -652,7 +670,7 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
 
     }//GEN-LAST:event_cbo_loaiSachMouseClicked
 
-    private void myButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton4ActionPerformed
+    private void btn_themsachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themsachActionPerformed
 //        listtheloai = svTheLoai.getlistTheLoai();
 //        int indexTl = cbo_loaiSach.getSelectedIndex();
 //        TheLoai tl = listtheloai.get(indexTl);
@@ -669,26 +687,28 @@ if (checkMaSach(txtMaSach.getText())==true) {
         showData(listSachView);
     
     }
-    }//GEN-LAST:event_myButton4ActionPerformed
+    }//GEN-LAST:event_btn_themsachActionPerformed
 
-    private void myButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton3ActionPerformed
+    private void btn_MoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MoiActionPerformed
         cbo_loaiSach.setSelectedIndex(0);
         txtTenSach1.setText("");
         txtMaSach.setText("");
         rdo_DangKinhDoanh.setSelected(false);
         rdo_NgungKinhDoanh.setSelected(false);
-    }//GEN-LAST:event_myButton3ActionPerformed
+    }//GEN-LAST:event_btn_MoiActionPerformed
 
     private void rdo_DangKinhDoanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_DangKinhDoanhActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rdo_DangKinhDoanhActionPerformed
 
-    private void myButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton5ActionPerformed
+    private void btn_suaSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaSachActionPerformed
        String id = txtID.getText() ;
        JOptionPane.showMessageDialog(this,svSach.update(guiDataSach(), id));
        listSachView = svSach.getAll();
        showData(listSachView);
-    }//GEN-LAST:event_myButton5ActionPerformed
+       lammoi();
+       
+    }//GEN-LAST:event_btn_suaSachActionPerformed
 
     private void tbl_sanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_sanPhamMouseClicked
         int row = tbl_sanPham.getSelectedRow();
@@ -704,18 +724,21 @@ if (checkMaSach(txtMaSach.getText())==true) {
         }else{
             rdo_NgungKinhDoanh.setSelected(true);
         }
+         btn_suaSach.setEnabled(true);
+        btn_xoasach.setEnabled(true);
     }//GEN-LAST:event_tbl_sanPhamMouseClicked
 
     private void txtTenSach1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenSach1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTenSach1ActionPerformed
 
-    private void myButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton6ActionPerformed
+    private void btn_xoasachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoasachActionPerformed
          String id = txtID.getText();
          JOptionPane.showMessageDialog(this, svSach.delete(id));
          listSachView = svSach.getAll();
          showData(listSachView);
-    }//GEN-LAST:event_myButton6ActionPerformed
+         lammoi();
+    }//GEN-LAST:event_btn_xoasachActionPerformed
 
     private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
         TimTheoTen();
@@ -731,21 +754,37 @@ if (checkMaSach(txtMaSach.getText())==true) {
     }//GEN-LAST:event_btn_TatQuetMaActionPerformed
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
+        
+        if (checkTenTheLoai(txt_tenLoaiSach.getText())==true) {
+            JOptionPane.showMessageDialog(this,"Bạn ơi, Tên sách đac có trong hệ thống");
+            return;
+        } else {
+        
         JOptionPane.showMessageDialog(this,svTheLoai.inerts(guidata()));
         fillcomboxTheLoai();
+        }
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
+        if (checkTenTheLoai(txt_tenLoaiSach.getText())==true) {
+            JOptionPane.showMessageDialog(this,"Bạn ơi, Tên sách đã có trong hệ thống");
+            return;
+        } else {
         int id = Integer.valueOf(txtIDTheLoai.getText());
         JOptionPane.showMessageDialog(this,svTheLoai.update(guidata(),id));
         fillcomboxTheLoai();
+        }
     }//GEN-LAST:event_btn_suaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private View.form.MyButton btn_Moi;
     private View.form.MyButton btn_TatQuetMa;
     private View.form.MyButton btn_sua;
+    private View.form.MyButton btn_suaSach;
     private View.form.MyButton btn_them;
+    private View.form.MyButton btn_themsach;
+    private View.form.MyButton btn_xoasach;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private View.form.Combobox cboNhaCungCaP;
@@ -760,10 +799,6 @@ if (checkMaSach(txtMaSach.getText())==true) {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTb2;
     private View.form.MyButton myButton2;
-    private View.form.MyButton myButton3;
-    private View.form.MyButton myButton4;
-    private View.form.MyButton myButton5;
-    private View.form.MyButton myButton6;
     private View.form.MyButton myButton7;
     private View.form.RadioButtonCustom rdoDKDCTS;
     private View.form.RadioButtonCustom rdoNKDcts;

@@ -32,6 +32,8 @@ public class ViewKhachHang extends javax.swing.JPanel {
         showData(listKH);
         clearForm();
         txt_id.disable();
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
     }
 
     public void showData(List<KhachHang> listKH) {
@@ -61,6 +63,8 @@ public void clearForm() {
         rbt_nam.setSelected(true);
         rbt_nu.setSelected(false);
         btn_them.setEnabled(true);
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
     }
 public KhachHang getGui() {
         KhachHang kh = new KhachHang();
@@ -108,6 +112,7 @@ public boolean validate01(){
         JOptionPane.showMessageDialog(this,"Bạn Ơi, Số Điện Thoại Phải là số nha");
         return false;
     }
+    
     
     return true;
 }
@@ -433,6 +438,7 @@ public boolean validate01(){
         KhachHang kh = new KhachHang(id,ten, ngaySinh, gt, sdt, diaChi, tt);
         JOptionPane.showMessageDialog(this, svKH.capnhat(kh));
         showData(svKH.getlistKhachHang());
+        clearForm();
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void btn_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_newActionPerformed
@@ -450,6 +456,7 @@ public boolean validate01(){
         JOptionPane.showMessageDialog(this, svKH.delete(id));
         listKH = svKH.getlistKhachHang();
         showData(listKH);
+        clearForm();
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void txt_searchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_searchCaretUpdate
@@ -482,6 +489,9 @@ public boolean validate01(){
         } else {
             rbt_khonghailong.setSelected(true);
         }
+        btn_sua.setEnabled(true);
+        btn_xoa.setEnabled(true);
+        btn_them.setEnabled(false);
     }//GEN-LAST:event_tbl_khachhangMouseClicked
 
 

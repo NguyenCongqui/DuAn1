@@ -37,6 +37,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
 
     public ViewNhanVien() {
         initComponents();
+        btn_xoanhanvien.setEnabled(false);
         tblModel = (DefaultTableModel) tbl_nhanvien.getModel();
         us = nhanvienservice.ListgetNhanVien();
         showData();
@@ -63,6 +64,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
                 us.getLuong()};
             tblModel.addRow(row);
         }
+        btn_xoanhanvien.setEnabled(false);
     }
     
     public void showDataKhongLam() {
@@ -324,7 +326,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
 
     private void tbl_nhanvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_nhanvienMouseClicked
         // TODO add your handling code here:
-        // if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
             int index = tbl_nhanvien.getSelectedRow();
             int idUser = (int) tbl_nhanvien.getValueAt(index, 0);
             String CCCD = tbl_nhanvien.getValueAt(index, 1).toString();
@@ -338,7 +340,8 @@ public class ViewNhanVien extends javax.swing.JPanel {
             String Luong = tbl_nhanvien.getValueAt(index, 9).toString();
             thenhanvienUpdate = new ViewThemNhanVienFrame(CCCD,Hoten,ChucVu,GioiTinh,NgaySinh,DiaChi,SoDienThoai,email,Luong,idUser,cbo_tinhtrang.getSelectedIndex());
             thenhanvienUpdate.setVisible(true);
-       // }
+            btn_xoanhanvien.setEnabled(true);
+       }
 
         if (thenhanvienUpdate == null) {
             return;
@@ -350,6 +353,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
                     cbo_tinhtrang.setSelectedIndex(0);
                     us = nhanvienservice.ListgetNhanVien();
                     showData();
+                    btn_xoanhanvien.setEnabled(false);
 
                 }
             }
