@@ -40,7 +40,7 @@ public class NhanVienImpl implements NhanVienService{
 
     @Override
     public String XoaNhanVien(int k) {
-       return rep.Delete(k);
+       return rep.Delete( k);
     }
 
     @Override

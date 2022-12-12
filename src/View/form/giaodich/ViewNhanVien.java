@@ -31,17 +31,26 @@ public class ViewNhanVien extends javax.swing.JPanel {
     private UsersService usersService = new UsersImpl();
     ViewThemNhanVienFrame nhanvien = new ViewThemNhanVienFrame();
     NhanVienService nhanvienservice = new NhanVienImpl();
-    ViewThemNhanVienFrame thenhanvien01 = new ViewThemNhanVienFrame();
+   // ViewThemNhanVienFrame thenhanvien01 = new ViewThemNhanVienFrame();
     ViewThemNhanVienFrame thenhanvienUpdate;
 
 
     public ViewNhanVien() {
         initComponents();
-        btn_xoanhanvien.setEnabled(false);
+        //btn_xoanhanvien.setEnabled(false);
         tblModel = (DefaultTableModel) tbl_nhanvien.getModel();
         us = nhanvienservice.ListgetNhanVien();
-        showData();
+            showData();
         lbl_tim.disable();
+        cbo_tinhtrang.setSelectedIndex(0);
+        nhanvien.addEvenFillTable(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            nhanvien.insert();
+             us = nhanvienservice.ListgetNhanVien();
+             showData();
+            }
+        });
 
         
     }
@@ -64,7 +73,8 @@ public class ViewNhanVien extends javax.swing.JPanel {
                 us.getLuong()};
             tblModel.addRow(row);
         }
-        btn_xoanhanvien.setEnabled(false);
+        System.out.println("haha");
+       // btn_xoanhanvien.setEnabled(false);
     }
     
     public void showDataKhongLam() {
@@ -310,8 +320,8 @@ public class ViewNhanVien extends javax.swing.JPanel {
     private void btn_themnhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themnhanvienActionPerformed
         // TODO add your handling code here:
         nhanvien.setVisible(true);
-        us = nhanvienservice.ListgetNhanVien();
-        showData();
+//        us = nhanvienservice.ListgetNhanVien();
+//        showData();
 
     }//GEN-LAST:event_btn_themnhanvienActionPerformed
 
@@ -340,7 +350,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
             String Luong = tbl_nhanvien.getValueAt(index, 9).toString();
             thenhanvienUpdate = new ViewThemNhanVienFrame(CCCD,Hoten,ChucVu,GioiTinh,NgaySinh,DiaChi,SoDienThoai,email,Luong,idUser,cbo_tinhtrang.getSelectedIndex());
             thenhanvienUpdate.setVisible(true);
-            btn_xoanhanvien.setEnabled(true);
+            //btn_xoanhanvien.setEnabled(true);
        }
 
         if (thenhanvienUpdate == null) {
@@ -353,7 +363,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
                     cbo_tinhtrang.setSelectedIndex(0);
                     us = nhanvienservice.ListgetNhanVien();
                     showData();
-                    btn_xoanhanvien.setEnabled(false);
+                    //btn_xoanhanvien.setEnabled(false);
 
                 }
             }

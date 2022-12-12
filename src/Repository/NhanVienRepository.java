@@ -143,7 +143,7 @@ DBConnection db;
         }
         return "Them khong thanh cong";
     }
-    public String Delete (int t) {
+    public String Delete(int t) {
         String update = "UPDATE dbo.Users SET TrangThai = 0 WHERE IdUsers =?";
         try {
             pst = db.getConnection().prepareStatement(update);
@@ -208,4 +208,14 @@ public String updataNhanVien (Users us) {
         }
         return listTemp;
     }
+     public int getindex (int ma){
+               for (int i = 0; i < ListUsers.size(); i++) {
+                   if (ListUsers.get(i).getIdusers()==(ma)) {
+                       return i;
+                   }
+               }
+               return -3;
+           }
+
+    
 }

@@ -12,6 +12,7 @@ import Service.Impl.UsersImpl;
 import Services.NhanVienService;
 
 import Services.UsersService;
+import View.TrangChu.mainform;
 import View.login.XDate;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
@@ -38,6 +39,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -180,10 +182,7 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
         return t ;
         
     }
-    
 
-
-    
     public void addEvenUpdate(ActionListener evt) {
         btn_sua.addActionListener(evt);
     }
@@ -306,6 +305,60 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
         }
         return false;
     }
+    public void insert(){
+        System.out.println("huhi");
+        try {
+        if (validate01()) {
+            if (checkCCCD(txt_cccd.getText())==true) {
+                    JOptionPane.showMessageDialog(this,"Bạn Ơi,Nhân Viên Này có trong hệ thống rồi nha");
+                    return;
+                }else
+            if (checkDate()) {
+                if (checkSoDienThoai(txt_dienthoai.getText())== true) {
+                    JOptionPane.showMessageDialog(this,"Bạn Ơi, Số điện thoại có trong hệ thống rồi nha");
+                    return;
+                }else if (checkEmail(txt_email.getText())==true) {
+                    JOptionPane.showMessageDialog(this,"Bạn Ơi, Email có trong hệ thống rồi nha");
+                    return;
+                }else if (checkUser(txt_username.getText()) == true) {
+                    JOptionPane.showMessageDialog(this,"Bạn Ơi,Tên Users có trong hệ thống rồi nha");
+                    return;
+                } else if (checksodienthoai(txt_dienthoai.getText())==false) {
+                    JOptionPane.showMessageDialog(this,"Bạn ơi, số điện thoại không hợp lệ ");
+                }else
+                      {
+                         
+                JOptionPane.showMessageDialog(this, nhanVienService.themNhanVien(getGui()));
+        nhanVienService.ThemTaiKhoan(GetGuidataTaiKhoan());
+       // new mainform().showForm(new ViewNhanVien());
+        clearForm();
+        this.dispose();
+//         if (webcam == null) {
+//            return;
+//        }
+//        webcam.close(); 
+        
+            }
+            }
+        }
+         } catch (Exception e) {
+        }
+    }
+    public boolean checksodienthoai(  String sb){
+         boolean flag = true;
+        if (txt_dienthoai.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this,"Bạn Ơi, số điện thoại đang trống nha");
+            return false;
+        }
+        Pattern pattern = Pattern.compile("(84|0[3|5|7|8|9])+([0-9]{8})");
+        Matcher matcher = pattern.matcher(txt_dienthoai.getText());
+        if (!matcher.find()) {
+            flag = false;
+        } else {
+            flag = true;
+        }
+        return flag;
+    }
     
     public boolean validate01(){
         if (txt_ten.getText().trim().isEmpty()) {
@@ -321,10 +374,8 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
             return false;
         }
         
-        if (Integer.parseInt(txt_dienthoai.getText())<10) {
-            JOptionPane.showMessageDialog(this,"Bạn ơi số Điện Thoại phải la 10 số nha");
-            return false;
-        }
+        
+        
         try {
             Integer.parseInt(txt_dienthoai.getText());
         } catch (Exception e) {
@@ -378,6 +429,10 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
          
          
         return true;
+    }
+    
+    public void addEvenFillTable(ActionListener evt) {
+        btn_them.addActionListener(evt);
     }
 
     /**
@@ -723,33 +778,9 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
-
+      //this.insert();
         
-        if (validate01()) {
-            if (checkCCCD(txt_cccd.getText())==true) {
-                    JOptionPane.showMessageDialog(this,"Bạn Ơi,Nhân Viên Này có trong hệ thống rồi nha");
-                    return;
-                }else
-            if (checkDate()) {
-                if (checkSoDienThoai(txt_dienthoai.getText())== true) {
-                    JOptionPane.showMessageDialog(this,"Bạn Ơi, Số điện thoại có trong hệ thống rồi nha");
-                    return;
-                }else if (checkEmail(txt_email.getText())==true) {
-                    JOptionPane.showMessageDialog(this,"Bạn Ơi, Email có trong hệ thống rồi nha");
-                    return;
-                }else if (checkUser(txt_username.getText()) == true) {
-                    JOptionPane.showMessageDialog(this,"Bạn Ơi,Tên Users có trong hệ thống rồi nha");
-                    return;
-                } else
-                      {
-                         
-                JOptionPane.showMessageDialog(this, nhanVienService.themNhanVien(getGui()));
-        nhanVienService.ThemTaiKhoan(GetGuidataTaiKhoan());
-        clearForm();
-        this.dispose();
-            }
-            }
-        }
+        
 
        
     }//GEN-LAST:event_btn_themActionPerformed
@@ -797,7 +828,7 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
         // TODO add your handling code here:
-//        this.update();
+       //this.update();
     }//GEN-LAST:event_btn_suaActionPerformed
 
     /**
