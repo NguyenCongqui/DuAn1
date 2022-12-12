@@ -66,7 +66,7 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         Users us ;
-        setResizable(false);
+       // setResizable(false);
         btn_sua.setEnabled(false);
        //  webcam.close();
 //       initwebcam();

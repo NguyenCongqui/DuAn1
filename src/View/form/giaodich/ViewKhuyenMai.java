@@ -38,6 +38,8 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
         ListVoucher = voucherService.getListVouchers();
         filldata();
         txt_ID.setEnabled(false);
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
         
     }
      public void filldata(){
@@ -98,6 +100,8 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
         txt_soluong.setText("");
         txt_ID.setText("");
         rdo_DangHoatDong.setSelected(true);
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
     }
     public void showdeil(){
         Voucher v = ListVoucher.get(index);
@@ -463,6 +467,8 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
         try {
             index = tbl_khuyenMai.getSelectedRow();
             showdeil();
+            btn_sua.setEnabled(true);
+            btn_xoa.setEnabled(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this ," loi click");
         }
