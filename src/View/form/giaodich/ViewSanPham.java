@@ -766,14 +766,14 @@ if (checkMaSach(txtMaSach.getText())==true) {
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
-        if (checkTenTheLoai(txt_tenLoaiSach.getText())==true) {
-            JOptionPane.showMessageDialog(this,"Bạn ơi, Tên sách đã có trong hệ thống");
-            return;
-        } else {
+//        if (checkTenTheLoai(txt_tenLoaiSach.getText())==true) {
+//            JOptionPane.showMessageDialog(this,"Bạn ơi, Tên sách đã có trong hệ thống");
+//            return;
+//        } else {
         int id = Integer.valueOf(txtIDTheLoai.getText());
         JOptionPane.showMessageDialog(this,svTheLoai.update(guidata(),id));
         fillcomboxTheLoai();
-        }
+        //}
     }//GEN-LAST:event_btn_suaActionPerformed
 
 
