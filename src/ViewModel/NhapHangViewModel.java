@@ -23,7 +23,8 @@ public class NhapHangViewModel {
     private int IdKhachHang;
     private String tenKhachHang;
     private String tenTheLoai;
-
+    private String maSach;
+    
     public NhapHangViewModel() {
     }
 
@@ -51,15 +52,7 @@ public class NhapHangViewModel {
 
   
 
-    public NhapHangViewModel(int idchitietsach,
-            String TenSach,
-            String tenTheLoai,
-            String TenNxb,
-            String TenNgonNgu,
-            String TenTacGia,
-            int soluong,
-            float gia
-            ) {
+    public NhapHangViewModel(int idchitietsach,String TenSach,String tenTheLoai,String TenNxb,String TenNgonNgu,String TenTacGia,int soluong,float gia) {
         this.idchitietsach = idchitietsach;
         this.TenSach = TenSach;
         this.tenTheLoai = tenTheLoai;
@@ -69,6 +62,18 @@ public class NhapHangViewModel {
         this.soluong = soluong;
         this.gia = gia;
 
+    }
+
+    public NhapHangViewModel(int idchitietsach,String TenSach,String tenTheLoai,String TenNxb,String TenNgonNgu,String TenTacGia,int soluong,float gia,String maSach ) {
+        this.idchitietsach = idchitietsach;
+        this.TenSach = TenSach;
+        this.tenTheLoai = tenTheLoai;
+        this.TenNxb = TenNxb;
+        this.TenNgonNgu = TenNgonNgu;
+        this.TenTacGia = TenTacGia;
+        this.soluong = soluong;
+        this.gia = gia;
+        this.maSach = maSach;
     }
 
     public int getIdchitietsach() {
@@ -221,6 +226,14 @@ public class NhapHangViewModel {
 
     public void setGianhap(float gianhap) {
         this.gianhap = gianhap;
+    }
+
+    public String getMaSach() {
+        return maSach;
+    }
+
+    public void setMaSach(String maSach) {
+        this.maSach = maSach;
     }
 
     

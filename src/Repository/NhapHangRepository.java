@@ -34,14 +34,15 @@ public class NhapHangRepository {
 
     public List<NhapHangViewModel> getAll() {
 
-        String sql = "   SELECT c.IdCTSach,s.TenSach,l.TenTheLoai,x.TenNXB,n.TenNgonNGu,T.TenTacGia,C.SoLuongTon,C.GiaBan \n"
-                + "  FROM dbo.ChiTietSach C\n"
-                + "  INNER JOIN dbo.NgonNgu N ON N.IdNgonNgu = C.IdNgonNgu\n"
-                + "  INNER JOIN dbo.NXB X ON X.IdNXB = C.IdNXB\n"
-                + "  INNER JOIN dbo.TacGia T ON T.IdTacGia = C.IdTacGia\n"
-                + "  INNER JOIN dbo.Sach S ON S.IdSach = C.IdSach\n"
-                + "  INNER JOIN dbo.TheLoai L ON L.IdTheLoai = S.Idtheloai\n"
-                + "  ORDER BY C.IdCTSach DESC";
+        String sql = "SELECT c.IdCTSach,s.TenSach,l.TenTheLoai,x.TenNXB,n.TenNgonNGu,T.TenTacGia,C.SoLuongTon,C.GiaBan ,S.MaSach\n" +
+" FROM dbo.ChiTietSach C\n" +
+" INNER JOIN dbo.NgonNgu N ON N.IdNgonNgu = C.IdNgonNgu\n" +
+" INNER JOIN dbo.NXB X ON X.IdNXB = C.IdNXB\n" +
+" INNER JOIN dbo.TacGia T ON T.IdTacGia = C.IdTacGia\n" +
+" INNER JOIN dbo.Sach S ON S.IdSach = C.IdSach\n" +
+" INNER JOIN dbo.TheLoai L ON L.IdTheLoai = S.Idtheloai\n" +
+" WHERE s.TrangThai = 1\n" +
+" ORDER BY C.IdCTSach DESC ";
         try {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(sql);
@@ -55,7 +56,9 @@ public class NhapHangRepository {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getInt(7),
-                        rs.getFloat(8)));
+                        rs.getFloat(8),
+                        rs.getString(9)
+                ));
             }
             rs.close();
         } catch (SQLException ex) {
@@ -65,7 +68,7 @@ public class NhapHangRepository {
     }
 
     public List<NhapHangViewModel> searchTenSach(String temp) {
-        String sql = "SELECT c.IdCTSach,s.TenSach,l.TenTheLoai,x.TenNXB,n.TenNgonNGu,T.TenTacGia,C.SoLuongTon,C.GiaBan \n"
+        String sql = "SELECT c.IdCTSach,s.TenSach,l.TenTheLoai,x.TenNXB,n.TenNgonNGu,T.TenTacGia,C.SoLuongTon,C.GiaBan ,S.MaSach\n" 
                 + "FROM dbo.ChiTietSach C\n"
                 + "INNER JOIN dbo.NgonNgu N ON N.IdNgonNgu = C.IdNgonNgu\n"
                 + "INNER JOIN dbo.NXB X ON X.IdNXB = C.IdNXB\n"
@@ -85,7 +88,9 @@ public class NhapHangRepository {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getInt(7),
-                        rs.getFloat(8)));
+                        rs.getFloat(8),
+                        rs.getString(9)
+                ));
             }
             rs.close();
         } catch (SQLException ex) {

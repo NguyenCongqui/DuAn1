@@ -66,6 +66,7 @@ public class ViewNhapHang extends javax.swing.JPanel {
         for (NhapHangViewModel p : list2) {
             model.addRow(new Object[]{
                 p.getIdchitietsach(),
+                p.getMaSach(),
                 p.getTenSach(),
                 p.getTenTheLoai(),
                 p.getTenNxb(),
@@ -194,7 +195,7 @@ public class ViewNhapHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Id SP", "Ten SP", "The Loai", "NXB", "Ngon Ngu", "Tac Gia", "Slg trong kho", "Gia Ban"
+                "Id SP", "Ma SP", "Ten SP", "The Loai", "NXB", "Ngon Ngu", "Tac Gia", "Slg trong kho", "Gia Ban"
             }
         ));
         tbl1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -268,7 +269,7 @@ public class ViewNhapHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Id SP", "Ten SP", "The Loai", "NXB", "Ngon Ngu", "Tac Gia", "Slg Nhap", "Gia Nhap"
+                "Id SP", "Ma SP", "Ten SP", "The Loai", "NXB", "Ngon Ngu", "Tac Gia", "Slg Nhap", "Gia Nhap"
             }
         ));
         tbl2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -425,17 +426,18 @@ public class ViewNhapHang extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Bạn chưa chọn mặt hàng nào");
             } else {//lay dlieu tu bang 1
                 int id = Integer.parseInt(tbl1.getValueAt(row, 0).toString());
-                String tenSP = (String) tbl1.getValueAt(row, 1);
-                String theLoai = (String) tbl1.getValueAt(row, 2);
-                String NXB = (String) tbl1.getValueAt(row, 3);
-                String ngonNgu = (String) tbl1.getValueAt(row, 4);
-                String tacGia = (String) tbl1.getValueAt(row, 5);
+                 String maSp = (String) tbl1.getValueAt(row, 1);
+                String tenSP = (String) tbl1.getValueAt(row, 2);
+                String theLoai = (String) tbl1.getValueAt(row, 3);
+                String NXB = (String) tbl1.getValueAt(row, 4);
+                String ngonNgu = (String) tbl1.getValueAt(row, 5);
+                String tacGia = (String) tbl1.getValueAt(row, 6);
                 int sLg = Integer.parseInt(txt_SLgNhap.getText());
                 Float giaNhap = Float.parseFloat(txt_Gia.getText());
 
                 //do dlieu vao bang 2
                 DefaultTableModel tableModel1 = (DefaultTableModel) tbl2.getModel();
-                tableModel1.addRow(new Object[]{id, tenSP, theLoai, NXB, ngonNgu, tacGia, sLg, giaNhap});
+                tableModel1.addRow(new Object[]{id,maSp, tenSP, theLoai, NXB, ngonNgu, tacGia, sLg, giaNhap});
                 CTHDNhapSpViewModel nhvm = new CTHDNhapSpViewModel();
                 nhvm.setPrice(giaNhap);
                 nhvm.setIDChiTietSach(id);
@@ -554,6 +556,7 @@ public class ViewNhapHang extends javax.swing.JPanel {
         for (NhapHangViewModel p : list2) {
             tableModel.addRow(new Object[]{
                 p.getIdchitietsach(),
+                p.getMaSach(),
                 p.getTenSach(),
                 p.getTenTheLoai(),
                 p.getTenNxb(),
@@ -613,10 +616,10 @@ public String deleteLastKey(String str) {
             lblGiaNhap.setText("");
             return;
         }
-        if (Float.parseFloat(txt_Gia.getText()) > Float.parseFloat(fomartFloat(tbl1.getValueAt(tbl1.getSelectedRow(), 7).toString()))) {
+        if (Float.parseFloat(txt_Gia.getText()) > Float.parseFloat(fomartFloat(tbl1.getValueAt(tbl1.getSelectedRow(), 8).toString()))) {
             lblGiaNhap.setVisible(true);
             lblGiaNhap.setText("Giá nhập nhỏ hơn giá bán");
-            System.out.println(Float.parseFloat(fomartFloat(tbl1.getValueAt(tbl1.getSelectedRow(), 7).toString())));
+            System.out.println(Float.parseFloat(fomartFloat(tbl1.getValueAt(tbl1.getSelectedRow(), 8).toString())));
         } else {
             
             lblGiaNhap.setText("");
