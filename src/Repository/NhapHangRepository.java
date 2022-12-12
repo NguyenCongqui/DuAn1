@@ -74,7 +74,7 @@ public class NhapHangRepository {
                 + "INNER JOIN dbo.NXB X ON X.IdNXB = C.IdNXB\n"
                 + "INNER JOIN dbo.TacGia T ON T.IdTacGia = C.IdTacGia\n"
                 + "INNER JOIN dbo.Sach S ON S.IdSach = C.IdSach\n"
-                + "INNER JOIN dbo.TheLoai L ON L.IdTheLoai = S.Idtheloai where S.TenSach LIKE '%" + temp + "%' order by S.TenSach asc";
+                + "INNER JOIN dbo.TheLoai L ON L.IdTheLoai = S.Idtheloai where S.TenSach LIKE '%" + temp + "%' and S.TrangThai = 1 order by S.TenSach asc";
         try {
             st = db.getConnection().createStatement();
             rs = st.executeQuery(sql);
