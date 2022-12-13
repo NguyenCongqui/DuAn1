@@ -27,17 +27,17 @@ public class SachImpl implements SachService {
 
     @Override
     public String inert(Sach s) {
-        if(s.getMaSach().isEmpty()==true){
+        if (s.getMaSach().isEmpty() == true) {
             return "Ma sach trong";
-        }else if(s.getTenSach().isEmpty()==true){
+        } else if (s.getTenSach().isEmpty() == true) {
             return "Ten sach trong";
         }
         boolean them = rp.them(s);
-        if(them){
+        if (them) {
             return "them sach thanh cong";
-        }else{
-             return "them sach that bai";    
-        } 
+        } else {
+            return "them sach that bai";
+        }
     }
 
     @Override
@@ -48,7 +48,7 @@ public class SachImpl implements SachService {
     @Override
     public String update(Sach s, String id) {
         boolean up = rp.update(s, id);
-        if(up){
+        if (up) {
             return "update thanh cong";
         }
         return "update that bai";
@@ -57,20 +57,16 @@ public class SachImpl implements SachService {
     @Override
     public String delete(String id) {
         boolean de = rp.xoa(id);
-        if(de){
+        if (de) {
             return "xoa thanh cong";
         }
         return "xoa that bai";
     }
 
-    
-
     @Override
     public List<SachViewModel> searchTen(String temp) {
         return rp.searchTen(temp);
     }
-
-  
 
     @Override
     public sachMatHangViewModel selectByName(String name) {
@@ -80,15 +76,21 @@ public class SachImpl implements SachService {
     @Override
     public String update01(Sach s, int id) {
         boolean up = rp.sua(s, id);
-        if(up){
+        if (up) {
             return "update thanh cong";
         }
         return "update that bai";
     }
 
- 
-    
+    @Override
+    public List<SachViewModel> getNKD() {
+        return rp.getListSachNgungKinhDoanh();
+    }
 
-    
+    @Override
+    public List<SachViewModel> getDKD() {
+        return rp.getListSachDangKinhDoanh();
+
+    }
 
 }

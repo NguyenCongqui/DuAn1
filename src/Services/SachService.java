@@ -22,5 +22,7 @@ public interface SachService {
     List<SachViewModel> searchTen(String temp);
     sachMatHangViewModel selectByName(String name);
     String update01(Sach s , int id);
+    List<SachViewModel> getNKD();
+    List<SachViewModel> getDKD();
     
 }

@@ -44,7 +44,40 @@ public class SachRepository {
         }
         return null;
     }
-
+     public List<SachViewModel> getListSachNgungKinhDoanh() {
+        String select = "SELECT dbo.Sach.IdSach, dbo.Sach.MaSach, dbo.Sach.TenSach, dbo.TheLoai.TenTheLoai, dbo.NhaCungCap.TenNhaCungCap, dbo.Sach.TrangThai\n"
+                + "FROM     dbo.NhaCungCap INNER JOIN\n"
+                + "                  dbo.Sach ON dbo.NhaCungCap.IdNhaCungCap = dbo.Sach.IdNhaCungCap INNER JOIN\n"
+                + "                  dbo.TheLoai ON dbo.Sach.Idtheloai = dbo.TheLoai.IdTheLoai WHERE dbo.Sach.TrangThai =0 ORDER BY dbo.Sach.TrangThai DESC";
+        List<SachViewModel> listNKD = new ArrayList<>();
+        try {
+            st = db.getConnection().createStatement();
+            rs = st.executeQuery(select);
+            while (rs.next()) {
+                listNKD.add(new SachViewModel(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6)));
+            }
+            rs.close();
+        } catch (Exception e) {
+        }
+        return listNKD;
+    }
+      public List<SachViewModel> getListSachDangKinhDoanh() {
+        String select = "SELECT dbo.Sach.IdSach, dbo.Sach.MaSach, dbo.Sach.TenSach, dbo.TheLoai.TenTheLoai, dbo.NhaCungCap.TenNhaCungCap, dbo.Sach.TrangThai\n"
+                + "FROM     dbo.NhaCungCap INNER JOIN\n"
+                + "                  dbo.Sach ON dbo.NhaCungCap.IdNhaCungCap = dbo.Sach.IdNhaCungCap INNER JOIN\n"
+                + "                  dbo.TheLoai ON dbo.Sach.Idtheloai = dbo.TheLoai.IdTheLoai WHERE dbo.Sach.TrangThai =1 ORDER BY dbo.Sach.TrangThai DESC";
+        List<SachViewModel> listNKD = new ArrayList<>();
+        try {
+            st = db.getConnection().createStatement();
+            rs = st.executeQuery(select);
+            while (rs.next()) {
+                listNKD.add(new SachViewModel(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6)));
+            }
+            rs.close();
+        } catch (Exception e) {
+        }
+        return listNKD;
+    }
     public List<SachViewModel> getAll() {
         String query = "SELECT dbo.Sach.IdSach, dbo.Sach.MaSach, dbo.Sach.TenSach, dbo.TheLoai.TenTheLoai, dbo.NhaCungCap.TenNhaCungCap, dbo.Sach.TrangThai\n"
                 + "FROM     dbo.NhaCungCap INNER JOIN\n"

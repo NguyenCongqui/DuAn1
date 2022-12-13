@@ -39,16 +39,16 @@ import net.miginfocom.layout.AC;
  *
  * @author ADMIN
  */
-public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadFactory{
+public class ViewSanPham extends javax.swing.JPanel implements Runnable, ThreadFactory {
 
-    private DefaultComboBoxModel cbModel ;
+    private DefaultComboBoxModel cbModel;
     private DefaultComboBoxModel cbModel2;
-    private DefaultTableModel tblModel ;
-    private List<SachViewModel> listSachView ;
-    private List<NCC> listNCC ;
-    private List<TheLoai> listtheloai ;
-    private TheLoaiServie svTheLoai ;
-    private SachService svSach ;
+    private DefaultTableModel tblModel;
+    private List<SachViewModel> listSachView;
+    private List<NCC> listNCC;
+    private List<TheLoai> listtheloai;
+    private TheLoaiServie svTheLoai;
+    private SachService svSach;
     private NCCService svNCC;
     private WebcamPanel panel = null;
     private static Webcam webcam = null;
@@ -56,7 +56,7 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
 
     public ViewSanPham() {
         initComponents();
-        cbModel =(DefaultComboBoxModel) cbo_loaiSach.getModel();
+        cbModel = (DefaultComboBoxModel) cbo_loaiSach.getModel();
         tblModel = (DefaultTableModel) tbl_sanPham.getModel();
         cbModel2 = (DefaultComboBoxModel) cboNhaCungCaP.getModel();
         svTheLoai = new TheLoaiImpl();
@@ -74,63 +74,66 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
         initwebcam();
         btn_suaSach.setEnabled(false);
         btn_xoasach.setEnabled(false);
-        
 
     }
+
     @Override
     public Thread newThread(Runnable r) {
         Thread t = new Thread(r, "My Thread");
         t.setDaemon(true);
-        return t ;
-        
+        return t;
+
     }
-    public void run(){
-    do {        
-        try {
-             Thread.sleep(100);
-        } catch (Exception e) {
-        }
-        Result result =null;
-        BufferedImage image = null;
-        if (webcam.isOpen()) {
-            if ((image = webcam.getImage() )== null) {
+
+    public void run() {
+        do {
+            try {
+                Thread.sleep(100);
+            } catch (Exception e) {
+            }
+            Result result = null;
+            BufferedImage image = null;
+            if (webcam.isOpen()) {
+                if ((image = webcam.getImage()) == null) {
+                    continue;
+                }
+            }
+            if (image == null) {
                 continue;
             }
-        }
-        if (image == null) {
-            continue;
-        }
-        LuminanceSource soure = new BufferedImageLuminanceSource(image);
-        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(soure));
-        try {
-             result = new MultiFormatReader().decode(bitmap);
-        } catch (Exception e) {
-        }
-        if (result != null) {
-            txtMaSach.setText(result.getText());            
-        }
-      
-    } while (true);
-}
-     public static void closeCam(){
+            LuminanceSource soure = new BufferedImageLuminanceSource(image);
+            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(soure));
+            try {
+                result = new MultiFormatReader().decode(bitmap);
+            } catch (Exception e) {
+            }
+            if (result != null) {
+                txtMaSach.setText(result.getText());
+            }
+
+        } while (true);
+    }
+
+    public static void closeCam() {
         if (webcam == null) {
             return;
         }
         webcam.close();
     }
-  private void initwebcam(){
-    Dimension size = WebcamResolution.QQVGA.getSize();
-    webcam = Webcam.getWebcams().get(0);
-    webcam.setViewSize(size);
-    panel = new WebcamPanel(webcam);
-    panel.setPreferredSize(size);
-    panel.setFPSDisplayed(true);
-  
-   jPanel6.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 150));
-  
-    executor.execute( this);
-    
-}  
+
+    private void initwebcam() {
+        Dimension size = WebcamResolution.QQVGA.getSize();
+        webcam = Webcam.getWebcams().get(0);
+        webcam.setViewSize(size);
+        panel = new WebcamPanel(webcam);
+        panel.setPreferredSize(size);
+        panel.setFPSDisplayed(true);
+
+        jPanel6.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 150));
+
+        executor.execute(this);
+
+    }
 
     public void statusform() {
         txt_tenLoaiSach.setVisible(false);
@@ -142,6 +145,7 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
         txtIDTheLoai.setVisible(false);
 //        myButton1.setVisible(false);
     }
+
     public boolean checkMaSach(String acc) {
         for (int i = 0; i < svSach.getAll().size(); i++) {
             if (svSach.getAll().get(i).getMaSach().trim().equals(acc.trim())) {
@@ -150,6 +154,7 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
         }
         return false;
     }
+
     public boolean checkTenTheLoai(String acc) {
         for (int i = 0; i < svTheLoai.getlistTheLoai().size(); i++) {
             if (svTheLoai.getlistTheLoai().get(i).getTenTheLoai().trim().equals(acc.trim())) {
@@ -170,20 +175,38 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
     public void showData(List<SachViewModel> listSachView) {
         tblModel.setRowCount(0);
         for (SachViewModel s : listSachView) {
-            Object[] row = new Object[]{s.getId(),s.getMaSach(), s.getTenSach(), s.getLoaiSach(),s.getNXB(), s.isTrangThai() == true ? "Đang kinh doanh" : "Ngừng kinh doanh"};
+            Object[] row = new Object[]{s.getId(), s.getMaSach(), s.getTenSach(), s.getLoaiSach(), s.getNXB(), s.isTrangThai() == true ? "Đang kinh doanh" : "Ngừng kinh doanh"};
+            tblModel.addRow(row);
+        }
+    }
+
+    public void showDataListNKD() {
+        tblModel.setRowCount(0);
+        List<SachViewModel> list = svSach.getNKD();
+        for (SachViewModel s : list) {
+            Object[] row = new Object[]{s.getId(), s.getMaSach(), s.getTenSach(), s.getLoaiSach(), s.getNXB(), s.isTrangThai() == true ? "Đang kinh doanh" : "Ngừng kinh doanh"};
+            tblModel.addRow(row);
+        }
+    }
+
+    public void showDataListDKD() {
+        tblModel.setRowCount(0);
+        List<SachViewModel> list = svSach.getDKD();
+        for (SachViewModel s : list) {
+            Object[] row = new Object[]{s.getId(), s.getMaSach(), s.getTenSach(), s.getLoaiSach(), s.getNXB(), s.isTrangThai() == true ? "Đang kinh doanh" : "Ngừng kinh doanh"};
             tblModel.addRow(row);
         }
     }
 
     public void showtheloai() {
-      
-       TheLoai tl = (TheLoai) cbo_loaiSach.getSelectedItem();
+
+        TheLoai tl = (TheLoai) cbo_loaiSach.getSelectedItem();
         if (tl == null) {
             return;
-        } 
-        
-            txt_tenLoaiSach.setText(tl.getTenTheLoai());
-            txtIDTheLoai.setText(String.valueOf(tl.getIdTheLoai()));
+        }
+
+        txt_tenLoaiSach.setText(tl.getTenTheLoai());
+        txtIDTheLoai.setText(String.valueOf(tl.getIdTheLoai()));
 //           for (TheLoai cc : listtheloai) {
 //            if(cc.isTrangThai()==true){
 //                rdoDKDCTS.setSelected(true);
@@ -191,14 +214,15 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
 //                rdoNKDcts.setSelected(true);
 //            }
 //        }
-            if(tl.isTrangThai()==true){
-                rdoDKDCTS.setSelected(true);
-            }else{
-                rdoNKDcts.setSelected(true);
-            }
-   
+        if (tl.isTrangThai() == true) {
+            rdoDKDCTS.setSelected(true);
+        } else {
+            rdoNKDcts.setSelected(true);
+        }
+
     }
-    public void fillComBoxCNN(){
+
+    public void fillComBoxCNN() {
         DefaultComboBoxModel comode2 = (DefaultComboBoxModel) cboNhaCungCaP.getModel();
         cboNhaCungCaP.removeAllItems();
         listNCC = svNCC.getAll();
@@ -206,6 +230,7 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
             comode2.addElement(ncc);
         }
     }
+
     public void fillcomboxTheLoai() {
         DefaultComboBoxModel comode = (DefaultComboBoxModel) cbo_loaiSach.getModel();
         cbo_loaiSach.removeAllItems();
@@ -215,34 +240,39 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
         }
 
     }
-    public void lammoi(){
+
+    public void lammoi() {
         txtID.setText("");
         txtMaSach.setText("");
         txtMaSach.setText("");
         rdo_DangKinhDoanh.setSelected(true);
-         btn_suaSach.setEnabled(false);
+        btn_suaSach.setEnabled(false);
         btn_xoasach.setEnabled(false);
     }
-    public void fillData(int index){
+
+    public void fillData(int index) {
         SachViewModel s = svSach.getAll().get(index);
-        
+
     }
+
     public TheLoai guidata() {
         TheLoai tl = new TheLoai();
         tl.setTenTheLoai(txt_tenLoaiSach.getText());
         boolean tt = rdoDKDCTS.isSelected();
-        if(tt){
+        if (tt) {
             tl.setTrangThai(true);
-        }else{
+        } else {
             tl.setTrangThai(false);
         }
-        
+
         return tl;
     }
-    public Sach guiDataSach(){
+
+    public Sach guiDataSach() {
         return new Sach(txtMaSach.getText(), txtTenSach1.getText(), listtheloai.get(cbo_loaiSach.getSelectedIndex()).getIdTheLoai(), listNCC.get(cboNhaCungCaP.getSelectedIndex()).getIdNCC(), rdo_DangKinhDoanh.isSelected());
 //        return new Sach(txtTenSach1.getText(), listtheloai.get(cbo_loaiSach.getSelectedIndex()).getIdTheLoai(), rdo_DangKinhDoanh.isSelected());
     }
+
     public void TimTheoTen() {
         String temp = txtTimKiem.getText();
         List<SachViewModel> listSearch = new ArrayList<>();
@@ -251,7 +281,7 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
         tblModel.setRowCount(0);
         if (listSearch.isEmpty()) {
             lblTb2.setText("Không tìm thay san pham : " + temp);
-          return;
+            return;
         }
         for (SachViewModel p : listSearch) {
             tblModel.addRow(new Object[]{
@@ -260,9 +290,7 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
                 p.getTenSach(),
                 p.getLoaiSach(),
                 p.getNXB(),
-                p.isTrangThai()==true?"Đang Kinh Doanh":"Ngừng Kinh Doanh",
-               
-            });
+                p.isTrangThai() == true ? "Đang Kinh Doanh" : "Ngừng Kinh Doanh",});
         }
     }
 
@@ -281,7 +309,6 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtTimKiem = new View.form.TextField();
-        myButton2 = new View.form.MyButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         lblTb2 = new javax.swing.JLabel();
@@ -308,6 +335,7 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
         rdoNKDcts = new View.form.RadioButtonCustom();
         txtIDTheLoai = new View.form.TextField();
         btn_sua = new View.form.MyButton();
+        cbTK = new View.form.Combobox();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -316,15 +344,12 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Sách");
 
-        txtTimKiem.setLabelText("Tìm theo tên hoặc mã");
+        txtTimKiem.setLabelText("Tìm theo tên");
         txtTimKiem.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 txtTimKiemCaretUpdate(evt);
             }
         });
-
-        myButton2.setText("Xuất");
-        myButton2.setRadius(20);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quét Mã", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 10))); // NOI18N
@@ -561,6 +586,14 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
                 .addGap(34, 34, 34))
         );
 
+        cbTK.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Đang Kinh Doanh", "Ngừng Kinh Doanh", "Tất cả" }));
+        cbTK.setLabeText("tìm kiem theo trang thai");
+        cbTK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTKActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -571,15 +604,18 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
                         .addGap(22, 22, 22)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblTb2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
-                        .addGap(70, 70, 70)
-                        .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 192, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblTb2, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(70, 70, 70)
+                                .addComponent(cbTK, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -592,10 +628,11 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbTK, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTb2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -647,8 +684,7 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
             rdoDKDCTS.setVisible(false);
             rdoNKDcts.setVisible(false);
             txtIDTheLoai.setVisible(false);
-           
- 
+
         } else {
             txt_tenLoaiSach.setVisible(true);
             btn_sua.setVisible(true);
@@ -656,7 +692,7 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
             rdoDKDCTS.setVisible(true);
             rdoNKDcts.setVisible(true);
             txtIDTheLoai.setVisible(true);
- 
+
             showtheloai();
         }
 
@@ -677,17 +713,17 @@ public class ViewSanPham extends javax.swing.JPanel implements  Runnable,ThreadF
 //        String tenSach = txtTenSach.getText();
 //        boolean trangThai = rdo_DangKinhDoanh.isSelected();
 //        Sach s = new Sach( tenSach, tl.getIdTheLoai(), trangThai);
-if (checkMaSach(txtMaSach.getText())==true) {
-            JOptionPane.showMessageDialog(this,"Bạn ơi,Mã sách có trong hệ thống rồi nha");
+        if (checkMaSach(txtMaSach.getText()) == true) {
+            JOptionPane.showMessageDialog(this, "Bạn ơi,Mã sách có trong hệ thống rồi nha");
             return;
         } else {
 
-        JOptionPane.showMessageDialog(this, svSach.inert(guiDataSach()));
-        listSachView = svSach.getAll();
-        showData(listSachView);
-        lammoi();
-    
-    }
+            JOptionPane.showMessageDialog(this, svSach.inert(guiDataSach()));
+            listSachView = svSach.getAll();
+            showData(listSachView);
+            lammoi();
+
+        }
     }//GEN-LAST:event_btn_themsachActionPerformed
 
     private void btn_MoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MoiActionPerformed
@@ -703,29 +739,29 @@ if (checkMaSach(txtMaSach.getText())==true) {
     }//GEN-LAST:event_rdo_DangKinhDoanhActionPerformed
 
     private void btn_suaSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaSachActionPerformed
-       String id = txtID.getText() ;
-       JOptionPane.showMessageDialog(this,svSach.update(guiDataSach(), id));
-       listSachView = svSach.getAll();
-       showData(listSachView);
-       lammoi();
-       
+        String id = txtID.getText();
+        JOptionPane.showMessageDialog(this, svSach.update(guiDataSach(), id));
+        listSachView = svSach.getAll();
+        showData(listSachView);
+        lammoi();
+
     }//GEN-LAST:event_btn_suaSachActionPerformed
 
     private void tbl_sanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_sanPhamMouseClicked
         int row = tbl_sanPham.getSelectedRow();
         SachViewModel s = listSachView.get(row);
-        txtID.setText(s.getId()+"");
+        txtID.setText(s.getId() + "");
         txtMaSach.setText(s.getMaSach());
         txtTenSach1.setText(s.getTenSach());
         cboNhaCungCaP.setSelectedItem(s.getNXB());
         cbo_loaiSach.setSelectedItem(s.getLoaiSach());
         boolean trangThai = s.isTrangThai();
-        if(trangThai){
+        if (trangThai) {
             rdo_DangKinhDoanh.setSelected(true);
-        }else{
+        } else {
             rdo_NgungKinhDoanh.setSelected(true);
         }
-         btn_suaSach.setEnabled(true);
+        btn_suaSach.setEnabled(true);
         btn_xoasach.setEnabled(true);
     }//GEN-LAST:event_tbl_sanPhamMouseClicked
 
@@ -734,11 +770,11 @@ if (checkMaSach(txtMaSach.getText())==true) {
     }//GEN-LAST:event_txtTenSach1ActionPerformed
 
     private void btn_xoasachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoasachActionPerformed
-         String id = txtID.getText();
-         JOptionPane.showMessageDialog(this, svSach.delete(id));
-         listSachView = svSach.getAll();
-         showData(listSachView);
-         lammoi();
+        String id = txtID.getText();
+        JOptionPane.showMessageDialog(this, svSach.delete(id));
+        listSachView = svSach.getAll();
+        showData(listSachView);
+        lammoi();
     }//GEN-LAST:event_btn_xoasachActionPerformed
 
     private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
@@ -751,18 +787,18 @@ if (checkMaSach(txtMaSach.getText())==true) {
             return;
         }
         webcam.close();
-        
+
     }//GEN-LAST:event_btn_TatQuetMaActionPerformed
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
-        
-        if (checkTenTheLoai(txt_tenLoaiSach.getText())==true) {
-            JOptionPane.showMessageDialog(this,"Bạn ơi, Tên sách đac có trong hệ thống");
+
+        if (checkTenTheLoai(txt_tenLoaiSach.getText()) == true) {
+            JOptionPane.showMessageDialog(this, "Bạn ơi, Tên sách đac có trong hệ thống");
             return;
         } else {
-        
-        JOptionPane.showMessageDialog(this,svTheLoai.inerts(guidata()));
-        fillcomboxTheLoai();
+
+            JOptionPane.showMessageDialog(this, svTheLoai.inerts(guidata()));
+            fillcomboxTheLoai();
         }
     }//GEN-LAST:event_btn_themActionPerformed
 
@@ -778,13 +814,24 @@ if (checkMaSach(txtMaSach.getText())==true) {
 //        listSachView = svSach.getAll();
 //        showData(listSachView);
         int id = Integer.valueOf(txtIDTheLoai.getText());
-        JOptionPane.showMessageDialog(this,svTheLoai.update(guidata(),id));
+        JOptionPane.showMessageDialog(this, svTheLoai.update(guidata(), id));
         svSach.update01(guiDataSach(), id);
         fillcomboxTheLoai();
         listSachView = svSach.getAll();
         showData(listSachView);
         //}
     }//GEN-LAST:event_btn_suaActionPerformed
+
+    private void cbTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTKActionPerformed
+        if (cbTK.getSelectedIndex() == 0) {
+            showDataListDKD();
+        } else if(cbTK.getSelectedIndex() == 1) {
+            showDataListNKD();
+        }
+        else{
+            showData(listSachView);
+        }
+    }//GEN-LAST:event_cbTKActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -797,6 +844,7 @@ if (checkMaSach(txtMaSach.getText())==true) {
     private View.form.MyButton btn_xoasach;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private View.form.Combobox cbTK;
     private View.form.Combobox cboNhaCungCaP;
     private View.form.Combobox cbo_loaiSach;
     private javax.swing.JLabel jLabel1;
@@ -808,7 +856,6 @@ if (checkMaSach(txtMaSach.getText())==true) {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTb2;
-    private View.form.MyButton myButton2;
     private View.form.MyButton myButton7;
     private View.form.RadioButtonCustom rdoDKDCTS;
     private View.form.RadioButtonCustom rdoNKDcts;
