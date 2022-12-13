@@ -153,7 +153,6 @@ public class ViewNhanVien extends javax.swing.JPanel {
         cbo_tinhtrang = new View.form.Combobox();
         btn_themnhanvien = new View.form.MyButton();
         btn_xoanhanvien = new View.form.MyButton();
-        btn_xuat = new View.form.MyButton();
         lbl_tim = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -205,9 +204,6 @@ public class ViewNhanVien extends javax.swing.JPanel {
             }
         });
 
-        btn_xuat.setText("Xuất");
-        btn_xuat.setRadius(20);
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -227,8 +223,6 @@ public class ViewNhanVien extends javax.swing.JPanel {
                 .addComponent(btn_themnhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(btn_xoanhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(btn_xuat, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -250,8 +244,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_themnhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_xoanhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_xuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_xoanhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
 
@@ -393,7 +386,6 @@ public class ViewNhanVien extends javax.swing.JPanel {
     private View.form.MyButton btn_themnhanvien;
     private View.form.MyButton btn_tim;
     private View.form.MyButton btn_xoanhanvien;
-    private View.form.MyButton btn_xuat;
     private View.form.Combobox cbo_tinhtrang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

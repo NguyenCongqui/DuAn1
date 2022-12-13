@@ -64,7 +64,6 @@ public class ViewThongKeDoanhSo extends javax.swing.JPanel {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btn_xuat = new View.form.MyButton();
         jPanel2 = new javax.swing.JPanel();
         rdo_bieudoduong = new javax.swing.JRadioButton();
         rdo_bieudocot = new javax.swing.JRadioButton();
@@ -82,14 +81,6 @@ public class ViewThongKeDoanhSo extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Thống Kê Doanh Số");
 
-        btn_xuat.setText("Xuất");
-        btn_xuat.setRadius(20);
-        btn_xuat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_xuatActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -97,18 +88,14 @@ public class ViewThongKeDoanhSo extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 452, Short.MAX_VALUE)
-                .addComponent(btn_xuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(336, 336, 336))
+                .addContainerGap(860, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(btn_xuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(jLabel1)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -232,10 +219,6 @@ public class ViewThongKeDoanhSo extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_xuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xuatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_xuatActionPerformed
-
     private void rdo_bieudoduongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_bieudoduongActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rdo_bieudoduongActionPerformed
@@ -267,7 +250,6 @@ public class ViewThongKeDoanhSo extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.form.MyButton btn_bieudo;
-    private View.form.MyButton btn_xuat;
     private javax.swing.ButtonGroup buttonGroup1;
     private View.form.Combobox cbo_nam;
     private View.form.Combobox cbo_thang;

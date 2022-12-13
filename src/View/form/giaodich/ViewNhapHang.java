@@ -62,7 +62,7 @@ public class ViewNhapHang extends javax.swing.JPanel {
     public void fillTable() {
         DefaultTableModel model = (DefaultTableModel) tbl1.getModel();
         model.setRowCount(0);
-        list2 = NHservice.getAll();
+        list2 = NHservice.getAll();//CTS
         for (NhapHangViewModel p : list2) {
             model.addRow(new Object[]{
                 p.getIdchitietsach(),

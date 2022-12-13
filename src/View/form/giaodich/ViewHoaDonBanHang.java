@@ -40,6 +40,16 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
         setOpaque(false);
         chitiethoadonservice = new ChiTietHoaDonImpl();
         fillData();
+        btnFirst.setEnabled(false);
+        btnFirst.setVisible(false);
+        btnBack.setEnabled(false);
+        btnBack.setVisible(false);
+        cbbPagination.setEnabled(false);
+        cbbPagination.setVisible(false);
+        btnNext.setEnabled(false);
+        btnNext.setVisible(false);
+        btnLast.setEnabled(false);
+        btnLast.setVisible(false);
     }
     int totalPage = 1;
     int page = 1;
@@ -318,8 +328,6 @@ public class ViewHoaDonBanHang extends javax.swing.JPanel {
                 cbbPaginationItemStateChanged(evt);
             }
         });
-
-        lbl_Count.setText("jLabel2");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

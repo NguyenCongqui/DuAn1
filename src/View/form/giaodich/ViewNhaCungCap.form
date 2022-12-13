@@ -99,19 +99,14 @@
                           <Component id="txt_Search" pref="323" max="32767" attributes="0"/>
                           <Component id="lbl_Search" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="276" max="-2" attributes="0"/>
-                      <Component id="btn_xuat" min="-2" pref="66" max="-2" attributes="0"/>
-                      <EmptySpace pref="194" max="32767" attributes="0"/>
+                      <EmptySpace pref="536" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="txt_Search" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn_xuat" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="txt_Search" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lbl_Search" pref="23" max="32767" attributes="0"/>
                   </Group>
@@ -140,12 +135,6 @@
                 <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txt_SearchCaretUpdate"/>
                 <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_SearchFocusGained"/>
               </Events>
-            </Component>
-            <Component class="View.form.MyButton" name="btn_xuat">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t"/>
-                <Property name="radius" type="int" value="20"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_Search">
               <Properties>

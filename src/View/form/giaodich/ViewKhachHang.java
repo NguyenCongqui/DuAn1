@@ -133,7 +133,6 @@ public boolean validate01(){
         txt_search = new View.form.TextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_khachhang = new View.form.TableColumn();
-        myButton1 = new View.form.MyButton();
         jPanel2 = new javax.swing.JPanel();
         txt_ten = new View.form.TextField();
         txt_diachi = new View.form.TextField();
@@ -183,9 +182,6 @@ public boolean validate01(){
             }
         });
         jScrollPane1.setViewportView(tbl_khachhang);
-
-        myButton1.setText("Search");
-        myButton1.setRadius(20);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Chi tiết khách hàng"));
@@ -345,9 +341,7 @@ public boolean validate01(){
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nbl_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_search, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txt_search, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE))))
                 .addContainerGap(308, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -359,10 +353,7 @@ public boolean validate01(){
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(7, 7, 7)
                 .addComponent(nbl_search, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -515,7 +506,6 @@ public boolean validate01(){
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private View.form.MyButton myButton1;
     private javax.swing.JLabel nbl_search;
     private View.form.RadioButtonCustom rbt_hailong;
     private View.form.RadioButtonCustom rbt_khonghailong;

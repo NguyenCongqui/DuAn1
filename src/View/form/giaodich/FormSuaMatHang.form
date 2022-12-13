@@ -169,7 +169,7 @@
             </Component>
             <Component class="View.form.MyButton" name="btn_hoanThanh">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ho&#xe0;n Th&#xe0;nh"/>
+                <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
                 <Property name="radius" type="int" value="20"/>
               </Properties>
               <Events>

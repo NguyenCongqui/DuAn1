@@ -207,7 +207,7 @@ public class FormSuaMatHang extends javax.swing.JFrame {
 
         cbo_TacGia.setLabeText("");
 
-        btn_hoanThanh.setText("Hoàn Thành");
+        btn_hoanThanh.setText("Sửa");
         btn_hoanThanh.setRadius(20);
         btn_hoanThanh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
