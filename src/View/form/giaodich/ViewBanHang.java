@@ -390,7 +390,6 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txt_Search = new View.form.TextField();
-        btn_Search = new View.form.MyButton();
         txt_SlgBan = new View.form.TextField();
         btn_LuuTam = new View.form.MyButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -423,7 +422,7 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Ban Hang");
 
-        txt_Search.setLabelText("Tim theo ten hoac ma");
+        txt_Search.setLabelText("Tim theo ma");
         txt_Search.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 txt_SearchCaretUpdate(evt);
@@ -487,9 +486,6 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
             }
         });
 
-        btn_Search.setText("Tìm Kiếm");
-        btn_Search.setRadius(20);
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -499,17 +495,14 @@ public class ViewBanHang extends javax.swing.JPanel implements Runnable,ThreadFa
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addComponent(btn_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(174, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(btn_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2))
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -1012,7 +1005,6 @@ fillTableWhenFind();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.form.MyButton btn_BanHang;
     private View.form.MyButton btn_LuuTam;
-    private View.form.MyButton btn_Search;
     private View.form.MyButton btn_Xoa;
     private View.form.Combobox cbo_KhachHang;
     private View.form.Combobox cbo_MaGiamGia;

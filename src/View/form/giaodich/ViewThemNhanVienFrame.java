@@ -333,10 +333,10 @@ public class ViewThemNhanVienFrame extends javax.swing.JFrame implements Runnabl
        // new mainform().showForm(new ViewNhanVien());
         clearForm();
         this.dispose();
-//         if (webcam == null) {
-//            return;
-//        }
-//        webcam.close(); 
+         if (webcam == null) {
+            return;
+        }
+        webcam.close(); 
         
             }
             }
