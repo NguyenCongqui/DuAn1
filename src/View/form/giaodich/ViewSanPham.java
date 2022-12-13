@@ -243,7 +243,7 @@ public class ViewSanPham extends javax.swing.JPanel implements Runnable, ThreadF
 
     public void lammoi() {
         txtID.setText("");
-        txtMaSach.setText("");
+        txtTenSach1.setText("");
         txtMaSach.setText("");
         rdo_DangKinhDoanh.setSelected(true);
         btn_suaSach.setEnabled(false);
@@ -292,6 +292,14 @@ public class ViewSanPham extends javax.swing.JPanel implements Runnable, ThreadF
                 p.getNXB(),
                 p.isTrangThai() == true ? "Đang Kinh Doanh" : "Ngừng Kinh Doanh",});
         }
+    }
+    public void xoaForm(){
+        txtID.setText("");
+        cbo_loaiSach.setSelectedIndex(0);
+        txtTenSach1.setText("");
+        txtMaSach.setText("");
+        rdo_DangKinhDoanh.setSelected(false);
+        rdo_NgungKinhDoanh.setSelected(false);
     }
 
     /**
@@ -727,11 +735,7 @@ public class ViewSanPham extends javax.swing.JPanel implements Runnable, ThreadF
     }//GEN-LAST:event_btn_themsachActionPerformed
 
     private void btn_MoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MoiActionPerformed
-        cbo_loaiSach.setSelectedIndex(0);
-        txtTenSach1.setText("");
-        txtMaSach.setText("");
-        rdo_DangKinhDoanh.setSelected(false);
-        rdo_NgungKinhDoanh.setSelected(false);
+        lammoi();
     }//GEN-LAST:event_btn_MoiActionPerformed
 
     private void rdo_DangKinhDoanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_DangKinhDoanhActionPerformed
@@ -774,7 +778,7 @@ public class ViewSanPham extends javax.swing.JPanel implements Runnable, ThreadF
         JOptionPane.showMessageDialog(this, svSach.delete(id));
         listSachView = svSach.getAll();
         showData(listSachView);
-        lammoi();
+        xoaForm();
     }//GEN-LAST:event_btn_xoasachActionPerformed
 
     private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
