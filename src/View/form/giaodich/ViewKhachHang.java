@@ -43,6 +43,7 @@ public class ViewKhachHang extends javax.swing.JPanel {
             tblModel.addRow(row);
         }
     }
+
     public boolean checkSoDienThoai(String acc) {
         for (int i = 0; i < svKH.getlistKhachHang().size(); i++) {
             if (svKH.getlistKhachHang().get(i).getSoDienThoai().trim().equals(acc.trim())) {
@@ -51,7 +52,8 @@ public class ViewKhachHang extends javax.swing.JPanel {
         }
         return false;
     }
-public void clearForm() {
+
+    public void clearForm() {
         tbl_khachhang.clearSelection();
         txt_ten.setText("");
         txt_diachi.setText("");
@@ -66,56 +68,75 @@ public void clearForm() {
         btn_sua.setEnabled(false);
         btn_xoa.setEnabled(false);
     }
-public KhachHang getGui() {
+
+    public KhachHang getGui() {
         KhachHang kh = new KhachHang();
         kh.setHoTen(txt_ten.getText());
         kh.setDiaChi(txt_diachi.getText());
         kh.setSoDienThoai(txt_Sdt.getText());
         kh.setNgaySinh(txt_ngaysinh.getText());
-        if (rbt_nam.isSelected()==true) {
-        kh.setGioiTinh(true);
-    } else {
+        if (rbt_nam.isSelected() == true) {
+            kh.setGioiTinh(true);
+        } else {
             kh.setGioiTinh(false);
-    }
-        if (rbt_hailong.isSelected()==true) {
-        kh.setTrangThai(true);
-    } else {
+        }
+        if (rbt_hailong.isSelected() == true) {
+            kh.setTrangThai(true);
+        } else {
             kh.setTrangThai(false);
-    }
+        }
         return kh;
-        
+
     }
-public boolean validate01(){
-    if (txt_Sdt.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this,"Bạn ơi, Số Điện Thoại Đang Trống Kìa");
-        return false;
+
+    public boolean validate01() {
+        if (txt_Sdt.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn ơi, Số Điện Thoại Đang Trống Kìa");
+            return false;
+        }
+        if (txt_diachi.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn ơi, Địa Chỉ Đang Trống Kìa");
+            return false;
+        }
+        if (txt_ten.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn ơi, Họ Và Tên Đang Trống Kìa");
+            return false;
+        }
+        if (!rbt_nam.isSelected() && !rbt_nu.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Bạn Ơi, Bạn chưa chọn giới Tính Kìa");
+            return false;
+        }
+        if (!rbt_hailong.isSelected() && !rbt_khonghailong.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Bạn Ơi, Bạn chưa chọn Tình trạng Kìa");
+            return false;
+        }
+        try {
+            Integer.parseInt(txt_Sdt.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Bạn Ơi, Số Điện Thoại Phải là số nha");
+            return false;
+        }
+
+        return true;
+
     }
-    if (txt_diachi.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this,"Bạn ơi, Địa Chỉ Đang Trống Kìa");
-        return false;
+
+    public void Search() {
+        DefaultTableModel model = (DefaultTableModel) tbl_khachhang.getModel();
+        model.setRowCount(0);
+        String keyString = txt_search.getText();
+        listKH = svKH.search(keyString);
+        if (listKH.isEmpty()) {
+            nbl_search.setText("Không có nhà cung câp : " + keyString);
+            return;
+        }
+        for (KhachHang s : listKH) {
+            Object[] row = new Object[]{s.getIdKhachHang(), s.getHoTen(), s.getNgaySinh(), s.isGioiTinh() == true ? "Nam" : "Nu", s.getSoDienThoai(), s.getDiaChi(), s.isTrangThai() == true ? "Hài lòng" : "Không hài lòng"};
+            tblModel.addRow(row);
+        }
+        nbl_search.setText("");
     }
-    if (txt_ten.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this,"Bạn ơi, Họ Và Tên Đang Trống Kìa");
-        return false;
-    }
-    if (!rbt_nam.isSelected()&& !rbt_nu.isSelected()) {
-        JOptionPane.showMessageDialog(this,"Bạn Ơi, Bạn chưa chọn giới Tính Kìa");
-        return false;
-    }
-    if (!rbt_hailong.isSelected()&& !rbt_khonghailong.isSelected()) {
-        JOptionPane.showMessageDialog(this,"Bạn Ơi, Bạn chưa chọn Tình trạng Kìa");
-        return false;
-    }
-    try {
-        Integer.parseInt(txt_Sdt.getText());
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this,"Bạn Ơi, Số Điện Thoại Phải là số nha");
-        return false;
-    }
-    
-    
-    return true;
-}
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -162,6 +183,11 @@ public boolean validate01(){
         txt_search.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 txt_searchCaretUpdate(evt);
+            }
+        });
+        txt_search.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_searchFocusGained(evt);
             }
         });
 
@@ -382,41 +408,41 @@ public boolean validate01(){
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
         if (validate01()) {
-            if (checkSoDienThoai(txt_Sdt.getText())==true) {
-                JOptionPane.showMessageDialog(this,"Bạn ơi, số điện thoại của khách hàng có trên hệ thống rồi");
+            if (checkSoDienThoai(txt_Sdt.getText()) == true) {
+                JOptionPane.showMessageDialog(this, "Bạn ơi, số điện thoại của khách hàng có trên hệ thống rồi");
                 return;
-            
+
             }
-       
-         String ten = txt_ten.getText();
-        String diaChi = txt_diachi.getText();
-        String sdt = txt_Sdt.getText();
-        String ngaySinh = txt_ngaysinh.getText();
-        boolean gt = rbt_nam.isSelected();
-        if (gt) {
-            rbt_nam.setSelected(true);
-        } else {
-            rbt_nu.setSelected(true);
+
+            String ten = txt_ten.getText();
+            String diaChi = txt_diachi.getText();
+            String sdt = txt_Sdt.getText();
+            String ngaySinh = txt_ngaysinh.getText();
+            boolean gt = rbt_nam.isSelected();
+            if (gt) {
+                rbt_nam.setSelected(true);
+            } else {
+                rbt_nu.setSelected(true);
+            }
+
+            boolean tt = rbt_hailong.isSelected();
+            if (tt) {
+                rbt_hailong.setSelected(true);
+            }
+            rbt_khonghailong.setSelected(true);
+            KhachHang kh = new KhachHang(ten, ngaySinh, gt, sdt, diaChi, tt);
+            JOptionPane.showMessageDialog(this, svKH.them(kh));
+            listKH = svKH.getlistKhachHang();
+            showData();
+            clearForm();
         }
-        
-        boolean tt = rbt_hailong.isSelected();
-        if (tt) {
-            rbt_hailong.setSelected(true);
-        }
-        rbt_khonghailong.setSelected(true);
-        KhachHang kh = new KhachHang(ten, ngaySinh, gt, sdt, diaChi, tt);
-        JOptionPane.showMessageDialog(this, svKH.them(kh));
-        listKH= svKH.getlistKhachHang();
-        showData();
-        clearForm();
-        }
-       
+
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
         // TODO add your handling code here:
-         int id =Integer.parseInt(txt_id.getText());
-         String ten = txt_ten.getText();
+        int id = Integer.parseInt(txt_id.getText());
+        String ten = txt_ten.getText();
         String diaChi = txt_diachi.getText();
         String sdt = txt_Sdt.getText();
         String ngaySinh = txt_ngaysinh.getText();
@@ -426,15 +452,15 @@ public boolean validate01(){
         } else {
             rbt_nu.setSelected(true);
         }
-        
+
         boolean tt = rbt_hailong.isSelected();
         if (tt) {
             rbt_hailong.setSelected(true);
         }
         rbt_khonghailong.setSelected(true);
-        KhachHang kh = new KhachHang(id,ten, ngaySinh, gt, sdt, diaChi, tt);
+        KhachHang kh = new KhachHang(id, ten, ngaySinh, gt, sdt, diaChi, tt);
         JOptionPane.showMessageDialog(this, svKH.capnhat(kh));
-        listKH= svKH.getlistKhachHang();
+        listKH = svKH.getlistKhachHang();
         showData();
         clearForm();
     }//GEN-LAST:event_btn_suaActionPerformed
@@ -450,7 +476,7 @@ public boolean validate01(){
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
-                int id = Integer.valueOf(txt_id.getText());
+        int id = Integer.valueOf(txt_id.getText());
         JOptionPane.showMessageDialog(this, svKH.delete(id));
         listKH = svKH.getlistKhachHang();
         showData();
@@ -459,18 +485,12 @@ public boolean validate01(){
 
     private void txt_searchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_searchCaretUpdate
         // TODO add your handling code here:
-         String keyString = txt_search.getText();
-        listKH = svKH.search(keyString);
-        if (listKH.isEmpty()) {
-           nbl_search.setText("Không có khách hàng : " + keyString);
-            return;
-        }
-        showData();
+        Search();
     }//GEN-LAST:event_txt_searchCaretUpdate
 
     private void tbl_khachhangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_khachhangMouseClicked
         // TODO add your handling code here:
-          int row = tbl_khachhang.getSelectedRow();
+        int row = tbl_khachhang.getSelectedRow();
         KhachHang k = listKH.get(row);
         txt_id.setText(String.valueOf(k.getIdKhachHang()));
         txt_ten.setText((k.getHoTen()));
@@ -491,6 +511,12 @@ public boolean validate01(){
         btn_xoa.setEnabled(true);
         btn_them.setEnabled(false);
     }//GEN-LAST:event_tbl_khachhangMouseClicked
+
+    private void txt_searchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_searchFocusGained
+        // TODO add your handling code here:
+
+        Search();
+    }//GEN-LAST:event_txt_searchFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
