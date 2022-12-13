@@ -408,6 +408,7 @@ public boolean validate01(){
         JOptionPane.showMessageDialog(this, svKH.them(kh));
         listKH= svKH.getlistKhachHang();
         showData();
+        clearForm();
         }
        
     }//GEN-LAST:event_btn_themActionPerformed
